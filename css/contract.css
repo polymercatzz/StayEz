@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+.itim-regular {
+    font-family: "Itim", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Itim', sans-serif;
+    position: relative;
+    font-size: 10px;
+    background-color: #E5EFFF;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 10% auto;
+}
+
+.bar {
+    width: 100%;
+    background-color: #93B1D7;
+    border: none;
+    display: flex;
+}
+
+.container {
+    background-color: white;
+    padding: 5%;
+    margin: 15%;
+    margin-top: 5%;
+}
