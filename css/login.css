@@ -6,96 +6,85 @@
     font-style: normal;
 }
 
-body {
-    position: relative;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Itim', sans-serif;
+}
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    position: relative;
     background-color: #C9D7EE;
 }
 
-.container {
+.from-box {
     position: absolute;
-    background: #FFFFFF;
-    border-radius: 30px;
-    margin: 10%;
-    padding: 10%;
-    padding-top: 2%;
-    padding-bottom: 6%;
+    padding: 3%;
+    color: #7B9CC8;
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+    width: 40%;
+    max-height:100%;
     right: 0;
-    display: flex;
+    margin: 5%;
+    margin-right: 8%;
     align-items: center;
     text-align: center;
 }
 
-.container::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background-color: #ffffff;
-    border-radius: 25px;
-    filter: blur(3px);
-    z-index: -1;
-}
-
 h1 {
-    margin: 0;
-    padding: 0;
+    text-align: center;
+    margin: 5%;
 }
 
-.login-box {
-    display: flex;
-    padding: 3%;
-    color: #7B9CC8;
-    width: 100%;
+h2 {
+    text-align: left;
+    margin: 5%;
 }
 
 .input-box {
     position: relative;
-    margin-top: 25%;
+    margin-top: 5%;
     text-align: left;
     color: #93B1D7;
 }
 
 .input-box input {
-    font-family: 'Itim';
     border: none;
+    outline: none;
     border-radius: 16px;
-    background-color: #E5EFFF;
+    background-color: #e5efff;
     color: rgb(0, 0, 0);
-    width:100%;
+    width: 100%;
     height: 2vh;
     padding: 5%;
+    font-size: 18px;
+    height: 40px;
 }
 
-.form {
-    width: 100%;
-}
 
 .btn {
-    font-size: 16px;
+    font-size: 20px;
     font-family: "Itim", sans-serif;
-    margin-top: 30%;
-    padding: 5%;
+    margin-top: 10%;
+    padding: 4%;
     color: #ffffff;
     background-color: #7B9CC8;
-    width: 55%;
-    text-align: center;
-    align-items: center;
-    border-radius: 16px ;
+    width: 50%;
+    border-radius: 16px;
     border: none;
+    outline: none;
+    overflow: hidden;
+    transition: .65s;
 }
 
-.toggle-box {
-    position: absolute;
-    left: 0;
-    width: 35%;
-    height: 100%;
-    background-color: #FFFFFF;
-    
+.btn:hover {
+    background-color: #ffffff;
+    color: #7B9CC8;
+    border: 1px solid #3070df;
 }

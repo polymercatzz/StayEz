@@ -6,35 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-In</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="login-box">
-            <form action="">
-                <h1>Log-In</h1>
-                <div class="input-box">
-                    <h2>Email</h2>
-                    <input type="text" placeholder="Please enter your email." required>
-                </div>
-                <div class="input-box">
-                    <h2>Password</h2>
-                    <input type="text" placeholder="Please enter your password." required>
-                </div>
-                <button type="submit" class="btn">Log-In</button>
-            </form>
-        </div>
+    <div class="from-box login">
+        <form action="">
+            <h1>Log-In</h1>
+            <div class="input-box">
+                <h2>Email</h2>
+                <input type="email" required>
+            </div>
+            <div class="input-box">
+                <h2>Password</h2>
+                <input type="password" required>
+            </div>
+            <button type="submit" class="btn">Log-In</button>
+        </form>
     </div>
-    <div class="toggle-box">
-        <div class="toggle-panel toggle-left">
-            <h1>Welcome to <br>StayEz</h1>
-            <p>sign-in if your don't have account</p>
-            <button type="submit" class="btn">Sign-in</button>
-        </div>
+
+    <div class="from-box register">
+        <form action="">
+            <h1>Sign-In</h1>
+            <div class="input-box">
+                <h2>Firstname:</h2>
+                <input type="text" required>
+            </div>
+            <div class="input-box">
+                <h2>Lastname:</h2>
+                <input type="text" required>
+            </div>
+            <div class="input-box">
+                <h2>Tel:</h2>
+                <input type="tel" required>
+            </div>
+            <div class="input-box">
+                <h2>Email:</h2>
+                <input type="email" required>
+            </div>
+            <div class="input-box">
+                <h2>Password:</h2>
+                <input type="password" required>
+            </div>
+            <div class="input-box">
+                <h2>Confirm Password</h2>
+                <input type="password" required>
+            </div>
+            <button type="submit" class="btn">Summit</button>
+        </form>
     </div>
-        
-    
+
+
 
     <script src="/javascript/script.js"></script>
 </body>
