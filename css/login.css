@@ -13,11 +13,16 @@
     font-family: 'Itim', sans-serif;
 }
 
+html, body{
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    max-height: 100vh;
     position: relative;
     background-color: #C9D7EE;
 }
@@ -29,7 +34,7 @@ body {
     background-color: rgb(255, 255, 255);
     border-radius: 16px;
     width: 40%;
-    max-height:100%;
+    max-height: none;
     right: 0;
     margin: 5%;
     margin-right: 8%;
@@ -117,4 +122,5 @@ h3 {
     justify-content: center;
     align-items: center;
     color: #93B1D7;
+    padding: 3%;
 }
