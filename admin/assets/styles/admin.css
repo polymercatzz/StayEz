@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+body {
+    margin: 0;
+    font-family: "Itim", serif;
+}
+.header {
+    height: 9%;
+    background-color: rgba(201, 215, 238, 1);
+}
+.img {
+    margin-top: 25px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+.img img {
+    width: 90%;
+    min-height: 200px;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.page-select {
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+.page-select button {
+    border: none;
+    background-color: rgba(201, 215, 238, 1);
+    font-family: "Itim", serif;
+    color: white;
+    width: 20%;
+    max-width: 200px;
+    min-width: 150px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.summary p {
+    margin-left: 5%;
+    font-size: 24px;
+    color: rgba(123, 156, 200, 1);
+}
+.total {
+    width: 90%;
+    background-color: rgba(201, 215, 238, 1);
+    border-radius: 10px;
+    justify-self: center;
+}
+.total p {
+    font-size: 20px;
+    white-space: nowrap;
+}
+.total-header {
+    padding-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.total-section {
+    display: flex;
+    gap: 10px;
+    height: 40px;
+}
+.total-section p {
+    margin: 0;
+    line-height: 40px;
+}
+.total-text {
+    text-align: center;
+    background-color: rgba(147, 177, 215, 1);
+    width: 180px;
+    height: 40px;
+    border-radius: 10px;
+    line-height: 40px;
+    font-size: 20px;
+}
+.total-img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.total-img img {
+    width: 70%;
+    min-height: 300px;
+    max-height: 500px;
+    object-fit: cover;
+}
+.total-footer {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+.total-footer button {
+    float: left;
+    border: none;
+    background-color: rgba(147, 177, 215, 1);
+    color: white;
+    height: 40px;
+    width: 150px;
+    font-size: 18px;
+    font-family: "Itim", serif;
+    border-radius: 5px;
+    margin-left: 30px;
+}
+.sum-section {
+    display: flex;
+    float: right;
+    margin-right: 30px;
+    gap: 10px;
+    height: 40px;
+}
+.sum-section p {
+    margin: 0;
+    line-height: 40px;
+}
+.sum-text {
+    background-color: rgba(147, 177, 215, 1);
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+}
