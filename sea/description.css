@@ -1,0 +1,634 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+body {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    /* padding: 20px; */
+           
+}
+
+/* Navbar */
+.navbar {
+    background: #C9D7EE;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    max-width: 100%;
+    height: 80px;
+    position: fixed;
+    top :0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 4px 41px rgb(14 55 54 / 14%);
+
+}
+
+.navbar .logo {
+    font-size: 22px;
+    font-weight: bold;;
+}
+.stayEz{
+    margin-left: 10px;
+}
+
+.menu-toggle,.hidden {
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    margin: 0 15px;
+    position: relative;
+}
+
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 2.3vh;
+
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+
+/* pic */
+.pic{
+    width: 50px;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+.pic2{
+    width: 30px;
+    margin-left: -20px;
+        }
+.pic3{
+    width: 40px;
+    margin-left: -30px;
+}
+
+
+/* boby */
+
+.text-map{
+    display: flex;
+}
+
+
+.map {
+    font-size: 3vh;
+    color: #94abca;
+    margin-top: 120px;
+    margin-left: auto;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+.map p{
+    margin-top: -10px;
+    cursor: pointer;
+
+}
+
+.map img{
+    max-width: 40px;
+}
+
+
+.text{
+    margin-top: 120px;
+    margin-left:40px ;
+    font-size: 2rem;
+    color: #94abca;
+}
+.allpic{
+    position: relative; 
+    /* width: 80%; */
+    /* max-width: 100%; */
+    /* overflow: hidden;  */
+    /* border-radius: 16px;  */
+    /* box-shadow: 0 4px 10px rgba(0,0,0,0.1);  */
+    /* margin: 130px auto;  */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin: 10px;
+    /* height: 70vh;  */
+}
+
+
+
+.p1 img{
+    /* width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; */
+    width: 100%;
+    max-width: 900px; 
+    height: auto; 
+    object-fit: contain; 
+    display: block;
+    margin: 0 auto; 
+    padding: 10px;
+    border-radius: 20px;
+
+}
+
+.p2 img{
+    width: 100%;
+    max-width: 350px; /* ปรับค่าตามขนาดที่เหมาะสม */
+    height: auto; /* ทำให้รูปภาพปรับขนาดอัตโนมัติตามสัดส่วนเดิม */
+    object-fit: contain; /* คงสัดส่วนรูปภาพโดยไม่มีการครอบตัด */
+    display: block;
+    /* margin: 0 auto;  */
+    padding: 10px;
+    border-radius: 20px;
+
+}
+
+
+.heart{
+    width: 20px;
+    padding: 10px;
+    border-radius: 100%;
+    position: absolute;
+    right: 20%; 
+    cursor: pointer;
+}
+
+.heart .material-symbols-outlined {
+    color: #ffffff;
+    background-color: #f0ccec;
+    font-size: 30px; 
+    padding: 10px;
+    border-radius: 100%;
+}
+
+
+.heart.active .material-symbols-outlined {
+    color: red;
+}
+
+.text2{
+    display: flex;
+    /* margin-top: 80px; */
+    margin-left:40px ;
+    font-size: 1.7rem;
+    color: #94abca;
+    /* background-color: #94abca; */
+    padding: 10px;
+    max-width: 200px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 80px auto;
+}
+
+.alldata{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto; 
+    max-width: 1150px;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: #94abca;
+    margin-top: -70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #e0e0e0;
+    /* max-width: calc(80% - 40px);  */
+
+
+}
+.text-data2{
+    flex: 1;
+    max-width: 600px;
+    font-size: 1.3rem;
+    /* padding: 10px; */
+    margin-right: 20px;
+    border-radius: 16px;
+    /* background-color: #93B1D7; */
+    /* margin-left: 30px; */
+    margin-bottom: 15px;
+    margin: auto;
+    color: #ffffff
+}
+
+.text-data2 .p{
+margin-left: 50px;
+
+}
+
+
+.text-data{
+    font-size: 1.4rem;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+
+}
+
+
+
+.price{
+    /* flex: 1;
+    max-width: 500px;
+    background: #C9D7EE;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: auto; */
+    flex: 1; /* Make it flexible */
+    max-width: 600px;
+    background: #C9D7EE;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: 0px auto;
+
+}
+
+
+.flex-data {
+    display: flex;
+    justify-content: space-between;
+    /* font-size: 1.2rem; */
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.flex-data:last-of-type {
+    border-bottom: none;
+}
+
+.room{
+    display: flex;
+}
+.room p{
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    
+}
+
+
+.price button{
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    background-color: #93B1D7;
+    padding: 10px;
+    font-size: 1.25rem;
+    color: #ffffff;
+    align-items: center;
+    margin: 10px auto;
+}
+
+
+.allhave{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #E5EFFF;
+    border-radius: 16px;
+    margin: 20px auto; 
+    padding: 30px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+.have{
+    margin-left: 20px;
+}
+.datahave{
+    display: flex;
+    font-size: 1.2rem;
+    padding: 10px;
+    color: #888787;
+}
+
+.datahave img{
+    /* margin-left: 30px; */
+    width: 25px;
+    margin-right: 10px;
+
+}
+
+.review{
+    max-width: 600px;
+    background-color: #C9D7EE;
+    padding: 20px;
+    border-radius: 18px;
+    max-height: 400px; 
+    overflow-y: auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    /* flex: 1; */
+}
+
+.name{
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 16px;
+    margin-top: 20px;
+}
+.review p {
+    word-wrap: break-word; 
+}
+.name1{
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 16px;
+    /* margin-top: 20px; */
+}
+
+
+
+/* WebKit browsers */
+.review::-webkit-scrollbar {
+    width: 5px;
+}
+
+.review::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.review::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.review::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Firefox */
+.review {
+    scrollbar-width: thin;
+    scrollbar-color: #bebebe #f1f1f1;
+}
+
+.review::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
+.alldata2{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto; 
+    max-width: 1150px;
+    padding: 10px;
+    border-radius: 16px;
+    gap: 70px;
+}
+
+.rate{
+    padding-top: 10px;
+    margin: auto; 
+    max-width: 1150px;
+    font-size: 1.5rem;
+    color: #94abca;
+}
+
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #C9D7EE;
+    /* height: 100px; */
+    margin-top: 50px;
+    font-size: 2.3vh;
+    /* font-family: "Itim", serif; */
+    color: #7B9CC8;
+    padding: 10px;
+}
+.footer-content{
+    display: flex;
+    p{
+        padding: 10px;
+        margin-left: 15px;
+        color: #ffffff;
+    }
+}
+
+.all{
+    padding: 20px;
+}
+
+/* popup */
+.popup {
+    max-width: 450px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    position: absolute;
+    top: 37%;
+    right: -10%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    transition: transform 0.4s, visibility 0.4s;
+    border-radius: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.openPopup {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close-btn button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.close-btn button img {
+    width: 35px;
+
+}
+
+.close-btn {
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+    width: 100%;
+    background-color: #93B1D7;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    width: calc(100% + 40px);
+    margin: -20px -20px 0; 
+    box-sizing: border-box;
+
+
+}
+
+.allpopupdata {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #E5EFFF;
+    max-width: 370px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.popupdata {
+    display: flex;
+    max-width: 370px;
+    flex-wrap: wrap;
+    padding: 10px;
+    color: #93B1D7;
+}
+
+
+.popupdata label {
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
+.popupdata input {
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 5px;
+    color: #616162;
+    width: 100%;
+
+}
+
+.profile p {
+    text-align: center;
+    color: #93B1D7;
+    font-size: 1.8rem;
+    padding: 10px;
+}
+
+.log-out {
+    display: flex;
+    justify-content: end;
+}
+
+.log-out button {
+    border: none;
+    cursor: pointer;
+}
+
+.log-out img {
+    width: 40px;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .menu-toggle ,.hidden{
+        display: block;
+    }
+
+    .pic2,.pic3{
+        display: none;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        max-width: 150px; /* กำหนดความกว้างของเมนู */
+        position: absolute;
+        top: 40px;
+        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
+        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
+        background: #94abca;
+        text-align: center;
+        border-radius: 20px;
+    }
+
+    .nav-links.active {
+        display: flex;
+        max-width: 150px;
+        border-radius: 20px;
+        margin-top: 20px;
+
+    }
+    .alldata {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+    .popup {
+        top: 50%;
+        left: 50%;
+}
+
+}
+
+
+@media screen and (max-width: 700px){
+    .allpic{
+        position: relative; 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center; 
+        margin: 20px;
+    }
+    
+    
+    
+    .p1 img{
+        width: 100%;
+        max-width: 600px; /* ปรับค่าตามขนาดที่เหมาะสม */
+        height: auto; /* ทำให้รูปภาพปรับขนาดอัตโนมัติตามสัดส่วนเดิม */
+        object-fit: contain; /* คงสัดส่วนรูปภาพโดยไม่มีการครอบตัด */
+        display: block;
+        margin: 0 auto; 
+        padding: 10px;
+        border-radius: 20px;
+    
+    }
+    
+    .p2 img{
+        width: 100%;
+        max-width: 600px; /* ปรับค่าตามขนาดที่เหมาะสม */
+        height: auto; /* ทำให้รูปภาพปรับขนาดอัตโนมัติตามสัดส่วนเดิม */
+        object-fit: contain; /* คงสัดส่วนรูปภาพโดยไม่มีการครอบตัด */
+        display: block;
+        /* margin: 0 auto;  */
+        padding: 10px;
+        border-radius: 20px;
+    
+    }
+}
