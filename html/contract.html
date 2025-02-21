@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contract</title>
+    <link rel="icon" href="/sea/img/logo.jpeg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/contract.css">
 </head>
@@ -14,12 +15,122 @@
         <button class="close"><i class="bi bi-x"></i></button>
     </div>
     <div class="container">
-        <h1 style="text-align: center;">
+        <h1 id="head">
             สัญญาเช่าห้องพัก ห้อง 501 ชั้น 5 อาคารเสริมสิน อพาร์ตเมนต์
         </h1>
-        <h1 style="text-align: right; padding: 5%; padding-right: 0%;">สัญญานี้ทำขึ้นที่อาคารเสริมสิน อพาร์ตเมนต์ เมื่อ
-            01/01/2562</h1>
+        <h1 id="date">สัญญานี้ทำขึ้นที่อาคารเสริมสิน อพาร์ตเมนต์ เมื่อ 01/01/2562
+        </h1>
+        <div class="host">
+            <h1>ระหว่าง</h1>
+            <h1>บริษัท เสริมสิน คอมเพล็กซ์ จำกัด โดย นายชาญ สรณาคมน์
+                กรรมการผู้มีอำนาจ อยู่บ้านเลขที่ 370 หมู่ 12 ถ.ราชสีมา-โชคชัย
+                ต.โชคชัย อ.โชคชัย จ.นครราชสีมา 30190 ซึ่งต่อไปในสัญญานี้เรียกว่า
+                "ผู้ให้เช่า" ฝ่ายหนึ่ง
+            </h1>
+        </div>
+        <div class="client">
+            <h1>กับ</h1>
+            <div class="cadd">
+                <div class="form-group 1">
+                    <h1>คำนำหน้าชื่อ: </h1>
+                    <input type="text" id="prefix" required>
+                </div>
+                <div class="form-group 2">
+                    <h1>ชื่อ-นามสกุล: </h1>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group 3">
+                    <h1>เลขบัตรประชาชน: </h1>
+                    <input type="text" id="idcard" maxlength="13" required>
+                </div>
+                <div class="form-group 4">
+                    <h1>ที่อยู่ตามทะเบียนบ้าน: </h1>
+                    <textarea id="address" required></textarea>
+                </div>
+                <div class="form-group 5">
+                    <h1>โอนเงินคืนเข้า: </h1>
+                    <select class="select" id="bankselect" required>
+                        <option selected>---เลือกธนาคาร---</option>
+                        <option value="1">ธนาคารกรุงเทพ</option>
+                        <option value="2">ธนาคารกสิกรไทย</option>
+                        <option value="3">ธนาคารไทยพาณิชย์</option>
+                    </select>
+                </div>
+                <div class="form-group 6">
+                    <h1>เลขบัญชี: </h1>
+                    <input type="text" id="accountNumber" required>
+                </div>
+                <div class="form-group 7">
+                    <h1>ชื่อบัญชี: </h1>
+                    <input type="text" id="accountName" required>
+                </div>
+            </div>
+        </div>
+        <h1 style="margin-top: 15px;">
+            ซึ่งต่อไปในสัญญานี้จะเรียกว่า "ผู้เช่า" อีกฝ่ายหนึ่ง ทั้งสองฝ่ายตกลงทำสัญญากันโดยมีข้อความดังต่อไปนี้
+        </h1>
+        <div class="rule">
+            <h1>1. "ผู้เช่า" ตกลงเช่าห้องพักจากผู้ให้เช่าเพื่อใช้เป็นที่พักอาศัย
+                ภายใต้ระเบียบและข้อบังดับแนบท้ายสัญญาที่ผู้ให้เช่ากำหนด ระยะเวลาการเช่า
+                <select class="select" id="time">
+                    <option selected>---เลือกระยะเวลา---</option>
+                    <option value="1">1 month</option>
+                    <option value="2">3 month</option>
+                    <option value="3">6 month</option>
+                </select>
+            </h1>
+            <h1>
+                2. ผู้ให้เช่าและผู้เช่าตกลงค่าเช่าห้องพัก ในอัตราเดือนละ 2,000 บาท
+            </h1>
+            <h1>3. ในวันทำสัญญา ผู้เช่าได้ชำระเงินให้กับผู้ให้เช่าดังต่อไปนี้</h1>
+            <h1>3.1 เงินประกัน เป็นจำนวนเงิน 2,000 บาท</h1>
+            <h1>3.2 ค่าเช่าห้องในเดือนที่เข้าพัก เป็นจำนวนเงิน 2,000 บาท
+                รวมจำนวนเงินที่ผู้เช่าได้ชำระในวันทำสัญญาเป็นจำนวนเงิน 4,000 บาท</h1>
+            <h1>4. ในกรณีที่ผู้เช่าจะมีผู้ร่วมพักอาศัย กรุณาแจ้งให้ทางบริษัททราบเพื่อลงทะเบียนผู้ร่วมพักอาศัย</h1>
+            <h1>5.เมื่อสัญญาเช่าสิ้นสุดลงและผู้เช่าได้ปฏิบัติตามสัญญาถูกต้องเรียบร้อย
+                โดยห้องพักและทรัพย์สินอื่น ๆ ของ
+                ผู้ให้เช่าไม่ได้เกิดความเสียหาย และผู้เช่ามิได้ค้างชำระค่าใช้จ่ายต่างๆ
+                ผู้ให้เช่าจะคืนเงินประกันให้แก่ผู้เช่าภายใน 7 วัน
+                โดยโอนเข้าบัญชีธนาคารตามที่ผู้เช่าแจ้งไว้กับผู้ให้เช่า</h1>
+            <h1>6. ผู้เช่าตกลงยินยอมว่า ในกรณีที่สัญญาเช่าสิ้นสุดลงไม่ว่ากรณีใด ๆ
+                ผู้ให้เช่ามีสิทธิ์ที่จะกลับเข้าครอบครอง ห้องพักทันที
+                หากมีทรัพย์สินของผู้เช่าอยู่ภายในห้องพัก
+                ผู้ให้เช่าจะนำไปเก็บไว้ในสถานที่ที่เห็นสมควร เพื่อ
+                ผู้ให้เช่าสามารถให้เช่าห้องพักนี้ได้ต่อไป</h1><br><br>
+            <h1>สัญญาเช่านี้ทำขึ้น 2 ฉบับ มีข้อความถูกต้องตรงกัน
+                คู่สัญญาได้อ่านและเข้าใจข้อความในสัญญานี้โดยตลอดแล้วเห็นว่าถูกต้อง
+                จึงได้ลงลายมือชื่อไว้เป็นสำคัญ</h1>
+        </div>
+        <div class="signature-container">
+            <div class="signature-box">
+                <input type="text" class="signame">
+                <div class="signature-line top"></div>
+                <h1 class="signature-name"><input type="text" class="signame"></h1>
+                <h1 class="signature-title down">ผู้เช่า</h1>
+            </div>
+
+            <div class="signature-box">
+                <h1>แมน</h1>
+                <div class="signature-line"></div>
+                <h1 class="signature-name">นาย แมน แมน</h1>
+                <h1 class="signature-title">ผู้ให้เช่า</h1>
+            </div>
+        </div>
     </div>
+    <div class="payment-section">
+        <div class="section">
+            <h1>สลิปโอนเงิน :</h1>
+            <input type="file" class="flieselect">
+        </div>
+        <div class="section">
+            <h1>จำนวนผู้อยู่อาศัย :</h1>
+            <input type="number" class="peopleselect" style="border-radius: 10px; text-align: center;">
+        </div>
+    </div>
+    <div class="foot">
+        <button class="finish">ยืนยันการจอง</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

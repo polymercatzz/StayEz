@@ -129,3 +129,20 @@ h3 {
     padding: 3%;
     right: 0;
 }
+
+/* กำหนดขนาดของแถบเลื่อน */
+::-webkit-scrollbar {
+    width: 10px; /* ความกว้างของ scrollbar */
+}
+
+/* สีพื้นหลังของ scrollbar */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* สีของแถบเลื่อน */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #e5efff, #e5efff); /* ไล่สีฟ้า-น้ำเงิน */
+    border-radius: 10px;
+    transition: 0.5s;
+}

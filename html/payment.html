@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="icon" href="/sea/img/logo.jpeg">
+    <link rel="stylesheet" href="/css/payment.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="#">Payment</a></li>
+            <li><a href="#footer">Contact</a></li>
+            <li><a href="#" class="hidden">Wish list</a></li>
+            <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
+            <li><a href="main-regis.html" class="hidden">Log out</a></li>
+            <li><a href=""><img src="/img/heart.png" alt="" class="pic2"></a></li>
+            <li><a href="#" onclick="openPopup()"><img src="/img/user.png" alt="" class="pic3"></a></li>
+        </ul>
+    </nav>
+
+    <div class="payment">
+        <h1>Payment</h1>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-con">
+                    <div class="date">12/12/2025</div>
+                    <p><strong>ชื่อที่พัก :</strong> เดอะ เบส วงศ์สว่าง</p>
+                    <p><strong>ห้อง :</strong> 111</p>
+                    <p><strong>รายละเอียด :</strong> เรียกเก็บเงินต่อเดือน</p>
+                    <button class="btn">ใบเสร็จ</button>
+                </div>
+                <div class="card-con">
+                    <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                    <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-con">
+                    <div class="date">12/01/2026</div>
+                    <p><strong>ชื่อที่พัก :</strong> คอนโด เอพลัส</p>
+                    <p><strong>ห้อง :</strong> 202</p>
+                    <p><strong>รายละเอียด :</strong> เรียกเก็บเงินต่อเดือน</p>
+                    <button class="btn">ใบเสร็จ</button>
+                </div>
+                <div class="card-con">
+                    <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                    <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-con">
+                    <div class="date">12/02/2026</div>
+                    <p><strong>ชื่อที่พัก :</strong> เดอะ บีท</p>
+                    <p><strong>ห้อง :</strong> 305</p>
+                    <p><strong>รายละเอียด :</strong> เรียกเก็บเงินต่อเดือน</p>
+                    <button class="btn">ใบเสร็จ</button>
+                </div>
+                <div class="card-con">
+                    <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                    <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-con">
+                    <div class="date">12/03/2026</div>
+                    <p><strong>ชื่อที่พัก :</strong> เออร์เบิน สวีท</p>
+                    <p><strong>ห้อง :</strong> 410</p>
+                    <p><strong>รายละเอียด :</strong> เรียกเก็บเงินต่อเดือน</p>
+                    <button class="btn">ใบเสร็จ</button>
+                </div>
+                <div class="card-con">
+                    <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                    <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-con">
+                    <div class="date">12/03/2026</div>
+                    <p><strong>ชื่อที่พัก :</strong> เออร์เบิน สวีท</p>
+                    <p><strong>ห้อง :</strong> 410</p>
+                    <p><strong>รายละเอียด :</strong> เรียกเก็บเงินต่อเดือน</p>
+                    <button class="btn">ใบเสร็จ</button>
+                </div>
+                <div class="card-con">
+                    <p><strong>เพิ่มสลิป :</strong> <button class="btn chosefile">เลือกไฟล์</button></p>
+                    <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer-content">
+                <p>Line: @place1234</p>
+                <p>Tel: 000000000</p>
+                <p>Email: place@1234.com</p>
+            </div>
+    </footer>
+
+    <script>
+        document.getElementById("menuToggle").addEventListener("click", function () {
+            document.getElementById("navLinks").classList.toggle("active");
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest(".navbar")) {
+                document.getElementById("navLinks").classList.remove("active");
+                document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+            }
+        });
+
+        let popup = document.getElementById("popup");
+
+        function openPopup() {
+            popup.classList.add("openPopup");
+
+        }
+
+        function closePopup() {
+            popup.classList.remove("openPopup");
+        }
+    </script>
+</body>
+
+</html>
