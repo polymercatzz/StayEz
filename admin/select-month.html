@@ -1,0 +1,69 @@
+<!--เหลือ header, add ค่าใช้จ่ายอื่นๆเพิ่ม-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEz</title>
+    <link href="./assets/styles/select-month.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+
+    </div>
+    <div class="container">
+        <p class="title"">รายรับ-รายจ่ายแต่ละเดือน</p>
+        <p class="year">2024</p>
+        <div class="month">
+            <button class="month-detail" onclick="openPopup()">มกราคม</button>
+            <button class="month-detail" onclick="openPopup()">กุมภาพันธ์</button>
+            <button class="month-detail" onclick="openPopup()">มีนาคม</button>
+            <button class="month-detail" onclick="openPopup()">เมษายน</button>
+            <button class="month-detail" onclick="openPopup()">พฤษภาคม</button>
+            <button class="month-detail" onclick="openPopup()">มิถุนายน</button>
+            <button class="month-detail" onclick="openPopup()">กรกฎาคม</button>
+            <button class="month-detail" onclick="openPopup()">สิงหาคม</button>
+            <button class="month-detail" onclick="openPopup()">กันยายน</button>
+            <button class="month-detail" onclick="openPopup()">ตุลาคม</button>
+            <button class="month-detail" onclick="openPopup()">พฤศจิกายน</button>
+            <button class="month-detail" onclick="openPopup()">ธันวาคม</button>
+        </div>
+    </div>
+    <div class="popup-container" id="popup-container">
+        <div class="popup" id="popup">
+            <div class="popup-header">
+                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </div>
+            <div class="popup-content">
+                <p class="content-head">รายจ่าย : มกราคม 2024</p>
+                <div class="content-item">
+                    <p>ค่าน้ำ : </p>
+                    <input type="text">
+                </div>
+                <div class="content-item">
+                    <p>ค่าไฟ : </p>
+                    <input type="text">
+                </div>
+                <div class="content-item">
+                    <p>ค่าใช้จ่ายอื่นๆ : </p>
+                    <div>+</div>
+                </div>
+                <button>Submit</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openPopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'block';
+        };
+        function closePopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'none';
+        };
+    </script>
+</body>
+</html>

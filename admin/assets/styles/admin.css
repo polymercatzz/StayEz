@@ -3,13 +3,16 @@ body {
     margin: 0;
     font-family: "Itim", serif;
 }
+button {
+    cursor: pointer;
+}
 .header {
     height: 9%;
     background-color: rgba(201, 215, 238, 1);
 }
 .img {
-    margin-top: 25px;
     display: flex;
+    margin-top: 25px;
     width: 100%;
     justify-content: center;
     margin-bottom: 25px;
@@ -28,7 +31,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 .page-select button {
     border: none;
@@ -38,10 +41,9 @@ body {
     width: 20%;
     max-width: 200px;
     min-width: 150px;
-    height: 60px;
+    height: 50px;
     border-radius: 10px;
     font-size: 18px;
-    cursor: pointer;
 }
 .summary p {
     margin-left: 5%;
@@ -65,7 +67,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 .total-section {
     display: flex;
@@ -79,11 +81,12 @@ body {
 .total-text {
     text-align: center;
     background-color: rgba(147, 177, 215, 1);
-    width: 180px;
+    width: 100px;
     height: 40px;
     border-radius: 10px;
     line-height: 40px;
     font-size: 20px;
+    color: white !important;
 }
 .total-img {
     width: 100%;
@@ -132,4 +135,5 @@ body {
     font-size: 18px;
     text-align: center;
     line-height: 40px;
+    color: white !important;
 }

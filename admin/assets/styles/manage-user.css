@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+body {
+    margin: 0;
+    font-family: "Itim", serif;
+}
+.header {
+    height: 9%;
+    width: 100%;
+    background-color: rgba(201, 215, 238, 1);
+}
+.container-header {
+    padding-top: 30px;
+    width: 100%;
+    height: 30px;
+}
+.container-header p {
+    float: left;
+    margin: 0 5%;
+    font-size: 24px;
+    color: rgba(123, 156, 200, 1);
+}
+.save-btn {
+    float: right;
+    height: 40px;
+    margin-right: 5%;
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: rgba(123, 156, 200, 1);
+    font-family: "Itim", serif;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+}
+table {
+    margin-top: 30px;
+    justify-self: center;
+    width: 95%;
+    background-color: rgba(229, 239, 255, 1);
+    border-collapse: collapse;
+}
+table, td, th {
+    border: 1.5px solid black;
+    color: rgba(123, 156, 200, 1);
+    font-weight: 400;
+}
+tr {
+    text-align: center;
+}
+th, td {
+    padding: 10px;
+}
+tr button {
+    border: none;
+    background-color: rgba(123, 156, 200, 1);
+    border-radius: 5px;
+    font-family: "Itim", serif;
+    color: white;
+    width: 50px;
+    height: 25px;
+}
+tr select {
+    border: none;
+    background-color: rgba(123, 156, 200, 1);
+    border-radius: 5px;
+    font-family: "Itim", serif;
+    color: white;
+    width: 65px;
+    height: 25px;
+    text-align: center;
+}
+.etc {
+    border: none;
+    font-family: "Itim", serif;
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    padding-left: 10px;
+}

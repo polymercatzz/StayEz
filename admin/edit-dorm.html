@@ -1,0 +1,186 @@
+<!--เหลือ header-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEz</title>
+    <link href="./assets/styles/manage-dorm.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+
+    </div>
+    <div class="container">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+        </svg>
+        <svg class="icon bin-icon" onclick="confirmDelete()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+        </svg>
+        <form class="form-container">
+            <div class="form">
+                <div class="item">
+                    <label>ชื่อที่พัก : </label>
+                    <select>
+                        <option>test</option>
+                    </select>
+                </div>
+                <div class="item">
+                    <label>เลขห้อง : </label>
+                    <input type="text">
+                </div>
+                <div class="item">
+                    <label>ขนาดห้อง : </label>
+                    <input type="text">
+                </div>
+                <div class="item">
+                    <label>รูปที่ 1 : </label>
+                    <input class="file-input" type="file">
+                </div>
+                <div class="item">
+                    <label>รูปที่ 2 : </label>
+                    <input class="file-input" type="file">
+                </div>
+                <div class="item">
+                    <label>รูปที่ 3 : </label>
+                    <input class="file-input" type="file">
+                </div>
+                <div class="item">
+                    <label>ราคา : </label>
+                    <input type="text">
+                </div>
+                <div class="item">
+                    <label>ค่าไฟ : </label>
+                    <input type="text">
+                </div>
+                <div class="item">
+                    <label>ค่าน้ำ : </label>
+                    <input type="text">
+                </div>
+                <div class="item">
+                    <label>เงินประกัน : </label>
+                    <input type="text">
+                </div>
+                <div class="item">
+                    <label>จ่ายเงินล่วงหน้า : </label>
+                    <select></select>
+                </div>
+                <div class="item">
+                    <label>ห้องนอน : </label>
+                    <select></select>
+                </div>
+                <div class="item form-textarea">
+                    <label>รายละเอียดที่พัก : </label>
+                    <textarea></textarea>
+                </div>
+                <div class="item checklist">
+                    <label>ที่พักนี้มีอะไรบ้าง : </label>
+                    <div class="checklist-menu">
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/air-conditioner_4487562.png">
+                            <label>เครื่องปรับอากาศ</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/wifi_2803210.png">
+                            <label>wi-fi</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/television_1866560.png">
+                            <label>โทรทัศน์</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/washing-machine_481108.png">
+                            <label>เครื่องซักผ้า</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/gym_6286287.png">
+                            <label>ฟิตเนส</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/">
+                            <label>เฟอร์นิเจอร์</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/dog_3622379.png">
+                            <label>pet friendly</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/fridge_1586640.png">
+                            <label>ตู้เย็น</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/">
+                            <label>กล้องวงจรปิด</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/elevator_2176523.png">
+                            <label>lift</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/microwave_8348437.png">
+                            <label>ไมโครเวฟ</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox">
+                            <img src="./assets/img/car_6027986.png">
+                            <label>ที่จอดรถ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="item map">
+                    <label>Map : </label>
+                    <input type="text" style="width: 100%;">
+                </div>
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
+    <div class="popup-container" id="popup-container">
+        <div class="popup" id="popup">
+            <div class="popup-header">
+                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </div>
+            <div class="popup-content">
+                <p>ยืนยันการลบ</p>
+                <button id="del-btn" onclick="del()">ยืนยัน</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirmDelete() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'block';
+        };
+        function closePopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'none';
+        };
+        function del() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'none';
+        };
+    </script>
+</body>
+
+</html>

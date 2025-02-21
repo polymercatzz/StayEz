@@ -1,0 +1,136 @@
+<!--เหลือ header, add ค่าใช้จ่ายอื่นๆเพิ่ม-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEz</title>
+    <link href="./assets/styles/calculate.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+
+    </div>
+    <div class="container">
+        <div class="container-header">
+            <p>ระบบคำนวณค่าที่พัก</p>
+            <button class="save-btn">save</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ชื่อ-นามสกุล</th>
+                    <th>ชื่อที่พัก</th>
+                    <th>เลขห้อง</th>
+                    <th>กรอกค่าที่พัก</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>The Point</td>
+                    <td>1</td>
+                    <td>
+                        <button onclick="openInputPopup()">กรอก</button>
+                    </td>
+                    <td>
+                        <button onclick="openStatusPopup()">สำเร็จ</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="popup-container" id="input-popup-container">
+            <div class="input-popup" id="input-popup">
+                <div class="input-popup-header">
+                    <svg class="input-icon" id="input-icon" onclick="closeInputPopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </div>
+                <div class="input-popup-content">
+                    <p class="content-head">เรียกเก็บเงิน</p>
+                    <div class="content-item">
+                        <p>ค่าเช่า : </p>
+                        <input type="text">
+                    </div>
+                    <div class="content-item">
+                        <p>ค่าน้ำ : </p>
+                        <input type="text">
+                    </div>
+                    <div class="content-item">
+                        <p>ค่าไฟ : </p>
+                        <input type="text">
+                    </div>
+                    <div class="content-item">
+                        <p>ค่าใช้จ่ายอื่นๆ : </p>
+                        <div>+</div>
+                    </div>
+                    <button>Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="popup-container" id="status-popup-container">
+            <div class="status-popup" id="status-popup">
+                <div class="status-popup-header">
+                    <svg class="status-icon" id="status-icon" onclick="closeStatusPopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </div>
+                <div class="status-popup-content">
+                    <p class="status-date">12/12/2025</p>
+                    <div class="status-content">
+                        <div>
+                            <div class="status-item">
+                                <p class="title">ชื่อที่พัก : </p>
+                                <p class="content-text">เดอะ เบส วงศ์สว่าง</p>
+                            </div>
+                            <div class="status-item">
+                                <p class="title">ห้อง : </p>
+                                <p class="content-text">111</p>
+                            </div>
+                            <div class="status-item">
+                                <p class="title">รายละเอียด : </p>
+                                <p class="content-text">เรียกเก็บเงินต่อเดือน</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="status-item">
+                                <p class="title">เพิ่มสลิป : </p>
+                                <input type="file" class="file-input">
+                            </div>
+                            <div class="status-item">
+                                <p class="title">สถานะการจ่ายเงิน : </p>
+                                <p class="content-text">จ่ายแล้ว</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button>ใบเสร็จ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openInputPopup() {
+            const container = document.getElementById("input-popup-container");
+
+            container.style.display = 'block';
+        };
+        function openStatusPopup() {
+            const container = document.getElementById("status-popup-container");
+
+            container.style.display = 'block';
+        };
+        function closeInputPopup() {
+            const container = document.getElementById("input-popup-container");
+
+            container.style.display = 'none';
+        };
+        function closeStatusPopup() {
+            const container = document.getElementById("status-popup-container");
+
+            container.style.display = 'none';
+        };
+    </script>
+</body>
+</html>
