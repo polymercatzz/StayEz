@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-body {
+* {
     margin: 0;
-    font-family: "Itim", serif;
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+button {
+    cursor: pointer;
 }
 .header {
     height: 9%;
@@ -27,7 +31,6 @@ body {
     height: 30px;
     border: none;
     background-color: rgba(123, 156, 200, 1);
-    font-family: "Itim", serif;
     color: white;
     font-size: 18px;
     border-radius: 10px;
@@ -54,7 +57,6 @@ tr button {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     border-radius: 5px;
-    font-family: "Itim", serif;
     color: white;
     width: 60px;
     height: 25px;
@@ -64,7 +66,6 @@ tr select {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     border-radius: 5px;
-    font-family: "Itim", serif;
     color: white;
     width: 65px;
     height: 25px;
@@ -138,7 +139,6 @@ tr select {
     color: white;
     width: 60px;
     height: 30px;
-    font-family: "Itim", serif;
     border-radius: 10px;
     margin-top: 10px;
 }
@@ -157,7 +157,6 @@ tr select {
     border: none;
     height: 25px;
     border-radius: 10px;
-    font-family: "Itim", serif;
     padding-left: 10px;
 }
 .content-item div {
@@ -201,7 +200,6 @@ tr select {
     height: 25px;
     overflow: hidden;
     cursor: pointer;
-    font-family: "Itim", serif;
     color: rgba(123, 156, 200, 1);
     text-align: center;
     background-color: white;
@@ -220,7 +218,6 @@ tr select {
     background-color: white;
     color: rgba(123, 156, 200, 1);
     border-radius: 5px;
-    font-family: "Itim", serif;
     width: 60px;
     height: 20px;
 }

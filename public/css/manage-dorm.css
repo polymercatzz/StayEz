@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-body {
+* {
     margin: 0;
-    font-family: "Itim", serif;
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+button {
+    cursor: pointer;
 }
 .header {
     height: 9%;
@@ -46,7 +50,6 @@ body {
     height: 25px;
     border-radius: 5px;
     color: white;
-    font-family: "Itim", serif;
     padding-left: 10px;
     font-size: 16px;
 }
@@ -57,7 +60,6 @@ body {
     height: 25px;
     border-radius: 5px;
     color:  white;
-    font-family: "Itim", serif;
     text-align: center;
     font-size: 16px;
 }
@@ -70,7 +72,6 @@ body {
     width: 80px !important;
     overflow: hidden;
     cursor: pointer;
-    font-family: "Itim", serif;
     color: white;
     padding-left: 5px;
     line-height: 25px;
@@ -123,7 +124,6 @@ body {
     border: none;
     width: 70px;
     height: 30px;
-    font-family: "Itim", serif;
     color: white;
     background-color: rgba(123, 156, 200, 1);
     border-radius: 15px;
@@ -172,7 +172,6 @@ body {
     color: white;
     width: 60px;
     height: 30px;
-    font-family: "Itim", serif;
     border-radius: 10px;
 }
 .icon-popup {

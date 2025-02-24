@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-body {
+* {
     margin: 0;
-    font-family: "Itim", serif;
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+button {
+    cursor: pointer;
 }
 .header {
     height: 9%;
@@ -40,7 +44,6 @@ body {
 .month-detail {
     font-size: 16px;
     border: none;
-    font-family: "Itim", serif;
     background-color: white;
     color: rgba(123, 156, 200, 1);
     width: 180px;
@@ -92,7 +95,6 @@ body {
     color: white;
     width: 60px;
     height: 30px;
-    font-family: "Itim", serif;
     border-radius: 10px;
     margin-top: 10px;
 }
@@ -117,7 +119,6 @@ body {
     border: none;
     height: 25px;
     border-radius: 10px;
-    font-family: "Itim", serif;
     padding-left: 10px;
 }
 .content-item div {
