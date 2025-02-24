@@ -11,31 +11,31 @@
 
 <body>
     <div class="form-box register">
-        <form action="">
+        <form action="/user/register" method="POST">
             <h1>Sign-in</h1>
             <div class="input-box">
                 <h2>Firstname</h2>
-                <input type="text" required>
+                <input type="text" id="firstname" name="firstname" required>
             </div>
             <div class="input-box">
                 <h2>Lastname</h2>
-                <input type="text" required>
+                <input type="text" id="lastname" name="lastname" required>
             </div>
             <div class="input-box">
                 <h2>Tel</h2>
-                <input type="tel" required>
+                <input type="tel" id="tel" name="tel" required>
             </div>
             <div class="input-box">
                 <h2>Email</h2>
-                <input type="email" required>
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="input-box">
                 <h2>Password</h2>
-                <input type="password" required>
+                <input type="password" id="password" name="password" required>
             </div>
             <div class="input-box">
                 <h2>Confirm Password</h2>
-                <input type="password">
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
             <button type="submit" class="btn">Submit</button>
         </form>
@@ -45,7 +45,7 @@
         <div class="panel panelleft">
             <h3>Welcome to <br> StayEz</h3>
             <p>Please login</p>
-            <button class="btn regisbtn">Log-in</button>
+            <a href="/login" class="btn regisbtn">Log-in</a>
         </div>
     </div>
 </body>

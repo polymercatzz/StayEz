@@ -8,19 +8,22 @@
     <link rel="icon" href="../img/logo.jpeg">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/login.css">
+
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="form-box login">
-        <form action="">
+        <form action="/user/login" method="POST">
             <h1>Log-In</h1>
             <div class="input-box">
                 <h2>Email</h2>
-                <input type="email" required>
+                <input type="email" id="email" name="email">
             </div>
             <div class="input-box">
                 <h2>Password</h2>
-                <input type="password" required>
+                <input type="password" id="password" name="password">
             </div>
             <button type="submit" class="btn">Log-In</button>
         </form>
@@ -30,9 +33,59 @@
         <div class="panel panelleft">
             <h3>Welcome to <br> StayEz</h3>
             <p>sign-in if your don't have account</p>
-            <button class="btn regisbtn">Sign-in</button>
+            <a class="btn regisbtn" href="/register">
+                Sign-in
+            </a>
         </div>
     </div>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const email = document.querySelector('#email').value;
+            const password = document.querySelector('#password').value;
+    
+            try {
+                const response = await fetch('/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+    
+                const result = await response.json();
+    
+                if (response.status === 401) {
+                    // If login failed
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: result.message || 'Invalid username or password',
+                    });
+                } else if (response.status === 200) {
+                    // Redirect to the main page if login is successful
+                    window.location.href = '/main';
+                } else {
+                    // Handle any unexpected errors
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unexpected Error',
+                        text: 'An unexpected error occurred!',
+                    });
+                }
+            } catch (error) {
+                // Handle network or other errors
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Network Error',
+                    text: 'There was an error with the login request.',
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

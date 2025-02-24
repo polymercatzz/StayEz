@@ -296,24 +296,24 @@
                 <div class="allpopupdata">
                     <div class="popupdata">
                         <label for="name">Name:</label>
-                        <input type="text">
+                        <input type="text" id="firstname" disabled>
                     </div>
                     <div class="popupdata">
                         <label for="lastname">Lastname:</label>
-                        <input type="text">
+                        <input type="text" id="lastname" disabled>
                     </div>
                     <div class="popupdata">
                         <label for="tel">Tel:</label>
-                        <input type="text">
+                        <input type="text" id="tel" disabled>
                     </div>
                     <div class="popupdata">
                         <label for="email">Email:</label>
-                        <input type="text">
+                        <input type="text" id="email" disabled>
                     </div>
                     <div class="log-out">
                         <br>
 
-                        <a href="main-regis.html"><button><img src="../img/log-out.png" alt=""></button></a>
+                        <a href="/logout"><button><img src="../img/log-out.png" alt=""></button></a>
                     </div>
                 </div>
                 
@@ -488,8 +488,20 @@
     let popup = document.getElementById("popup");
 
         function openPopup() {
+            // fetch user data
+            fetch('/user/main')
+            .then(response => response.json())
+            .then(data => {
+                // Display the data in the HTML
+                document.getElementById('firstname').value = data.firstname;
+                document.getElementById('lastname').value = data.lastname;
+                document.getElementById('tel').value = data.tel;
+                document.getElementById('email').value = data.email;
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+    
             popup.classList.add("openPopup");
-            
+
         }
 
         function closePopup() {

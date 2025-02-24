@@ -92,6 +92,8 @@ h2 {
     outline: none;
     overflow: hidden;
     transition: .5s;
+    text-align: center;
+    text-decoration: none;
 }
 
 .btn:hover {
