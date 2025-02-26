@@ -18,9 +18,9 @@
         </div>
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#">Home</a></li>
+            <li><a href="/admin/main">Home</a></li>
             <li><a href="" class="hidden">Profile</a></li>
-            <a href=""><img src="../img/log-out.png" alt="" class="pic3"></a>
+            <a href="/logout"><img src="../img/log-out.png" alt="" class="pic3"></a>
         </ul>    
 
     </nav>
@@ -29,6 +29,138 @@
     </div>
 
     <div class="history">
+        <% data.forEach(function(item) { %>
+        <div class="all">
+            <div class="card">
+                <div class="data4">
+                    <p class="card-title2"><%= item.date %></p>
+                </div>    
+                <a href="#" class="card-link">
+                    <p class="badge"><%= item.room_name %></p>
+                    <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img" > 
+                </a>
+                <div class="data3">
+                    <a href="#" class="book">หนังสือสัญญา</a>
+                </div>    
+
+            </div>
+            <div class="alldata">
+                <div class="data5">
+                    <p class="card-title2">สถานะ:</p>
+                    <select name="status" id="" class="status">
+                        <option value="status" >สำเร็จ</option>
+                        <option value="status" >กำลังรอตรวจสอบ</option>
+                        <option value="status" >ยกเลิก</option>
+                    </select>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">สลิปโอนเงิน: </p>
+                    <div class="slip">
+                        <a href=""><img src="../img/archive.png" alt="" class="pic5"></a>
+                    </div>
+                </div>
+                <div class="data">
+                    <p class="card-title2">รายละเอียดผู้เช่า: </p>
+                </div>
+
+                <div class="data5">
+                    <p class="card-title2">หมายเลขห้อง: </p>
+                    <p class="card-title2"><%= item.room_id %></p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">ชื่อ-นามสกุล</p>
+                    <p class="card-title2"><%= item.firstname %> <%= item.lastname %></p>
+
+                </div>
+                <div class="data5">
+                    <p class="card-title2">email: </p>
+                    <p class="card-title2"><%= item.email %></p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">เบอร์โทร: </p>
+                    <p class="card-title2"><%= item.tel %></p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">สัญญาเช่าอยู่: </p>
+                    <p class="card-title2"><%= item.tenancy %> เดือน</p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">จำนวนผู้เข้าพัก: </p>
+                    <p class="card-title2"><%= item.people %> คน</p>
+                </div>
+
+                <div class="data5">
+                    <p class="card-title2">วันที่เริ่มทำสัญญา: </p>
+                    <p class="card-title2"><%= item.date %></p>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+        <!-- <div class="all">
+            <div class="card">
+                <div class="data4">
+                    <p class="card-title2">12/12/2025</p>
+                </div>    
+                <a href="#" class="card-link">                            
+                    <p class="badge">Ram resident</p>
+                    <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img" > 
+                </a>
+                <div class="data3">
+                    <a href="#" class="book">หนังสือสัญญา</a>
+                </div>    
+
+            </div>
+            <div class="alldata">
+                <div class="data5">
+                    <p class="card-title2">สถานะ:</p>
+                    <select name="status" id="" class="status">
+                        <option value="status" >สำเร็จ</option>
+                        <option value="status" >กำลังรอตรวจสอบ</option>
+                        <option value="status" >ยกเลิก</option>
+                    </select>
+                </div>    
+                <div class="data5">
+                    <p class="card-title2">สลิปโอนเงิน: </p>
+                    <div class="slip">
+                        <a href=""><img src="../img/archive.png" alt="" class="pic5"></a>
+                    </div>
+                </div>
+                <div class="data">
+                    <p class="card-title2">รายละเอียดผู้เช่า: </p>
+                </div>
+
+                <div class="data5">
+                    <p class="card-title2">หมายเลขห้อง: </p>
+                    <p class="card-title2">111</p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">ชื่อ-นามสกุล</p>
+                    <p class="card-title2">แมน แมน</p>
+
+                </div>
+                <div class="data5">
+                    <p class="card-title2">email: </p>
+                    <p class="card-title2">man@man</p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">เบอร์โทร: </p>
+                    <p class="card-title2">000000000</p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">สัญญาเช่าอยู่: </p>
+                    <p class="card-title2">3 เดือน</p>
+                </div>
+                <div class="data5">
+                    <p class="card-title2">จำนวนผู้เข้าพัก: </p>
+                    <p class="card-title2">2 คน</p>
+                </div>
+
+                <div class="data5">
+                    <p class="card-title2">วันที่เริ่มทำสัญญา: </p>
+                    <p class="card-title2">12/12/2025</p>
+                </div>
+            </div>
+        </div>
         <div class="all">
             <div class="card">
                 <div class="data4">
@@ -159,138 +291,7 @@
                     <p class="card-title2">12/12/2025</p>
                 </div>
             </div>
-        </div>
-        <div class="all">
-            <div class="card">
-                <div class="data4">
-                    <p class="card-title2">12/12/2025</p>
-                </div>    
-                <a href="#" class="card-link">                            
-                    <p class="badge">Ram resident</p>
-                    <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img" > 
-                </a>
-                <div class="data3">
-                    <a href="#" class="book">หนังสือสัญญา</a>
-                </div>    
-
-            </div>
-            <div class="alldata">
-                <div class="data5">
-                    <p class="card-title2">สถานะ:</p>
-                    <select name="status" id="" class="status">
-                        <option value="status" >สำเร็จ</option>
-                        <option value="status" >กำลังรอตรวจสอบ</option>
-                        <option value="status" >ยกเลิก</option>
-                    </select>
-                </div>    
-                <div class="data5">
-                    <p class="card-title2">สลิปโอนเงิน: </p>
-                    <div class="slip">
-                        <a href=""><img src="../img/archive.png" alt="" class="pic5"></a>
-                    </div>
-                </div>
-                <div class="data">
-                    <p class="card-title2">รายละเอียดผู้เช่า: </p>
-                </div>
-
-                <div class="data5">
-                    <p class="card-title2">หมายเลขห้อง: </p>
-                    <p class="card-title2">111</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">ชื่อ-นามสกุล</p>
-                    <p class="card-title2">แมน แมน</p>
-
-                </div>
-                <div class="data5">
-                    <p class="card-title2">email: </p>
-                    <p class="card-title2">man@man</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">เบอร์โทร: </p>
-                    <p class="card-title2">000000000</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">สัญญาเช่าอยู่: </p>
-                    <p class="card-title2">3 เดือน</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">จำนวนผู้เข้าพัก: </p>
-                    <p class="card-title2">2 คน</p>
-                </div>
-
-                <div class="data5">
-                    <p class="card-title2">วันที่เริ่มทำสัญญา: </p>
-                    <p class="card-title2">12/12/2025</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="all">
-            <div class="card">
-                <div class="data4">
-                    <p class="card-title2">12/12/2025</p>
-                </div>    
-                <a href="#" class="card-link">                            
-                    <p class="badge">Ram resident</p>
-                    <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img" > 
-                </a>
-                <div class="data3">
-                    <a href="#" class="book">หนังสือสัญญา</a>
-                </div>    
-
-            </div>
-            <div class="alldata">
-                <div class="data5">
-                    <p class="card-title2">สถานะ:</p>
-                    <select name="status" id="" class="status">
-                        <option value="status" >สำเร็จ</option>
-                        <option value="status" >กำลังรอตรวจสอบ</option>
-                        <option value="status" >ยกเลิก</option>
-                    </select>
-                </div>    
-                <div class="data5">
-                    <p class="card-title2">สลิปโอนเงิน: </p>
-                    <div class="slip">
-                        <a href=""><img src="../img/archive.png" alt="" class="pic5"></a>
-                    </div>
-                </div>
-                <div class="data">
-                    <p class="card-title2">รายละเอียดผู้เช่า: </p>
-                </div>
-
-                <div class="data5">
-                    <p class="card-title2">หมายเลขห้อง: </p>
-                    <p class="card-title2">111</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">ชื่อ-นามสกุล</p>
-                    <p class="card-title2">แมน แมน</p>
-
-                </div>
-                <div class="data5">
-                    <p class="card-title2">email: </p>
-                    <p class="card-title2">man@man</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">เบอร์โทร: </p>
-                    <p class="card-title2">000000000</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">สัญญาเช่าอยู่: </p>
-                    <p class="card-title2">3 เดือน</p>
-                </div>
-                <div class="data5">
-                    <p class="card-title2">จำนวนผู้เข้าพัก: </p>
-                    <p class="card-title2">2 คน</p>
-                </div>
-
-                <div class="data5">
-                    <p class="card-title2">วันที่เริ่มทำสัญญา: </p>
-                    <p class="card-title2">12/12/2025</p>
-                </div>
-            </div>
-        </div>
+        </div> -->
 
     </div>
     <footer id="footer">

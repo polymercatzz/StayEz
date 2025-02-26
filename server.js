@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const userRoutes = require("./routes/userRoute"); // import routes
+const userRoutes = require("./routes/userRoute"); // import routes user
+const adminRoutes = require("./routes/adminRoute"); // import routes admin
 const checkAuth = require("./middlewares/auth"); // import middleware
 const path = require("path");
 const port = 3000;
@@ -44,6 +45,8 @@ app.get("/logout", (req, res) => {
 
 //api
 app.use("/user", userRoutes);
+app.use("/admin", adminRoutes);
+
 
 app.listen(port, () => {
    console.log("The server was running on : http://localhost:3000");
