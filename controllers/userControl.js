@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
 const loginUser = (req, res) => {
     const { email, password } = req.body;
 
-
+    
     // Retrieve user from the database
     const sql = `SELECT * FROM users WHERE email = ?`;
     db.get(sql, [email], async (err, user) => {

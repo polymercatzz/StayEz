@@ -4,6 +4,7 @@ const userRoutes = require("./routes/userRoute"); // import routes user
 const adminRoutes = require("./routes/adminRoute"); // import routes admin
 const checkAuth = require("./middlewares/auth"); // import middleware
 const path = require("path");
+require('dotenv').config();
 const port = 3000;
 
 const app = express();
@@ -32,15 +33,20 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/html/login.html'));
 });
 
-app.get('/main', checkAuth, (req, res) => { 
-  res.sendFile(path.join(__dirname, '/public/html/main-user.html'));
+app.get('/main', checkAuth, (req, res) => {
+  const user = req.cookies.userId;
+  if(process.env.ADMIN_ID == user){
+    res.redirect("/admin/main");
+  } else {
+    res.sendFile(path.join(__dirname, '/public/html/main-user.html'));
+  }
 });
 
 //logout
 app.get("/logout", (req, res) => {
   res.clearCookie("userId");
   res.redirect("/login")
-  console.log("logout", req.cookies.userId);
+  // console.log("logout", req.cookies.userId);
 });
 
 //api
