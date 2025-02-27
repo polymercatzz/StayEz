@@ -35,5 +35,50 @@ const updatebookstatus = (req, res) => {
     });
 };
 
+const show_manage_user = (req, res) => {
+    const sql = `SELECT * FROM users`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows);
+        res.render("manageuser", { data: rows });
+    });
+};
 
-module.exports = { show_main_admin, show_manage_room, show_manage_booking, updatebookstatus};
+const updateuserstatus = (req, res) => {
+    const user_id = req.params.user_id;
+    const status = req.body.status;
+    const sql = `UPDATE users SET user_status = ? WHERE user_id = ?`;
+    console.log(status, user_id);
+    db.run(sql, [status, user_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/admin/manage_user");
+    });
+};
+
+const show_user_detail = (req, res) => {
+    const user_id = req.params.user_id;
+    const sql = `SELECT * FROM users WHERE user_id = ?`;
+    db.get(sql, [user_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.send(row);
+    });
+}
+
+const delete_user = (req, res) => {
+    const user_id = req.params.user_id;
+    const sql = `DELETE FROM users WHERE user_id = ?`;
+    db.run(sql, [user_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/admin/manage_user");
+    });
+};
+
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_manage_booking, updatebookstatus};

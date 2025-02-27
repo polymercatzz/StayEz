@@ -1,0 +1,61 @@
+<!--เหลือ header-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEz</title>
+    <link href="../css/manage-user.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+
+    </div>
+    <div class="container">
+        <div class="container-header">
+            <p>ระบบจัดการ user</p>
+            <!-- <button class="save-btn">save</button> -->
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ชื่อ-นามสกุล</th>
+                    <th>Detail</th>
+                    <th>สถานะ</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(function(item){ %>
+                <tr>
+                    <td><%= item.user_id %></td>
+                    <td><%= item.first_name %> <%= item.last_name %></td>
+                    <td><a href="/admin/userdetail/<%= item.user_id %>">Show Detail</a></td>
+                    <td>
+                        <form action="/admin/updateuserstatus/<%= item.user_id %>" method="post">
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="active" <%= item.user_status === 'active' ? 'selected' : '' %>>active</option>
+                                <option value="inactive" <%= item.user_status === 'inactive' ? 'selected' : '' %>>inactive</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/admin/delete_user/<%= item.user_id %>" method="post">
+                            <button type="submit" style="border: none; background: none; cursor: pointer;"><img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt="" style="width: 30px;"></button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
