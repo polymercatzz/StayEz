@@ -23,4 +23,17 @@ const show_manage_booking = (req, res) => {
     });
 };
 
-module.exports = { show_main_admin, show_manage_room, show_manage_booking};
+const updatebookstatus = (req, res) => {
+    const history_id = req.params.history_id;
+    const status = req.body.status;
+    const sql = `UPDATE history SET history_status = ? WHERE history_id = ?`;
+    db.run(sql, [status, history_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/admin/manage_booking");
+    });
+};
+
+
+module.exports = { show_main_admin, show_manage_room, show_manage_booking, updatebookstatus};

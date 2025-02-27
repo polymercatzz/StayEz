@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 
-const db = new sqlite3.Database('database.db', sqlite3.OPEN_READWRITE, (err) => {
+const db = new sqlite3.Database('database.db', (err) => {
     if (err) {
       console.error('Error opening the database:', err);
     } else {
@@ -18,7 +18,7 @@ db.serialize(() => {
           tel TEXT NOT NULL,
           email TEXT UNIQUE NOT NULL,
           password TEXT NOT NULL,
-          status TEXT CHECK(status IN ('active', 'inactive')) NOT NULL
+          user_status TEXT CHECK(user_status IN ('active', 'inactive')) NOT NULL
         )
       `);
     
@@ -37,7 +37,7 @@ db.serialize(() => {
           detail TEXT,
           room_have TEXT,
           map TEXT,
-          status TEXT CHECK(status IN ('available', 'occupied', 'maintenance')) NOT NULL
+          room_status TEXT CHECK(room_status IN ('available', 'occupied', 'maintenance')) NOT NULL
         )
       `);
     
@@ -87,7 +87,7 @@ db.serialize(() => {
           user_id INTEGER NOT NULL,
           room_id INTEGER NOT NULL,
           contract_id INTEGER NOT NULL,
-          status TEXT CHECK(status IN ('active', 'completed', 'cancelled')) NOT NULL,
+          history_status TEXT CHECK(history_status IN ('verification', 'completed', 'cancelled')) NOT NULL,
           date DATE NOT NULL,
           FOREIGN KEY (user_id) REFERENCES Users (user_id) ON DELETE CASCADE,
           FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE,

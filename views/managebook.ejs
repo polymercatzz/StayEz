@@ -47,11 +47,14 @@
             <div class="alldata">
                 <div class="data5">
                     <p class="card-title2">สถานะ:</p>
-                    <select name="status" id="" class="status">
-                        <option value="status" >สำเร็จ</option>
-                        <option value="status" >กำลังรอตรวจสอบ</option>
-                        <option value="status" >ยกเลิก</option>
-                    </select>
+                    <form action="/admin/updatebookstatus/<%= item.history_id %>" method="post">
+                        <select name="status" id="status" class="status" onchange="this.form.submit()">
+                            <option value="verification" <%= item.history_status === 'verification' ? 'selected' : '' %>>กำลังรอตรวจสอบ</option>
+                            <option value="completed" <%= item.history_status === 'completed' ? 'selected' : '' %>>สำเร็จ</option>
+                            <option value="cancelled" <%= item.history_status === 'cancelled' ? 'selected' : '' %>>ยกเลิก</option>
+                        </select>
+                    </form>
+                    
                 </div>
                 <div class="data5">
                     <p class="card-title2">สลิปโอนเงิน: </p>
@@ -69,7 +72,7 @@
                 </div>
                 <div class="data5">
                     <p class="card-title2">ชื่อ-นามสกุล</p>
-                    <p class="card-title2"><%= item.firstname %> <%= item.lastname %></p>
+                    <p class="card-title2"><%= item.first_name %> <%= item.last_name %></p>
 
                 </div>
                 <div class="data5">

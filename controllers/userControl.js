@@ -16,7 +16,7 @@ const registerUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         // Insert to db
-        const sql = `INSERT INTO users (firstname, lastname, tel, email, password) VALUES (?, ?, ?, ?, ?)`;
+        const sql = `INSERT INTO users (first_name, last_name, tel, email, password) VALUES (?, ?, ?, ?, ?)`;
         db.run(sql, [firstname, lastname, tel, email, hashedPassword], function (err) {
             if (err) {
                 return res.status(500).json({ message: "Error registering user", error: err.message });
