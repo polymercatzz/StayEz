@@ -18,7 +18,7 @@ db.serialize(() => {
           tel TEXT NOT NULL,
           email TEXT UNIQUE NOT NULL,
           password TEXT NOT NULL,
-          user_status TEXT CHECK(user_status IN ('active', 'inactive')) NOT NULL
+          user_status TEXT CHECK(user_status IN ('active', 'inactive')) NOT NULL DEFAULT 'active'
         )
       `);
     

@@ -489,17 +489,18 @@
 
         function openPopup() {
             // fetch user data
+            console.log('Fetching user data...');
             fetch('/user/main')
             .then(response => response.json())
             .then(data => {
                 // Display the data in the HTML
-                document.getElementById('firstname').value = data.firstname;
-                document.getElementById('lastname').value = data.lastname;
+                document.getElementById('firstname').value = data.first_name;
+                document.getElementById('lastname').value = data.last_name;
                 document.getElementById('tel').value = data.tel;
                 document.getElementById('email').value = data.email;
             })
             .catch(error => console.error('Error fetching user data:', error));
-    
+
             popup.classList.add("openPopup");
 
         }

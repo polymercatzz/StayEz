@@ -32,10 +32,6 @@ const registerUser = async (req, res) => {
 const loginUser = (req, res) => {
     const { email, password } = req.body;
 
-    //alert เดี๋ยวมาทำต่อ
-    // if (!email || !password) {
-    //     return res.status(400).json({ message: "email and password are required" });
-    // }
 
     // Retrieve user from the database
     const sql = `SELECT * FROM users WHERE email = ?`;
@@ -69,7 +65,7 @@ const getUserProfile = (req, res) => {
     // Read user ID from cookies
     const userId = req.cookies.userId;
 
-    const sql = `SELECT firstname, lastname, tel, email FROM users WHERE user_id = ?`;
+    const sql = `SELECT first_name, last_name, tel, email FROM users WHERE user_id = ?`;
     db.get(sql, [userId], (err, user) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
