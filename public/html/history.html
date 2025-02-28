@@ -241,7 +241,8 @@
                 </div>
             </div>
         </section>
-        <!-- <div class="overlay" id="overlay" onclick="closePopup()"></div> -->
+        <!-- popup profile -->
+        <div class="overlay" id="overlay" onclick="closePopup()"></div>
         <section>
             <div class="popup" id="popup">
                 <div class="profile">
@@ -279,6 +280,8 @@
             </div>
 
         </section>
+        <!-- popup cancel -->
+        <div class="overlay2" id="overlay2" onclick="closePopup2()"></div>
 
         <section>
             <div class="pop-upcancel" id="pop-upcancel">
@@ -289,50 +292,49 @@
                 </div>
                 <div class="ok">
                     <p>ยืนยันการยกเลิก</p>
-                    <button onclick="closePopup2()">ยืนยัน</button>
+                    <button onclick="closePopup2()" class="but">ยืนยัน</button>
                 </div>
             </div>
-        </section>
 
-        <div class="overlay" id="overlay" onclick="closePopup3()"></div>
+            <div class="overlay" id="overlay" onclick="closePopup3()"></div>
 
-    <section>
-        <div class="popup-review" id="popup-review">
-            <div class="close-btn">
-                <button onclick="closePopup3()">
-                    <img src="../img/close.png" alt="">
-                </button>
-            </div>
-            <p>Review</p>
-            <div class="allreviewdata">
-                <div class="reviewdata">
-                    <label for="rate">Rate:</label>
-                    <select id="rate">
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                    </select>
+            <section>
+                <div class="popup-review" id="popup-review">
+                    <div class="close-btn">
+                        <button onclick="closePopup3()">
+                            <img src="../img/close.png" alt="">
+                        </button>
+                    </div>
+                    <p>Review</p>
+                    <div class="allreviewdata">
+                        <div class="reviewdata">
+                            <label for="rate">Rate:</label>
+                            <select id="rate">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="reviewdata">
+                            <label for="review">Review:</label>
+                            <textarea id="review" rows="4" cols="30"></textarea>
+                        </div>
+                        <button onclick="closePopup3()" class="submit">Submit</button>
+                    </div>
                 </div>
-                <div class="reviewdata">
-                    <label for="review">Review:</label>
-                    <textarea id="review" rows="4" cols="30"></textarea>
-                </div>
-                <button onclick="closePopup3()" class="submit">Submit</button>
-            </div>
-        </div>
-    </section>
+            </section>
 
-        
-        <footer id="footer">
-            <div class="footer">
-                <div class="footer-content">
-                    <p>Line: @place1234</p>
-                    <p>Tel: 000000000</p>
-                    <p>Email: place@1234.com</p>
-                </div>
-        </footer>
+
+            <footer id="footer">
+                <div class="footer">
+                    <div class="footer-content">
+                        <p>Line: @place1234</p>
+                        <p>Tel: 000000000</p>
+                        <p>Email: place@1234.com</p>
+                    </div>
+            </footer>
 
 
 
@@ -352,58 +354,62 @@
 
 
 
-        <script>
-            // menu
-            document.getElementById("menuToggle").addEventListener("click", function () {
-                document.getElementById("navLinks").classList.toggle("active");
-            });
-
-            document.querySelectorAll(".dropdown-toggle").forEach(item => {
-                item.addEventListener("click", function () {
-                    let dropdownMenu = this.nextElementSibling;
-                    dropdownMenu.classList.toggle("show");
+            <script>
+                // menu
+                document.getElementById("menuToggle").addEventListener("click", function () {
+                    document.getElementById("navLinks").classList.toggle("active");
                 });
-            });
 
-            document.addEventListener("click", function (event) {
-                if (!event.target.closest(".navbar")) {
-                    document.getElementById("navLinks").classList.remove("active");
-                    document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+                document.querySelectorAll(".dropdown-toggle").forEach(item => {
+                    item.addEventListener("click", function () {
+                        let dropdownMenu = this.nextElementSibling;
+                        dropdownMenu.classList.toggle("show");
+                    });
+                });
+
+                document.addEventListener("click", function (event) {
+                    if (!event.target.closest(".navbar")) {
+                        document.getElementById("navLinks").classList.remove("active");
+                        document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+                    }
+                });
+
+                // popup
+                let popup = document.getElementById("popup");
+
+                function openPopup() {
+                    popup.classList.add("openPopup");
+                    document.getElementById("overlay").classList.add("active");
+
+
                 }
-            });
 
-            // popup
-            let popup = document.getElementById("popup");
+                function closePopup() {
+                    popup.classList.remove("openPopup");
+                    document.getElementById("overlay").classList.remove("active");
 
-            function openPopup() {
-                popup.classList.add("openPopup");
+                }
+                // cancel
+                function openPopup2() {
+                    document.getElementById("pop-upcancel").classList.add("active");
+                    document.getElementById("overlay2").classList.add("active");
+                }
 
-            }
+                function closePopup2() {
+                    document.getElementById("pop-upcancel").classList.remove("active");
+                    document.getElementById("overlay2").classList.remove("active");
+                }
+                // popup review
+                function openPopup3() {
+                    document.getElementById("popup-review").classList.add("active");
+                    document.getElementById("overlay").classList.add("active");
+                }
 
-            function closePopup() {
-                popup.classList.remove("openPopup");
-            }
-
-            let popup2 = document.getElementById("pop-upcancel");
-            function openPopup2() {
-                popup2.classList.add("openPopup2");
-
-            }
-
-            function closePopup2() {
-                popup2.classList.remove("openPopup2");
-            }
-// popup review
-        function openPopup3() {
-            document.getElementById("popup-review").classList.add("active");
-            document.getElementById("overlay").classList.add("active");
-        }
-
-        function closePopup3() {
-            document.getElementById("popup-review").classList.remove("active");
-            document.getElementById("overlay").classList.remove("active");
-        }
-        </script>
+                function closePopup3() {
+                    document.getElementById("popup-review").classList.remove("active");
+                    document.getElementById("overlay").classList.remove("active");
+                }
+            </script>
 </body>
 
 </html>
