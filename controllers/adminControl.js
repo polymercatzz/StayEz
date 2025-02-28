@@ -6,14 +6,44 @@ const show_main_admin = (req, res) => {
 };
 
 const show_manage_room = (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/html/something'));
+    const sql = `SELECT 
+        room.*,
+        departments.*,
+        history.user_id,
+        users.first_name,
+        users.last_name
+    FROM room 
+    JOIN departments ON room.department_id = departments.department_id
+    LEFT JOIN history ON room.room_id = history.room_id
+    LEFT JOIN users ON history.user_id = users.user_id
+    ORDER BY department_id;`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows);
+        res.render('manageroom', { data: rows });
+    });
+};
+
+const show_edit_room = (req, res) => {
+    const room_id = req.params.room_id;
+    const sql = `SELECT * FROM room JOIN departments ON room.department_id = departments.department_id WHERE room_id = ?`;
+    db.get(sql, [room_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(row);
+        res.render('editroom', { data: row });
+    });
 };
 
 const show_manage_booking = (req, res) => {
     const sql = `SELECT * FROM history
     JOIN users ON history.user_id = users.user_id
     JOIN room ON history.room_id = room.room_id
-    JOIN contract ON history.contract_id = contract.contract_id`;
+    JOIN contract ON history.contract_id = contract.contract_id
+    JOIN departments ON room.department_id = departments.department_id;`;
     db.all(sql, [], (err, rows) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -81,4 +111,5 @@ const delete_user = (req, res) => {
     });
 };
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_manage_booking, updatebookstatus};
+
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_manage_booking, updatebookstatus};

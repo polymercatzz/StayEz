@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StayEz</title>
-    <link href="../css/manage-dorm.css" rel="stylesheet">
+    <link href="../../css/manage-dorm.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -30,16 +30,16 @@
                 <div class="item">
                     <label>ชื่อที่พัก : </label>
                     <select>
-                        <option>test</option>
+                        <option><%= data.department_name%></option>
                     </select>
                 </div>
                 <div class="item">
                     <label>เลขห้อง : </label>
-                    <input type="text">
+                    <input type="text" value="<%= data.room_name %>">
                 </div>
                 <div class="item">
                     <label>ขนาดห้อง : </label>
-                    <input type="text">
+                    <input type="text" value="<%= data.size %>">
                 </div>
                 <div class="item">
                     <label>รูปที่ 1 : </label>
@@ -55,31 +55,31 @@
                 </div>
                 <div class="item">
                     <label>ราคา : </label>
-                    <input type="text">
+                    <input type="number" value="<%= data.price %>">
                 </div>
                 <div class="item">
                     <label>ค่าไฟ : </label>
-                    <input type="text">
+                    <input type="number" value="<%= data.p_electric %>">
                 </div>
                 <div class="item">
                     <label>ค่าน้ำ : </label>
-                    <input type="text">
+                    <input type="number" value="<%= data.p_water %>">
                 </div>
                 <div class="item">
                     <label>เงินประกัน : </label>
-                    <input type="text">
+                    <input type="number" value="<%= data.deposit %>">
                 </div>
                 <div class="item">
                     <label>จ่ายเงินล่วงหน้า : </label>
-                    <select></select>
+                    <input value="<%= data.pay_advance %>">
                 </div>
                 <div class="item">
                     <label>ห้องนอน : </label>
-                    <select></select>
+                    <input value="<%= data.bedroom %>">
                 </div>
                 <div class="item form-textarea">
                     <label>รายละเอียดที่พัก : </label>
-                    <textarea></textarea>
+                    <textarea value="<%= data.detail %>"></textarea>
                 </div>
                 <div class="item checklist">
                     <label>ที่พักนี้มีอะไรบ้าง : </label>

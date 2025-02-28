@@ -21,11 +21,18 @@ db.serialize(() => {
           user_status TEXT CHECK(user_status IN ('active', 'inactive')) NOT NULL DEFAULT 'active'
         )
       `);
-    
+      // ตาราง Departments
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Departments (
+          department_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          department_name TEXT NOT NULL
+        )
+      `);
       // ตาราง Room
     db.run(`
         CREATE TABLE IF NOT EXISTS Room (
           room_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          department_id INTEGER NOT NULL,
           room_name TEXT NOT NULL,
           size REAL,
           price REAL NOT NULL,
@@ -37,7 +44,8 @@ db.serialize(() => {
           detail TEXT,
           room_have TEXT,
           map TEXT,
-          room_status TEXT CHECK(room_status IN ('available', 'occupied', 'maintenance')) NOT NULL
+          room_status TEXT CHECK(room_status IN ('available', 'occupied', 'maintenance')) NOT NULL DEFAULT 'available',
+          FOREIGN KEY (department_id) REFERENCES Departments (department_id) ON DELETE CASCADE
         )
       `);
     

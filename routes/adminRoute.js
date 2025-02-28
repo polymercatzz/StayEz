@@ -7,6 +7,8 @@ router.get("/main", adminControl.show_main_admin);
 router.get("/manage_booking", adminControl.show_manage_booking);
 router.get("/manage_user", adminControl.show_manage_user);
 router.get("/userdetail/:user_id", adminControl.show_user_detail);
+router.get("/manage_room", adminControl.show_manage_room);
+router.get("/edit_room/:room_id", adminControl.show_edit_room);
 
 
 router.post("/updatebookstatus/:history_id", adminControl.updatebookstatus);
