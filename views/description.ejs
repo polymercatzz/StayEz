@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>description</title>
-    <link rel="stylesheet" href="../css/description.css">
+    <link rel="stylesheet" href="../../css/description.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,19 +20,19 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="../img/logo.jpeg" alt="" class="pic">
+            <img src="../../img/logo.jpeg" alt="" class="pic">
             <div class="stayEz">StayEz</div>
         </div>
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="main-user.html">Home</a></li>
+            <li><a href="/user/main">Home</a></li>
             <li><a href="history.html">History</a></li>
             <li><a href="#">Payment</a></li>
             <li><a href="#footer">Contact</a></li>
             <li><a href="#" class="hidden">Wish list</a></li>
             <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
-            <li><a href=""><img src="../img/heart.png" alt="" class="pic2"></a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>
+            <li><a href=""><img src="../../img/heart.png" alt="" class="pic2"></a></li>
+            <li><a href="#" onclick="openPopup()"><img src="../../img/user.png" alt="" class="pic3"></a></li>
         </ul>
     </nav>
 
@@ -40,17 +40,17 @@
         <div class="text-map">
             <p class="text">Asok resident</p>
             <a href="" class="map">
-                <img src="../img/map.png" alt="">
+                <img src="../../img/map.png" alt="">
                 <p>Map</p>
             </a>
         </div>
         <div class="allpic">
             <div class="p1">
-                <img src="../img/condo.jpg" alt="">
+                <img src="../../img/condo.jpg" alt="">
             </div>
             <div class="p2">
-                <img src="../img/condo2.jpg" alt="">
-                <img src="../img/condo3.webp" alt="">
+                <img src="../../img/condo2.jpg" alt="">
+                <img src="../../img/condo3.webp" alt="">
             </div>
         </div>
         <a href="" class="heart">
@@ -76,45 +76,45 @@
             <div class="allhave">
                 <div class="have">
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>ตู้เย็น</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                 </div>
                 <div class="have">
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>ตู้เย็น</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
                     <div class="datahave">
-                        <img src="../img/dog.png" alt="">
+                        <img src="../../img/dog.png" alt="">
                         <p>Pet Friendly</p>
                     </div>
 
@@ -156,23 +156,23 @@
             <div class="price">
                 <div class="flex-data">
                     <p class="text-data">ราคา:</p>
-                    <p class="text-data">2500 บาท/เดือน</p>
+                    <p class="text-data"><%= room.price %> บาท/เดือน</p>
                 </div>
                 <div class="flex-data">
                     <p class="text-data">ค่าไฟ:</p>
-                    <p class="text-data">8 บาท/หน่วย</p>
+                    <p class="text-data"><%= room.p_electric %> บาท/หน่วย</p>
                 </div>
                 <div class="flex-data">
                     <p class="text-data">ค่าน้ำ:</p>
-                    <p class="text-data">20 บาท/หน่วย</p>
+                    <p class="text-data"><%= room.p_water %> บาท/หน่วย</p>
                 </div>
                 <div class="flex-data">
                     <p class="text-data">เงินประกัน:</p>
-                    <p class="text-data">15000 บาท</p>
+                    <p class="text-data"><%= room.deposit %> บาท</p>
                 </div>
                 <div class="flex-data">
                     <p class="text-data">จ่ายเงินล่วงหน้า:</p>
-                    <p class="text-data">1 เดือน</p>
+                    <p class="text-data"><%= room.pay_advance %> บาท</p>
                 </div>
                 <button>จอง</button>
 
@@ -187,31 +187,31 @@
             <div class="profile">
                 <div class="close-btn">
                     <button onclick="closePopup()">
-                        <img src="../img/close.png" alt="">
+                        <img src="../../img/close.png" alt="">
                     </button>
                 </div>
                 <p>Profile</p>
                 <div class="allpopupdata">
                     <div class="popupdata">
                         <label for="name">Name:</label>
-                        <input type="text">
+                        <input type="text" value="<%= user.first_name %>" disabled>
                     </div>
                     <div class="popupdata">
                         <label for="lastname">Lastname:</label>
-                        <input type="text">
+                        <input type="text" value="<%= user.last_name %>" disabled>
                     </div>
                     <div class="popupdata">
                         <label for="tel">Tel:</label>
-                        <input type="text">
+                        <input type="text" value="<%= user.tel %>" disabled>
                     </div>
                     <div class="popupdata">
                         <label for="email">Email:</label>
-                        <input type="text">
+                        <input type="text" value="<%= user.email %>" disabled>
                     </div>
                     <div class="log-out">
                         <br>
 
-                        <a href="main-regis.html"><button><img src="../img/log-out.png" alt=""></button></a>
+                        <a href="/logout"><button><img src="../../img/log-out.png" alt=""></button></a>
                     </div>
                 </div>
 
