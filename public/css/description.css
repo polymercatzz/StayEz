@@ -125,17 +125,11 @@ body {
 .text{
     margin-top: 120px;
     margin-left:40px ;
-    font-size: 2rem;
+    font-size: 4vh;
     color: #94abca;
 }
 .allpic{
     position: relative; 
-    /* width: 80%; */
-    /* max-width: 100%; */
-    /* overflow: hidden;  */
-    /* border-radius: 16px;  */
-    /* box-shadow: 0 4px 10px rgba(0,0,0,0.1);  */
-    /* margin: 130px auto;  */
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -146,10 +140,6 @@ body {
 
 
 .p1 img{
-    /* width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    display: block; */
     width: 100%;
     max-width: 900px; 
     height: auto; 
@@ -163,11 +153,10 @@ body {
 
 .p2 img{
     width: 100%;
-    max-width: 350px; /* ปรับค่าตามขนาดที่เหมาะสม */
-    height: auto; /* ทำให้รูปภาพปรับขนาดอัตโนมัติตามสัดส่วนเดิม */
-    object-fit: contain; /* คงสัดส่วนรูปภาพโดยไม่มีการครอบตัด */
+    max-width: 350px; 
+    height: auto; 
+    object-fit: contain; 
     display: block;
-    /* margin: 0 auto;  */
     padding: 10px;
     border-radius: 20px;
 
@@ -198,15 +187,13 @@ body {
 
 .text2{
     display: flex;
-    /* margin-top: 80px; */
-    margin-left:40px ;
-    font-size: 1.7rem;
+    /* margin-left:50px ; */
+    font-size: 3vh;
     color: #94abca;
-    /* background-color: #94abca; */
     padding: 10px;
     max-width: 200px;
     border-radius: 10px;
-    text-align: center;
+    /* text-align: center; */
     margin: 80px auto;
 }
 
@@ -221,19 +208,15 @@ body {
     margin-top: -70px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     border: 1px solid #e0e0e0;
-    /* max-width: calc(80% - 40px);  */
 
 
 }
 .text-data2{
     flex: 1;
     max-width: 600px;
-    font-size: 1.3rem;
-    /* padding: 10px; */
+    font-size: 2.5vh;
     margin-right: 20px;
     border-radius: 16px;
-    /* background-color: #93B1D7; */
-    /* margin-left: 30px; */
     margin-bottom: 15px;
     margin: auto;
     color: #ffffff
@@ -246,7 +229,7 @@ margin-left: 50px;
 
 
 .text-data{
-    font-size: 1.4rem;
+    font-size: 2.4vh;
     justify-content: space-between;
     padding: 5px;
     align-items: center;
@@ -256,17 +239,7 @@ margin-left: 50px;
 
 
 .price{
-    /* flex: 1;
-    max-width: 500px;
-    background: #C9D7EE;
-    color: #ffffff;
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-    margin: auto; */
-    flex: 1; /* Make it flexible */
+    flex: 1; 
     max-width: 600px;
     background: #C9D7EE;
     color: #ffffff;
@@ -283,7 +256,6 @@ margin-left: 50px;
 .flex-data {
     display: flex;
     justify-content: space-between;
-    /* font-size: 1.2rem; */
     padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
@@ -296,7 +268,7 @@ margin-left: 50px;
     display: flex;
 }
 .room p{
-    font-size: 1.6rem;
+    font-size: 2.4vh;
     color: #ffffff;
     margin-right: 20px;
     margin-bottom: 15px;
@@ -310,7 +282,7 @@ margin-left: 50px;
     border: none;
     background-color: #93B1D7;
     padding: 10px;
-    font-size: 1.25rem;
+    font-size: 2.4vh;
     color: #ffffff;
     align-items: center;
     margin: 10px auto;
@@ -331,13 +303,12 @@ margin-left: 50px;
 }
 .datahave{
     display: flex;
-    font-size: 1.2rem;
+    font-size: 2.4vh;
     padding: 10px;
     color: #888787;
 }
 
 .datahave img{
-    /* margin-left: 30px; */
     width: 25px;
     margin-right: 10px;
 
@@ -359,6 +330,9 @@ margin-left: 50px;
     padding: 10px;
     border-radius: 16px;
     margin-top: 20px;
+    font-size: 2vh;
+    color: #616162;
+
 }
 .review p {
     word-wrap: break-word; 
@@ -367,7 +341,9 @@ margin-left: 50px;
     background-color: #ffffff;
     padding: 10px;
     border-radius: 16px;
-    /* margin-top: 20px; */
+    font-size: 2vh;
+    color: #616162;
+
 }
 
 
@@ -450,18 +426,17 @@ margin-left: 50px;
 .popup {
     max-width: 450px;
     background-color: #ffffff;
-    border-radius: 6px;
-    position: absolute;
-    top: 37%;
-    right: -10%;
-    transform: translate(-50%, -50%);
+    border-radius: 18px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
     visibility: hidden;
     transition: transform 0.4s, visibility 0.4s;
-    border-radius: 18px;
     padding: 20px;
     box-sizing: border-box;
-    backdrop-filter: blur(5px);
     z-index: 1000;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .openPopup {
@@ -526,7 +501,6 @@ margin-left: 50px;
     font-size: 1rem;
     padding: 5px;
     color: #616162;
-    width: 100%;
 
 }
 
@@ -544,6 +518,8 @@ margin-left: 50px;
 
 .log-out button {
     border: none;
+    background: none;
+    padding: 5px;
     cursor: pointer;
 }
 
@@ -551,7 +527,23 @@ margin-left: 50px;
     width: 40px;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+    z-index: 999;
+}
 
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
 
 
 

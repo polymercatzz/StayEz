@@ -32,7 +32,7 @@
             <li><a href="#" class="hidden">Wish list</a></li>
             <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
             <li><a href=""><img src="../img/heart.png" alt="" class="pic2"></a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>               
+            <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>
         </ul>
     </nav>
 
@@ -179,11 +179,12 @@
             </div>
 
         </div>
-
     </section>
+
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
     <section>
         <div class="popup" id="popup">
-            <div class="profile" >
+            <div class="profile">
                 <div class="close-btn">
                     <button onclick="closePopup()">
                         <img src="../img/close.png" alt="">
@@ -213,7 +214,7 @@
                         <a href="main-regis.html"><button><img src="../img/log-out.png" alt=""></button></a>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -229,9 +230,9 @@
     <footer id="footer">
         <div class="footer">
             <div class="footer-content">
-            <p>Line: @place1234</p>
-            <p>Tel: 000000000</p>
-            <p>Email: place@1234.com</p>
+                <p>Line: @place1234</p>
+                <p>Tel: 000000000</p>
+                <p>Email: place@1234.com</p>
             </div>
     </footer>
 </body>
@@ -277,14 +278,18 @@
     // popup
     let popup = document.getElementById("popup");
 
-        function openPopup() {
-            popup.classList.add("openPopup");
-            
-        }
+    function openPopup() {
+        popup.classList.add("openPopup");
+        document.getElementById("overlay").classList.add("active");
 
-        function closePopup() {
-            popup.classList.remove("openPopup");
-        }
+
+    }
+
+    function closePopup() {
+        popup.classList.remove("openPopup");
+        document.getElementById("overlay").classList.remove("active");
+
+    }
 </script>
 
 </html>
