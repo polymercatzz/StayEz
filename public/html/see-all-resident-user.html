@@ -118,6 +118,9 @@
         </a>
 
     </div>
+
+    <!-- popup profile -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
     <section>
         <div class="popup" id="popup">
             <div class="profile">
@@ -155,6 +158,8 @@
         </div>
 
     </section>
+
+
     <div class="footer">
         <div class="footer-content">
             <p>Line: @place1234</p>
@@ -189,11 +194,15 @@
 
             function openPopup() {
                 popup.classList.add("openPopup");
+                document.getElementById("overlay").classList.add("active");
+
 
             }
 
             function closePopup() {
                 popup.classList.remove("openPopup");
+                document.getElementById("overlay").classList.remove("active");
+
             }
 
         </script>
