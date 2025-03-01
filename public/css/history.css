@@ -655,13 +655,10 @@ body {
         flex-direction: column;
         width: 100%;
         max-width: 150px;
-        /* กำหนดความกว้างของเมนู */
         position: absolute;
         top: 40px;
         right: 0;
-        /* ทำให้เมนูอยู่ขวาสุด */
         left: auto;
-        /* ป้องกันไม่ให้เมนูติดซ้าย */
         background: #94abca;
         text-align: center;
         border-radius: 20px;

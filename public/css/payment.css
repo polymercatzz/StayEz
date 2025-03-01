@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 * {
-    font-family: "Itim", serif;
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+
 }
 
 body {
     background: #ffffff;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
-    font-family: "Itim", serif;
-    display: flex;
     flex-direction: column;
 }
 
@@ -20,7 +21,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
     max-width: 100%;
     height: 80px;
     position: fixed;
@@ -35,6 +35,7 @@ body {
 .navbar .logo {
     font-size: 22px;
     font-weight: bold;
+    ;
 }
 
 .stayEz {
@@ -74,6 +75,8 @@ body {
     align-items: center;
 }
 
+
+/* pic */
 .pic {
     width: 50px;
     margin-left: 10px;
@@ -90,6 +93,7 @@ body {
     margin-left: -30px;
 }
 
+
 .payment {
     color: #7B9CC8;
     flex: 1;
@@ -102,7 +106,7 @@ body {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
     gap: 50px;
     padding: 20px;
     margin: 2%;
@@ -117,11 +121,10 @@ body {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 96%;
 }
 
 .card-con {
-    width: 48%;
+    max-width: 48%;
     padding: 10px;
 }
 
@@ -135,7 +138,6 @@ body {
     padding: 5px 10px;
     border-radius: 8px;
     font-size: 14px;
-    font-weight: bold;
 }
 
 /* ปุ่ม */
@@ -161,7 +163,7 @@ body {
     display: inline-block;
     padding: 5px 10px;
     border-radius: 8px;
-    font-weight: bold;
+    /* font-weight: bold; */
     text-align: center;
     max-width: 100%;
     white-space: nowrap;
@@ -175,7 +177,6 @@ body {
     background-color: #C9D7EE;
     font-size: 2.3vh;
     color: #7B9CC8;
-    padding: 10px;
     width: 100%;
     margin-top: auto;
 }
@@ -304,12 +305,146 @@ thead th{
 }
 
 
+/* popup */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+    z-index: 999;
+}
+
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    max-width: 450px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    visibility: hidden;
+    transition: transform 0.4s, visibility 0.4s;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.openPopup {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close-btn button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.close-btn button img {
+    width: 35px;
+
+}
+
+.close-btn {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    height: 40px;
+    background-color: #93B1D7;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    width: calc(100% + 40px);
+    margin: -20px -20px 0;
+    box-sizing: border-box;
+
+
+}
+
+.allpopupdata {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #E5EFFF;
+    max-width: 370px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.popupdata {
+    display: flex;
+    max-width: 370px;
+    flex-wrap: wrap;
+    padding: 10px;
+    color: #93B1D7;
+}
+
+
+.popupdata label {
+    margin-right: 15px;
+    font-size: 2.4vh;
+}
+
+.popupdata input {
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 5px;
+    color: #616162;
+    /* width: 100%; */
+
+}
+
+.profile p {
+    text-align: center;
+    color: #93B1D7;
+    font-size: 1.8rem;
+    padding: 10px;
+}
+
+.log-out {
+    display: flex;
+    justify-content: end;
+}
+
+.log-out button {
+    border: none;
+    background: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.log-out img {
+    width: 40px;
+}
+
+
+
+
+
+
+
 
 @media screen and (max-width: 768px) {
 
     .menu-toggle,
     .hidden {
         display: block;
+
+    }
+    .menu-toggle{
+        margin-right: 20px;
     }
 
     .pic2,
@@ -336,26 +471,26 @@ thead th{
         max-width: 150px;
         border-radius: 20px;
         margin-top: 20px;
+        padding: 0;
+    }
+
+
+}
+
+@media screen and (max-width: 600px) {
+    .card-container {
+        display: flex; 
+        flex-direction: column; 
+        padding: 25px; 
+        margin-right: 20px;
+        margin-left: -10px;
 
     }
 
-    .card-wrapper {
-        margin: 0 30px 25px;
+    .card {
+        width: 100%; 
+        max-width: 400px;
+        
     }
-
-    .card-wrapper .swiper-button-prev,
-    .card-wrapper .swiper-button-next {
-        display: none;
-    }
-
-    .slider-container {
-        aspect-ratio: 4/3;
-        height: auto;
-    }
-
-    .popup {
-        top: 50%;
-        left: 50%;
-    }
-
+    
 }
