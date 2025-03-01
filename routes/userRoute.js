@@ -8,6 +8,7 @@ const router = express.Router();
 router.get("/main", checkAuth, userControl.showMain);
 router.get("/fav", checkAuth, userControl.showFav);
 router.get("/room-details/:room_id", checkAuth, userControl.showDetails);
+router.get("/history", checkAuth, userControl.showHistory);
 
 //post
 router.post('/register', userControl.registerUser);

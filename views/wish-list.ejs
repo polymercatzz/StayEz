@@ -22,7 +22,7 @@
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="/user/main">Home</a></li>
-            <li><a href="history.html">History</a></li>
+            <li><a href="/user/history">History</a></li>
             <li><a href="#">Payment</a></li>
             <li><a href="#footer">Contact</a></li>
             <li><a href="#" class="hidden">Wish list</a></li>
@@ -71,19 +71,19 @@
                 <div class="allpopupdata">
                     <div class="popupdata">
                         <label for="name">Name:</label>
-                        <input type="text" value="<%= user.first_name %>" disabled>
+                        <input type="text" value="<%= user.first_name %>" readonly>
                     </div>
                     <div class="popupdata">
                         <label for="lastname">Lastname:</label>
-                        <input type="text" value="<%= user.last_name %>" disabled>
+                        <input type="text" value="<%= user.last_name %>" readonly>
                     </div>
                     <div class="popupdata">
                         <label for="tel">Tel:</label>
-                        <input type="text" value="<%= user.tel %>" disabled>
+                        <input type="text" value="<%= user.tel %>" readonly>
                     </div>
                     <div class="popupdata">
                         <label for="email">Email:</label>
-                        <input type="text" value="<%= user.email %>" disabled>
+                        <input type="text" value="<%= user.email %>" readonly>
                     </div>
                     <div class="log-out">
                         <br>

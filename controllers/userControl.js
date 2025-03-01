@@ -132,5 +132,29 @@ const showDetails = (req, res) => {
     });
 };
 
+const showHistory = (req, res) => {
+    const userId = req.cookies.userId;
+    const historySql = `
+        SELECT r.room_name, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name
+        FROM history h
+        LEFT JOIN room r ON h.room_id = r.room_id
+        LEFT JOIN contract c ON h.contract_id = c.contract_id
+        LEFT JOIN departments d ON r.department_id = d.department_id
+        WHERE h.user_id = ?;
+    `;
+    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    db.get(userSql, [userId], (err, userData) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        db.all(historySql, [userId], (err, historyData) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.render('history', {history : historyData, user : userData});
+        });
+    });
+};
+
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails };
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory };
