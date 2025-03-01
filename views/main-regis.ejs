@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main-regis</title>
+    <!-- search -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+    <link rel="stylesheet" href="../css/main-regis.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Concert+One&family=DM+Serif+Text:ital@0;1&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Hind+Mysuru:wght@300;400;500;600;700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Marcellus&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans+Caption:wght@400;700&family=Signika+Negative:wght@300..700&family=Silkscreen:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- arrow -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
+
+    <!-- link swiperjs -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <div class="menu-toggle" id="menuToggle"></div>
+        <a href="/login"><img src="../img/login.png" alt="" class="pic3"></a>
+    </nav>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img
+                    src="https://cdn-images.prod.thinkofliving.com/wp-content/uploads/1/2019/02/19234153/10-14.jpg"
+                    alt="Image 1"></div>
+            <div class="slide"><img
+                    src="https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2023/07/COCO-PARC-Pool-02-FI.jpg"
+                    alt="Image 2"></div>
+            <div class="slide"><img src="https://realasset.co.th/ckfinder/userfiles/images/03_LAVIQ.jpg" alt="Image 3">
+            </div>
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <section class="searchall">
+        <div class="search">
+            <div class="place">
+                <label for="search" class="text">ตำแหน่ง</label>
+                <select id="allplace" class="allplace">
+                    <option id=""></option>
+                    <option id="">ที่พักทั้งหมด</option>
+                    <option>ที่พัก 1</option>
+                    <option id="place2">ที่พัก 2</option>
+                </select>
+            </div>
+            <div class="place">
+                <label for="search" class="text">ประเภทห้องพัก</label>
+                <div class="dropdown">
+                    <div class="dropdown-toggle">เลือกประเภทห้องพัก</div>
+                    <div class="dropdown-menu">
+                        <label><input type="checkbox" value="all"> ห้องพักทั้งหมด</label>
+                        <label><input type="checkbox" value="place1"> ที่พัก 1</label>
+                        <label><input type="checkbox" value="place2"> ที่พัก 2</label>
+                        <label><input type="checkbox" value="pets"> ที่พักเลี้ยงสัตว์ได้</label>
+                    </div>
+                </div>
+            </div>
+            <div class="place">
+                <label for="search" class="text">ช่วงราคา</label>
+                <select id="allplace" class="allplace">
+                    <option></option>
+                    <option>ราคาทั้งหมด</option>
+                    <option>1000-3000</option>
+                    <option>3000-6000</option>
+                    <option>6000-9000</option>
+                    <option>9000-12000</option>
+                    <option>12000-15000</option>
+                    <option>15000-18000</option>
+                    <option>18000-21000</option>
+                    <option>21000-24000</option>
+                    <option>24000-27000</option>
+                    <option>27000-30000</option>
+                </select>
+            </div>
+            <div class="place">
+                <button class="searchbutton">
+                    <span class="material-symbols-outlined">search</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="allroom">
+        <p class="text2">ที่พักแนะนำ</p>
+        <div class="container swiper">
+            <div class="card-wrapper">
+                <ul class="card-list swiper-wrapper">
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Saton resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Asok resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Ari resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+
+
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Tip resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Ram resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+                </ul>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <!-- <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div> -->
+
+            </div>
+        </div>
+    </section>
+
+    <% dept.forEach((data) => { %>
+        <section class="allroom3">
+            <div class="text2">
+                <p><%= data.department_name %> resident</p>
+                <a href="see-all-resident-user.html" class="end" id="openLink" target="_blank">
+                    <button class="card-button material-icons-outlined">arrow_forward</button>
+                </a>
+            </div>
+    
+            <div class="container swiper">
+                <div class="card-wrapper">
+                     <ul class="card-list swiper-wrapper">
+                        <% room.forEach((room) => { %>
+                            <% if (data.department_id == room.department_id) { %>
+                                <li class="card-item swiper-slide">
+                                    <a href="#" class="card-link">
+                                        <p class="badge"><%= data.department_name %> resident</p>
+                                        <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img">
+                                        <p class="card-title">รีวิว 4.9</p>
+                                        <p class="card-title"><%= room.price %> บาท/เดือน</p>
+                                        <p class="card-title"><%= room.bedroom %> ห้องนอน</p>
+                                        <div class="service">
+                                            <% room.room_have.split(', ').forEach((service) => { %>
+                                                <% if (service === 'แอร์') { %>
+                                                    <img src="/img/air-conditioner.png" alt="Air" class="pic4">
+                                                <% } else if (service === 'เตียง') { %>
+                                                    <img src="/img/wifi.png" alt="Bed" class="pic4">
+                                                <% } else if (service === 'โต๊ะ') { %>
+                                                    <img src="/img/gym.png" alt="gym" class="pic4">
+                                                <% } %>
+                                            <% }) %>
+                                        </div>
+                                    </a>
+                                </li>
+                            <% } %>
+                        <% }) %>
+                     </ul>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+        </section>
+    <% }) %>
+
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer-content">
+                <p>Line: @place1234</p>
+                <p>Tel: 000000000</p>
+                <p>Email: place@1234.com</p>
+            </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--  swiper room -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // menu
+        document.getElementById("menuToggle").addEventListener("click", function () {
+            document.getElementById("navLinks").classList.toggle("active");
+        });
+
+        document.querySelectorAll(".dropdown-toggle").forEach(item => {
+            item.addEventListener("click", function () {
+                let dropdownMenu = this.nextElementSibling;
+                dropdownMenu.classList.toggle("show");
+            });
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest(".navbar")) {
+                document.getElementById("navLinks").classList.remove("active");
+                document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+            }
+        });
+
+
+        // sliderpic
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(i) {
+            if (i >= slides.length) index = 0;
+            if (i < 0) index = slides.length - 1;
+            document.querySelector('.slider').style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        function nextSlide() {
+            index++;
+            showSlide(index);
+        }
+
+        function prevSlide() {
+            index--;
+            showSlide(index);
+        }
+
+        showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
+        setInterval(nextSlide, 5000); // Auto slide every 3 seconds
+
+        // dropdownsearch
+        document.querySelector(".dropdown-toggle").addEventListener("click", function () {
+            let menu = document.querySelector(".dropdown-menu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest(".dropdown")) {
+                document.querySelector(".dropdown-menu").style.display = "none";
+            }
+        });
+
+        //swiper room
+        new Swiper('.card-wrapper', {
+            loop: true,
+            grabCursor: true,
+            simulateTouch: true,
+
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                450: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+
+            },
+        });
+        // open link new tab
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "a" || event.key === "A") {
+                event.preventDefault(); // ป้องกันการเปลี่ยนหน้าเว็บหลัก
+                document.getElementById("openLink").click();
+            }
+        });
+    </script>
+</body>
+
+</html>
