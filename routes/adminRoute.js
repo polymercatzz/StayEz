@@ -22,6 +22,7 @@ router.post("/updateuserstatus/:user_id", adminControl.updateuserstatus);
 router.post("/delete_user/:user_id", adminControl.delete_user);
 router.post("/updateroom/:room_id", adminControl.update_room);
 router.post("/createroom", upload.array('imageFiles'), adminControl.create_room);
+router.post("/deleteroom/:room_id", adminControl.delete_room);
 
 
 module.exports = router;

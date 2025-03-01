@@ -28,20 +28,25 @@ const show_manage_room = (req, res) => {
 
 const show_edit_room = (req, res) => {
     const room_id = req.params.room_id;
-    const room_sql = `SELECT * FROM room JOIN departments ON room.department_id = departments.department_id WHERE room_id = ?`;
+    const room_sql = `SELECT * FROM room JOIN departments ON room.department_id = departments.department_id WHERE room_id = ?;`;
     db.get(room_sql, [room_id], (err, room) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        const dept_sql = `SELECT * FROM departments`;
-        db.all(dept_sql, [], (err, dept) => {
+        const imgroom_sql = `SELECT * FROM room_images WHERE room_id = ?;`;
+        db.all(imgroom_sql, [room_id], (err, image) => {
+            const dept_sql = `SELECT * FROM departments`;
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            let room_have = JSON.parse(room.room_have);
-            res.render('editroom', { data: room, room_have: room_have, dept: dept });
+            db.all(dept_sql, (err, dept) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                let room_have = JSON.parse(room.room_have);
+                res.render('editroom', { data: room, room_have: room_have, dept: dept, image: image});
+            });
         });
-
     });
 };
 
@@ -109,11 +114,6 @@ const show_create_room = (req, res) => {
 };
 
 const create_room = (req, res) => {
-    // req.files.forEach(file => {
-    //     const filename = file.originalname;
-    //     const fileData = file.buffer;
-    //     console.log("Filename: ", filename);
-    // });
     const department_id = req.body.department_id;
     const data = {
         room_name: req.body.room_name,
@@ -159,8 +159,41 @@ const create_room = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
+            if (req.files) {
+                const room_sql = `SELECT room_id FROM room ORDER BY room_id DESC;`;
+                db.get(room_sql, (err, room) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    if (!room) {
+                        return res.status(404).json({ message: "No room found" });
+                    }
+                    const last_id = room.room_id;
+                    req.files.forEach((file, index) => {
+                        let file_name = `room_${last_id}_${index + 1}`;
+                        let file_data = file.buffer;
+                        let img_sql = `INSERT INTO room_images (room_id, filename, data) VALUES (?, ?, ?)`;
+                        db.run(img_sql, [last_id, file_name, file_data], (err) => {
+                            if (err) {
+                                return res.status(500).json({ message: "Database error", error: err.message });
+                            }
+                        });
+                    });
+                });
+            }
             res.redirect("/admin/manage_room");
         });
+    });
+};
+
+const delete_room = (req, res) => {
+    const room_id = req.params.room_id;
+    const sql = `DELETE FROM room WHERE room_id = ?`;
+    db.run(sql, [room_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/admin/manage_room");
     });
 };
 
@@ -202,7 +235,7 @@ const show_manage_user = (req, res) => {
     });
 };
 
-const updateuserstatus = (req, res) => {
+const updateuserstatus = (req, resredirect) => {
     const user_id = req.params.user_id;
     const status = req.body.status;
     const sql = `UPDATE users SET user_status = ? WHERE user_id = ?`;
@@ -238,4 +271,4 @@ const delete_user = (req, res) => {
 };
 
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, show_manage_booking, updatebookstatus };
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus };

@@ -8,7 +8,9 @@
     <link href="../../css/manage-dorm.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -18,12 +20,17 @@
     <div class="container">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-            <a href="/admin/manage_room"><path
-                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" /></a>
+            <a href="/admin/manage_room">
+                <path
+                    d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+            </a>
         </svg>
-        <svg class="icon bin-icon" onclick="confirmDelete()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+        <svg class="icon bin-icon" onclick="confirmDelete()" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path
+                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+            <path
+                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
         </svg>
         <form class="form-container" action="/admin/updateroom/<%= data.room_id%>" method="POST">
             <div class="form">
@@ -31,12 +38,16 @@
                     <label>ชื่อที่พัก : </label>
                     <select id="department-name" name="department_id">
                         <option value="">เลือก</option>
-                        <% dept.forEach((department) => { %>
-                            <option value="<%= department.department_id %>" <%= data.department_id === department.department_id ? 'selected' : '' %>><%= department.department_name %></option>
-                        <% }) %>
-                        <option value="<%= dept.length+1 %>">อื่นๆ</option>
+                        <% dept.forEach((department)=> { %>
+                            <option value="<%= department.department_id %>"
+                                <%= data.department_id === department.department_id ? 'selected' : '' %>><%=
+                                    department.department_name %>
+                            </option>
+                            <% }) %>
+                                <option value="<%= dept.length+1 %>">อื่นๆ</option>
                     </select>
-                    <input type="text" id="other-department-name" style="display: none;" placeholder="กรอกชื่อที่พัก" name="department_name"/>
+                    <input type="text" id="other-department-name" style="display: none;" placeholder="กรอกชื่อที่พัก"
+                        name="department_name" />
                 </div>
                 <div class="item">
                     <label>เลขห้อง : </label>
@@ -47,16 +58,16 @@
                     <input type="text" value="<%= data.size %>" name="size">
                 </div>
                 <div class="item">
-                    <label>รูปที่ 1 : </label>
-                    <input class="file-input" type="file">
+                    <label>รูปที่ 1 : <img src="/room_img/<%= image[0].room_img_id %>" style="width: 100px;"></label>
+                    <input class="file-input" type="file" accept="image/*" name="imageFiles">
                 </div>
                 <div class="item">
-                    <label>รูปที่ 2 : </label>
-                    <input class="file-input" type="file">
+                    <label>รูปที่ 2 : <img src="/room_img/<%= image[1].room_img_id %>" style="width: 100px;"></label>
+                    <input class="file-input" type="file" accept="image/*" name="imageFiles">
                 </div>
                 <div class="item">
-                    <label>รูปที่ 3 : </label>
-                    <input class="file-input" type="file">
+                    <label>รูปที่ 3 : <img src="/room_img/<%= image[1].room_img_id %>" style="width: 100px;"></label>
+                    <input class="file-input" type="file" accept="image/*" name="imageFiles">
                 </div>
                 <div class="item">
                     <label>ราคา : </label>
@@ -90,62 +101,64 @@
                     <label>ที่พักนี้มีอะไรบ้าง : </label>
                     <div class="checklist-menu">
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.air_conditioner ? "checked" : ""%> name="air_conditioner">
+                            <input type="checkbox" <%=room_have.air_conditioner ? "checked" : "" %>
+                            name="air_conditioner">
                             <img src="/img/air-conditioner.png">
                             <label>เครื่องปรับอากาศ</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.wi_fi ? "checked" : ""%> name="wi_fi">
+                            <input type="checkbox" <%=room_have.wi_fi ? "checked" : "" %> name="wi_fi">
                             <img src="/img/wifi.png">
                             <label>wi-fi</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.TV ? "checked" : ""%> name="TV">
+                            <input type="checkbox" <%=room_have.TV ? "checked" : "" %> name="TV">
                             <img src="/img/television.png">
                             <label>โทรทัศน์</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.washing_machine ? "checked" : ""%> name="washing_machine">
+                            <input type="checkbox" <%=room_have.washing_machine ? "checked" : "" %>
+                            name="washing_machine">
                             <img src="/img/washing-machine.png">
                             <label>เครื่องซักผ้า</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.fitnaess ? "checked" : ""%> name="fitnaess">
+                            <input type="checkbox" <%=room_have.fitnaess ? "checked" : "" %> name="fitnaess">
                             <img src="/img/gym.png">
                             <label>ฟิตเนส</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.furniture ? "checked" : ""%> name="furniture">
+                            <input type="checkbox" <%=room_have.furniture ? "checked" : "" %> name="furniture">
                             <img src="/img/home-furniture.png">
                             <label>เฟอร์นิเจอร์</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.pet_friendly ? "checked" : ""%> name="pet_friendly">
+                            <input type="checkbox" <%=room_have.pet_friendly ? "checked" : "" %> name="pet_friendly">
                             <img src="/img/dog.png">
                             <label>pet friendly</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.fridge ? "checked" : ""%> name="fridge">
+                            <input type="checkbox" <%=room_have.fridge ? "checked" : "" %> name="fridge">
                             <img src="/img/fridge.png">
                             <label>ตู้เย็น</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.closed_camera ? "checked" : ""%> name="closed_camera">
+                            <input type="checkbox" <%=room_have.closed_camera ? "checked" : "" %> name="closed_camera">
                             <img src="/img/security-camera.png">
                             <label>กล้องวงจรปิด</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.lift ? "checked" : ""%> name="lift">
+                            <input type="checkbox" <%=room_have.lift ? "checked" : "" %> name="lift">
                             <img src="/img/elevator.png">
                             <label>lift</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.microwave ? "checked" : ""%> name="microwave">
+                            <input type="checkbox" <%=room_have.microwave ? "checked" : "" %> name="microwave">
                             <img src="/img/microwave.png">
                             <label>ไมโครเวฟ</label>
                         </div>
                         <div class="checklist-item">
-                            <input type="checkbox" <%= room_have.parking ? "checked" : ""%> name="parking">
+                            <input type="checkbox" <%=room_have.parking ? "checked" : "" %> name="parking">
                             <img src="/img/car.png">
                             <label>ที่จอดรถ</label>
                         </div>
@@ -162,14 +175,19 @@
     <div class="popup-container" id="popup-container">
         <div class="popup" id="popup">
             <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                 </svg>
             </div>
-            <div class="popup-content">
-                <p>ยืนยันการลบ</p>
-                <button id="del-btn" onclick="del()">ยืนยัน</button>
-            </div>
+            <form action="/admin/deleteroom/<%= data.room_id%>" method="POST">
+                <div class="popup-content">
+                    <p>ยืนยันการลบ</p>
+                    <button id="del-btn" onclick="del()" type="submit">ยืนยัน</button></a>
+                </div>
+            </form>
+
         </div>
     </div>
     <script>
