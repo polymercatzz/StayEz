@@ -28,13 +28,139 @@ const show_manage_room = (req, res) => {
 
 const show_edit_room = (req, res) => {
     const room_id = req.params.room_id;
-    const sql = `SELECT * FROM room JOIN departments ON room.department_id = departments.department_id WHERE room_id = ?`;
-    db.get(sql, [room_id], (err, row) => {
+    const room_sql = `SELECT * FROM room JOIN departments ON room.department_id = departments.department_id WHERE room_id = ?`;
+    db.get(room_sql, [room_id], (err, room) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(row);
-        res.render('editroom', { data: row });
+        const dept_sql = `SELECT * FROM departments`;
+        db.all(dept_sql, [], (err, dept) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            let room_have = JSON.parse(room.room_have);
+            res.render('editroom', { data: room, room_have: room_have, dept: dept });
+        });
+
+    });
+};
+
+const update_room = (req, res) => {
+    const department_id = req.body.department_id;
+    const room_id = req.params.room_id;
+    const dept_sql = `SELECT * FROM departments Where department_id = ?`;
+    const data = {
+        room_name: req.body.room_name,
+        size: Number(req.body.size),
+        price: Number(req.body.price),
+        p_electric: Number(req.body.p_electric),
+        p_water: Number(req.body.p_water),
+        deposit: Number(req.body.deposit),
+        pay_advance: Number(req.body.pay_advance),
+        bedroom: Number(req.body.bedroom),
+        detail: req.body.detail,
+        room_have: JSON.stringify({
+            air_conditioner: req.body.air_conditioner == 'on',
+            wi_fi: req.body.wi_fi == 'on',
+            TV: req.body.TV == 'on',
+            washing_machine: req.body.washing_machine == 'on',
+            fitnaess: req.body.fitnaess == 'on',
+            furniture: req.body.furniture == 'on',
+            pet_friendly: req.body.pet_friendly == 'on',
+            fridge: req.body.fridge == 'on',
+            closed_camera: req.body.closed_camera == 'on',
+            lift: req.body.lift == 'on',
+            microwave: req.body.microwave == 'on',
+            parking: req.body.parking == 'on'
+        })
+    };
+    db.get(dept_sql, [department_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        if (!row) {
+            const create_dept_sql = `INSERT INTO departments (department_id, department_name) VALUES (?, ?)`;
+            db.run(create_dept_sql, [department_id, req.body.department_name], (err) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+            });
+        }
+        const sql = `UPDATE room SET room_name = ?, department_id = ?, size = ?, price = ?, p_electric = ?, p_water = ?, deposit = ?, pay_advance = ?, bedroom = ?, detail = ?, room_have = ? WHERE room_id = ?`;
+        db.run(sql, [data.room_name, department_id, data.size, data.price, data.p_electric, data.p_water, data.deposit, data.pay_advance, data.bedroom, data.detail, data.room_have, room_id], (err) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/admin/manage_room");
+        }
+        );
+    });
+};
+
+const show_create_room = (req, res) => {
+    const sql = `SELECT * FROM departments`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows);
+        res.render('createroom', { data: rows });
+    });
+};
+
+const create_room = (req, res) => {
+    // req.files.forEach(file => {
+    //     const filename = file.originalname;
+    //     const fileData = file.buffer;
+    //     console.log("Filename: ", filename);
+    // });
+    const department_id = req.body.department_id;
+    const data = {
+        room_name: req.body.room_name,
+        size: Number(req.body.size),
+        price: Number(req.body.price),
+        p_electric: Number(req.body.p_electric),
+        p_water: Number(req.body.p_water),
+        deposit: Number(req.body.deposit),
+        pay_advance: Number(req.body.pay_advance),
+        bedroom: Number(req.body.bedroom),
+        detail: req.body.detail,
+        room_have: JSON.stringify({
+            air_conditioner: req.body.air_conditioner == 'on',
+            wi_fi: req.body.wi_fi == 'on',
+            TV: req.body.TV == 'on',
+            washing_machine: req.body.washing_machine == 'on',
+            fitnaess: req.body.fitnaess == 'on',
+            furniture: req.body.furniture == 'on',
+            pet_friendly: req.body.pet_friendly == 'on',
+            fridge: req.body.fridge == 'on',
+            closed_camera: req.body.closed_camera == 'on',
+            lift: req.body.lift == 'on',
+            microwave: req.body.microwave == 'on',
+            parking: req.body.parking == 'on'
+        })
+    };
+    console.log(data, department_id);
+    const dept_sql = `SELECT * FROM departments WHERE department_id = ?`;
+    db.get(dept_sql, [department_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        if (!row) {
+            const create_dept_sql = `INSERT INTO departments (department_id, department_name) VALUES (?, ?)`;
+            db.run(create_dept_sql, [department_id, req.body.department_name], (err) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+            });
+        }
+        const sql = `INSERT INTO room (room_name, size, price, p_electric, p_water, deposit, pay_advance, bedroom, detail, room_have, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.run(sql, [data.room_name, data.size, data.price, data.p_electric, data.p_water, data.deposit, data.pay_advance, data.bedroom, data.detail, data.room_have, department_id], (err) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/admin/manage_room");
+        });
     });
 };
 
@@ -112,4 +238,4 @@ const delete_user = (req, res) => {
 };
 
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_manage_booking, updatebookstatus};
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, show_manage_booking, updatebookstatus };

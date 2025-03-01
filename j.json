@@ -1,0 +1,14 @@
+{
+    "air_conditioner": false,
+    "wi-fi": false,
+    "TV": false,
+    "washing_machine": false,
+    "fitnaess": true,
+    "furniture": false,
+    "pet_friendly": true,
+    "fridge": true,
+    "closed_camera": true,
+    "lift": true,
+    "microwave": true,
+    "parking": true
+}
