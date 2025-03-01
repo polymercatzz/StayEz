@@ -1,7 +1,5 @@
-const { use } = require("../routes/userRoute");
 const db = require("../server/database");
 const bcrypt = require("bcrypt");
-require('dotenv').config();
 
 // Register user
 const registerUser = async (req, res) => {
@@ -23,7 +21,7 @@ const registerUser = async (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Error registering user", error: err.message });
             }
-            res.redirect("/user/main");
+            res.redirect("/main");
         });
     } catch (error) {
         res.status(500).json({ message: "Error hashing password", error: error.message });
@@ -62,75 +60,22 @@ const loginUser = (req, res) => {
     });
 };
 
-//render main-user
-const showMain = (req, res) => {
-    if (req.cookies.userId == process.env.ADMIN_ID) {
-        return res.redirect("/admin/main");
-    }
-    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
-    const roomSql = `SELECT * FROM Room WHERE room_status = "available" ORDER BY department_id`;
-    const deptSql = `SELECT * FROM Departments`;
-    
-    db.get(userSql, [req.cookies.userId], (err, userData) => {
+//get info
+const getUserProfile = (req, res) => {
+    // Read user ID from cookies
+    const userId = req.cookies.userId;
+
+    const sql = `SELECT first_name, last_name, tel, email FROM users WHERE user_id = ?`;
+    db.get(sql, [userId], (err, user) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-
-        db.all(roomSql, (err, roomData) => {
-            if (err) {
-                return res.status(500).json({ message: "Database error", error: err.message });
-            }
-            db.all(deptSql, (err, deptData) => {
-                if (err) {
-                    return res.status(500).json({ message: "Database error", error: err.message });
-                }
-                res.render('main-user', { user: userData, room: roomData, dept: deptData});
-            });
-        });
-    });
-};
-
-const showFav = (req, res) => {
-    const favSql = `
-        SELECT *
-        FROM Favorites f
-        JOIN room r ON f.room_id = r.room_id
-        WHERE user_id = ?;
-    `;
-    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
-
-    db.get(userSql, [req.cookies.userId], (err, userData) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err.message });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
         }
-        db.all(favSql, [req.cookies.userId], (err, favData) => {
-            if (err) {
-                return res.status(500).json({ message: "Database error", error: err.message });
-            }
-            // check favorite Data
-            // console.log(favData);
-            res.render('wish-list', { fav: favData, user: userData});
-        });
-    });
-}
-
-const showDetails = (req, res) => {
-    const room_id = req.params.room_id;
-
-    const roomSql = `SELECT * FROM Room WHERE room_id = ?`;
-    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
-    db.get(userSql, [req.cookies.userId], (err, userData) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err.message });
-        }
-        db.get(roomSql, [room_id], (err, roomData) => {
-            if (err) {
-                return res.status(500).json({ message: "Database error", error: err.message });
-            }
-            res.render('description', { room : roomData, user: userData})
-        });
+        res.send(user);
     });
 };
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails };
+module.exports = { registerUser, loginUser, getUserProfile };

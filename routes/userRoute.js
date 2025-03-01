@@ -5,9 +5,7 @@ const checkAuth = require("../middlewares/auth");
 const router = express.Router();
 
 //get
-router.get("/main", checkAuth, userControl.showMain);
-router.get("/fav", checkAuth, userControl.showFav);
-router.get("/room-details/:room_id", checkAuth, userControl.showDetails);
+router.get("/main", checkAuth, userControl.getUserProfile);
 
 //post
 router.post('/register', userControl.registerUser);

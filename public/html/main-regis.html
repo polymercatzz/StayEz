@@ -197,48 +197,223 @@
         </div>
     </section>
 
-    <% dept.forEach((data) => { %>
-        <section class="allroom3">
-            <div class="text2">
-                <p><%= data.department_name %> resident</p>
-                <a href="see-all-resident-user.html" class="end" id="openLink" target="_blank">
-                    <button class="card-button material-icons-outlined">arrow_forward</button>
-                </a>
+    <section class="allroom2">
+        <div class="text2">
+            <p>Asok resident</p>
+            <a href="see-all-resident-user.html" class="end" id="openLink" target="_blank">
+                <button class="card-button material-icons-outlined">arrow_forward</button>
+            </a>
+        </div>
+
+        <div class="container swiper">
+            <div class="card-wrapper">
+                <ul class="card-list swiper-wrapper">
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Saton resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Asok resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Ari resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+
+
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Tip resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Ram resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+                </ul>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <!-- <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div> -->
+
             </div>
-    
-            <div class="container swiper">
-                <div class="card-wrapper">
-                     <ul class="card-list swiper-wrapper">
-                        <% room.forEach((room) => { %>
-                            <% if (data.department_id == room.department_id) { %>
-                                <li class="card-item swiper-slide">
-                                    <a href="#" class="card-link">
-                                        <p class="badge"><%= data.department_name %> resident</p>
-                                        <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img">
-                                        <p class="card-title">รีวิว 4.9</p>
-                                        <p class="card-title"><%= room.price %> บาท/เดือน</p>
-                                        <p class="card-title"><%= room.bedroom %> ห้องนอน</p>
-                                        <div class="service">
-                                            <% room.room_have.split(', ').forEach((service) => { %>
-                                                <% if (service === 'แอร์') { %>
-                                                    <img src="/img/air-conditioner.png" alt="Air" class="pic4">
-                                                <% } else if (service === 'เตียง') { %>
-                                                    <img src="/img/wifi.png" alt="Bed" class="pic4">
-                                                <% } else if (service === 'โต๊ะ') { %>
-                                                    <img src="/img/gym.png" alt="gym" class="pic4">
-                                                <% } %>
-                                            <% }) %>
-                                        </div>
-                                    </a>
-                                </li>
-                            <% } %>
-                        <% }) %>
-                     </ul>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-        </section>
-    <% }) %>
+        </div>
+    </section>
+
+    <section class="allroom3">
+        <div class="text2">
+            <p>Saton resident</p>
+            <a href="see-all-resident-user.html" class="end" id="openLink" target="_blank">
+                <button class="card-button material-icons-outlined">arrow_forward</button>
+            </a>        
+        </div>
+
+        <div class="container swiper">
+            <div class="card-wrapper">
+                <ul class="card-list swiper-wrapper">
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Saton resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Asok resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Ari resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+
+
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Tip resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <a href="#" class="card-link">
+                            <p class="badge">Ram resident</p>
+                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
+                                alt="Card Image" class="card-img">
+                            <p class="card-title">รีวิว 4.9</p>
+                            <p class="card-title">2500 บาท/เดือน</p>
+                            <p class="card-title">1 ห้องนอน</p>
+                            <div class="service">
+                                <img src="../img/dog.png" alt="" class="pic4">
+                                <img src="../img/gym.png" alt="" class="pic4">
+                                <img src="../img/wifi.png" alt="" class="pic4">
+                            </div>
+                            <!-- <button class="card-button material-symbols-outlined">arrow_forward</button>     -->
+                        </a>
+                    </li>
+                </ul>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <!-- <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div> -->
+
+            </div>
+        </div>
+    </section>
 
     <footer id="footer">
         <div class="footer">

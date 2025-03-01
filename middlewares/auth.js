@@ -7,4 +7,11 @@ const checkAuth = (req, res, next) => {
     next();
 };
 
+// const checkAdmin = (req, res, next) => {
+//     if (req.cookies.userId !== process.env.ADMIN_ID) {
+//         return res.status(403).json({ message: "This page for admin only" });
+//     }
+//     next();
+// };
+
 module.exports = checkAuth;
