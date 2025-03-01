@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StayEz</title>
     <link href="../css/select-month.css" rel="stylesheet">
+    <link rel="icon" href="../img/logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-
-    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#" onclick="openLogoutPopup()"><img src="../img/log-out.png" alt="" class="pic3"></a></li>
+        </ul>
+    </nav>
     <div class="container">
         <p class="title">รายรับ-รายจ่ายแต่ละเดือน</p>
         <p class="year">2024</p>
@@ -56,7 +64,30 @@
             </div>
         </div>
     </div>
+    <div class="logout-popup-container" id="logout-popup-container">
+        <div class="logout-popup" id="logout-popup">
+            <div class="logout-popup-header">
+                <svg class="logout-icon" id="icon" onclick="closeLogoutPopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </div>
+            <div class="logout-popup-content">
+                <p class="logout-content-head">ยืนยันที่จะออกจากระบบ</p>
+                <button onclick="closeLogoutPopup()">ยืนยัน</button>
+            </div>
+        </div>
+    </div>
     <script>
+        function openLogoutPopup() {
+            const container = document.getElementById("logout-popup-container");
+
+            container.style.display = 'block';
+        };
+        function closeLogoutPopup() {
+            const container = document.getElementById("logout-popup-container");
+
+            container.style.display = 'none';
+        };
         function openPopup() {
             const container = document.getElementById("popup-container");
 
@@ -65,7 +96,7 @@
         function closePopup() {
             const container = document.getElementById("popup-container");
 
-            container.style.display = 'none';
+        container.style.display = 'none';
         };
     </script>
 </body>
