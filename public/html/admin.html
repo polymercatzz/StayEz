@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
 </head>
 
 <body>
@@ -17,18 +19,18 @@
             <div class="stayEz">StayEz</div>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li class="header"><a href="#">Home</a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#" onclick="openPopup()"><img src="../img/log-out.png" alt="" class="pic3"></a></li>
         </ul>
     </nav>
     <div class="img">
         <img src="../img/condo.jpg">
     </div>
     <div class="page-select">
-        <a href="/admin/manage_user"><button>ระบบจัดการ User</button></a>
-        <a href="/admin/manage_room"><button>ระบบจัดการที่พัก</button></a>
-        <a href="/admin/manage_booking"><button>ระบบจัดการจอง</button></a>
-        <button>ระบบคำนวณ</button>
+        <a href="/admin/manage_user">ระบบจัดการ User</a>
+        <a href="/admin/manage_room">ระบบจัดการที่พัก</a>
+        <a href="/admin/manage_booking">ระบบจัดการจอง</a>
+        <a>ระบบคำนวณ</a>
     </div>
     <div class="summary">
         <p>สรุปรายได้-รายจ่ายที่พัก</p>
@@ -43,9 +45,7 @@
                     <p class="total-text"></p>
                 </div>
             </div>
-            <div class="total-img">
-                <img src="../img/logo.jpg" alt="ตาราง">
-            </div>
+            <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
             <div class="total-footer">
                 <button>รายได้แต่ละเดือน</button>
                 <div class="sum-section">
@@ -55,6 +55,54 @@
             </div>
         </div>
     </div>
+    <div class="popup-container" id="popup-container">
+        <div class="popup" id="popup">
+            <div class="popup-header">
+                <svg class="icon" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </div>
+            <div class="popup-content">
+                <p class="content-head">ยืนยันที่จะออกจากระบบ</p>
+                <button onclick="closePopup()">ยืนยัน</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openPopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'block';
+        };
+        function closePopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'none';
+        };
+        //script graph
+        const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+        const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+        
+        new Chart("total-chart", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(0,0,255,1.0)",
+              borderColor: "rgba(0,0,255,0.1)",
+              data: yValues
+            }]
+          },
+          options: {
+            legend: {display: false},
+            scales: {
+              yAxes: [{ticks: {min: 6, max:16}}],
+            }
+          }
+        });
+    </script>
 </body>
 
 </html>
