@@ -175,7 +175,6 @@
     </div>
     <script>
         function openInputPopup(history_id, room_id, price) {
-            console.log(history_id, price);
             const form = document.getElementById("payment-form");
             form.action = `/admin/createpayment/${room_id}/${history_id}`;
             const container = document.getElementById("input-popup-container");
@@ -199,7 +198,7 @@
             for (const key in other_json) {
                 show_addExpense(key, other_json[key]);
             }
-            document.getElementById("form_rent").remove();
+            document.getElementById("form_rent").style.display = 'none';
         };
         function openStatusPopup() {
             const container = document.getElementById("status-popup-container");
@@ -208,8 +207,24 @@
         };
         function closeInputPopup() {
             const container = document.getElementById("input-popup-container");
-
             container.style.display = 'none';
+            const rentInput = document.getElementById("rent");
+            const waterInput = document.getElementById("water");
+            const electricityInput = document.getElementById("electricity");
+            
+            rentInput.value = '';
+            waterInput.value = '';
+            electricityInput.value = '';
+
+            electricityInput.disabled = false;
+            waterInput.disabled = false;
+
+            const expenseContainer = document.getElementById("expense-container");
+            expenseContainer.innerHTML = `<div class="content-item" id="additem">
+                                <p>ค่าใช้จ่ายอื่นๆ : </p>
+                                <button type="button" onclick="addExpense()">+</button>
+                            </div>`;
+            document.getElementById("form_rent").style.display = 'block';
         };
         function closeStatusPopup() {
             const container = document.getElementById("status-popup-container");
