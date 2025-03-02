@@ -1,0 +1,264 @@
+<!--เหลือ header, add ค่าใช้จ่ายอื่นๆเพิ่ม-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEz</title>
+    <link href="../css/calculate.css" rel="stylesheet">
+    <link rel="icon" href="../img/logo.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/admin/main">Home</a></li>
+            <li><a href="#" onclick="openPopup()"><img src="../img/log-out.png" alt="" class="pic3"></a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="container-header">
+            <p>ระบบคำนวณค่าที่พัก</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ชื่อที่พัก</th>
+                    <th>เลขห้อง</th>
+                    <th>ชื่อ-นามสกุล</th>
+                    <th>กรอกค่าที่พัก</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% history.forEach(function(item) { %>
+                    <tr>
+                        <td>
+                            <%= item.history_id %>
+                        </td>
+                        <td>
+                            <%= item.department_name %>
+                        </td>
+                        <td>
+                            <%= item.room_name %>
+                        </td>
+                        <td>
+                            <%= item.first_name %>
+                                <%= item.last_name %>
+                        </td>
+                        <td>
+                            <% if (!item.payment_id) { %>
+                                <button
+                                    onclick="openInputPopup(<%= item.history_id %>, <%= item.room_id %>, <%= item.price %>)">กรอก</button>
+                                <% } else { const electricity=item.r_electric / item.p_electric; const
+                                    water=item.r_water / item.p_water; %>
+                                    <button
+                                        onclick="viewHistory(<%= item.price %>, <%= electricity %>, <%= water %>, <%= JSON.stringify(item.r_other) %>)">ดูประวัติเดือนนี้</button>
+                                    <% } %>
+                        </td>
+                        <td>
+                            <% if (!item.payment_id) { %>
+                                <button style="background-color: red;">กรุณากรอกข้อมูลค่าที่พัก</button>
+                                <% } else { %>
+                                    <button onclick="openStatusPopup()">กรุณ</button>
+                                    <% } %>
+
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        <div class="popup-container" id="input-popup-container">
+            <div class="input-popup" id="input-popup">
+                <div class="input-popup-header">
+                    <svg class="input-icon" id="input-icon" onclick="closeInputPopup()"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </div>
+                <form id="payment-form" method="POST">
+                    <div class="input-popup-content">
+                        <p class="content-head">เรียกเก็บเงิน</p>
+                        <div class="content-item">
+                            <p>ค่าเช่า : </p>
+                            <input type="text" id="rent" name="rent" disabled required>
+                            <p>บาท</p>
+                        </div>
+                        <div class="content-item">
+                            <p>ค่าน้ำ : </p>
+                            <input type="text" name="water" id="water" required>
+                            <p>หน่วย</p>
+                        </div>
+                        <div class="content-item">
+                            <p>ค่าไฟ :</p>
+                            <input type="text" name="electricity" id="electricity" required>
+                            <p>หน่วย</p>
+                        </div>
+                        <div id="expense-container">
+                            <div class="content-item" id="additem">
+                                <p>ค่าใช้จ่ายอื่นๆ : </p>
+                                <button type="button" onclick="addExpense()">+</button>
+                            </div>
+                        </div>
+                        <button type="submit" id="form_rent">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="popup-container" id="status-popup-container">
+            <div class="status-popup" id="status-popup">
+                <svg class="status-icon" id="status-icon" onclick="closeStatusPopup()"
+                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                </svg>
+                <div class="status-popup-content">
+                    <p class="status-date">12/12/2025</p>
+                    <div class="status-content">
+                        <div>
+                            <div class="status-item">
+                                <p class="title">ชื่อที่พัก : </p>
+                                <p class="content-text">เดอะ เบส วงศ์สว่าง</p>
+                            </div>
+                            <div class="status-item">
+                                <p class="title">ห้อง : </p>
+                                <p class="content-text">111</p>
+                            </div>
+                            <div class="status-item">
+                                <p class="title">รายละเอียด : </p>
+                                <p class="content-text">เรียกเก็บเงินต่อเดือน</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="status-item">
+                                <p class="title">เพิ่มสลิป : </p>
+                                <input type="file" class="file-input">
+                            </div>
+                            <div class="status-item">
+                                <p class="title">สถานะการจ่ายเงิน : </p>
+                                <p class="content-text">จ่ายแล้ว</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button>ใบเสร็จ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup-container" id="popup-container">
+        <div class="popup" id="popup">
+            <div class="popup-header">
+                <svg class="icon" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                </svg>
+            </div>
+            <div class="popup-content">
+                <p class="content-head">ยืนยันที่จะออกจากระบบ</p>
+                <button onclick="closePopup()">ยืนยัน</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openInputPopup(history_id, room_id, price) {
+            console.log(history_id, price);
+            const form = document.getElementById("payment-form");
+            form.action = `/admin/createpayment/${room_id}/${history_id}`;
+            const container = document.getElementById("input-popup-container");
+            container.style.display = 'block';
+            document.getElementById("rent").value = price;
+
+        };
+        function viewHistory(rent, electricity, water, other) {
+            const container = document.getElementById("input-popup-container");
+            container.style.display = 'block';
+            document.getElementById("rent").value = rent;
+            const electricity_input = document.getElementById("electricity");
+            const water_input = document.getElementById("water");
+            electricity_input.value = electricity;
+            water_input.value = water
+            electricity_input.disabled = true;
+            water_input.disabled = true;
+            const container_expense = document.getElementById("expense-container");
+            container_expense.innerHTML = '';
+            const other_json = JSON.parse(other);
+            for (const key in other_json) {
+                show_addExpense(key, other_json[key]);
+            }
+            document.getElementById("form_rent").remove();
+        };
+        function openStatusPopup() {
+            const container = document.getElementById("status-popup-container");
+
+            container.style.display = 'block';
+        };
+        function closeInputPopup() {
+            const container = document.getElementById("input-popup-container");
+
+            container.style.display = 'none';
+        };
+        function closeStatusPopup() {
+            const container = document.getElementById("status-popup-container");
+
+            container.style.display = 'none';
+        };
+        function openPopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'block';
+        };
+        function closePopup() {
+            const container = document.getElementById("popup-container");
+
+            container.style.display = 'none';
+        };
+        function addExpense() {
+            const container = document.getElementById("expense-container");
+
+            const newExpense = document.createElement("div");
+            newExpense.classList.add("content-item");
+
+            newExpense.innerHTML = `
+        <input type="text" name="other" >: 
+        <input type="text" name="r_other" >
+        <p>บาท</p>
+        <button onclick="removeExpense(this)">-</button>`;
+
+            container.appendChild(newExpense);
+        }
+        function show_addExpense(other_name, other_r) {
+            const container = document.getElementById("expense-container");
+
+            const newExpense = document.createElement("div");
+            newExpense.classList.add("content-item");
+
+            newExpense.innerHTML = `
+        <p>${other_name}</p>: 
+        <input type="text" name="r_other" value="${other_r}" disabled>
+        <p>บาท</p>`;
+
+            container.appendChild(newExpense);
+        }
+
+
+        function removeExpense(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</body>
+
+</html>

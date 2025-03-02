@@ -118,14 +118,13 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS Payment (
           payment_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          user_id INTEGER NOT NULL,
-          room_id INTEGER NOT NULL,
+          history_id INTEGER NOT NULL,
           r_electric REAL,
           r_water REAL,
           r_other REAL,
           date DATE NOT NULL,
-          FOREIGN KEY (user_id) REFERENCES Users (user_id) ON DELETE CASCADE,
-          FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE
+          payment_status TEXT CHECK(payment_status IN ('Pending', 'Review', 'Completed', 'Canceled')) NOT NULL DEFAULT 'Pending',
+          FOREIGN KEY (history_id) REFERENCES History (history_id) ON DELETE CASCADE
         )
       `);
     

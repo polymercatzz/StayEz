@@ -270,5 +270,80 @@ const delete_user = (req, res) => {
     });
 };
 
+const show_calulate = (req, res) =>{
+    const sql = `SELECT 
+                history.*,
+                users.*,
+                room.*,
+                departments.*,
+                payment.payment_id,
+                payment.r_electric,
+                payment.r_water,
+                payment.r_other,
+                payment.date As date_payment
+                FROM history
+                JOIN users ON history.user_id = users.user_id
+                JOIN room ON history.room_id = room.room_id
+                JOIN departments ON room.department_id = departments.department_id
+                LEFT JOIN payment ON history.history_id = payment.history_id
+                WHERE history.history_status = 'completed' 
+                AND (
+                    (strftime('%m', payment.date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.date) = strftime('%Y', 'now'))
+                    OR payment.payment_id IS NULL
+                );`
+    db.all(sql, (err, rows) => {
+        if (err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows);
+        res.render("calculate", {history : rows});
+    });
+};
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus };
+
+const create_payment = (req, res) => {
+    const room_id = req.params.room_id;
+    const history_id = req.params.history_id;
+    const electricity = parseFloat(req.body.electricity);
+    const water = parseFloat(req.body.water);
+    const date = new Date();
+    const year = String(date.getFullYear());
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    let data = {};
+    const room_sql = `SELECT * FROM room WHERE room_id = ?`
+    db.get(room_sql, [room_id], (err, room) => {
+        if(err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        let r_other_json = {};
+        const other_name = req.body.other;
+        const r_other = req.body.r_other;
+        if (Array.isArray(other_name)) {
+            other_name.forEach(function(item, index) {
+                r_other_json[item] = Number(r_other[index]);
+        });
+        } else if (other_name){
+            r_other_json[other_name] = Number(r_other);
+        }
+        data = {
+            r_electric: electricity*Number(room.p_electric),
+            r_water: water*Number(room.p_water),
+            r_other: JSON.stringify(r_other_json),
+            date: `${year}-${month}-${day}`
+        };
+        console.log(data, history_id);
+        const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, date) VALUES ( ?, ?, ?, ?, ?)`;
+        db.run(payment_sql, [history_id, data.r_electric, data.r_water, data.r_other, data.date], (err) => {
+            if(err){
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/admin/manage_rent")
+        });
+    });
+    
+};
+
+
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment};
