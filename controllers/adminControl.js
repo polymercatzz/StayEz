@@ -330,35 +330,35 @@ const create_payment = (req, res) => {
     const day = String(date.getDate()).padStart(2, '0');
     let data = {};
     const room_sql = `SELECT * FROM room WHERE room_id = ?`
-    // db.get(room_sql, [room_id], (err, room) => {
-    //     if(err){
-    //         return res.status(500).json({ message: "Database error", error: err.message });
-    //     }
-    //     let r_other_json = {};
-    //     const other_name = req.body.other;
-    //     const r_other = req.body.r_other;
-    //     if (Array.isArray(other_name)) {
-    //         other_name.forEach(function(item, index) {
-    //             r_other_json[item] = Number(r_other[index]);
-    //     });
-    //     } else if (other_name){
-    //         r_other_json[other_name] = Number(r_other);
-    //     }
-    //     data = {
-    //         r_electric: electricity*Number(room.p_electric),
-    //         r_water: water*Number(room.p_water),
-    //         r_other: JSON.stringify(r_other_json),
-    //         date: `${year}-${month}-${day}`
-    //     };
-    //     console.log(data, history_id);
-    //     const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, date) VALUES ( ?, ?, ?, ?, ?)`;
-    //     db.run(payment_sql, [history_id, data.r_electric, data.r_water, data.r_other, data.date], (err) => {
-    //         if(err){
-    //             return res.status(500).json({ message: "Database error", error: err.message });
-    //         }
-    //         res.redirect("/admin/manage_rent")
-    //     });
-    // });
+    db.get(room_sql, [room_id], (err, room) => {
+        if(err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        let r_other_json = {};
+        const other_name = req.body.other;
+        const r_other = req.body.r_other;
+        if (Array.isArray(other_name)) {
+            other_name.forEach(function(item, index) {
+                r_other_json[item] = Number(r_other[index]);
+        });
+        } else if (other_name){
+            r_other_json[other_name] = Number(r_other);
+        }
+        data = {
+            r_electric: electricity*Number(room.p_electric),
+            r_water: water*Number(room.p_water),
+            r_other: JSON.stringify(r_other_json),
+            date: `${year}-${month}-${day}`
+        };
+        console.log(data, history_id);
+        const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, date) VALUES ( ?, ?, ?, ?, ?)`;
+        db.run(payment_sql, [history_id, data.r_electric, data.r_water, data.r_other, data.date], (err) => {
+            if(err){
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/admin/manage_rent")
+        });
+    });
     
 };
 
