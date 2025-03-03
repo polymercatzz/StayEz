@@ -3,6 +3,7 @@ const db = require("../server/database");
 
 const show_main_admin = (req, res) => {
     res.sendFile(path.join(__dirname, '../public/html/admin.html'));
+    res.render("admin");
 };
 
 const show_manage_room = (req, res) => {
@@ -386,4 +387,19 @@ const show_contact = (req, res) => {
 
 };
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, show_contact};
+const showMonthlyPayment = (req, res) => {
+    res.render("select-month");
+    const monthSql = `SELECT * FROM report`;
+    db.all(monthSql, (err, rows) => {
+        if (err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        res.render("calculate", {history : rows});
+    });
+}
+
+const updateMonthlyPayment = (req, res) => {
+    
+}
+
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact};
+

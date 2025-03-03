@@ -123,14 +123,6 @@ const showMain = (req, res) => {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
             
-                // roomData.forEach(room => {
-                //     try {
-                //         room.room_have = JSON.parse(room.room_have);
-                //     } catch (e) {
-                //         room.room_have = {};
-                //     }
-                // });
-            
                 res.render('main-user', {
                     user: userData,
                     room: roomData,
@@ -356,7 +348,26 @@ const create_history = (req, res) => {
             });
         });
     });
+};
+const showDepartments = (req, res) => {
+    const department_id = req.params.department_id;
+    let deptSql = `SELECT * FROM Departments WHERE department_id = ?`;
+    let roomSql = `SELECT * FROM Room WHERE room_status = "available"`;
+    console.log(department_id);
+    db.all(deptSql, [department_id],(err, deptData) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+
+        db.all(roomSql, (err, roomData) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.render('see-all-resident-user', { dept: deptData, room: roomData });
+        });
+    });
 }
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, , showcontact, create_history, showDepartments};
+

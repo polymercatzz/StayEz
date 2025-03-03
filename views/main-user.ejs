@@ -94,13 +94,12 @@
         </form>
     </section>
     
-
     <% dept.forEach((data) => { %>
         <% if (!filters.location || filters.location == data.department_id) { %>
             <section class="allroom3">
                 <div class="text2">
                     <p><%= data.department_name %> resident</p>
-                    <a href="see-all-resident-user.html" class="end" id="openLink" target="_blank">
+                    <a href="/user/department/<%=data.department_id %>" class="end" id="openLink" target="_blank">
                         <button class="card-button material-icons-outlined">arrow_forward</button>
                     </a>
                 </div>
@@ -167,7 +166,6 @@
         <% } %>
     <% }) %>
 
-
     <!-- popup -->
     <section>
         <div class="popup" id="popup">
@@ -181,19 +179,19 @@
                 <div class="allpopupdata">
                     <div class="popupdata">
                         <label for="name">Name:</label>
-                        <input type="text" id="firstname" value="<%= user.first_name %>" disabled>
+                        <input type="text" id="firstname" value="<%= user.first_name %>" readonly>
                     </div>
                     <div class="popupdata">
                         <label for="lastname">Lastname:</label>
-                        <input type="text" id="lastname" value="<%= user.last_name %>" disabled>
+                        <input type="text" id="lastname" value="<%= user.last_name %>" readonly>
                     </div>
                     <div class="popupdata">
                         <label for="tel">Tel:</label>
-                        <input type="text" id="tel" value="<%= user.tel %>" disabled>
+                        <input type="text" id="tel" value="<%= user.tel %>" readonly>
                     </div>
                     <div class="popupdata">
                         <label for="email">Email:</label>
-                        <input type="text" id="email" value="<%= user.email %>" disabled>
+                        <input type="text" id="email" value="<%= user.email %>" readonly>
                     </div>
                     <div class="log-out">
                         <br>

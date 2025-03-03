@@ -17,6 +17,8 @@ router.get("/edit_room/:room_id", adminControl.show_edit_room);
 router.get("/create_room", adminControl.show_create_room);
 router.get("/manage_rent", adminControl.show_calulate);
 router.get("/contact/:history_id", adminControl.show_contact);
+router.get("/monthly", adminControl.showMonthlyPayment);
+
 
 
 router.post("/updatebookstatus/:history_id", adminControl.updatebookstatus);
@@ -27,6 +29,7 @@ router.post("/createroom", upload.array('imageFiles'), adminControl.create_room)
 router.post("/deleteroom/:room_id", adminControl.delete_room);
 router.post("/createpayment/:room_id/:history_id", adminControl.create_payment);
 router.post("/updatapayment/:payment_id", adminControl.update_payment);
+router.post("/updatemonthly", adminControl.updateMonthlyPayment);
 
 
 
