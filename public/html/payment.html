@@ -45,7 +45,13 @@
                 <button class="btn">ใบเสร็จ</button>
             </div>
             <div class="card-con">
-                <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                <div class="section">
+                    <p><strong>เพิ่มสลิป :</strong></p>
+                    <div class="file-select">
+                        <label for="file-upload" class="file-label">เลือกไฟล์</label>
+                        <input type="file" id="file-upload" class="flieselect">
+                    </div>
+                </div>
                 <p><strong>สถานะการจ่ายเงิน :</strong><span class="paid">จ่ายแล้ว</span></p>
             </div>
         </div>
@@ -58,7 +64,13 @@
                 <button class="btn">ใบเสร็จ</button>
             </div>
             <div class="card-con">
-                <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                <div class="section">
+                    <p><strong>เพิ่มสลิป :</strong></p>
+                    <div class="file-select">
+                        <label for="file-upload" class="file-label">เลือกไฟล์</label>
+                        <input type="file" id="file-upload" class="flieselect">
+                    </div>
+                </div>
                 <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
             </div>
         </div>
@@ -71,7 +83,13 @@
                 <button class="btn">ใบเสร็จ</button>
             </div>
             <div class="card-con">
-                <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                <div class="section">
+                    <p><strong>เพิ่มสลิป :</strong></p>
+                    <div class="file-select">
+                        <label for="file-upload" class="file-label">เลือกไฟล์</label>
+                        <input type="file" id="file-upload" class="flieselect">
+                    </div>
+                </div>                
                 <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
             </div>
         </div>
@@ -84,7 +102,13 @@
                 <button class="btn">ใบเสร็จ</button>
             </div>
             <div class="card-con">
-                <p><strong>เพิ่มสลิป :</strong> <button class="btn">เลือกไฟล์</button></p>
+                <div class="section">
+                    <p><strong>เพิ่มสลิป :</strong></p>
+                    <div class="file-select">
+                        <label for="file-upload" class="file-label">เลือกไฟล์</label>
+                        <input type="file" id="file-upload" class="flieselect">
+                    </div>
+                </div>
                 <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
             </div>
         </div>
@@ -97,25 +121,39 @@
                 <button class="btn">ใบเสร็จ</button>
             </div>
             <div class="card-con">
-                <p><strong>เพิ่มสลิป :</strong> <button class="btn chosefile">เลือกไฟล์</button></p>
+                <div class="section">
+                    <p><strong>เพิ่มสลิป :</strong></p>
+                    <div class="file-select">
+                        <label for="file-upload" class="file-label">เลือกไฟล์</label>
+                        <input type="file" id="file-upload" class="flieselect">
+                    </div>
+                </div>
                 <p><strong>สถานะการจ่ายเงิน :</strong> <span class="paid">จ่ายแล้ว</span></p>
             </div>
         </div>
     </div>
 </div>
 <!-- Popup bill -->
-<div id="receiptPopup" class="popup">
-    <div class="close-btn">
-        <button onclick="closeReceiptPopup()"><i class="bi bi-x"></i></button>
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<div id="receiptPopup" class="popup2">
+    <div class="close-btn2">
+        <button onclick="closeReceiptPopup()">
+            <img src="../img/close.png" alt="">
+        </button>
     </div>
-    <div class="allpopupdata">
+    <div class="allpopupdata2">
         <h1 class="title">บิลค่าเช่าเดือน มกราคม/2025</h1>
+        <div class="name">
+            <p>เรียกเก็บเงิน</p>
+            <p>นายแมน แมน</p>
+        </div>
         <div class="tablebox">
             <table>
                 <thead>
                     <tr>
-                        <th class="tb-left">รายการ</th>
-                        <th class="tb-right">จำนวนเงิน</th>
+                        <th class="tb-left1">รายการ</th>
+                        <th class="tb-right1">จำนวนเงิน</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,6 +175,13 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="line"></div>
+        <div class="bank">
+            <p>เลขบัญชี:</p>
+            <p>00000000000</p>
+            <p>ธนาคาร : กสิกรไทย</p>
+            <p>ชื่อบัญชี : แมน แมน</p>
         </div>
     </div>
 </div>
@@ -201,10 +246,14 @@
 
         function openReceiptPopup() {
             document.getElementById("receiptPopup").classList.add("openPopup");
+            document.getElementById("overlay").classList.add("active");
+
         }
 
         function closeReceiptPopup() {
             document.getElementById("receiptPopup").classList.remove("openPopup");
+            document.getElementById("overlay").classList.remove("active");
+
         }
 
         // ปิด Popup เมื่อคลิกนอกพื้นที่
