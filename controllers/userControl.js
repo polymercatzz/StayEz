@@ -349,6 +349,7 @@ const create_history = (req, res) => {
         });
     });
 };
+
 const showDepartments = (req, res) => {
     const department_id = req.params.department_id;
     let deptSql = `SELECT * FROM Departments WHERE department_id = ?`;
@@ -369,5 +370,5 @@ const showDepartments = (req, res) => {
 }
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, , showcontact, create_history, showDepartments};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments};
 
