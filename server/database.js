@@ -123,7 +123,7 @@ db.serialize(() => {
           r_water REAL,
           r_other REAL,
           date DATE NOT NULL,
-          payment_status TEXT CHECK(payment_status IN ('Pending', 'Review', 'Completed', 'Canceled')) NOT NULL DEFAULT 'Pending',
+          payment_status TEXT CHECK(payment_status IN ('Pending', 'Review', 'Completed')) NOT NULL DEFAULT 'Pending',
           FOREIGN KEY (history_id) REFERENCES History (history_id) ON DELETE CASCADE
         )
       `);
