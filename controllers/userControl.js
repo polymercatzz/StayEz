@@ -156,5 +156,37 @@ const showHistory = (req, res) => {
     });
 };
 
+const addFav = (req, res) => {
+    const favSql = `INSERT INTO Favorites (user_id, room_id) VALUES (?, ?)`;
+    const checkSql = `SELECT * FROM Favorites WHERE user_id = ? AND room_id = ?`;
+    const deleteSql = `DELETE FROM Favorites WHERE user_id = ? AND room_id = ?`;
+    const room_id = req.params.roomId;
+    const user_id = req.cookies.userId;
+
+    db.get(checkSql, [user_id, room_id], function (err, row) {
+        if (err) {
+            return res.status(500).json({ message: "Error : database error", error: err.message });
+        }
+        
+        if (row) {  // If row exists
+            db.run(deleteSql, [user_id, room_id], function (err) {
+                if (err) {
+                    return res.status(500).json({ message: "Error deleting favorite", error: err.message });
+                }
+                return res.redirect("/user/room-details/" + room_id);
+            });
+        } else {
+            // If not found, insert
+            db.run(favSql, [user_id, room_id], function (err) {
+                if (err) {
+                    return res.status(500).json({ message: "Error adding favorite", error: err.message });
+                }
+                res.redirect("/user/room-details/" + room_id);
+            });
+            }
+    });
+};
+
+
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory };
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav };

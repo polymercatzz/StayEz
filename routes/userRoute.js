@@ -13,5 +13,6 @@ router.get("/history", checkAuth, userControl.showHistory);
 //post
 router.post('/register', userControl.registerUser);
 router.post("/login", userControl.loginUser);
+router.post("/addFav/:roomId", userControl.addFav);
 
 module.exports = router;

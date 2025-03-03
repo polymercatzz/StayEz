@@ -26,12 +26,12 @@
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="/user/main">Home</a></li>
-            <li><a href="history.html">History</a></li>
+            <li><a href="/user/history">History</a></li>
             <li><a href="#">Payment</a></li>
             <li><a href="#footer">Contact</a></li>
             <li><a href="#" class="hidden">Wish list</a></li>
             <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
-            <li><a href=""><img src="../../img/heart.png" alt="" class="pic2"></a></li>
+            <li><a href="/user/fav"><img src="../../img/heart.png" alt="" class="pic2"></a></li>
             <li><a href="#" onclick="openPopup()"><img src="../../img/user.png" alt="" class="pic3"></a></li>
         </ul>
     </nav>
@@ -53,9 +53,11 @@
                 <img src="../../img/condo3.webp" alt="">
             </div>
         </div>
-        <a href="" class="heart">
-            <span class="material-symbols-outlined">favorite</span>
-        </a>
+        <form action="/user/addFav/<%= room.room_id %>" method="POST" id="favoriteForm">
+            <a class="heart" onclick="document.getElementById('favoriteForm').submit();">
+                <span class="material-symbols-outlined">favorite</span>
+            </a>
+        </form>
         <p class="text2">ลายละเอียดที่พัก</p>
         <div class="alldata">
             <div class="data">
