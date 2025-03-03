@@ -70,8 +70,22 @@
                             <% if (!item.payment_id) { %>
                                 <button style="background-color: red;">กรุณากรอกข้อมูลค่าที่พัก</button>
                                 <% } else { %>
-                                    <button onclick="openStatusPopup()">กรุณ</button>
+                                    <% let show_status = "" %>
+                                    <% if (item.payment_status === "Pending") { 
+                                        show_status = "รอจ่ายเงิน"
+                                    %>
+                                    <% } else if (item.payment_status === "Review") { 
+                                        show_status = "รอตรวจสอบ" 
+                                    %>
+                                    <% } else if (item.payment_status === "Completed") {
+                                        show_status = "จ่ายเงินแล้ว"
+                                    %>
+                                    <% } else if (item.payment_status === "Canceled") {
+                                        show_status = "ยกเลิก"
+                                    %>
                                     <% } %>
+                                    <button onclick="openStatusPopup(<%= item.payment_id %>,'<%= item.payment_date %>', '<%= item.department_name %>', '<%= item.room_name %>', '<%= item.payment_status %>')"><%= show_status %></button>
+                                <% } %>
 
                         </td>
                     </tr>
@@ -126,16 +140,16 @@
                         d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                 </svg>
                 <div class="status-popup-content">
-                    <p class="status-date">12/12/2025</p>
+                    <p class="status-date" id="status-date">12/12/2025</p>
                     <div class="status-content">
                         <div>
                             <div class="status-item">
                                 <p class="title">ชื่อที่พัก : </p>
-                                <p class="content-text">เดอะ เบส วงศ์สว่าง</p>
+                                <p class="content-text" id="dept_name"></p>
                             </div>
                             <div class="status-item">
                                 <p class="title">ห้อง : </p>
-                                <p class="content-text">111</p>
+                                <p class="content-text" id="room_name"></p>
                             </div>
                             <div class="status-item">
                                 <p class="title">รายละเอียด : </p>
@@ -145,11 +159,18 @@
                         <div>
                             <div class="status-item">
                                 <p class="title">เพิ่มสลิป : </p>
-                                <input type="file" class="file-input">
+                                <a href="/">ตรวจสอบหลักฐาน</a>
                             </div>
                             <div class="status-item">
                                 <p class="title">สถานะการจ่ายเงิน : </p>
-                                <p class="content-text">จ่ายแล้ว</p>
+                                <form method="post" id="status-form">
+                                    <select class="content-text" id="payment_status" name="payment_status" onchange="this.form.submit()">
+                                        <option value="Pending">รอจ่ายเงิน</option>
+                                        <option value="Review">รอตรวจสอบ</option>
+                                        <option value="Completed">จ่ายเงินแล้ว</option>
+                                        <option value="Canceled">ยกเลิก</option>
+                                    </select>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -200,10 +221,17 @@
             }
             document.getElementById("form_rent").style.display = 'none';
         };
-        function openStatusPopup() {
+        function openStatusPopup(payment_id, payment_date, department_name, room_name, payment_status) {
             const container = document.getElementById("status-popup-container");
 
             container.style.display = 'block';
+
+            document.getElementById("status-date").innerHTML = payment_date;
+            document.getElementById("dept_name").innerHTML = department_name;
+            document.getElementById("room_name").innerHTML = room_name;
+            document.getElementById("status-date").innerHTML = payment_date;
+            document.querySelector("#payment_status").value = payment_status;
+            document.getElementById("status-form").action = `/admin/updatapayment/${payment_id}`
         };
         function closeInputPopup() {
             const container = document.getElementById("input-popup-container");

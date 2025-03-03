@@ -276,38 +276,42 @@ const show_calulate = (req, res) =>{
                 users.*,
                 room.*,
                 departments.*,
-                 CASE 
-                    WHEN strftime('%m', payment.date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.date) = strftime('%Y', 'now')
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
                     THEN payment.payment_id ELSE NULL END AS payment_id,
                 CASE 
-                    WHEN strftime('%m', payment.date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.date) = strftime('%Y', 'now')
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
                     THEN payment.r_electric ELSE NULL END AS r_electric,
                 CASE 
-                    WHEN strftime('%m', payment.date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.date) = strftime('%Y', 'now')
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
                     THEN payment.r_water ELSE NULL END AS r_water,
                 CASE 
-                    WHEN strftime('%m', payment.date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.date) = strftime('%Y', 'now')
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
                     THEN payment.r_other ELSE NULL END AS r_other,
                 CASE 
-                    WHEN strftime('%m', payment.date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.date) = strftime('%Y', 'now')
-                    THEN payment.date ELSE NULL END AS date_payment
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.payment_date ELSE NULL END AS payment_date,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.payment_status ELSE NULL END AS payment_status
                 FROM history
                 JOIN users ON history.user_id = users.user_id
                 JOIN room ON history.room_id = room.room_id
                 JOIN departments ON room.department_id = departments.department_id
                 LEFT JOIN payment ON history.history_id = payment.history_id
                 WHERE history.history_status = 'completed'
-                    AND payment.payment_id = (
+                    AND (payment.payment_id = (
                     SELECT payment_id
                     FROM Payment 
                     WHERE history_id = history.history_id
-                    ORDER BY date DESC
-                    LIMIT (1));`
+                    ORDER BY payment_date DESC
+                    LIMIT (1)) OR payment.payment_id ISNULL);`
     db.all(sql, (err, rows) => {
         if (err){
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -362,5 +366,38 @@ const create_payment = (req, res) => {
     
 };
 
+const update_payment = (req, res) => {
+    const payment_status = req.body.payment_status;
+    const payment_id = req.params.payment_id;
+    const sql = `UPDATE payment SET payment_status = ? WHERE payment_id = ?`
+    db.run(sql, [payment_status, payment_id], (err) => {
+        if(err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/admin/manage_rent");
+    });
+};
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment};
+const showpayment = (req, res) => {
+    const user_id = 1;
+    const sql = `SELECT * FROM History
+                JOIN users ON history.user_id = users.user_id
+                JOIN room ON history.room_id = room.room_id
+                JOIN departments ON room.department_id = departments.department_id
+                JOIN Payment ON History.history_id = Payment.history_id
+                WHERE History.user_id = 1
+                ORDER BY payment.payment_date DESC,
+                CASE 
+                    WHEN payment.payment_status = 'Pending' THEN 1
+                    WHEN payment.payment_status = 'Review' THEN 2
+                    WHEN payment.payment_status = 'Completed' THEN 3 END;`
+    db.all(sql, (err, rows) => {
+        if(err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows)
+        res.render("payment", { data: rows });
+    })
+}
+
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showpayment};
