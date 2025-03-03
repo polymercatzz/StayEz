@@ -2,7 +2,6 @@ const path = require("path");
 const db = require("../server/database");
 
 const show_main_admin = (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/html/admin.html'));
     res.render("admin");
 };
 
@@ -382,6 +381,7 @@ const update_payment = (req, res) => {
 };
 
 const show_contact = (req, res) => {
+
     
     res.render("contract_admin");
 
@@ -393,6 +393,8 @@ const showMonthlyPayment = (req, res) => {
     db.all(monthSql, (err, rows) => {
         if (err){
             return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows);
         res.render("calculate", {history : rows});
     });
 }
