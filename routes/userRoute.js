@@ -13,12 +13,15 @@ router.get("/main", checkAuth, userControl.showMain);
 router.get("/fav", checkAuth, userControl.showFav);
 router.get("/room-details/:room_id", checkAuth, userControl.showDetails);
 router.get("/history", checkAuth, userControl.showHistory);
-router.get("/payment", userControl.showpayment);
+router.get("/payment", checkAuth, userControl.showpayment);
+router.get("/contact/:room_id", checkAuth, userControl.showcontact);
 
 //post
 router.post('/register', userControl.registerUser);
 router.post("/login", userControl.loginUser);
 router.post("/addFav/:roomId", userControl.addFav);
-router.post("/update_payment/:payment_id", upload.single('img'), userControl.update_payment)
+router.post("/update_payment/:payment_id", upload.single('img'), userControl.update_payment);
+router.post("/create_history/:room_id", upload.single('img'), userControl.create_history);
+
 
 module.exports = router;

@@ -7,13 +7,13 @@ require('dotenv').config();
 const registerUser = async (req, res) => {
     const { register_firstname, register_lastname, register_tel, register_email, register_password, register_confirmPassword } = req.body;
 
-    // if (!register_firstname || !register_lastname || !register_tel || !register_email || !register_password || !register_confirmPassword) {
-    //     return res.status(400).json({ message: "All fields are required" });
-    // }
+    if (!register_firstname || !register_lastname || !register_tel || !register_email || !register_password || !register_confirmPassword) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
 
-    // if (register_password !== register_confirmPassword) {
-    //     return res.status(400).json({ message: "Passwords do not match" });
-    // }
+    if (register_password !== register_confirmPassword) {
+        return res.status(400).json({ message: "Passwords do not match" });
+    }
 
     // Check if the email already exists in the database
     const sqlCheckEmail = `SELECT * FROM users WHERE email = ?`;
@@ -282,5 +282,81 @@ const update_payment = (req, res) => {
     });
 }
 
+const showcontact = (req, res) => {
+    const date = new Date();
+    const year = String(date.getFullYear());
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const today = `${year}-${month}-${day}`;
+    const user_id = req.cookies.userId;
+    const room_id = req.params.room_id;
+    const roomSql = `SELECT * FROM Room 
+                    JOIN departments ON room.department_id = departments.department_id
+                    WHERE room_id = ?`;
+    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    db.get(userSql, [user_id], (err, userData) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        db.get(roomSql, [room_id], (err, roomData) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            console.log(userData, roomData)
+            res.render("contract_user", { userData : userData, roomData : roomData , today : today});
+        });
+    });
+};
+
+const create_history = (req, res) => {
+    const date = new Date();
+    const year = String(date.getFullYear());
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const today = `${year}-${month}-${day}`;
+    console.log(req.body, req.file, req.params);
+    const user_id = req.cookies.userId;
+    const room_id = req.params.room_id;
+    const data = {
+        prefix: req.body.name,
+        id_card: req.body.idcard,
+        address: req.body.address,
+        bank_name: req.body.bankselect,
+        ac_number: req.body.accountNumber,
+        ac_name: req.body.accountName,
+        tenancy: req.body.moth,
+        people: req.body.people,
+    }
+    const room_sql = `UPDATE room SET room_status = 'occupied' WHERE room_id = ?`;
+    db.run(room_sql, [room_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+    });
+    const contract_sql = `INSERT INTO contract (prefix, id_card, address, back_name, ac_number, ac_name, tenancy, people) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const history_sql = `INSERT INTO history (user_id, room_id, contract_id, date) VALUES (?, ?, ?, ?)`;
+    const history_img_sql = `INSERT INTO history_Images (history_id, filename, data) VALUES (?, ?, ?)`;
+    db.run(contract_sql, [data.prefix, data.id_card, data.address, data.bank_name, data.ac_number, data.ac_name, data.tenancy, data.people], function(err) {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        const contractId = this.lastID;
+        db.run(history_sql, [user_id, room_id, contractId, today], function(err) {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            const history_id = this.lastID;
+            const file_name = `history_img_${history_id}`;
+            const file_data = req.file.buffer;
+            db.run(history_img_sql, [history_id, file_name, file_data], function(err) {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                res.redirect("/user/history");
+            });
+        });
+    });
+}
+
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history};

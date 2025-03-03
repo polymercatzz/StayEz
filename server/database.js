@@ -44,7 +44,7 @@ db.serialize(() => {
           detail TEXT,
           room_have TEXT,
           map TEXT,
-          room_status TEXT CHECK(room_status IN ('available', 'occupied', 'maintenance')) NOT NULL DEFAULT 'available',
+          room_status TEXT CHECK(room_status IN ('available', 'occupied')) NOT NULL DEFAULT 'available',
           FOREIGN KEY (department_id) REFERENCES Departments (department_id) ON DELETE CASCADE
         )
       `);
@@ -76,8 +76,6 @@ db.serialize(() => {
         CREATE TABLE IF NOT EXISTS Contract (
           contract_id INTEGER PRIMARY KEY AUTOINCREMENT,
           prefix TEXT,
-          first_name TEXT NOT NULL,
-          last_name TEXT NOT NULL,
           id_card TEXT NOT NULL UNIQUE,
           address TEXT NOT NULL,
           transfer_method TEXT NOT NULL,
@@ -95,7 +93,7 @@ db.serialize(() => {
           user_id INTEGER NOT NULL,
           room_id INTEGER NOT NULL,
           contract_id INTEGER NOT NULL,
-          history_status TEXT CHECK(history_status IN ('verification', 'completed', 'cancelled')) NOT NULL,
+          history_status TEXT CHECK(history_status IN ('verification', 'completed', 'cancelled')) NOT NULL DEFAULT 'verification',
           date DATE NOT NULL,
           FOREIGN KEY (user_id) REFERENCES Users (user_id) ON DELETE CASCADE,
           FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE,

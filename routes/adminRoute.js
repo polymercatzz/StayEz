@@ -16,6 +16,7 @@ router.get("/manage_room", adminControl.show_manage_room);
 router.get("/edit_room/:room_id", adminControl.show_edit_room);
 router.get("/create_room", adminControl.show_create_room);
 router.get("/manage_rent", adminControl.show_calulate);
+router.get("/contact/:history_id", adminControl.show_contact);
 
 
 router.post("/updatebookstatus/:history_id", adminControl.updatebookstatus);
