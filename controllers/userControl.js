@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
                 if (err) {
                     return res.status(500).json({ message: "Error registering user", error: err.message });
                 }
-                res.redirect("/login");
+                res.status(200).json({ message: "Sign-up Successful"});
             });
         } catch (error) {
             return res.status(500).json({ message: "Error hashing password", error: error.message });

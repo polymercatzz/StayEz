@@ -92,97 +92,105 @@
             document.querySelector(".wrapper").classList.toggle("active");
         }
     
-        const form = document.querySelector('form');
-console.log("Form listener attached");
-form.addEventListener('submit', async function (event) {
-    event.preventDefault();
-    console.log("Form submitted");
-    const isLoginForm = form.id === 'login-form'; // Check if it's the login form
-    const isRegisterForm = form.id === 'register-form'; // Check if it's the register form
+        const register_form = document.querySelector('#register-form');
+        const login_form = document.querySelector('#login-form');
 
-    let apiEndpoint;
-    let formData = {};
+        login_form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            let login_formData = {};
+            const email = document.querySelector('#login_email').value;
+            const password = document.querySelector('#login_password').value;
+            login_formData = { login_email: email, login_password: password };
+            try {
+                const response = await fetch('/user/login', {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(login_formData),
+                });
 
-    if (isLoginForm) {
-        // Handle Login
-        const email = document.querySelector('#login_email').value;
-        const password = document.querySelector('#login_password').value;
-
-        formData = { login_email: email, login_password: password };
-        apiEndpoint = '/user/login';  // Login API endpoint
-    } else if (isRegisterForm) {
-        // Handle Registration
-        const firstname = document.querySelector('#register_firstname').value;
-        const lastname = document.querySelector('#register_lastname').value;
-        const email = document.querySelector('#register_email').value;
-        const password = document.querySelector('#register_password').value;
-        const confirmPassword = document.querySelector('#register_confirmPassword').value;
-
-        formData = {
-            register_firstname: firstname,
-            register_lastname: lastname,
-            register_email: email,
-            register_password: password,
-            register_confirmPassword: confirmPassword
-        };
-        apiEndpoint = '/user/register';  // Registration API endpoint
-    }
-
-    console.log("Sending data to server:", formData);
-
-    // Make the API request
-    try {
-        const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+                const result = await response.json();
+        
+                if (response.status === 401) {
+                    // If login failed
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: result.message || 'Invalid email or password',
+                    });
+                } else if (response.status === 200) {
+                    window.location.href = '/user/main'; // Redirect to main page after login
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unexpected Error',
+                        text: result.message || 'An unexpected error occurred!',
+                    });
+                }
+            } catch (error) {
+                console.error("Network or other error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Network Error',
+                    text: 'There was an error with the request.',
+                });
+            }
         });
 
-        // Handle status codes
-        const result = await response.json().catch(() => null); // Catch JSON parsing errors
+        register_form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            let register_formData = {};
+            const firstname = document.querySelector('#register_firstname').value;
+            const lastname = document.querySelector('#register_lastname').value;
+            const email = document.querySelector('#register_email').value;
+            const password = document.querySelector('#register_password').value;
+            const confirmPassword = document.querySelector('#register_confirmPassword').value;
 
-        console.log("Received response:", response.status);
-        console.log("Response Body:", result);  // Log the result of the response
-
-        if (response.status === 400) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Registration Failed',
-                text: result?.message || 'There was an error with the registration',
-            });
-        } else if (response.status === 401) {
-            // If login failed
-            Swal.fire({
-                icon: 'error',
-                title: 'Login Failed',
-                text: result?.message || 'Invalid email or password',
-            });
-        } else if (response.status === 200) {
-            window.location.href = '/user/main'; // Redirect to main page after login
-        } else {
-            // Handle unexpected status codes
-            Swal.fire({
-                icon: 'error',
-                title: 'Unexpected Error',
-                text: result?.message || 'An unexpected error occurred!',
-            });
-        }
-    } catch (error) {
-        console.error("Network or other error:", error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Network Error',
-            text: 'There was an error with the request.',
+            register_formData = {
+                register_firstname: firstname,
+                register_lastname: lastname,
+                register_email: email,
+                register_password: password,
+                register_confirmPassword: confirmPassword
+            };
+            try {
+                const response = await fetch('/user/register', {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(register_formData),
+                });
+        
+                const result = await response.json();
+        
+                if (response.status === 400) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Registration Failed',
+                        text: result.message || 'There was an error with the registration',
+                    });
+                } else if (response.status === 200) {
+                    window.location.href = '/login';
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unexpected Error',
+                        text: result.message || 'An unexpected error occurred!',
+                    });
+                }
+            } catch (error) {
+                console.error("Network or other error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Network Error',
+                    text: 'There was an error with the request.',
+                });
+            }
         });
-    }
-});
 
     </script>
-    
-    
-   
 </body>
 
 </html>
