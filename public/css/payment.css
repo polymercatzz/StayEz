@@ -195,7 +195,7 @@ body {
 
 /* Popup ใบเสร็จ */
 .popup2 {
-    max-width: 100%;
+    width: 330px;
     background-color: #ffffff;
     border-radius: 18px;
     position: fixed;
@@ -223,7 +223,7 @@ body {
 }
 
 .close-btn2 button img {
-    width: 35px;
+    width: 25px;
 
 }
 
@@ -231,7 +231,7 @@ body {
     display: flex;
     justify-content: end;
     /* width: 100%; */
-    height: 40px;
+    height: 30px;
     background-color: #93B1D7;
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
@@ -245,13 +245,11 @@ body {
 .section{
     display: flex;
     flex-wrap: wrap;
-    font-size: 2.1vh;
-
+    font-size: 2vh;
     align-items: center;
 }
 .section p{
     color: #7B9CC8;
-    margin-right: 15px;
 }
 .peopleselect{
     border: none;
@@ -263,6 +261,7 @@ body {
     position: relative;
     display: inline-block;
     align-items: center;
+    margin-left: 10px;
 
 }
 
@@ -280,13 +279,13 @@ body {
     display: inline-block;
     background-color: #fff; 
     color: #7B9CC8;
-    padding: 5px;
     border-radius: 10px; 
     cursor: pointer;
     font-size: 1.6vh;
+    padding: 5px;
 }
 .title {
-    font-size: 2.7vh;
+    font-size: 2.5vh;
     padding-left: 10px;
     margin-top: 10px;
     margin-bottom: 0;
@@ -296,7 +295,7 @@ body {
 .tablebox {
     display: flex;
     justify-content: center;
-    padding: 15px;
+    padding: 20px;
 }
 
 table {
@@ -311,12 +310,12 @@ table input {
     border: none;
     outline: none;
     overflow: hidden;
-    width: 50%;
+    width: 100px;
     background-color: #E5EFFF;
     border-radius: 12px;
     height: 30px;
     text-align: center;
-    width: 100%;
+    /* width: 100%; */
 }
 
 thead th{
@@ -326,40 +325,48 @@ thead th{
 .tb-left {
     text-align: left;
     padding: 10px;
+    font-size: 2.2vh;
 
 }
 
 .tb-right {
     text-align: right;
     padding: 10px;
-
+    font-size: 2vh;
+}
+.tb-right input{
+    color: #939394;
 }
 .tb-left1 {
     text-align: left;
+    font-size: 2.3vh;
 
 }
 
 .tb-right1 {
     text-align: right;
+    padding-right: 20px;
+    font-size: 2.3vh;
 
 }
 .name{
     display: flex;
     flex-wrap: wrap;
     margin-left: 10px;
-    font-size: 2.2vh;
-    color: #808081;
+    font-size: 2vh;
+    color: #878787;
 }
 .name p{
     margin-right: 10px;
 }
 
 .line{
-    border-bottom: 1px solid #9f9c9c ;
+    border-top: 1.2px solid #9f9c9c ;
+    margin-top: -30px;
 }
 
 .bank{
-    padding: 10px;
+    padding: 20px;
     font-size: 2vh;
     color: #878787;
 }
