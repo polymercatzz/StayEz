@@ -299,12 +299,14 @@ const show_calulate = (req, res) =>{
                 CASE 
                     WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
                     AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.payment_status ELSE NULL END AS payment_status
+                    THEN payment.payment_status ELSE NULL END AS payment_status,
+                Payment_Images.pay_img_id
                 FROM history
                 JOIN users ON history.user_id = users.user_id
                 JOIN room ON history.room_id = room.room_id
                 JOIN departments ON room.department_id = departments.department_id
                 LEFT JOIN payment ON history.history_id = payment.history_id
+                LEFT JOIN Payment_Images ON Payment_Images.payment_id = Payment.payment_id
                 WHERE history.history_status = 'completed'
                     AND (payment.payment_id = (
                     SELECT payment_id
@@ -355,7 +357,7 @@ const create_payment = (req, res) => {
             date: `${year}-${month}-${day}`
         };
         console.log(data, history_id);
-        const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, date) VALUES ( ?, ?, ?, ?, ?)`;
+        const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, payment_date) VALUES ( ?, ?, ?, ?, ?)`;
         db.run(payment_sql, [history_id, data.r_electric, data.r_water, data.r_other, data.date], (err) => {
             if(err){
                 return res.status(500).json({ message: "Database error", error: err.message });
@@ -378,26 +380,4 @@ const update_payment = (req, res) => {
     });
 };
 
-const showpayment = (req, res) => {
-    const user_id = 1;
-    const sql = `SELECT * FROM History
-                JOIN users ON history.user_id = users.user_id
-                JOIN room ON history.room_id = room.room_id
-                JOIN departments ON room.department_id = departments.department_id
-                JOIN Payment ON History.history_id = Payment.history_id
-                WHERE History.user_id = 1
-                ORDER BY payment.payment_date DESC,
-                CASE 
-                    WHEN payment.payment_status = 'Pending' THEN 1
-                    WHEN payment.payment_status = 'Review' THEN 2
-                    WHEN payment.payment_status = 'Completed' THEN 3 END;`
-    db.all(sql, (err, rows) => {
-        if(err){
-            return res.status(500).json({ message: "Database error", error: err.message });
-        }
-        console.log(rows)
-        res.render("payment", { data: rows });
-    })
-}
-
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showpayment};
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment};

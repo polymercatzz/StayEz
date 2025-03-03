@@ -187,6 +187,46 @@ const addFav = (req, res) => {
     });
 };
 
+const showpayment = (req, res) => {
+    const user_id = 1;
+    const sql = `SELECT 
+                users.*,
+                room.*,
+                departments.*,
+                Payment.*,
+                Payment_Images.pay_img_id
+                FROM History
+                JOIN users ON history.user_id = users.user_id
+                JOIN room ON history.room_id = room.room_id
+                JOIN departments ON room.department_id = departments.department_id
+                JOIN Payment ON History.history_id = Payment.history_id
+                LEFT JOIN Payment_Images ON Payment_Images.payment_id = Payment.payment_id
+                WHERE History.user_id = 1
+                ORDER BY payment.payment_date DESC,
+                CASE 
+                    WHEN payment.payment_status = 'Pending' THEN 1
+                    WHEN payment.payment_status = 'Review' THEN 2
+                    WHEN payment.payment_status = 'Completed' THEN 3 END;`
+    db.all(sql, (err, rows) => {
+        if(err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(rows)
+        res.render("payment", { data: rows });
+    })
+}
+const update_payment = (req, res) => {
+    const payment_id = req.params.payment_id;
+    const file_name = `payment_${payment_id}`;
+    const file_data = req.file.buffer;
+    const sql = `INSERT INTO Payment_Images (payment_id, filename, data) values(?, ?, ?)`
+    db.run(sql, [payment_id,file_name,file_data],(err) => {
+        if(err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/user/payment");
+    });
+}
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav };
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment};

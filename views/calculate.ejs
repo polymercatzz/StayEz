@@ -80,11 +80,8 @@
                                     <% } else if (item.payment_status === "Completed") {
                                         show_status = "จ่ายเงินแล้ว"
                                     %>
-                                    <% } else if (item.payment_status === "Canceled") {
-                                        show_status = "ยกเลิก"
-                                    %>
                                     <% } %>
-                                    <button onclick="openStatusPopup(<%= item.payment_id %>,'<%= item.payment_date %>', '<%= item.department_name %>', '<%= item.room_name %>', '<%= item.payment_status %>')"><%= show_status %></button>
+                                    <button onclick="openStatusPopup(<%= item.payment_id %>,'<%= item.payment_date %>', '<%= item.department_name %>', '<%= item.room_name %>', '<%= item.payment_status %>', <%= item.pay_img_id %>)"><%= show_status %></button>
                                 <% } %>
 
                         </td>
@@ -159,7 +156,7 @@
                         <div>
                             <div class="status-item">
                                 <p class="title">เพิ่มสลิป : </p>
-                                <a href="/">ตรวจสอบหลักฐาน</a>
+                                <a href="" id="check">ตรวจสอบหลักฐาน</a>
                             </div>
                             <div class="status-item">
                                 <p class="title">สถานะการจ่ายเงิน : </p>
@@ -221,7 +218,7 @@
             }
             document.getElementById("form_rent").style.display = 'none';
         };
-        function openStatusPopup(payment_id, payment_date, department_name, room_name, payment_status) {
+        function openStatusPopup(payment_id, payment_date, department_name, room_name, payment_status, pay_img_id) {
             const container = document.getElementById("status-popup-container");
 
             container.style.display = 'block';
@@ -231,7 +228,8 @@
             document.getElementById("room_name").innerHTML = room_name;
             document.getElementById("status-date").innerHTML = payment_date;
             document.querySelector("#payment_status").value = payment_status;
-            document.getElementById("status-form").action = `/admin/updatapayment/${payment_id}`
+            document.getElementById("status-form").action = `/admin/updatapayment/${payment_id}`;
+            document.getElementById("check").href = `/payment_img/${pay_img_id}`;
         };
         function closeInputPopup() {
             const container = document.getElementById("input-popup-container");
