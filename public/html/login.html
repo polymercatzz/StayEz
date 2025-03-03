@@ -6,46 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-In</title>
     <link rel="icon" href="../img/logo.jpeg">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <div class="form-box login">
-        <form action="/user/login" method="POST">
-            <h1>Log-In</h1>
-            <div class="input-box">
-                <h2>Email</h2>
-                <input type="email" id="email" name="email">
+    <div class="wrapper">
+        <div class="container" id="login-container">
+            <div class="login-togglebox">
+                <p class="text title">Welcome to</p>
+                <p class="text title">StayEz</p>
+                <p class="text description">Sign in if you don't have an account</p>
+                <button class="btn" onclick="toggleForm()">Sign-in</button>
             </div>
-            <div class="input-box">
-                <h2>Password</h2>
-                <input type="password" id="password" name="password">
+            <div class="login-formbox">
+                <form action="/user/login" method="POST">
+                    <h1>Log-In</h1>
+                    <div class="inputbox">
+                        <h2>Email</h2>
+                        <input type="email" id="login-email" name="email">
+                    </div>
+                    <div class="inputbox">
+                        <h2>Password</h2>
+                        <input type="password" id="login-password" name="password">
+                    </div>
+                    <p class="alt">If you don't have account<a onclick="toggleForm()">Sign-In</a></p>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn">Log-In</button>
+                    </div>
+                </form>
             </div>
-            <button type="submit" class="btn">Log-In</button>
-        </form>
-    </div>
+        </div>
 
-    <div class="togglebox">
-        <div class="panel panelleft">
-            <h3>Welcome to <br> StayEz</h3>
-            <p>sign-in if your don't have account</p>
-            <a class="btn regisbtn" href="/register">
-                Sign-in
-            </a>
+        <div class="container" id="register-container">
+            <div class="register-formbox">
+                <form action="/user/register" method="POST">
+                    <h1>Sign-In</h1>
+                    <div class="inputbox register-box">
+                        <h2>Firstname</h2>
+                        <input type="text" id="register-firstname" name="firstname" required>
+                    </div>
+                    <div class="inputbox register-box">
+                        <h2>Lastname</h2>
+                        <input type="text" id="register-lastname" name="lastname" required>
+                    </div>
+                    <div class="inputbox register-box">
+                        <h2>Email</h2>
+                        <input type="email" id="register-email" name="email" required>
+                    </div>
+                    <div class="inputbox register-box">
+                        <h2>Password</h2>
+                        <input type="password" id="register-password" name="password" required>
+                    </div>
+                    <div class="inputbox register-box">
+                        <h2>Confirm Password</h2>
+                        <input type="password" id="register-confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <p class="alt">If you already have account<a onclick="toggleForm()">Log-In</a></p>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn">Sign-In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="register-togglebox">
+                <p class="text title">Welcome to</p>
+                <p class="text title">StayEz</p>
+                <p class="text description">Please Log-In</p>
+                <button class="btn" onclick="toggleForm()">Log-In</button>
+            </div>
         </div>
     </div>
+
     <script>
+        function toggleForm() {
+            document.querySelector(".wrapper").classList.toggle("active");
+        }
+
         const form = document.querySelector('form');
-        form.addEventListener('submit', async function(event) {
+        form.addEventListener('submit', async function (event) {
             event.preventDefault();
-            
+
             const email = document.querySelector('#email').value;
             const password = document.querySelector('#password').value;
-    
+
             try {
                 const response = await fetch('/user/login', {
                     method: 'POST',
@@ -54,9 +104,9 @@
                     },
                     body: JSON.stringify({ email, password }),
                 });
-    
+
                 const result = await response.json();
-    
+
                 if (response.status === 401) {
                     // If login failed
                     Swal.fire({
