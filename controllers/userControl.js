@@ -5,39 +5,53 @@ require('dotenv').config();
 
 // Register user
 const registerUser = async (req, res) => {
-    const { firstname, lastname, tel, email, password, confirmPassword } = req.body;
+    const { register_firstname, register_lastname, register_tel, register_email, register_password, register_confirmPassword } = req.body;
 
-    //alert เดี๋ยวมาทำต่อ
-    // if (!firstname || !password) {
-    //     return res.status(400).json({ message: "Username and password are required" });
+    // if (!register_firstname || !register_lastname || !register_tel || !register_email || !register_password || !register_confirmPassword) {
+    //     return res.status(400).json({ message: "All fields are required" });
     // }
 
-    try {
-        // Hash password
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // if (register_password !== register_confirmPassword) {
+    //     return res.status(400).json({ message: "Passwords do not match" });
+    // }
 
-        // Insert to db
-        const sql = `INSERT INTO users (first_name, last_name, tel, email, password) VALUES (?, ?, ?, ?, ?)`;
-        db.run(sql, [firstname, lastname, tel, email, hashedPassword], function (err) {
-            if (err) {
-                return res.status(500).json({ message: "Error registering user", error: err.message });
-            }
-            res.redirect("/user/main");
-        });
-    } catch (error) {
-        res.status(500).json({ message: "Error hashing password", error: error.message });
-    }
+    // Check if the email already exists in the database
+    const sqlCheckEmail = `SELECT * FROM users WHERE email = ?`;
+    db.get(sqlCheckEmail, [register_email], async (err, user) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+
+        if (user) {
+            return res.status(400).json({ message: "Email is already registered" });
+        }
+
+        try {
+            // Hash the password
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(register_password, saltRounds);
+
+            // Insert the new user into the database
+            const sql = `INSERT INTO users (first_name, last_name, tel, email, password) VALUES (?, ?, ?, ?, ?)`;
+            db.run(sql, [register_firstname, register_lastname, register_tel, register_email, hashedPassword], function (err) {
+                if (err) {
+                    return res.status(500).json({ message: "Error registering user", error: err.message });
+                }
+                res.redirect("/login");
+            });
+        } catch (error) {
+            return res.status(500).json({ message: "Error hashing password", error: error.message });
+        }
+    });
 };
 
 // Login user
 const loginUser = (req, res) => {
-    const { email, password } = req.body;
+    const { login_email, login_password } = req.body;
 
-    
     // Retrieve user from the database
     const sql = `SELECT * FROM users WHERE email = ?`;
-    db.get(sql, [email], async (err, user) => {
+    db.get(sql, [login_email], async (err, user) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
@@ -46,7 +60,7 @@ const loginUser = (req, res) => {
         }
 
         // Compare hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(login_password, user.password);
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid username or password" });
         }
@@ -67,28 +81,68 @@ const showMain = (req, res) => {
     if (req.cookies.userId == process.env.ADMIN_ID) {
         return res.redirect("/admin/main");
     }
-    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
-    const roomSql = `SELECT * FROM Room WHERE room_status = "available" ORDER BY department_id`;
-    const deptSql = `SELECT * FROM Departments`;
-    
+
+    const filters = {
+        location: req.query.location || "",
+        roomType: Array.isArray(req.query.roomType) ? req.query.roomType : req.query.roomType ? [req.query.roomType] : [],
+        price: req.query.price || "",
+    };
+
+    let userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    let deptSql = `SELECT * FROM Departments`;
+    let roomSql = `SELECT * FROM Room WHERE room_status = "available"`;
+    const params = [req.cookies.userId];
+
+    if (filters.location) {
+        roomSql += ` AND department_id = ?`;
+        params.push(filters.location);
+    }
+
+    if (filters.price) {
+        const [minPrice, maxPrice] = filters.price.split("-").map(Number);
+        roomSql += ` AND CAST(price AS INTEGER) BETWEEN ? AND ?`;
+        params.push(minPrice, maxPrice);
+    }
+
+    if (filters.roomType.includes("pets")) {
+        roomSql += ` AND json_extract(room_have, '$.pet_friendly') = 1`;
+    }
+
     db.get(userSql, [req.cookies.userId], (err, userData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
 
-        db.all(roomSql, (err, roomData) => {
+        db.all(deptSql, (err, deptData) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            db.all(deptSql, (err, deptData) => {
+
+            db.all(roomSql, params.slice(1), (err, roomData) => {
                 if (err) {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
-                res.render('main-user', { user: userData, room: roomData, dept: deptData});
+            
+                // roomData.forEach(room => {
+                //     try {
+                //         room.room_have = JSON.parse(room.room_have);
+                //     } catch (e) {
+                //         room.room_have = {};
+                //     }
+                // });
+            
+                res.render('main-user', {
+                    user: userData,
+                    room: roomData,
+                    dept: deptData,
+                    filters
+                });
             });
+            
         });
     });
 };
+
 
 const showFav = (req, res) => {
     const favSql = `

@@ -38,10 +38,6 @@ app.get('/', (req, res) => {
         });
     });
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/html/register.html'));
-});
-
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/html/login.html'));
 });
