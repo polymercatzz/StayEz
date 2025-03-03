@@ -52,8 +52,9 @@ body {
 .container {
     background-color: white;
     padding: 5%;
-    margin: 5%;
-    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 8%;
     font-size: calc(0.5vw + 0.5vh);
 }
 
@@ -82,7 +83,6 @@ body {
 .cadd {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* สร้าง 2 คอลัมน์ */
     gap: 10px;
     width: 80%;
 }
@@ -149,11 +149,13 @@ body {
     border: none;
     outline: none;
     width: 140px;
-    height: 20px;
+    height: 25px;
     border-radius: 10px;
     font-size: 0.9rem;
     background-repeat: no-repeat;
     transition: .5s;
+    cursor: pointer;
+    text-align: center;
 }
 
 .select:hover {
@@ -220,14 +222,90 @@ body {
     margin-top: 5.6px;
 }
 
-/* foot */
-/* .payment-section {
-} */
 
 .payment-section {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    font-size: calc(0.6vw + 0.5vh);
+}
+
+.flieselect {
+    display: none;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    color: #7B9CC8;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.5s ease;
+    font-size: calc(1vw + 0.6vh);
+}
+
+.custom-file-label:hover {
+    background-color: #7B9CC8;
+    border: 1px solid #ffff;
+    color: white;
+}
+
+.section {
+    flex: 1;
+    min-width: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+.section input {
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 30px;
+}
+
+.section h1 {
+    color: #7B9CC8;
+}
+
+.footer {
+    background-color: #E5EFFF;
+    padding: 3%;
+    margin-top: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.foot {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 3% 3% 0 3%;
+}
+
+.finish {
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #7B9CC8;
+    border-radius: 16px;
+    width: 30%;
+    height: 50px;
+    font-size: 24px;
+    transition: .5s;
+}
+
+.finish:hover {
+    border: 1px solid #7B9CC8;
+    color: #7B9CC8;
+    background-color: white;
 }
 
 /* Responsive */
@@ -236,10 +314,17 @@ body {
         flex-direction: column;
         align-items: center;
     }
+
+    .payment-section {
+        grid-template-columns: 1fr;
+    }
 }
 
-
 @media (max-width: 900px) {
+    .container {
+        margin-top: 100px;
+    }
+
     .cadd {
         grid-template-columns: 1fr;
     }

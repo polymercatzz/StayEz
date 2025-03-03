@@ -33,7 +33,12 @@
             <div class="cadd">
                 <div class="form-group 1">
                     <h1>คำนำหน้าชื่อ: </h1>
-                    <input type="text" id="prefix" required>
+                    <select id="prefix" name="prefix" class="select">
+                        <option value="" selected disabled>-- กรุณาเลือก --</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                        <option value="นางสาว">นางสาว</option>
+                    </select>
                 </div>
                 <div class="form-group 2">
                     <h1>ชื่อ-นามสกุล: </h1>
@@ -50,7 +55,7 @@
                 <div class="form-group 5">
                     <h1>โอนเงินคืนเข้า: </h1>
                     <select class="select" id="bankselect" required>
-                        <option selected>---เลือกธนาคาร---</option>
+                        <option selected>-- เลือกธนาคาร --</option>
                         <option value="1">ธนาคารกรุงเทพ</option>
                         <option value="2">ธนาคารกสิกรไทย</option>
                         <option value="3">ธนาคารไทยพาณิชย์</option>
@@ -73,7 +78,7 @@
             <h1>1. "ผู้เช่า" ตกลงเช่าห้องพักจากผู้ให้เช่าเพื่อใช้เป็นที่พักอาศัย
                 ภายใต้ระเบียบและข้อบังดับแนบท้ายสัญญาที่ผู้ให้เช่ากำหนด ระยะเวลาการเช่า
                 <select class="select" id="time">
-                    <option selected>---เลือกระยะเวลา---</option>
+                    <option selected>-- เลือกระยะเวลา --</option>
                     <option value="1">1 month</option>
                     <option value="2">3 month</option>
                     <option value="3">6 month</option>
@@ -117,19 +122,22 @@
             </div>
         </div>
     </div>
-    <div class="payment-section">
-        <div class="section">
-            <h1>สลิปโอนเงิน :</h1>
-            <input type="file" class="flieselect">
+    <div class="footer">
+        <div class="payment-section">
+            <div class="section">
+                <h1>สลิปโอนเงิน : <label for="fileUpload" class="custom-file-label">เลือกไฟล์</label><input type="file"
+                        class="flieselect" id="fileUpload"></h1>
+            </div>
+            <div class="section">
+                <h1>จำนวนผู้อยู่อาศัย : <input type="number" class="peopleselect"
+                        style="border-radius: 10px; text-align: center;"></h1>
+            </div>
         </div>
-        <div class="section">
-            <h1>จำนวนผู้อยู่อาศัย :</h1>
-            <input type="number" class="peopleselect" style="border-radius: 10px; text-align: center;">
+        <div class="foot">
+            <button class="finish">ยืนยันการจอง</button>
         </div>
     </div>
-    <div class="foot">
-        <button class="finish">ยืนยันการจอง</button>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
