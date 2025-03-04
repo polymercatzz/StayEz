@@ -29,7 +29,7 @@ router.post("/createroom", upload.array('imageFiles'), adminControl.create_room)
 router.post("/deleteroom/:room_id", adminControl.delete_room);
 router.post("/createpayment/:room_id/:history_id", adminControl.create_payment);
 router.post("/updatapayment/:payment_id", adminControl.update_payment);
-router.post("/updatemonthly", adminControl.updateMonthlyPayment);
+router.post("/monthly/:year/:month", adminControl.updateMonthlyPayment);
 
 
 
