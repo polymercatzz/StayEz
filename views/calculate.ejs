@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayEz</title>
+    <title>Manage Rent - StayEz</title>
     <link href="../css/calculate.css" rel="stylesheet">
     <link rel="icon" href="../img/logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,75 +20,79 @@
             <img src="../img/logo.jpeg" alt="" class="pic">
             <div class="stayEz">StayEz</div>
         </div>
+        <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="/admin/main">Home</a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../img/log-out.png" alt="" class="pic3"></a></li>
+            <li><a href="/logout" class="hidden">Log Out</a></li>
+            <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
         </ul>
     </nav>
     <div class="container">
         <div class="container-header">
             <p>ระบบคำนวณค่าที่พัก</p>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>ชื่อที่พัก</th>
-                    <th>เลขห้อง</th>
-                    <th>ชื่อ-นามสกุล</th>
-                    <th>กรอกค่าที่พัก</th>
-                    <th>สถานะ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% history.forEach(function(item) { %>
+        <div class="table-container">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <%= item.history_id %>
-                        </td>
-                        <td>
-                            <%= item.department_name %>
-                        </td>
-                        <td>
-                            <%= item.room_name %>
-                        </td>
-                        <td>
-                            <%= item.first_name %>
-                                <%= item.last_name %>
-                        </td>
-                        <td>
-                            <% if (!item.payment_id) { %>
-                                <button
-                                    onclick="openInputPopup(<%= item.history_id %>, <%= item.room_id %>, <%= item.price %>)">กรอก</button>
-                                <% } else { const electricity=item.r_electric / item.p_electric; const
-                                    water=item.r_water / item.p_water; %>
-                                    <button
-                                        onclick="viewHistory(<%= item.price %>, <%= electricity %>, <%= water %>, <%= JSON.stringify(item.r_other) %>)">ดูประวัติเดือนนี้</button>
-                                    <% } %>
-                        </td>
-                        <td>
-                            <% if (!item.payment_id) { %>
-                                <button style="background-color: red;">กรุณากรอกข้อมูลค่าที่พัก</button>
-                                <% } else { %>
-                                    <% let show_status = "" %>
-                                    <% if (item.payment_status === "Pending") { 
-                                        show_status = "รอจ่ายเงิน"
-                                    %>
-                                    <% } else if (item.payment_status === "Review") { 
-                                        show_status = "รอตรวจสอบ" 
-                                    %>
-                                    <% } else if (item.payment_status === "Completed") {
-                                        show_status = "จ่ายเงินแล้ว"
-                                    %>
-                                    <% } %>
-                                    <button onclick="openStatusPopup(<%= item.payment_id %>,'<%= item.payment_date %>', '<%= item.department_name %>', '<%= item.room_name %>', '<%= item.payment_status %>', <%= item.pay_img_id %>)"><%= show_status %></button>
-                                <% } %>
-
-                        </td>
+                        <th>ID</th>
+                        <th>ชื่อที่พัก</th>
+                        <th>เลขห้อง</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>กรอกค่าที่พัก</th>
+                        <th>สถานะ</th>
                     </tr>
-                    <% }); %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% history.forEach(function(item) { %>
+                        <tr>
+                            <td>
+                                <%= item.history_id %>
+                            </td>
+                            <td>
+                                <%= item.department_name %>
+                            </td>
+                            <td>
+                                <%= item.room_name %>
+                            </td>
+                            <td>
+                                <%= item.first_name %>
+                                    <%= item.last_name %>
+                            </td>
+                            <td>
+                                <% if (!item.payment_id) { %>
+                                    <button
+                                        onclick="openInputPopup(<%= item.history_id %>, <%= item.room_id %>, <%= item.price %>)">กรอก</button>
+                                    <% } else { const electricity=item.r_electric / item.p_electric; const
+                                        water=item.r_water / item.p_water; %>
+                                        <button
+                                            onclick="viewHistory(<%= item.price %>, <%= electricity %>, <%= water %>, <%= JSON.stringify(item.r_other) %>)">ดูประวัติเดือนนี้</button>
+                                        <% } %>
+                            </td>
+                            <td>
+                                <% if (!item.payment_id) { %>
+                                    <button style="background-color: red;">กรุณากรอกข้อมูลค่าที่พัก</button>
+                                    <% } else { %>
+                                        <% let show_status = "" %>
+                                        <% if (item.payment_status === "Pending") { 
+                                            show_status = "รอจ่ายเงิน"
+                                        %>
+                                        <% } else if (item.payment_status === "Review") { 
+                                            show_status = "รอตรวจสอบ" 
+                                        %>
+                                        <% } else if (item.payment_status === "Completed") {
+                                            show_status = "จ่ายเงินแล้ว"
+                                        %>
+                                        <% } %>
+                                        <button onclick="openStatusPopup(<%= item.payment_id %>,'<%= item.payment_date %>', '<%= item.department_name %>', '<%= item.room_name %>', '<%= item.payment_status %>', <%= item.pay_img_id %>)"><%= show_status %></button>
+                                    <% } %>
+
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
         <div class="popup-container" id="input-popup-container">
             <div class="input-popup" id="input-popup">
                 <div class="input-popup-header">
@@ -176,22 +180,32 @@
             </div>
         </div>
     </div>
-    <div class="popup-container" id="popup-container">
-        <div class="popup" id="popup">
-            <div class="popup-header">
-                <svg class="icon" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer-content">
+            <p>Line: @place1234</p>
+            <p>Tel: 000000000</p>
+            <p>Email: place@1234.com</p>
             </div>
-            <div class="popup-content">
-                <p class="content-head">ยืนยันที่จะออกจากระบบ</p>
-                <button onclick="closePopup()">ยืนยัน</button>
-            </div>
-        </div>
-    </div>
+    </footer>
     <script>
+        document.getElementById("menuToggle").addEventListener("click", function() {
+            document.getElementById("navLinks").classList.toggle("active");
+        });
+
+        document.querySelectorAll(".dropdown-toggle").forEach(item => {
+            item.addEventListener("click", function() {
+                let dropdownMenu = this.nextElementSibling;
+                dropdownMenu.classList.toggle("show");
+            });
+        });
+
+        document.addEventListener("click", function(event) {
+            if (!event.target.closest(".navbar")) {
+                document.getElementById("navLinks").classList.remove("active");
+                document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+            }
+        });
         function openInputPopup(history_id, room_id, price) {
             const form = document.getElementById("payment-form");
             form.action = `/admin/createpayment/${room_id}/${history_id}`;
@@ -254,16 +268,6 @@
         };
         function closeStatusPopup() {
             const container = document.getElementById("status-popup-container");
-
-            container.style.display = 'none';
-        };
-        function openPopup() {
-            const container = document.getElementById("popup-container");
-
-            container.style.display = 'block';
-        };
-        function closePopup() {
-            const container = document.getElementById("popup-container");
 
             container.style.display = 'none';
         };
