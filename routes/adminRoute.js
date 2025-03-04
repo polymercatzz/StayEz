@@ -1,4 +1,5 @@
 const express = require('express');
+const checkAd = require("../middlewares/adminAuth");
 const adminControl = require('../controllers/adminControl');
 
 const multer = require("multer");
@@ -8,16 +9,16 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.get("/main", adminControl.show_main_admin);
-router.get("/manage_booking", adminControl.show_manage_booking);
-router.get("/manage_user", adminControl.show_manage_user);
-router.get("/userdetail/:user_id", adminControl.show_user_detail);
-router.get("/manage_room", adminControl.show_manage_room);
-router.get("/edit_room/:room_id", adminControl.show_edit_room);
-router.get("/create_room", adminControl.show_create_room);
-router.get("/manage_rent", adminControl.show_calulate);
-router.get("/contact/:contract_id", adminControl.show_contact);
-router.get("/monthly", adminControl.showMonthlyPayment);
+router.get("/main", checkAd, adminControl.show_main_admin);
+router.get("/manage_booking", checkAd, adminControl.show_manage_booking);
+router.get("/manage_user", checkAd, adminControl.show_manage_user);
+router.get("/userdetail/:user_id", checkAd, adminControl.show_user_detail);
+router.get("/manage_room", checkAd, adminControl.show_manage_room);
+router.get("/edit_room/:room_id", checkAd, adminControl.show_edit_room);
+router.get("/create_room", checkAd, adminControl.show_create_room);
+router.get("/manage_rent", checkAd, adminControl.show_calulate);
+router.get("/contact/:contract_id", checkAd, adminControl.show_contact);
+router.get("/monthly", checkAd, adminControl.showMonthlyPayment);
 
 
 
