@@ -64,6 +64,18 @@ app.get('/payment_img/:id', (req, res) => {
       res.send(row.data);
   });
 });
+
+app.get('/history_img/:id', (req, res) => {
+  const imageId = req.params.id;
+  db.get("SELECT filename, data FROM history_Images WHERE his_img_id = ?", [imageId], (err, row) => {
+      if (err || !row) {
+          return res.status(404).json({ message: "Image not found" });
+      }
+      res.setHeader("Content-Type", "image/jpeg");
+      res.send(row.data);
+  });
+});
+
 //logout
 app.get("/logout", (req, res) => {
   res.clearCookie("userId");

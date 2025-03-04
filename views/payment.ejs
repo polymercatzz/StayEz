@@ -21,20 +21,21 @@
     </div>
     <div class="menu-toggle" id="menuToggle">☰</div>
     <ul class="nav-links" id="navLinks">
-        <li><a href="#">Home</a></li>
-        <li><a href="history.html">History</a></li>
-        <li><a href="#">Payment</a></li>
+        <li><a href="/user/main">Home</a></li>
+        <li><a href="/user/history">History</a></li>
+        <li><a href="/user/payment">Payment</a></li>
         <li><a href="#footer">Contact</a></li>
-        <li><a href="#" class="hidden">Wish list</a></li>
+        <li><a href="/user/fav" class="hidden">Wish list</a></li>
         <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
-        <li><a href="main-regis.html" class="hidden">Log out</a></li>
-        <li><a href=""><img src="../img/heart.png" alt="" class="pic2"></a></li>
-        <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>
+        <li><a href="/logout" class="hidden">Log out</a></li>
+        <li><a href="/user/fav"><img src="/img/heart.png" alt="" class="pic2"></a></li>
+        <li><a href="#" onclick="openPopup()"><img src="/img/user.png" alt="" class="pic3"></a></li>
     </ul>
 </nav>
 
 <div class="payment">
     <h1>Payment</h1>
+    
     <div class="card-container">
         <% data.forEach(item => { %>
             <div class="card">
@@ -119,8 +120,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="line"></div>
+        
         <div class="bank">
+            <div class="line"></div>
             <p>เลขบัญชี : 00000000000</p>
             <p>ธนาคาร : กสิกรไทย</p>
             <p>ชื่อบัญชี : แมน แมน</p>

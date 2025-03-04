@@ -181,7 +181,7 @@ const showDetails = (req, res) => {
 const showHistory = (req, res) => {
     const userId = req.cookies.userId;
     const historySql = `
-        SELECT r.room_name, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name
+        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name
         FROM history h
         LEFT JOIN room r ON h.room_id = r.room_id
         LEFT JOIN contract c ON h.contract_id = c.contract_id
@@ -234,7 +234,7 @@ const addFav = (req, res) => {
 };
 
 const showpayment = (req, res) => {
-    const user_id = 1;
+    const user_id = req.cookies.userId;
     const sql = `SELECT 
                 users.*,
                 room.*,
@@ -247,13 +247,13 @@ const showpayment = (req, res) => {
                 JOIN departments ON room.department_id = departments.department_id
                 JOIN Payment ON History.history_id = Payment.history_id
                 LEFT JOIN Payment_Images ON Payment_Images.payment_id = Payment.payment_id
-                WHERE History.user_id = 1
+                WHERE History.user_id = ?
                 ORDER BY payment.payment_date DESC,
                 CASE 
                     WHEN payment.payment_status = 'Pending' THEN 1
                     WHEN payment.payment_status = 'Review' THEN 2
                     WHEN payment.payment_status = 'Completed' THEN 3 END;`
-    db.all(sql, (err, rows) => {
+    db.all(sql, [user_id], (err, rows) => {
         if(err){
             return res.status(500).json({ message: "Database error", error: err.message });
         }
@@ -270,7 +270,13 @@ const update_payment = (req, res) => {
         if(err){
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        res.redirect("/user/payment");
+        const payment_sql = `UPDATE payment SET payment_status = 'Review' WHERE payment_id = ?`;
+        db.run(payment_sql, [payment_id], (err) => {
+            if(err){
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/user/payment");
+        });
     });
 }
 
@@ -350,6 +356,25 @@ const create_history = (req, res) => {
     });
 };
 
+const showcontact_histroy = (req, res) => {
+    const contract_id = req.params.contract_id;
+    const sql = `SELECT *
+        FROM contract c
+        JOIN history h ON h.contract_id = c.contract_id
+        JOIN users u ON u.user_id = h.user_id
+        JOIN room r ON h.room_id = r.room_id
+        JOIN departments d ON r.department_id = d.department_id
+        JOIN History_Images i on h.history_id =i.history_id
+        WHERE c.contract_id = ?`;
+    db.get(sql, [contract_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(row);
+        res.render("contract_user_show", { data : row });
+    });
+};
+
 const showDepartments = (req, res) => {
     const department_id = req.params.department_id;
     let deptSql = `SELECT * FROM Departments WHERE department_id = ?`;
@@ -370,5 +395,5 @@ const showDepartments = (req, res) => {
 }
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_histroy};
 

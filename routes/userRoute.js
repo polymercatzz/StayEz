@@ -15,6 +15,7 @@ router.get("/room-details/:room_id", checkAuth, userControl.showDetails);
 router.get("/history", checkAuth, userControl.showHistory);
 router.get("/payment", checkAuth, userControl.showpayment);
 router.get("/contact/:room_id", checkAuth, userControl.showcontact);
+router.get("/showcontract/:contract_id", checkAuth, userControl.showcontact_histroy);
 router.get("/department/:department_id", checkAuth, userControl.showDepartments);
 
 //post

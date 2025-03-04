@@ -381,10 +381,23 @@ const update_payment = (req, res) => {
 };
 
 const show_contact = (req, res) => {
-
+    const contract_id = req.params.contract_id;
+    const sql = `SELECT *
+        FROM contract c
+        JOIN history h ON h.contract_id = c.contract_id
+        JOIN users u ON u.user_id = h.user_id
+        JOIN room r ON h.room_id = r.room_id
+        JOIN departments d ON r.department_id = d.department_id
+        JOIN History_Images i on h.history_id =i.history_id
+        WHERE c.contract_id = ?`;
+    db.get(sql, [contract_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        console.log(row);
+        res.render("contract_admin_show", { data : row });
+    });
     
-    res.render("contract_admin");
-
 };
 
 const showMonthlyPayment = (req, res) => {
