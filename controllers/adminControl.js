@@ -2,7 +2,13 @@ const path = require("path");
 const db = require("../server/database");
 
 const show_main_admin = (req, res) => {
-    res.render("admin");
+    const sql = `SELECT * FROM report`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.render("admin", { data: rows });
+    });
 };
 
 const show_manage_room = (req, res) => {
