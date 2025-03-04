@@ -148,7 +148,19 @@ db.serialize(() => {
           date DATE NOT NULL
         )
         `);
+    
+      // ตาราง Review
+    db.run(`
+      CREATE TABLE IF NOT EXISTS Review (
+        review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        room_id INTEGER NOT NULL,
+        rating INTEGER NOT NULL,
+        comment TEXT
+      )
+      `);
         }
     );
+    
 
 module.exports = db;

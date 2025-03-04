@@ -181,7 +181,7 @@ const showDetails = (req, res) => {
 const showHistory = (req, res) => {
     const userId = req.cookies.userId;
     const historySql = `
-        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name
+        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name, r.room_id
         FROM history h
         LEFT JOIN room r ON h.room_id = r.room_id
         LEFT JOIN contract c ON h.contract_id = c.contract_id
@@ -394,6 +394,18 @@ const showDepartments = (req, res) => {
     });
 }
 
+const writeReview = (req, res) => {
+    user_id = req.params.user_id;
+    room_id = req.params.room_id;
+
+    const sql = `INSERT INTO review (user_id, room_id, rating, comment) VALUES (?, ?, ?, ?)`;
+    db.run(sql, [user_id, room_id, req.body.rating, req.body.comment], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+    });
+}
+
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_histroy};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_histroy, writeReview};
 

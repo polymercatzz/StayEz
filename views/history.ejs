@@ -86,7 +86,7 @@
                         <div class="data3">
                             <a href="/user/showcontract/<%= item.contract_id %>" class="book">หนังสือสัญญา</a>
                             <button class="cancel" onclick="openPopup2()">ยกเลิกสัญญา</button>
-                            <a href="#" class="review" onclick="openPopup3()">Review</a>
+                            <a href="#" class="review" onclick="openPopup3('<%= item.room_id %>')">Review</a>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                             <label for="review">Review:</label>
                             <textarea id="review" rows="4" cols="30"></textarea>
                         </div>
-                        <button onclick="closePopup3()" class="submit">Submit</button>
+                        <button onclick="submitReview()" class="submit">Submit</button>
                     </div>
                 </div>
             </section>
@@ -204,7 +204,8 @@
 
 
 
-
+            <input type="hidden" id="userId" value="<%= user.user_id %>">
+            <input type="hidden" id="roomId" value="">
             <script>
                 // menu
                 document.getElementById("menuToggle").addEventListener("click", function () {
@@ -227,6 +228,42 @@
 
                 // popup
                 let popup = document.getElementById("popup");
+
+                async function submitReview() {
+                    const userId = document.getElementById("userId").value;
+                    const roomId = document.getElementById("roomId").value;
+
+                    console.log(userId, roomId);
+
+                    const rate = document.getElementById("rate").value;
+                    const review = document.getElementById("review").value;
+
+                    if (!rate || !review.trim()) {
+                        alert("Please provide a rating and a review.");
+                        return;
+                    }
+
+                    // window.location.href = `/user/history`;
+
+                    fetch(`/user/review/${userId}/${roomId}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            rate: rate,
+                            review: review,
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Success:", data);
+                        closePopup3();
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+                }
 
                 function openPopup() {
                     popup.classList.add("openPopup");
@@ -251,9 +288,11 @@
                     document.getElementById("overlay2").classList.remove("active");
                 }
                 // popup review
-                function openPopup3() {
+                function openPopup3(roomId) {
                     document.getElementById("popup-review").classList.add("active");
                     document.getElementById("overlay").classList.add("active");
+
+                    document.getElementById("roomId").value = roomId;
                 }
 
                 function closePopup3() {
