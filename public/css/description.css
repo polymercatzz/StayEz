@@ -187,14 +187,14 @@ body {
 
 .text2{
     display: flex;
-    /* margin-left:50px ; */
     font-size: 3vh;
     color: #94abca;
     padding: 10px;
-    max-width: 500px;
     border-radius: 10px;
-    /* text-align: center; */
+    text-align: center;
     margin: 80px auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .alldata{
