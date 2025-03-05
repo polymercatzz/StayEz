@@ -1,4 +1,3 @@
-require('dotenv').config();
 
 const checkAuth = (req, res, next) => {
     if (!req.cookies.userId) {
@@ -6,7 +5,6 @@ const checkAuth = (req, res, next) => {
     }
     next();
 };
-
 
 
 module.exports = checkAuth;

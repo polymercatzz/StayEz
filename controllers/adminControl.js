@@ -2,7 +2,13 @@ const path = require("path");
 const db = require("../server/database");
 
 const show_main_admin = (req, res) => {
-    res.render("admin");
+    const sql = `SELECT * FROM report`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.render("admin", { data: rows });
+    });
 };
 
 const show_manage_room = (req, res) => {
@@ -401,19 +407,51 @@ const show_contact = (req, res) => {
 };
 
 const showMonthlyPayment = (req, res) => {
-    res.render("select-month");
     const monthSql = `SELECT * FROM report`;
     db.all(monthSql, (err, rows) => {
-        if (err){
+        if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows);
-        res.render("calculate", {history : rows});
+        
+        // Get the selected month from the URL parameters
+        const selectedMonth = req.params.month; // Assuming /admin/monthly/:year/:month
+        // Find the corresponding data for that month
+        const monthData = rows.find(row => row.date.endsWith(selectedMonth)); // Matching by month (e.g., '2025-01')
+        
+        const months = [
+            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        ];
+        res.render("select-month", { 
+            monthly: rows, 
+            monthData: monthData, 
+            selectedMonth: selectedMonth, 
+            months: months
+        });
     });
 }
 
+
+
 const updateMonthlyPayment = (req, res) => {
-    
+    const { year, month } = req.params;
+    const { water, electricity, other } = req.body;
+
+    const waterInt = Number(water) || 0;
+    const electricityInt = Number(electricity) || 0;
+    const otherInt = Number(other) || 0;
+
+    const amount = waterInt + electricityInt + otherInt;
+    const date = year + "-" + month;
+
+    console.log(amount, date);
+    const sql = `INSERT INTO report (water_bill, electric_bill, other_bill, total_amount, date) VALUES (?, ?, ?, ?, ?)`;
+    db.run(sql, [waterInt, electricityInt, otherInt, amount, date], (err) => {
+        if (err){
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.redirect("/admin/monthly");
+    });
 }
 
 module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact};

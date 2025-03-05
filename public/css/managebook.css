@@ -5,7 +5,6 @@
     font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
-
 }
 
 body {
@@ -323,7 +322,7 @@ body {
         display: block;
     }
 
-    .pic2,.pic3{
+    .pic2,.logout-icon{
         display: none;
     }
 
@@ -365,7 +364,7 @@ body {
         display: block;
     }
 
-    .pic2,.pic3{
+    .pic2,.logout-icon{
         display: none;
     }
 

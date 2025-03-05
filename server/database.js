@@ -141,13 +141,26 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS Report (
           report_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          report_type TEXT NOT NULL,
-          description TEXT,
+          water_bill REAL NOT NULL,
+          electric_bill REAL NOT NULL,
+          other_bill REAL NOT NULL,
           total_amount REAL NOT NULL,
           date DATE NOT NULL
         )
         `);
+    
+      // ตาราง Review
+    db.run(`
+      CREATE TABLE IF NOT EXISTS Review (
+        review_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        room_id INTEGER NOT NULL,
+        rating INTEGER NOT NULL,
+        comment TEXT
+      )
+      `);
         }
     );
+    
 
 module.exports = db;

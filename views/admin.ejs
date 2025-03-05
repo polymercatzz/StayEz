@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayEz</title>
+    <title>Main - StayEz</title>
     <link href="../css/admin.css" rel="stylesheet">
     <link rel="icon" href="../img/logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +21,13 @@
             <img src="../img/logo.jpeg" alt="" class="pic">
             <div class="stayEz">StayEz</div>
         </div>
+        <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="/admin/main">Home</a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../img/log-out.png" alt="" class="pic3"></a></li>
+            <li><a href="/logout" class="hidden">Log Out</a></li>
+            <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
         </ul>
     </nav>
-    <!-- <div class="img">
-        <img src="../img/condo.jpg">
-    </div> -->
 
     <div class="slider-container">
         <div class="slider">
@@ -55,13 +54,13 @@
         <p>สรุปรายได้-รายจ่ายที่พัก</p>
         <div class="total">
             <div class="total-header">
-                <div class="total-section">
+                <!-- <div class="total-section">
                     <p>รายได้ทั้งหมด : </p>
                     <p class="total-text"></p>
-                </div>
+                </div> -->
                 <div class="total-section">
                     <p>รายจ่ายทั้งหมด : </p>
-                    <p class="total-text"></p>
+                    <p class="total-text"><%= data.reduce((sum, item) => sum + (item.total_amount || 0), 0) %></p>
                 </div>
             </div>
             <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
@@ -74,37 +73,61 @@
             </div>
         </div>
     </div>
-    <div class="popup-container" id="popup-container">
-        <div class="popup" id="popup">
-            <div class="popup-header">
-                <svg class="icon" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
+    <input type="hidden" id="one" value="<%= (data.length > 0 && data[0].total_amount !== undefined) ? data[0].total_amount : 0 %>">
+    <input type="hidden" id="two" value="<%= (data.length > 0 && data[1].total_amount !== undefined) ? data[1].total_amount : 0 %>">
+    <input type="hidden" id="three" value="<%= (data.length > 0 && data[2].total_amount !== undefined) ? data[2].total_amount : 0 %>">
+    <input type="hidden" id="four" value="<%= (data.length > 0 && data[3].total_amount !== undefined) ? data[3].total_amount : 0 %>">
+    <input type="hidden" id="five" value="<%= (data.length > 0 && data[4].total_amount !== undefined) ? data[4].total_amount : 0 %>">
+    <input type="hidden" id="six" value="<%= (data.length > 0 && data[5].total_amount !== undefined) ? data[5].total_amount : 0 %>">
+    <input type="hidden" id="seven" value="<%= (data.length > 0 && data[6].total_amount !== undefined) ? data[6].total_amount : 0 %>">
+    <input type="hidden" id="eight" value="<%= (data.length > 0 && data[7].total_amount !== undefined) ? data[7].total_amount : 0 %>">
+    <input type="hidden" id="nine" value="<%= (data.length > 0 && data[8].total_amount !== undefined) ? data[8].total_amount : 0 %>">
+    <input type="hidden" id="ten" value="<%= (data.length > 0 && data[9].total_amount !== undefined) ? data[9].total_amount : 0 %>">
+    <input type="hidden" id="eleven" value="<%= (data.length > 0 && data[10].total_amount !== undefined) ? data[10].total_amount : 0 %>">
+    <input type="hidden" id="twelve" value="<%= (data.length > 0 && data[11].total_amount !== undefined) ? data[11].total_amount : 0 %>">
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer-content">
+            <p>Line: @place1234</p>
+            <p>Tel: 000000000</p>
+            <p>Email: place@1234.com</p>
             </div>
-            <div class="popup-content">
-                <p class="content-head">ยืนยันที่จะออกจากระบบ</p>
-                <a href="/logout">
-                    <button onclick="closePopup()">ยืนยัน</button>
-                </a>
-            </div>
-        </div>
-    </div>
+    </footer>
     <script>
-        function openPopup() {
-            const container = document.getElementById("popup-container");
+        document.getElementById("menuToggle").addEventListener("click", function() {
+            document.getElementById("navLinks").classList.toggle("active");
+        });
 
-            container.style.display = 'block';
-        };
-        function closePopup() {
-            const container = document.getElementById("popup-container");
+        document.querySelectorAll(".dropdown-toggle").forEach(item => {
+            item.addEventListener("click", function() {
+                let dropdownMenu = this.nextElementSibling;
+                dropdownMenu.classList.toggle("show");
+            });
+        });
 
-            container.style.display = 'none';
-        };
+        document.addEventListener("click", function(event) {
+            if (!event.target.closest(".navbar")) {
+                document.getElementById("navLinks").classList.remove("active");
+                document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+            }
+        });
+
+        const one = document.getElementById("one").value;
+        const two = document.getElementById("two").value;
+        const three = document.getElementById("three").value;
+        const four = document.getElementById("four").value;
+        const five = document.getElementById("five").value;
+        const six = document.getElementById("six").value;
+        const seven = document.getElementById("seven").value;
+        const eight = document.getElementById("eight").value;
+        const nine = document.getElementById("nine").value;
+        const ten = document.getElementById("ten").value;
+        const eleven = document.getElementById("eleven").value;
+        const twelve = document.getElementById("twelve").value;
+
         //script graph
-        const xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-        const yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+        const xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        const yValues = [one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve];
 
         new Chart("total-chart", {
             type: "line",
@@ -121,7 +144,7 @@
             options: {
                 legend: { display: false },
                 scales: {
-                    yAxes: [{ ticks: { min: 6, max: 16 } }],
+                    yAxes: [{ ticks: { min: 0, max: 50000 } }],
                 }
             }
         });
