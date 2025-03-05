@@ -76,9 +76,9 @@ db.serialize(() => {
         CREATE TABLE IF NOT EXISTS Contract (
           contract_id INTEGER PRIMARY KEY AUTOINCREMENT,
           prefix TEXT,
-          id_card TEXT NOT NULL UNIQUE,
+          id_card TEXT NOT NULL,
           address TEXT NOT NULL,
-          transfer_method TEXT NOT NULL,
+          bank_name TEXT NOT NULL,
           ac_name TEXT NOT NULL,
           ac_number TEXT NOT NULL,
           tenancy INTEGER NOT NULL,

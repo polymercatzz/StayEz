@@ -331,7 +331,7 @@ const create_history = (req, res) => {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
     });
-    const contract_sql = `INSERT INTO contract (prefix, id_card, address, back_name, ac_number, ac_name, tenancy, people) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const contract_sql = `INSERT INTO contract (prefix, id_card, address, bank_name, ac_number, ac_name, tenancy, people) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     const history_sql = `INSERT INTO history (user_id, room_id, contract_id, date) VALUES (?, ?, ?, ?)`;
     const history_img_sql = `INSERT INTO history_Images (history_id, filename, data) VALUES (?, ?, ?)`;
     db.run(contract_sql, [data.prefix, data.id_card, data.address, data.bank_name, data.ac_number, data.ac_name, data.tenancy, data.people], function(err) {

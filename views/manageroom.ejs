@@ -26,6 +26,10 @@
             <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
         </ul>
     </nav>
+    <div class="container-header">
+        <p>ระบบจัดการที่พัก</p>
+        <a href="/admin/create_room"><button class="add-btn" type="button">+</button></a>
+    </div>
     <% current = null %>
     <% data.forEach((item, index) => { %>
         <% if (current != item.department_id) { 
