@@ -39,7 +39,10 @@
 
     <div class="card">
         <% if (fav.length===0) { %>
+            <!-- ซีแก้ด้วย -->
             <h1>U don't have any favorite now.</h1>
+             <!-- ซีแก้ด้วย -->
+
             <% } else { %>
                 <% fav.forEach((data)=> { %>
                     <a href="/user/room-details/<%= data.room_id %>" class="card-link">
