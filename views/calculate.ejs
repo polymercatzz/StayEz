@@ -66,7 +66,7 @@
                                     <% } else { const electricity=item.r_electric / item.p_electric; const
                                         water=item.r_water / item.p_water; %>
                                         <button
-                                            onclick="viewHistory(<%= item.price %>, <%= electricity %>, <%= water %>, <%= JSON.stringify(item.r_other) %>)">ดูประวัติเดือนนี้</button>
+                                            onclick="viewHistory(<%= item.price %>, <%= electricity %>, <%= water %>, <%= JSON.stringify(item.r_other) %>)">ดูประวัติวันที่ <%= item.payment_date %></button>
                                         <% } %>
                             </td>
                             <td>
@@ -169,13 +169,11 @@
                                         <option value="Pending">รอจ่ายเงิน</option>
                                         <option value="Review">รอตรวจสอบ</option>
                                         <option value="Completed">จ่ายเงินแล้ว</option>
-                                        <option value="Canceled">ยกเลิก</option>
                                     </select>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <button>ใบเสร็จ</button>
                 </div>
             </div>
         </div>

@@ -35,46 +35,51 @@
 
 <div class="payment">
     <h1>Payment</h1>
-    
+
     <div class="card-container">
-        <% data.forEach(item => { %>
+        <% data.forEach(item=> { %>
             <div class="card">
                 <div class="card-con">
-                    <div class="date"> <%= item.payment_date %> </div>
-                    <p><strong>ชื่อที่พัก :</strong> <%= item.department_name %></p>
-                    <p><strong>ห้อง :</strong> <%= item.room_name %> </p>
+                    <div class="date">
+                        <%= item.payment_date %>
+                    </div>
+                    <p><strong>ชื่อที่พัก :</strong>
+                        <%= item.department_name %>
+                    </p>
+                    <p><strong>ห้อง :</strong>
+                        <%= item.room_name %>
+                    </p>
                     <p><strong>รายละเอียด :</strong> เรียกเก็บเงินต่อเดือน</p>
-                    <button class="btn">ใบเสร็จ</button>
+                    <button class="btn"
+                        onclick="openReceiptPopup('<%= item.first_name %>', '<%= item.last_name %>', <%= item.price %>, <%= item.r_electric %>, <%= item.r_water %>, <%= JSON.stringify(item.r_other) %>, '<%= item.payment_date %>')">ใบเสร็จ</button>
                 </div>
                 <div class="card-con">
                     <div class="section">
                         <p><strong>เพิ่มสลิป :</strong></p>
                         <div class="file-select">
-                            <form action="/user/update_payment/<%= item.payment_id %>" method="post" enctype="multipart/form-data">
+                            <form action="/user/update_payment/<%= item.payment_id %>" method="post"
+                                enctype="multipart/form-data">
                                 <% if (item.pay_img_id) { %>
                                     <a href="/payment_img/<%= item.pay_img_id %>">ดูหลักฐานการจ่ายเงิน</a>
-                                <% } else { %>
-                                    <label for="file-upload" class="file-label">เลือกไฟล์</label>
-                                    <input type="file" id="file-upload" class="flieselect" accept="image/*" onchange="this.form.submit()" name="img">
-                                <% } %>
+                                    <% } else { %>
+                                        <label for="file-upload" class="file-label">เลือกไฟล์</label>
+                                        <input type="file" id="file-upload" class="flieselect" accept="image/*"
+                                            onchange="this.form.submit()" name="img">
+                                        <% } %>
                             </form>
                         </div>
                     </div>
-                    <% let show_status = "" %>
-                        <% if (item.payment_status === "Pending") { 
-                            show_status = "รอจ่ายเงิน"
-                        %>
-                        <% } else if (item.payment_status === "Review") { 
-                            show_status = "รอตรวจสอบ" 
-                        %>
-                        <% } else if (item.payment_status === "Completed") {
-                            show_status = "จ่ายเงินแล้ว"
-                        %>
-                        <% } %>
-                    <p><strong>สถานะการจ่ายเงิน :</strong><span class="paid"><%= show_status %></span></p>
+                    <% let show_status="" %>
+                        <% if (item.payment_status==="Pending" ) { show_status="รอจ่ายเงิน" %>
+                            <% } else if (item.payment_status==="Review" ) { show_status="รอตรวจสอบ" %>
+                                <% } else if (item.payment_status==="Completed" ) { show_status="จ่ายเงินแล้ว" %>
+                                    <% } %>
+                                        <p><strong>สถานะการจ่ายเงิน :</strong><span class="paid">
+                                                <%= show_status %>
+                                            </span></p>
                 </div>
             </div>
-        <% }) %>
+            <% }) %>
     </div>
 </div>
 <!-- Popup bill -->
@@ -87,10 +92,10 @@
         </button>
     </div>
     <div class="allpopupdata2">
-        <h1 class="title">บิลค่าเช่าเดือน มกราคม/2025</h1>
+        <h1 class="title" id="date_receipt"></h1>
         <div class="name">
             <p>เรียกเก็บเงิน</p>
-            <p>นายแมน แมน</p>
+            <p id="name_receipt"></p>
         </div>
         <div class="tablebox">
             <table>
@@ -100,27 +105,23 @@
                         <th class="tb-right1">จำนวนเงิน</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                     <tr>
                         <td class="tb-left"><label>ค่าเช่าห้อง :</label></td>
-                        <td class="tb-right"><input type="text" value="10,000" readonly></td>
+                        <td class="tb-right"><input type="text" id="rent" readonly></td>
                     </tr>
                     <tr>
                         <td class="tb-left"><label>ค่าน้ำ :</label></td>
-                        <td class="tb-right"><input type="text" value="300" readonly></td>
+                        <td class="tb-right"><input type="text" id="water" readonly></td>
                     </tr>
                     <tr>
                         <td class="tb-left"><label>ค่าไฟ :</label></td>
-                        <td class="tb-right"><input type="text" value="300" readonly></td>
-                    </tr>
-                    <tr>
-                        <td class="tb-left"><label>ค่าอื่น ๆ :</label></td>
-                        <td class="tb-right"><input type="text" value="300" readonly></td>
+                        <td class="tb-right"><input type="text" id="electricity" readonly></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        
+
         <div class="bank">
             <div class="line"></div>
             <p>เลขบัญชี : 00000000000</p>
@@ -188,16 +189,41 @@
             }
         });
 
-        function openReceiptPopup() {
+        function openReceiptPopup(first_name, last_name, price, r_electric, r_water, r_other, date) {
             document.getElementById("receiptPopup").classList.add("openPopup");
             document.getElementById("overlay").classList.add("active");
+            document.getElementById("date_receipt").innerText = `ใบเสร็จวันที่ ${date}`;
+            document.getElementById("name_receipt").innerText = `${first_name} ${last_name}`;
+            document.getElementById("rent").value = price;
+            document.getElementById("water").value = r_water;
+            document.getElementById("electricity").value = r_electric;
+            const other_json = JSON.parse(r_other);
+            for (const key in other_json) {
+                const newRow = document.createElement('tr');
+                newRow.setAttribute("id", "test");
+                const leftCell = document.createElement('td');
+                leftCell.classList.add('tb-left');
+                const leftLabel = document.createElement('label');
+                leftLabel.textContent = key;
+                leftCell.appendChild(leftLabel);
+                newRow.appendChild(leftCell);
+                const rightCell = document.createElement('td');
+                const inputField = document.createElement('input');
+                rightCell.classList.add('tb-right')
+                inputField.setAttribute('type', 'text');
+                inputField.setAttribute('value', other_json[key]);
+                inputField.setAttribute('readonly', '');
+                rightCell.appendChild(inputField);
+                newRow.appendChild(rightCell);
+                document.getElementById('tbody').appendChild(newRow);
+            }
 
         }
 
         function closeReceiptPopup() {
             document.getElementById("receiptPopup").classList.remove("openPopup");
             document.getElementById("overlay").classList.remove("active");
-
+            document.querySelectorAll('#test').forEach(el => el.remove());
         }
 
         // ปิด Popup เมื่อคลิกนอกพื้นที่
@@ -206,11 +232,6 @@
             if (event.target === popup) {
                 closeReceiptPopup();
             }
-        });
-
-        // ผูกฟังก์ชันกับปุ่ม "ใบเสร็จ"
-        document.querySelectorAll(".btn").forEach(button => {
-            button.addEventListener("click", openReceiptPopup);
         });
 
         // popup proflie

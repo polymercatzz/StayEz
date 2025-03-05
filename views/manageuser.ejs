@@ -54,7 +54,7 @@
                                 <%= item.first_name %>
                                     <%= item.last_name %>
                             </td>
-                            <td><a onclick="openPopup()">Show Detail</a></td>
+                            <td><a onclick="openPopup('<%= item.first_name %>', '<%= item.last_name %>', '<%= item.tel %>', '<%= item.email %>')">Show Detail</a></td>
                             <td>
                                 <form action="/admin/updateuserstatus/<%= item.user_id %>" method="post">
                                     <select name="status" onchange="this.form.submit()">
@@ -89,15 +89,15 @@
                 <div class="popup-content">
                     <div class="content-item">
                         <p>ชื่อ-นามสกุล : </p>
-                        <input type="text">
+                        <input type="text" id="name" readonly>
                     </div>
                     <div class="content-item">
                         <p>เบอร์โทรศัพท์ : </p>
-                        <input type="text">
+                        <input type="text" id="tel" readonly>
                     </div>
                     <div class="content-item">
                         <p>Email : </p>
-                        <input type="text">
+                        <input type="text" id="email" readonly>
                     </div>
                 </div>
             </div>
@@ -112,10 +112,14 @@
             </div>
     </footer>
     <script>
-        function openPopup() {
+        function openPopup(first_name, last_name, tel, email) {
             const container = document.getElementById("popup-container");
 
             container.style.display = 'block';
+            document.getElementById("name").value = `${first_name} ${last_name}`;
+            document.getElementById("tel").value = `${tel}`;
+            document.getElementById("email").value = `${email}`;
+
         };
         function closePopup() {
             const container = document.getElementById("popup-container");

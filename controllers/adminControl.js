@@ -282,30 +282,12 @@ const show_calulate = (req, res) =>{
                 users.*,
                 room.*,
                 departments.*,
-                CASE 
-                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.payment_id ELSE NULL END AS payment_id,
-                CASE 
-                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.r_electric ELSE NULL END AS r_electric,
-                CASE 
-                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.r_water ELSE NULL END AS r_water,
-                CASE 
-                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.r_other ELSE NULL END AS r_other,
-                CASE 
-                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.payment_date ELSE NULL END AS payment_date,
-                CASE 
-                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
-                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
-                    THEN payment.payment_status ELSE NULL END AS payment_status,
+                payment.payment_id,
+                payment.r_electric,
+                payment.r_water,
+                payment.r_other,
+                payment.payment_date,
+                payment.payment_status,
                 Payment_Images.pay_img_id
                 FROM history
                 JOIN users ON history.user_id = users.user_id
