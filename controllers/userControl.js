@@ -91,6 +91,11 @@ const showMain = (req, res) => {
     let userSql = `SELECT * FROM Users WHERE user_id = ?`;
     let deptSql = `SELECT * FROM Departments`;
     let roomSql = `SELECT * FROM Room WHERE room_status = "available"`;
+    let reviewSql = `
+        SELECT room_id, SUM(rating) AS total_rating, COUNT(*) AS review_count
+        FROM review
+        GROUP BY room_id;
+    `;
     const params = [req.cookies.userId];
 
     if (filters.location) {
@@ -123,11 +128,23 @@ const showMain = (req, res) => {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
             
-                res.render('main-user', {
-                    user: userData,
-                    room: roomData,
-                    dept: deptData,
-                    filters
+                db.all(reviewSql, (err, reviewData) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    let reviewMap = {};
+                    reviewData.forEach(rev => {
+                        reviewMap[rev.room_id] = {
+                            avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                        };
+                    });
+                    res.render('main-user', {
+                        user: userData,
+                        room: roomData,
+                        dept: deptData,
+                        review: reviewMap,
+                        filters
+                    });
                 });
             });
             
@@ -165,6 +182,12 @@ const showDetails = (req, res) => {
 
     const roomSql = `SELECT * FROM Room WHERE room_id = ?`;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    let reviewSql = `
+        SELECT room_id, AVG(rating) AS avg_rating, COUNT(*) AS review_count, GROUP_CONCAT(comment) AS comments
+        FROM review
+        WHERE room_id = ?
+        GROUP BY room_id;
+    `;
     db.get(userSql, [req.cookies.userId], (err, userData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -173,7 +196,23 @@ const showDetails = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            res.render('description', { room : roomData, user: userData})
+            db.get(reviewSql, [room_id], (err, reviewData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                console.log(reviewData);
+                const comments = reviewData ? reviewData.comments.split(',') : [];
+                const avgRating = reviewData ? reviewData.avg_rating : 0;
+                const reviewCount = reviewData ? reviewData.review_count : 0;
+
+                res.render('description', { 
+                    room: roomData, 
+                    user: userData, 
+                    avgRating: avgRating,
+                    reviewCount: reviewCount,
+                    comments: comments
+                });
+            });
         });
     });
 };
@@ -379,17 +418,31 @@ const showDepartments = (req, res) => {
     const department_id = req.params.department_id;
     let deptSql = `SELECT * FROM Departments WHERE department_id = ?`;
     let roomSql = `SELECT * FROM Room WHERE room_status = "available"`;
-    console.log(department_id);
+    let reviewSql = `
+        SELECT room_id, SUM(rating) AS total_rating, COUNT(*) AS review_count
+        FROM review
+        GROUP BY room_id;
+    `;
     db.all(deptSql, [department_id],(err, deptData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-
         db.all(roomSql, (err, roomData) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            res.render('see-all-resident-user', { dept: deptData, room: roomData });
+            db.all(reviewSql, (err, reviewData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                let reviewMap = {};
+                reviewData.forEach(rev => {
+                    reviewMap[rev.room_id] = {
+                        avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                    };
+                });
+                res.render('see-all-resident-user', { dept: deptData, room: roomData, review: reviewMap });
+            });
         });
     });
 }
@@ -399,7 +452,7 @@ const writeReview = (req, res) => {
     room_id = req.params.room_id;
 
     const sql = `INSERT INTO review (user_id, room_id, rating, comment) VALUES (?, ?, ?, ?)`;
-    db.run(sql, [user_id, room_id, req.body.rating, req.body.comment], (err) => {
+    db.run(sql, [user_id, room_id, req.body.rate, req.body.review], (err) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }

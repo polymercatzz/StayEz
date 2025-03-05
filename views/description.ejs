@@ -125,35 +125,14 @@
             </div>
 
         </div>
-        <p class="rate">รีวิว 4.99 ★</p>
+        <p class="rate">รีวิว <%= avgRating %> ★</p>
         <div class="alldata2">
-            <div class="review">
-                <div class="name1">
-                    <p>mann</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum itaque accusantium neque modi!
-                        Totam ipsum saepe, suscipit magni quasi minus!</p>
-                </div>
-                <div class="name">
-                    <p>mann</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum itaque accusantium neque modi!
-                        Totam ipsum saepe, suscipit magni quasi
-                        minustuyftyftyftyftyftyfgtyftyftyfyutyutguytuytuytuytuytuytyutuyt6ytytytytyytf</p>
-                </div>
-                <div class="name">
-                    <p>mann</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum itaque accusantium neque modi!
-                        Totam ipsum saepe, suscipit magni quasi minus!</p>
-                </div>
-                <div class="name">
-                    <p>mann</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum itaque accusantium neque modi!
-                        Totam ipsum saepe, suscipit magni quasi minus!</p>
-                </div>
-                <div class="name">
-                    <p>mann</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum itaque accusantium neque modi!
-                        Totam ipsum saepe, suscipit magni quasi minus!</p>
-                </div>
+            <div class="reviews">
+                <% comments.forEach((comment, index) => { %>
+                    <div class="review">
+                        <p><%= comment %></p>
+                    </div>
+                <% }) %>
             </div>
             <div class="price">
                 <div class="flex-data">

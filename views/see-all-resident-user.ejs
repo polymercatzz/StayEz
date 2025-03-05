@@ -43,9 +43,9 @@
                 <% if (data.department_id == room.department_id) { %>
                     <a href="/user/room-details/<%=room.room_id %>" class="card-link">
                         <p class="badge"><%= data.department_name %></p>
-                        <img src="https://cdn-cms.pgimgs.com/static/2021/10/How-to-choose-luxury-condo.jpg" alt="Card Image"
-                            class="card-img">
-                        <p class="card-title">รีวิว 4.9</p>
+                        <img src="https://cdn-cms.pgimgs.com/static/2021/10/How-to-choose-luxury-condo.jpg" alt="Card Image" class="card-img">
+                        <% let avgRating = review[room.room_id] ? review[room.room_id].avgRating : 0; %>
+                        <p class="card-title">รีวิว <%= avgRating %></p>
                         <p class="card-title"><%= room.price %> บาท/เดือน</p>
                         <p class="card-title"><%= room.bedroom %> ห้องนอน</p>
                         <div class="service">
