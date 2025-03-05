@@ -180,6 +180,10 @@ body {
     color: #7B9CC8;
     width: 100%;
     margin-top: auto;
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+    
 }
 
 .footer-content {

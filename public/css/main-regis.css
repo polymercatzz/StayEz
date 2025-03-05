@@ -400,6 +400,9 @@ body {
     /* font-family: "Itim", serif; */
     color: #7B9CC8;
     padding: 10px;
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
 }
 .footer-content{
     display: flex;
