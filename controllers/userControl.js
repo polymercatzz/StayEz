@@ -201,7 +201,7 @@ const showDetails = (req, res) => {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
                 console.log(reviewData);
-                const comments = reviewData ? reviewData.comments.split(',') : [];
+                const comments = reviewData ? reviewData.comments.split(',') : null;
                 const avgRating = reviewData ? reviewData.avg_rating : 0;
                 const reviewCount = reviewData ? reviewData.review_count : 0;
 

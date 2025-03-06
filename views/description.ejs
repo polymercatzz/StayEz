@@ -127,12 +127,16 @@
         </div>
         <p class="rate">รีวิว <%= avgRating %> ★</p>
         <div class="alldata2">
-            <div class="reviews">
-                <% comments.forEach((comment, index) => { %>
-                    <div class="review">
-                        <p><%= comment %></p>
-                    </div>
-                <% }) %>
+            <div class="review">
+                <% if (comments) { %>
+                    <% comments.forEach((comment, index) => { %>
+                        <div class="name">
+                            <p><%= comment %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>ไม่มีรีวิวในห้องนี้</p>
+                <% } %>
             </div>
             <div class="price">
                 <div class="flex-data">
