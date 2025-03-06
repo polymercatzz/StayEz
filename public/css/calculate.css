@@ -1,13 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Kanit", serif;
-    font-weight: 400;
-    font-style: normal;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
 html,
 body {
     height: 100%;
@@ -16,27 +6,6 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-}
-
-body {
-    background: #ffffff;
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
-}
-
-button {
-    cursor: pointer;
-}
-
-a {
-    cursor: pointer;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 .container {
@@ -57,17 +26,21 @@ a {
     color: rgba(123, 156, 200, 1);
 }
 
-.save-btn {
+.container a {
+    display: flex;
+    align-items: center;
     float: right;
     height: 40px;
     margin-right: 5%;
-    width: 80px;
+    width: max-content;
     height: 30px;
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
-    font-size: 2vh;
+    font-size: 2.3vh;
     border-radius: 10px;
+    padding: 0 15px;
+    vertical-align: middle;
 }
 
 .table-container {
