@@ -4,8 +4,12 @@
     font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
-html, body {
+
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
@@ -13,104 +17,42 @@ html, body {
     display: flex;
     flex-direction: column;
 }
+
 body {
     background: #ffffff;
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
     overflow-x: hidden;
 }
+
 button {
     cursor: pointer;
 }
-.navbar {
-    background: #C9D7EE;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    max-width: 100%;
-    height: 80px;
-    position: fixed;
-    top :0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 4px 41px rgb(14 55 54 / 14%);
 
-}
-
-.navbar .logo {
-    font-size: 22px;
-    font-weight: bold;;
-}
-.stayEz{
-    margin-left: 10px;
-}
-
-.menu-toggle,.hidden {
-    font-size: 24px;
+a {
     cursor: pointer;
+}
+
+::-webkit-scrollbar {
     display: none;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links li {
-    display: flex;
-    margin: 0 15px;
-    position: relative;
-}
-
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 2.3vh;
-    padding: 10px;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-}
-
-
-/* pic */
-.pic{
-    width: 50px;
-    margin-left: 10px;
-    border-radius: 50%;
-}
-.pic2{
-    width: 30px;
-    margin-left: -20px;
-}
-.pic3{
-    width: 40px;
-    margin-left: -30px;
-}
 .container {
     flex: 1;
     margin: 80px auto 55px auto;
 }
+
 .container-header {
     padding-top: 30px;
     width: 100%;
     height: 30px;
 }
+
 .container-header p {
     float: left;
     margin: 0 5%;
     font-size: 24px;
     color: rgba(123, 156, 200, 1);
 }
+
 .save-btn {
     float: right;
     height: 40px;
@@ -123,10 +65,12 @@ button {
     font-size: 18px;
     border-radius: 10px;
 }
+
 .table-container {
     overflow-x: auto;
     width: 100vw;
 }
+
 table {
     margin-left: auto;
     margin-right: auto;
@@ -136,17 +80,24 @@ table {
     background-color: rgba(229, 239, 255, 1);
     border-collapse: collapse;
 }
-table, td, th {
+
+table,
+td,
+th {
     border: 1.5px solid black;
     color: rgba(123, 156, 200, 1);
     font-weight: 400;
 }
+
 tr {
     text-align: center;
 }
-th, td {
+
+th,
+td {
     padding: 10px;
 }
+
 tr a {
     justify-self: center;
     line-height: 25px;
@@ -161,6 +112,7 @@ tr a {
     text-decoration: none;
     font-size: 2.1vh;
 }
+
 tr select {
     border: none;
     background-color: rgba(123, 156, 200, 1);
@@ -171,6 +123,7 @@ tr select {
     text-align: center;
     font-size: 2.1vh;
 }
+
 .etc {
     border: none;
     width: 100%;
@@ -178,6 +131,7 @@ tr select {
     border-radius: 5px;
     padding-left: 10px;
 }
+
 .popup-container {
     display: none;
     position: fixed;
@@ -189,18 +143,20 @@ tr select {
     justify-content: center;
     align-items: center;
 }
+
 .popup {
     position: fixed;
     color: rgba(123, 156, 200, 1);
     background-color: white;
     width: 50vh;
-    height: 50vh;
+    height: 30vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow: hidden;
 }
+
 .popup-header {
     background-color: rgba(201, 215, 238, 1);
     height: 30px;
@@ -209,14 +165,16 @@ tr select {
     display: flex;
     padding-right: 5px;
 }
+
 .popup-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 45vh;
+    height: 25vh;
 }
-.popup-content button{
+
+.popup-content button {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
@@ -225,6 +183,7 @@ tr select {
     border-radius: 10px;
     margin-top: 10px;
 }
+
 .icon-popup {
     color: white;
     cursor: pointer;
@@ -233,16 +192,19 @@ tr select {
     stroke: white;
     stroke-width: 2;
 }
+
 .content-head {
     font-size: 24px;
     margin-bottom: 10px;
 }
+
 .content-item {
     display: flex;
     height: 40px;
     align-items: center;
     gap: 10px;
 }
+
 .content-item input {
     background-color: rgba(229, 239, 255, 1);
     color: rgba(123, 156, 200, 1);
@@ -251,6 +213,7 @@ tr select {
     border-radius: 10px;
     padding-left: 10px;
 }
+
 .content-item div {
     background-color: rgba(123, 156, 200, 1);
     color: white;
@@ -259,127 +222,4 @@ tr select {
     text-align: center;
     line-height: 16px;
     border-radius: 10px;
-}
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #C9D7EE;
-    margin-top: 50px;
-    font-size: 2.3vh;
-    color: #7B9CC8;
-    padding: 10px;
-}
-
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-
-
-    p {
-        padding: 10px;
-        margin-left: 15px;
-        color: #ffffff;
-    }
-}
-@media screen and (max-width: 768px) {
-    .img {
-        aspect-ratio: 4/3;
-        height: auto;
-    }
-    .page-select {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-
-
-    .slider-container {
-        aspect-ratio: 4/3;
-        height: auto;
-    }
-}
-@media screen and (max-width: 420px) {
-    .page-select {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 30px;
-    }
-    .total-footer {
-        display: flex;
-        flex-direction: column;
-        justify-self: center;
-        gap: 30px;
-        align-items: center;
-    }
-    .total-footer button {
-        float: none;
-        margin: 0;
-    }
-    .sum-section {
-        float: none;
-        margin: 0;
-    }
-}
-@media screen and (max-width: 1127px) {
-    .menu-toggle ,.hidden{
-        display: block;
-    }
-
-    .pic2,.logout-icon{
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px; /* กำหนดความกว้างของเมนู */
-        position: absolute;
-        top: 40px;
-        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
-        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
-}
-
-
-@media screen and (max-width: 700px) {
-    .menu-toggle ,.hidden{
-        display: block;
-    }
-
-    .pic2,.logout-icon{
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px; /* กำหนดความกว้างของเมนู */
-        position: absolute;
-        top: 40px;
-        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
-        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
 }

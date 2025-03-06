@@ -1,11 +1,12 @@
-<!--เหลือ header-->
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayEz</title>
+    <title>Edit Room - StayEz</title>
     <link href="../../css/manage-dorm.css" rel="stylesheet">
+    <link href="../../css/admin-header.css" rel="stylesheet">
+    <link rel="icon" href="../../img/logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,17 +15,26 @@
 </head>
 
 <body>
-    <div class="header">
-
-    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../../img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/admin/main">Home</a></li>
+            <li><a href="/logout" class="hidden">Log Out</a></li>
+            <a href="/logout" class="logout-icon"><img src="../../img/log-out.png" alt="" class="pic3"></a>
+        </ul>
+    </nav>
     <div class="container">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-            <a href="/admin/manage_room">
+        <a href="/admin/manage_room">
+            <svg class="icon" xmlns="httpww.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                 <path
                     d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-            </a>
-        </svg>
+            </svg>
+        </a>
         <svg class="icon bin-icon" onclick="confirmDelete()" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
             <path
@@ -40,7 +50,7 @@
                         <option value="">เลือก</option>
                         <% dept.forEach((department)=> { %>
                             <option value="<%= department.department_id %>"
-                                <%= data.department_id === department.department_id ? 'selected' : '' %>><%=
+                                <%=data.department_id===department.department_id ? 'selected' : '' %>><%=
                                     department.department_name %>
                             </option>
                             <% }) %>
@@ -176,7 +186,7 @@
         <div class="popup" id="popup">
             <div class="popup-header">
                 <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    height="16" class="bi bi-x" viewBox="0 0 16 16">
                     <path
                         d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                 </svg>
@@ -190,6 +200,15 @@
 
         </div>
     </div>
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer-content">
+                <p>Line: @place1234</p>
+                <p>Tel: 000000000</p>
+                <p>Email: place@1234.com</p>
+            </div>
+    </footer>
+    <script src="../../script/admin-header.js"></script>
     <script>
         function confirmDelete() {
             const container = document.getElementById("popup-container");

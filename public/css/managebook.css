@@ -5,8 +5,9 @@
     font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
-
 body {
     background: #ffffff;
     width: 100%;
@@ -14,88 +15,21 @@ body {
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
-           
 }
-.navbar {
-    background: #C9D7EE;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    max-width: 100%;
-    height: 80px;
-    position: fixed;
-    top :0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 4px 41px rgb(14 55 54 / 14%);
-
-}
-
-.navbar .logo {
-    font-size: 22px;
-    font-weight: bold;;
-}
-.stayEz{
-    margin-left: 10px;
-}
-
-.menu-toggle,.hidden {
-    font-size: 24px;
+button {
     cursor: pointer;
+}
+a {
+    cursor: pointer;
+}
+::-webkit-scrollbar {
     display: none;
 }
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links li {
-    display: flex;
-    margin: 0 15px;
-    position: relative;
-}
-
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    font-size: 2.3vh;
-
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-}
-
-
-/* pic */
-.pic{
-    width: 50px;
-    margin-left: 10px;
-    border-radius: 50%;
-}
-.pic2{
-    width: 30px;
-    margin-left: -20px;
-}
-.pic3{
-    width: 40px;
-    margin-left: -30px;
-}
-.box{
+.box {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-top: 100px; */
 }
-
 .text{
     margin-top: 125px;
     display: flex;
@@ -105,14 +39,11 @@ body {
     padding: 10px;
     border-radius: 10px;
     justify-content: center;
-
 }
-
 .card {
     display: flex;
     flex-direction: column;
 }
-
 .card-link {
     display: flex;
     width: 250px;
@@ -123,11 +54,6 @@ body {
     border-radius: 18px;
     text-decoration: none;
 }
-
-
-
-
-
 .card-img{
     width: 100%;
     margin-bottom: 10px;
@@ -135,9 +61,6 @@ body {
     object-fit: cover;
     border-radius: 16px;
 }
-
-
-
 .badge{
     color: rgb(141, 141, 141);
     padding: 8px 16px;
@@ -146,33 +69,21 @@ body {
     background-color: #d2d2d2;
     width: fit-content;
     border-radius: 10px;
-    /* text-decoration: none */
 }
-
-
 .card-title{
     font-size: 1rem;
     color: #616162;
 }
 .text2{
     display: flex;
-    /* font-size: 2.8vh; */
-    /* font-family: "Itim", serif; */
     color: #7B9CC8;
-    /* background-color: #2e518a; */
-    /* width: 92%; */
     margin-bottom: 20px;
-
-    
 }
-
 .pic4{
     width: 25px;
     padding-right: 5px;
     margin-top: 10px;
 }
-
-
 .all {
     display: flex;
     background-color: #C9D7EE;
@@ -180,40 +91,30 @@ body {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     justify-content: center;
-
 }
-
 .card {
-    /* max-width: 300px; */
     border-radius: 15px;
     display: flex;
     justify-content: center;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); */
 }
-
 .alldata {
     padding: 30px;
     border-radius: 10px;
     min-width: 360px;
 }
-
 .data, .data2 {
     display: flex;
     justify-content: space-between;
     padding: 8px 10px;
     border-bottom: 1px solid #ffffff;
 }
-
 .data:last-child, .data2:last-child {
     border-bottom: none;
 }
-
-
 .data2 {
     justify-content: space-between;
     align-items: center;
 }
-
 .book{
     font-size: 1rem;
     color: #ffffff;
@@ -225,17 +126,14 @@ body {
     border: none;
     cursor: pointer;
 }
-
 .book:hover, .cancel:hover {
     background-color: #E5EFFF;
     color: #7B9CC8;
 }
-
 .card-title2{
     font-size: 1.2rem;
     color: #ffffff;
 }
-
 .history{
     display: grid;
     margin-top: 20px;
@@ -243,21 +141,18 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 16px;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;
     gap: 30px;
     padding: 40px;
 }
-
 .data3 {
     display: flex;
     justify-content: center;
     padding: 8px 10px;
 }
-
 .data4 {
     padding: 20px;
 }
-
 .status{
     border: none;
     background-color: #7B9CC8;
@@ -265,10 +160,8 @@ body {
     border-radius: 10px;
     padding: 3px;
 }
-
 .pic5{
     width: 20px;
-    
 }
 .slip{
     display: flex;
@@ -279,74 +172,12 @@ body {
     background-color: #7B9CC8;
     border-radius: 100%;
 }
-
 .data5{
     display: flex;
     justify-content: space-between;
     padding: 8px 10px;
-    /* border-bottom: 1px solid #ffffff; */
 }
-
-
-
-/* footer */
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #C9D7EE;
-    margin-top: 50px;
-    font-size: 2.3vh;
-    color: #7B9CC8;
-    padding: 10px;
-    /* position: fixed; */
-    bottom: 0;
-    width: 100%;
-}
-
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-
-
-    p {
-        padding: 10px;
-        margin-left: 15px;
-        color: #ffffff;
-    }
-}
-
-
 @media screen and (max-width: 1127px) {
-    .menu-toggle ,.hidden{
-        display: block;
-    }
-
-    .pic2,.logout-icon{
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px; /* กำหนดความกว้างของเมนู */
-        position: absolute;
-        top: 40px;
-        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
-        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
     .history{
         display: grid;
         grid-template-columns: 1fr;
@@ -357,53 +188,19 @@ body {
         margin : 30px;
     }
 }
-
-
 @media screen and (max-width: 700px) {
-    .menu-toggle ,.hidden{
-        display: block;
-    }
-
-    .pic2,.logout-icon{
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px; /* กำหนดความกว้างของเมนู */
-        position: absolute;
-        top: 40px;
-        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
-        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
     .all {
         flex-direction: column;
         align-items: center;
     }
-
     .card, .alldata {
         width: 100%;
         max-width: none;
     }
-
     .card {
         display: flex;
         flex-direction: column;
-        align-items: center; /* จัดให้อยู่ตรงกลาง */
-        justify-content: center; 
-        /* width: 100%; */
+        align-items: center;
+        justify-content: center;
     }
 }

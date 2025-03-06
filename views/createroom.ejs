@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayEz</title>
+    <title>Create Room - StayEz</title>
     <link href="../css/manage-dorm.css" rel="stylesheet">
+    <link href="../css/admin-header.css" rel="stylesheet">
+    <link rel="icon" href="../img/logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,29 +16,41 @@
 </head>
 
 <body>
-    <div class="header">
-
-    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/admin/main">Home</a></li>
+            <li><a href="/logout" class="hidden">Log Out</a></li>
+            <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
+        </ul>
+    </nav>
     <div class="container">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-            <a href="/admin/manage_room">
+        <a href="/admin/manage_room">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                 <path
                     d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-            </a>
-        </svg>
+            </svg>
+        </a>
         <form class="form-container" action="/admin/createroom" method="POST" enctype="multipart/form-data">
             <div class="form">
                 <div class="item">
                     <label>ชื่อที่พัก : </label>
                     <select id="department-name" name="department_id">
                         <option value="">เลือก</option>
-                        <% data.forEach((department) => { %>
-                            <option value="<%= department.department_id %>"><%= department.department_name %></option>
-                        <% }) %>
-                        <option value="<%= data.length+1 %>">อื่นๆ</option>
+                        <% data.forEach((department)=> { %>
+                            <option value="<%= department.department_id %>">
+                                <%= department.department_name %>
+                            </option>
+                            <% }) %>
+                                <option value="<%= data.length+1 %>">อื่นๆ</option>
                     </select>
-                    <input type="text" id="other-department-name" style="display: none;" placeholder="กรอกชื่อที่พัก" name="department_name"/>
+                    <input type="text" id="other-department-name" style="display: none;" placeholder="กรอกชื่อที่พัก"
+                        name="department_name" />
                 </div>
                 <div class="item">
                     <label>เลขห้อง : </label>
@@ -159,6 +173,15 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer-content">
+                <p>Line: @place1234</p>
+                <p>Tel: 000000000</p>
+                <p>Email: place@1234.com</p>
+            </div>
+    </footer>
+    <script src="../script/admin-header.js"></script>
     <script>
         function confirmDelete() {
             const container = document.getElementById("popup-container");
