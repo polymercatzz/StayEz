@@ -333,6 +333,14 @@ body {
     opacity: 1;
 }
 
+.fav{
+    font-size: 2.3vh;
+    color: #858585;
+    background-color: #E5EFFF;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 
 @media screen and (max-width: 1024px) {
     .card {
