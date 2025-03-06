@@ -5,168 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main - StayEz</title>
     <link href="../css/admin.css" rel="stylesheet">
-    <link href="../css/admin-header.css" rel="stylesheet">
-    <link rel="icon" href="../img/logo.jpeg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <%- include('partials/default-head') %>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="../img/logo.jpeg" alt="" class="pic">
-            <div class="stayEz">StayEz</div>
-        </div>
-        <div class="menu-toggle" id="menuToggle">☰</div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="/admin/main">Home</a></li>
-            <li><a href="/logout" class="hidden">Log Out</a></li>
-            <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
-        </ul>
-    </nav>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide"><img
-                    src="https://cdn-images.prod.thinkofliving.com/wp-content/uploads/1/2019/02/19234153/10-14.jpg"
-                    alt="Image 1"></div>
-            <div class="slide"><img
-                    src="https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2023/07/COCO-PARC-Pool-02-FI.jpg"
-                    alt="Image 2"></div>
-            <div class="slide"><img src="https://realasset.co.th/ckfinder/userfiles/images/03_LAVIQ.jpg" alt="Image 3">
+    <%- include('partials/admin-navbar') %>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide"><img
+                        src="https://cdn-images.prod.thinkofliving.com/wp-content/uploads/1/2019/02/19234153/10-14.jpg"
+                        alt="Image 1"></div>
+                <div class="slide"><img
+                        src="https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2023/07/COCO-PARC-Pool-02-FI.jpg"
+                        alt="Image 2"></div>
+                <div class="slide"><img src="https://realasset.co.th/ckfinder/userfiles/images/03_LAVIQ.jpg"
+                        alt="Image 3">
+                </div>
             </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
         </div>
-        <button class="prev" onclick="prevSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
-    </div>
-    <div class="page-select">
-        <a href="/admin/manage_user">ระบบจัดการ User</a>
-        <a href="/admin/manage_room">ระบบจัดการที่พัก</a>
-        <a href="/admin/manage_booking">ระบบจัดการจอง</a>
-        <a href="/admin/manage_rent">ระบบคำนวณ</a>
-    </div>
-    <div class="summary">
-        <p>สรุปรายได้-รายจ่ายที่พัก</p>
-        <div class="total">
-            <div class="total-header">
-                <!-- <div class="total-section">
+        <div class="page-select">
+            <a href="/admin/manage_user">ระบบจัดการ User</a>
+            <a href="/admin/manage_room">ระบบจัดการที่พัก</a>
+            <a href="/admin/manage_booking">ระบบจัดการจอง</a>
+            <a href="/admin/manage_rent">ระบบคำนวณ</a>
+        </div>
+        <div class="summary">
+            <p>สรุปรายได้-รายจ่ายที่พัก</p>
+            <div class="total">
+                <div class="total-header">
+                    <!-- <div class="total-section">
                     <p>รายได้ทั้งหมด : </p>
                     <p class="total-text"></p>
                 </div> -->
-                <div class="total-section">
-                    <p>รายจ่ายทั้งหมด : </p>
-                    <p class="total-text">
-                        <%= data.reduce((sum, item)=> sum + (item.total_amount || 0), 0) %>
-                    </p>
+                    <div class="total-section">
+                        <p>รายจ่ายทั้งหมด : </p>
+                        <p class="total-text">
+                            <%= data.reduce((sum, item)=> sum + (item.total_amount || 0), 0) %>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
-            <div class="total-footer">
-                <a href="/admin/monthly"><button>รายได้แต่ละเดือน</button></a>
-                <div class="sum-section">
-                    <p>สรุป : </p>
-                    <p class="sum-text"></p>
+                <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
+                <div class="total-footer">
+                    <a href="/admin/monthly"><button>รายได้แต่ละเดือน</button></a>
+                    <div class="sum-section">
+                        <p>สรุป : </p>
+                        <p class="sum-text"></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <input type="hidden" id="one"
-        value="<%= (data.length > 0 && data[0].total_amount !== undefined) ? data[0].total_amount : 0 %>">
-    <input type="hidden" id="two"
-        value="<%= (data.length > 0 && data[1].total_amount !== undefined) ? data[1].total_amount : 0 %>">
-    <input type="hidden" id="three"
-        value="<%= (data.length > 0 && data[2].total_amount !== undefined) ? data[2].total_amount : 0 %>">
-    <input type="hidden" id="four"
-        value="<%= (data.length > 0 && data[3].total_amount !== undefined) ? data[3].total_amount : 0 %>">
-    <input type="hidden" id="five"
-        value="<%= (data.length > 0 && data[4].total_amount !== undefined) ? data[4].total_amount : 0 %>">
-    <input type="hidden" id="six"
-        value="<%= (data.length > 0 && data[5].total_amount !== undefined) ? data[5].total_amount : 0 %>">
-    <input type="hidden" id="seven"
-        value="<%= (data.length > 0 && data[6].total_amount !== undefined) ? data[6].total_amount : 0 %>">
-    <input type="hidden" id="eight"
-        value="<%= (data.length > 0 && data[7].total_amount !== undefined) ? data[7].total_amount : 0 %>">
-    <input type="hidden" id="nine"
-        value="<%= (data.length > 0 && data[8].total_amount !== undefined) ? data[8].total_amount : 0 %>">
-    <input type="hidden" id="ten"
-        value="<%= (data.length > 0 && data[9].total_amount !== undefined) ? data[9].total_amount : 0 %>">
-    <input type="hidden" id="eleven"
-        value="<%= (data.length > 0 && data[10].total_amount !== undefined) ? data[10].total_amount : 0 %>">
-    <input type="hidden" id="twelve"
-        value="<%= (data.length > 0 && data[11].total_amount !== undefined) ? data[11].total_amount : 0 %>">
-    <footer id="footer">
-        <div class="footer">
-            <div class="footer-content">
-                <p>Line: @place1234</p>
-                <p>Tel: 000000000</p>
-                <p>Email: place@1234.com</p>
-            </div>
-    </footer>
-    <script src="../script/admin-header.js"></script>
-    <script>
-        const one = document.getElementById("one").value;
-        const two = document.getElementById("two").value;
-        const three = document.getElementById("three").value;
-        const four = document.getElementById("four").value;
-        const five = document.getElementById("five").value;
-        const six = document.getElementById("six").value;
-        const seven = document.getElementById("seven").value;
-        const eight = document.getElementById("eight").value;
-        const nine = document.getElementById("nine").value;
-        const ten = document.getElementById("ten").value;
-        const eleven = document.getElementById("eleven").value;
-        const twelve = document.getElementById("twelve").value;
-
-        const xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-        const yValues = [one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve];
-
-        new Chart("total-chart", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                scales: {
-                    yAxes: [{ ticks: { min: 0, max: 50000 } }],
-                }
+        <%- include('partials/admin-footer') %>
+        <% for (let i = 1; i <= 12; i++) { %>
+            <input type="hidden" id="month-<%= i %>" value="<%= (data.length > i && data[i].total_amount !== undefined) ? data[i].total_amount : 0 %>">
+        <% } %>
+        <script>
+            const values = [];
+            for (let i = 1; i <= 12; i++) {
+                values.push(document.getElementById(`month-${i}`).value);
             }
-        });
+            new Chart("total-chart", {
+                type: "line",
+                data: {
+                    labels: values,
+                    datasets: [{
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(0,0,255,1.0)",
+                        borderColor: "rgba(0,0,255,0.1)",
+                        data: values
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { min: 0, max: 50000 } }],
+                    }
+                }
+            });
 
-        // sliderpic
-        let index = 0;
-        const slides = document.querySelectorAll('.slide');
+            // sliderpic
+            let index = 0;
+            const slides = document.querySelectorAll('.slide');
 
-        function showSlide(i) {
-            if (i >= slides.length) index = 0;
-            if (i < 0) index = slides.length - 1;
-            document.querySelector('.slider').style.transform = `translateX(${-index * 100}%)`;
-        }
+            function showSlide(i) {
+                if (i >= slides.length) index = 0;
+                if (i < 0) index = slides.length - 1;
+                document.querySelector('.slider').style.transform = `translateX(${-index * 100}%)`;
+            }
 
-        function nextSlide() {
-            index++;
-            showSlide(index);
-        }
+            function nextSlide() {
+                index++;
+                showSlide(index);
+            }
 
-        function prevSlide() {
-            index--;
-            showSlide(index);
-        }
+            function prevSlide() {
+                index--;
+                showSlide(index);
+            }
 
-        showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
-        setInterval(nextSlide, 5000); // Auto slide every 3 seconds
+            showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
+            setInterval(nextSlide, 5000); // Auto slide every 3 seconds
 
-    </script>
+        </script>
 </body>
 
 </html>
