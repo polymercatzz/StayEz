@@ -45,12 +45,13 @@
             </a>
         </div>
         <div class="allpic">
+            <% const roomImage = img.find(image => image.room_id === room.room_id); %>
             <div class="p1">
-                <img src="../../img/condo.jpg" alt="">
+                <img src="/room_img/<%= img[0].room_img_id %>" alt="Card Image" class="card-img" style="width: 700px;">
             </div>
             <div class="p2">
-                <img src="../../img/condo2.jpg" alt="">
-                <img src="../../img/condo3.webp" alt="">
+                <img src="/room_img/<%= img[1].room_img_id %>" alt="Card Image" class="card-img">
+                <img src="/room_img/<%= img[2].room_img_id %>" alt="Card Image" class="card-img">
             </div>
         </div>
         <form action="/user/addFav/<%= room.room_id %>" method="POST" id="favoriteForm">

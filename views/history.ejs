@@ -40,13 +40,12 @@
         </div>
 
         <section class="history">
-            <% history.forEach(item => { %>
+            <% history.forEach((item, index) => { %>
                 <div class="all">
                     <div class="card">
                         <a href="#" class="card-link">
                             <p class="badge"><%= item.department_name %></p>
-                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg"
-                                alt="Card Image" class="card-img">
+                            <img src="/room_img/<%= history[index].room_img_id %>" alt="Room Image" class="card-img">
                             <p class="card-title">รีวิว 4.9</p>
                             <p class="card-title"><%= item.price %> บาท/เดือน</p>
                             <p class="card-title"><%= item.bedroom %> ห้องนอน</p>

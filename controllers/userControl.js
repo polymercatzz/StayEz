@@ -96,6 +96,7 @@ const showMain = (req, res) => {
         FROM review
         GROUP BY room_id;
     `;
+    let imgSql = `SELECT * FROM Room_Images`;
     const params = [req.cookies.userId];
 
     if (filters.location) {
@@ -109,9 +110,26 @@ const showMain = (req, res) => {
         params.push(minPrice, maxPrice);
     }
 
-    if (filters.roomType.includes("pets")) {
-        roomSql += ` AND json_extract(room_have, '$.pet_friendly') = 1`;
-    }
+    const featureFilters = {
+        pets: "pet_friendly",
+        wifi: "wi_fi",
+        tv: "TV",
+        aircon: "air_conditioner",
+        washing: "washing_machine",
+        gym: "fitnaess",
+        furniture: "furniture",
+        fridge: "fridge",
+        security: "closed_camera",
+        lift: "lift",
+        microwave: "microwave",
+        parking: "parking"
+    };
+
+    filters.roomType.forEach(filter => {
+        if (featureFilters[filter]) {
+            roomSql += ` AND json_extract(room_have, '$.${featureFilters[filter]}') = 1`;
+        }
+    });
 
     db.get(userSql, [req.cookies.userId], (err, userData) => {
         if (err) {
@@ -132,18 +150,26 @@ const showMain = (req, res) => {
                     if (err) {
                         return res.status(500).json({ message: "Database error", error: err.message });
                     }
+
                     let reviewMap = {};
                     reviewData.forEach(rev => {
                         reviewMap[rev.room_id] = {
                             avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
                         };
                     });
-                    res.render('main-user', {
-                        user: userData,
-                        room: roomData,
-                        dept: deptData,
-                        review: reviewMap,
-                        filters
+
+                    db.all(imgSql, (err, imgData) => {
+                        if (err) {
+                            return res.status(500).json({ message: "Database error", error: err.message });
+                        }
+                        res.render('main-user', {
+                            user: userData,
+                            room: roomData,
+                            dept: deptData,
+                            review: reviewMap,
+                            img: imgData,
+                            filters
+                        });
                     });
                 });
             });
@@ -193,6 +219,7 @@ const showDetails = (req, res) => {
         WHERE r.room_id = ?
         GROUP BY r.room_id;
     `;
+    let imgSql = `SELECT * FROM Room_Images WHERE room_id = ?`;
     db.get(userSql, [req.cookies.userId], (err, userData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -205,19 +232,25 @@ const showDetails = (req, res) => {
                 if (err) {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
-                const comments = reviewData ? reviewData.comments.split(',') : null;
-                const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
-                const avgRating = reviewData ? reviewData.avg_rating : 0;
-                const reviewCount = reviewData ? reviewData.review_count : 0;
-                console.log(roomData);
-                res.render('description', { 
-                    room: roomData, 
-                    user: userData, 
-                    avgRating: avgRating,
-                    reviewCount: reviewCount,
-                    comments: comments,
-                    reviewers: reviewers,
-                    reviewData: reviewData
+                db.all(imgSql, [room_id], (err, imgData) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    const comments = reviewData ? reviewData.comments.split(',') : null;
+                    const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
+                    const avgRating = reviewData ? reviewData.avg_rating : 0;
+                    const reviewCount = reviewData ? reviewData.review_count : 0;
+
+                    res.render('description', { 
+                        room: roomData, 
+                        user: userData, 
+                        avgRating: avgRating,
+                        reviewCount: reviewCount,
+                        comments: comments,
+                        reviewers: reviewers,
+                        reviewData: reviewData,
+                        img: imgData
+                    });
                 });
             });
         });
@@ -235,6 +268,15 @@ const showHistory = (req, res) => {
         WHERE h.user_id = ?;
     `;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    const imgSql = `
+        SELECT ri.room_id, ri.room_img_id, ri.data
+        FROM Room_Images ri
+        INNER JOIN (
+            SELECT room_id, MIN(room_img_id) as min_image_id 
+            FROM Room_Images 
+            GROUP BY room_id
+        ) as img ON ri.room_id = img.room_id AND ri.room_img_id = img.min_image_id
+    `;
     db.get(userSql, [userId], (err, userData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -243,7 +285,20 @@ const showHistory = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            res.render('history', {history : historyData, user : userData});
+            db.all(imgSql, (err, imgData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                const imgMap = {};
+                imgData.forEach(img => {
+                    imgMap[img.room_id] = img.room_img_id;
+                });
+
+                historyData.forEach(item => {
+                    item.room_img_id = imgMap[item.room_id] || 'default.jpg';
+                });
+                res.render('history', {history : historyData, user : userData});
+            });
         });
     });
 };
@@ -454,6 +509,7 @@ const showDepartments = (req, res) => {
         FROM review
         GROUP BY room_id;
     `;
+    let imgSql = `SELECT * FROM Room_Images`;
     db.all(deptSql, [department_id],(err, deptData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -472,7 +528,18 @@ const showDepartments = (req, res) => {
                         avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
                     };
                 });
-                res.render('see-all-resident-user', { dept: deptData, room: roomData, review: reviewMap });
+                db.all(imgSql, (err, imgData) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    let reviewMap = {};
+                    reviewData.forEach(rev => {
+                        reviewMap[rev.room_id] = {
+                            avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                        };
+                    });
+                    res.render('see-all-resident-user', { dept: deptData, room: roomData, review: reviewMap, img: imgData });
+                });
             });
         });
     });

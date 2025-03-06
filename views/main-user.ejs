@@ -73,10 +73,57 @@
                     <div class="dropdown">
                         <div class="dropdown-toggle">เลือกประเภทห้องพัก</div>
                         <div class="dropdown-menu">
-                            <label><input type="checkbox" name="roomType" value="pets"
-                                <%= filters.roomType && filters.roomType.includes("pets") ? 'checked' : '' %>> ที่พักเลี้ยงสัตว์ได้</label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="pets"
+                                    <%= filters.roomType.includes("pets") ? 'checked' : '' %>> ที่พักเลี้ยงสัตว์ได้
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="wifi"
+                                    <%= filters.roomType.includes("wifi") ? 'checked' : '' %>> Wi-Fi
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="tv"
+                                    <%= filters.roomType.includes("tv") ? 'checked' : '' %>> TV
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="aircon"
+                                    <%= filters.roomType.includes("aircon") ? 'checked' : '' %>> Air Conditioner
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="washing"
+                                    <%= filters.roomType.includes("washing") ? 'checked' : '' %>> Washing Machine
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="gym"
+                                    <%= filters.roomType.includes("gym") ? 'checked' : '' %>> Fitness
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="furniture"
+                                    <%= filters.roomType.includes("furniture") ? 'checked' : '' %>> Furniture
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="fridge"
+                                    <%= filters.roomType.includes("fridge") ? 'checked' : '' %>> Fridge
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="security"
+                                    <%= filters.roomType.includes("security") ? 'checked' : '' %>> Security Camera
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="lift"
+                                    <%= filters.roomType.includes("lift") ? 'checked' : '' %>> Lift
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="microwave"
+                                    <%= filters.roomType.includes("microwave") ? 'checked' : '' %>> Microwave
+                            </label>
+                            <label>
+                                <input type="checkbox" name="roomType" value="parking"
+                                    <%= filters.roomType.includes("parking") ? 'checked' : '' %>> Parking
+                            </label>
                         </div>
-                    </div>      
+                        
+                    </div>
                 </div>
     
                 <div class="place">
@@ -116,7 +163,8 @@
                                     <li class="card-item swiper-slide">
                                         <a href="/user/room-details/<%=room.room_id %>" class="card-link">
                                             <p class="badge"><%= data.department_name %> resident</p>
-                                            <img src="https://cdn.britannica.com/34/235834-050-C5843610/two-different-breeds-of-cats-side-by-side-outdoors-in-the-garden.jpg" alt="Card Image" class="card-img">
+                                            <% const roomImage = img.find(image => image.room_id === room.room_id); %>
+                                            <img src="/room_img/<%= roomImage ? roomImage.room_img_id : 'default.jpg' %>" alt="Room Image" class="card-img">
                                             <% let avgRating = review[room.room_id] ? review[room.room_id].avgRating : 0; %>
                                             <p class="card-title">รีวิว <%= avgRating %></p>
                                             <p class="card-title"><%= room.price %> บาท/เดือน</p>
