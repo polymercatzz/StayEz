@@ -213,7 +213,7 @@ body {
 }
 .text-data2{
     flex: 1;
-    max-width: 600px;
+    max-width: 500px;
     font-size: 2.5vh;
     margin-right: 20px;
     border-radius: 16px;
