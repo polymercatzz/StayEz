@@ -38,63 +38,65 @@
         </a>
         <form class="form-container" action="/admin/createroom" method="POST" enctype="multipart/form-data">
             <div class="form">
-                <div class="item">
-                    <label>ชื่อที่พัก : </label>
-                    <select id="department-name" name="department_id">
-                        <option value="">เลือก</option>
-                        <% data.forEach((department)=> { %>
-                            <option value="<%= department.department_id %>">
-                                <%= department.department_name %>
-                            </option>
-                            <% }) %>
-                                <option value="<%= data.length+1 %>">อื่นๆ</option>
-                    </select>
-                    <input type="text" id="other-department-name" style="display: none;" placeholder="กรอกชื่อที่พัก"
-                        name="department_name" />
-                </div>
-                <div class="item">
-                    <label>เลขห้อง : </label>
-                    <input type="text" name="room_name">
-                </div>
-                <div class="item">
-                    <label>ขนาดห้อง : </label>
-                    <input type="text" name="size">
-                </div>
-                <div class="item">
-                    <label>รูปที่ 1 : </label>
-                    <input class="file-input" type="file" accept="image/*" name="imageFiles">
-                </div>
-                <div class="item">
-                    <label>รูปที่ 2 : </label>
-                    <input class="file-input" type="file" accept="image/*" name="imageFiles">
-                </div>
-                <div class="item">
-                    <label>รูปที่ 3 : </label>
-                    <input class="file-input" type="file" accept="image/*" name="imageFiles">
-                </div>
-                <div class="item">
-                    <label>ราคา : </label>
-                    <input type="number" name="price">
-                </div>
-                <div class="item">
-                    <label>ค่าไฟ : </label>
-                    <input type="number" name="p_electric">
-                </div>
-                <div class="item">
-                    <label>ค่าน้ำ : </label>
-                    <input type="number" name="p_water">
-                </div>
-                <div class="item">
-                    <label>เงินประกัน : </label>
-                    <input type="number" name="deposit">
-                </div>
-                <div class="item">
-                    <label>จ่ายเงินล่วงหน้า : </label>
-                    <input name="pay_advance">
-                </div>
-                <div class="item">
-                    <label>ห้องนอน : </label>
-                    <input name="bedroom">
+                <div class="first-section">
+                    <div class="item">
+                        <label>ชื่อที่พัก : </label>
+                        <select id="department-name" name="department_id">
+                            <option value="">เลือก</option>
+                            <% data.forEach((department)=> { %>
+                                <option value="<%= department.department_id %>">
+                                    <%= department.department_name %>
+                                </option>
+                                <% }) %>
+                                    <option value="<%= data.length+1 %>">อื่นๆ</option>
+                        </select>
+                        <input type="text" id="other-department-name" style="display: none;"
+                            placeholder="กรอกชื่อที่พัก" name="department_name" />
+                    </div>
+                    <div class="item">
+                        <label>เลขห้อง : </label>
+                        <input type="text" name="room_name">
+                    </div>
+                    <div class="item">
+                        <label>ขนาดห้อง : </label>
+                        <input type="text" name="size">
+                    </div>
+                    <div class="item">
+                        <label>รูปที่ 1 : </label>
+                        <input class="file-input" type="file" accept="image/*" name="imageFiles">
+                    </div>
+                    <div class="item">
+                        <label>รูปที่ 2 : </label>
+                        <input class="file-input" type="file" accept="image/*" name="imageFiles">
+                    </div>
+                    <div class="item">
+                        <label>รูปที่ 3 : </label>
+                        <input class="file-input" type="file" accept="image/*" name="imageFiles">
+                    </div>
+                    <div class="item">
+                        <label>ราคา : </label>
+                        <input type="number" name="price">
+                    </div>
+                    <div class="item">
+                        <label>ค่าไฟ : </label>
+                        <input type="number" name="p_electric">
+                    </div>
+                    <div class="item">
+                        <label>ค่าน้ำ : </label>
+                        <input type="number" name="p_water">
+                    </div>
+                    <div class="item">
+                        <label>เงินประกัน : </label>
+                        <input type="number" name="deposit">
+                    </div>
+                    <div class="item">
+                        <label>จ่ายเงินล่วงหน้า : </label>
+                        <input name="pay_advance">
+                    </div>
+                    <div class="item">
+                        <label>ห้องนอน : </label>
+                        <input name="bedroom">
+                    </div>
                 </div>
                 <div class="item form-textarea">
                     <label>รายละเอียดที่พัก : </label>
