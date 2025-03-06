@@ -1,4 +1,4 @@
-<!--เหลือ header-->
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,28 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Room - StayEz</title>
     <link href="../css/manage-dorm.css" rel="stylesheet">
-    <link href="../css/admin-header.css" rel="stylesheet">
-    <link rel="icon" href="../img/logo.jpeg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <%- include('partials/default-head') %>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="../img/logo.jpeg" alt="" class="pic">
-            <div class="stayEz">StayEz</div>
-        </div>
-        <div class="menu-toggle" id="menuToggle">☰</div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="/admin/main">Home</a></li>
-            <li><a href="/logout" class="hidden">Log Out</a></li>
-            <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
-        </ul>
-    </nav>
+    <%- include('partials/admin-navbar') %>
     <div class="container">
         <a href="/admin/manage_room">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -169,21 +152,13 @@
                 </div>
                 <div class="item map">
                     <label>Map : </label>
-                    <input type="text" style="width: 100%;">
+                    <input type="text">
                 </div>
             </div>
             <button type="submit">Submit</button>
         </form>
     </div>
-    <footer id="footer">
-        <div class="footer">
-            <div class="footer-content">
-                <p>Line: @place1234</p>
-                <p>Tel: 000000000</p>
-                <p>Email: place@1234.com</p>
-            </div>
-    </footer>
-    <script src="../script/admin-header.js"></script>
+    <%- include('partials/admin-footer') %>
     <script>
         function confirmDelete() {
             const container = document.getElementById("popup-container");
