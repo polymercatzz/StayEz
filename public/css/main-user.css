@@ -291,14 +291,11 @@ body {
 .allroom,
 .allroom2,
 .allroom3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 50px ;  
 
 }
 .card-wrapper {
+    display: flex;
     max-width: 100%;
     margin: 0 60px 35px;
     padding: 20px 10px;
@@ -379,7 +376,7 @@ body {
     color: #7B9CC8;
     width: 92%;
     margin-bottom: 20px;
-
+    margin-left: 5%;
     .end {
         margin-left: auto;
     }
