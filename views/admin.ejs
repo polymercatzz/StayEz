@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main - StayEz</title>
     <link href="../css/admin.css" rel="stylesheet">
+    <link href="../css/admin-header.css" rel="stylesheet">
     <link rel="icon" href="../img/logo.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body>
@@ -28,7 +28,6 @@
             <a href="/logout" class="logout-icon"><img src="../img/log-out.png" alt="" class="pic3"></a>
         </ul>
     </nav>
-
     <div class="slider-container">
         <div class="slider">
             <div class="slide"><img
@@ -43,7 +42,6 @@
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>
     </div>
-
     <div class="page-select">
         <a href="/admin/manage_user">ระบบจัดการ User</a>
         <a href="/admin/manage_room">ระบบจัดการที่พัก</a>
@@ -60,7 +58,9 @@
                 </div> -->
                 <div class="total-section">
                     <p>รายจ่ายทั้งหมด : </p>
-                    <p class="total-text"><%= data.reduce((sum, item) => sum + (item.total_amount || 0), 0) %></p>
+                    <p class="total-text">
+                        <%= data.reduce((sum, item)=> sum + (item.total_amount || 0), 0) %>
+                    </p>
                 </div>
             </div>
             <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
@@ -73,45 +73,40 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="one" value="<%= (data.length > 0 && data[0].total_amount !== undefined) ? data[0].total_amount : 0 %>">
-    <input type="hidden" id="two" value="<%= (data.length > 0 && data[1].total_amount !== undefined) ? data[1].total_amount : 0 %>">
-    <input type="hidden" id="three" value="<%= (data.length > 0 && data[2].total_amount !== undefined) ? data[2].total_amount : 0 %>">
-    <input type="hidden" id="four" value="<%= (data.length > 0 && data[3].total_amount !== undefined) ? data[3].total_amount : 0 %>">
-    <input type="hidden" id="five" value="<%= (data.length > 0 && data[4].total_amount !== undefined) ? data[4].total_amount : 0 %>">
-    <input type="hidden" id="six" value="<%= (data.length > 0 && data[5].total_amount !== undefined) ? data[5].total_amount : 0 %>">
-    <input type="hidden" id="seven" value="<%= (data.length > 0 && data[6].total_amount !== undefined) ? data[6].total_amount : 0 %>">
-    <input type="hidden" id="eight" value="<%= (data.length > 0 && data[7].total_amount !== undefined) ? data[7].total_amount : 0 %>">
-    <input type="hidden" id="nine" value="<%= (data.length > 0 && data[8].total_amount !== undefined) ? data[8].total_amount : 0 %>">
-    <input type="hidden" id="ten" value="<%= (data.length > 0 && data[9].total_amount !== undefined) ? data[9].total_amount : 0 %>">
-    <input type="hidden" id="eleven" value="<%= (data.length > 0 && data[10].total_amount !== undefined) ? data[10].total_amount : 0 %>">
-    <input type="hidden" id="twelve" value="<%= (data.length > 0 && data[11].total_amount !== undefined) ? data[11].total_amount : 0 %>">
+    <input type="hidden" id="one"
+        value="<%= (data.length > 0 && data[0].total_amount !== undefined) ? data[0].total_amount : 0 %>">
+    <input type="hidden" id="two"
+        value="<%= (data.length > 0 && data[1].total_amount !== undefined) ? data[1].total_amount : 0 %>">
+    <input type="hidden" id="three"
+        value="<%= (data.length > 0 && data[2].total_amount !== undefined) ? data[2].total_amount : 0 %>">
+    <input type="hidden" id="four"
+        value="<%= (data.length > 0 && data[3].total_amount !== undefined) ? data[3].total_amount : 0 %>">
+    <input type="hidden" id="five"
+        value="<%= (data.length > 0 && data[4].total_amount !== undefined) ? data[4].total_amount : 0 %>">
+    <input type="hidden" id="six"
+        value="<%= (data.length > 0 && data[5].total_amount !== undefined) ? data[5].total_amount : 0 %>">
+    <input type="hidden" id="seven"
+        value="<%= (data.length > 0 && data[6].total_amount !== undefined) ? data[6].total_amount : 0 %>">
+    <input type="hidden" id="eight"
+        value="<%= (data.length > 0 && data[7].total_amount !== undefined) ? data[7].total_amount : 0 %>">
+    <input type="hidden" id="nine"
+        value="<%= (data.length > 0 && data[8].total_amount !== undefined) ? data[8].total_amount : 0 %>">
+    <input type="hidden" id="ten"
+        value="<%= (data.length > 0 && data[9].total_amount !== undefined) ? data[9].total_amount : 0 %>">
+    <input type="hidden" id="eleven"
+        value="<%= (data.length > 0 && data[10].total_amount !== undefined) ? data[10].total_amount : 0 %>">
+    <input type="hidden" id="twelve"
+        value="<%= (data.length > 0 && data[11].total_amount !== undefined) ? data[11].total_amount : 0 %>">
     <footer id="footer">
         <div class="footer">
             <div class="footer-content">
-            <p>Line: @place1234</p>
-            <p>Tel: 000000000</p>
-            <p>Email: place@1234.com</p>
+                <p>Line: @place1234</p>
+                <p>Tel: 000000000</p>
+                <p>Email: place@1234.com</p>
             </div>
     </footer>
+    <script src="../script/admin-header.js"></script>
     <script>
-        document.getElementById("menuToggle").addEventListener("click", function() {
-            document.getElementById("navLinks").classList.toggle("active");
-        });
-
-        document.querySelectorAll(".dropdown-toggle").forEach(item => {
-            item.addEventListener("click", function() {
-                let dropdownMenu = this.nextElementSibling;
-                dropdownMenu.classList.toggle("show");
-            });
-        });
-
-        document.addEventListener("click", function(event) {
-            if (!event.target.closest(".navbar")) {
-                document.getElementById("navLinks").classList.remove("active");
-                document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
-            }
-        });
-
         const one = document.getElementById("one").value;
         const two = document.getElementById("two").value;
         const three = document.getElementById("three").value;
@@ -125,7 +120,6 @@
         const eleven = document.getElementById("eleven").value;
         const twelve = document.getElementById("twelve").value;
 
-        //script graph
         const xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         const yValues = [one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve];
 
@@ -149,7 +143,6 @@
             }
         });
 
-
         // sliderpic
         let index = 0;
         const slides = document.querySelectorAll('.slide');
@@ -172,7 +165,6 @@
 
         showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
         setInterval(nextSlide, 5000); // Auto slide every 3 seconds
-
 
     </script>
 </body>

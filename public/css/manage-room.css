@@ -4,7 +4,8 @@
     font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
-
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 body {
@@ -14,92 +15,36 @@ body {
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
-           
-}
-.navbar {
-    background: #C9D7EE;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    max-width: 100%;
-    height: 80px;
-    position: fixed;
-    top :0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 4px 41px rgb(14 55 54 / 14%);
-
 }
 
-.navbar .logo {
-    font-size: 22px;
-    font-weight: bold;;
-}
-.stayEz{
-    margin-left: 10px;
-}
-
-.menu-toggle,.hidden {
-    font-size: 24px;
+button {
     cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
     display: none;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links li {
-    display: flex;
-    margin: 0 15px;
-    position: relative;
-}
-
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 2.3vh;
-    padding: 10px;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-}
-
-
-/* pic */
-.pic{
-    width: 50px;
-    margin-left: 10px;
-    border-radius: 50%;
-}
-.pic2{
-    width: 30px;
-    margin-left: -20px;
-}
-.pic3{
-    width: 40px;
-    margin-left: -30px;
+.container {
+    margin: 110px auto 30px auto;
 }
 
 .container-header {
-    padding-top: 130px;
     width: 100%;
     height: 30px;
 }
+
 .container-header p {
     float: left;
     margin: 0 5%;
     font-size: 24px;
     color: rgba(123, 156, 200, 1);
 }
+
 .add-btn {
     float: right;
     margin-right: 5%;
@@ -108,10 +53,27 @@ body {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
-    font-size: 18px;
+    font-size: 24px;
     border-radius: 30px;
+    line-height: 5px;
 }
-.container {
+
+.room-content {
+    margin-top: 30px;
+}
+
+.building-name {
+    color: white;
+    justify-self: center;
+    text-align: center;
+    font-size: 22px;
+    background-color: rgba(123, 156, 200, 1);
+    width: max-content;
+    padding: 0 10px;
+    border-radius: 8px;
+}
+
+.room {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -119,110 +81,33 @@ body {
     gap: 30px;
     justify-content: center;
 }
+
+.room a{
+    text-decoration: none;
+    color: grey;
+}
+
 .card {
     width: 300px;
     padding: 15px;
     border-radius: 20px;
     height: 350px;
 }
+
 .card p {
     margin: 10px;
     font-size: 18px;
 }
+
 .reserve {
     background-color: rgba(245, 245, 245, 1);
 }
+
 .empty {
     background-color: rgba(229, 239, 255, 1);
 }
+
 .card img {
     width: 100%;
     border-radius: 15px;
-}
-
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #C9D7EE;
-    margin-top: 50px;
-    font-size: 2.3vh;
-    color: #7B9CC8;
-    padding: 10px;
-}
-
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-
-
-    p {
-        padding: 10px;
-        margin-left: 15px;
-        color: #ffffff;
-    }
-}
-@media screen and (max-width: 1127px) {
-    .menu-toggle ,.hidden{
-        display: block;
-    }
-
-    .pic2,.logout-icon{
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px; /* กำหนดความกว้างของเมนู */
-        position: absolute;
-        top: 40px;
-        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
-        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
-}
-
-
-@media screen and (max-width: 700px) {
-    .menu-toggle ,.hidden{
-        display: block;
-    }
-
-    .pic2,.logout-icon{
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px; /* กำหนดความกว้างของเมนู */
-        position: absolute;
-        top: 40px;
-        right: 0; /* ทำให้เมนูอยู่ขวาสุด */
-        left: auto; /* ป้องกันไม่ให้เมนูติดซ้าย */
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
 }
