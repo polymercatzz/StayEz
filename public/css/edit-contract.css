@@ -5,99 +5,37 @@
     font-family: "Kanit", serif;
     font-weight: 350;
     font-style: normal;
-
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 body {
     background-color: #E5EFFF;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
 
-
-/* Navbar */
-.navbar {
-    background: #C9D7EE;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    max-width: 100%;
-    height: 80px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    box-shadow: 0 4px 41px rgb(14 55 54 / 14%);
-
-}
-
-.navbar .logo {
-    font-size: 22px;
-    font-weight: bold;
-    ;
-}
-
-.stayEz {
-    margin-left: 10px;
-}
-
-.menu-toggle,
-.hidden {
-    font-size: 24px;
+button {
     cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
     display: none;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links li {
-    display: flex;
-    margin: 0 15px;
-    position: relative;
-}
-
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    font-size: 2.3vh;
-
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-.pic {
-    width: 50px;
-    margin-left: 10px;
-    border-radius: 50%;
-}
-
-.pic2 {
-    width: 30px;
-    margin-left: -20px;
-}
-
-.pic3 {
-    width: 40px;
-    margin-left: -30px;
-}
-
-
-.allcontact{
+.allcontact {
     padding: 30px;
 }
 
-
 /* container */
-.container{
+.container {
     margin-top: 120px;
     background-color: #ffff;
     max-width: 1300px;
@@ -107,48 +45,47 @@ body {
     font-size: 2.3vh;
 }
 
-.contact-head{
+.contact-head {
     text-align: center;
 }
 
-.date{
+.date {
     text-align: right;
     margin-top: 15px;
 }
 
-.company{
+.company {
     display: flex;
     flex-wrap: wrap;
     margin-top: 15px;
 }
 
-.com{
+.com {
     margin-left: 30px;
 }
 
-.client{
+.client {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
 }
 
-.cadd{
+.cadd {
     margin-left: 30px;
 }
 
-.name{
+.name {
     display: flex;
     flex-wrap: wrap;
 }
-.form-group{
+
+.form-group {
     display: flex;
     padding-bottom: 20px;
     flex-wrap: wrap;
-
-    
 }
 
-.form-group select{
+.form-group select {
     margin-right: 30px;
     border: none;
     background-color: #E5EFFF;
@@ -156,7 +93,9 @@ body {
     font-size: 2vh;
 }
 
-.form-group input , textarea,.select{
+.form-group input,
+textarea,
+.select {
     font-size: 2vh;
     padding-left: 10px;
     border: none;
@@ -164,21 +103,22 @@ body {
     border-radius: 10px;
 }
 
-.form-group p{
+.form-group p {
     margin-right: 20px;
 }
-.bank{
+
+.bank {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.allrule{
+.allrule {
     margin-top: 15px;
 }
 
 
-.signature-container{
+.signature-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,33 +126,30 @@ body {
     flex-wrap: wrap;
 }
 
-.signature-box{
+.signature-box {
     text-align: center;
     margin-top: 20px;
-
 }
-.signame{
+
+.signame {
     border: none;
     background-color: #E5EFFF;
     border-radius: 10px;
     padding: 5px;
     margin-bottom: 10px;
     font-size: 2vh;
-
 }
 
-.signature-line{
+.signature-line {
     border-bottom: 1.5px solid #000000;
     margin-bottom: 10px;
 }
 
-
-
-.signature-title{
+.signature-title {
     margin-top: 10px;
 }
 
-.payment-section{
+.payment-section {
     display: flex;
     flex-wrap: wrap;
     max-width: 1300px;
@@ -221,34 +158,33 @@ body {
 }
 
 
-.section{
+.section {
     display: flex;
     flex-wrap: wrap;
     font-size: 2.3vh;
     margin-left: 30px;
-    /* margin-left: auto;
-    margin-right: auto; */
     margin-bottom: 20px;
 }
-.section p{
+
+.section p {
     color: #7B9CC8;
     margin-right: 15px;
 }
-.peopleselect{
+
+.peopleselect {
     border: none;
     background-color: #C9D7EE;
     border-radius: 10px;
+    padding-left: 10px;
 }
 
-
-
-.foot{
+.foot {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.foot button{
+.foot button {
     border: none;
     background-color: #7B9CC8;
     padding: 15px;
@@ -258,11 +194,9 @@ body {
     margin: 20px;
 }
 
-
 .file-select {
     position: relative;
     display: inline-block;
-
 }
 
 .file-select input[type="file"] {
@@ -277,44 +211,14 @@ body {
 
 .file-label {
     display: inline-block;
-    background-color: #fff; 
+    background-color: #fff;
     color: #7B9CC8;
     padding: 5px;
-    border-radius: 10px; 
+    border-radius: 10px;
     cursor: pointer;
     font-size: 1.6vh;
     cursor: pointer;
-
 }
-
-/* footer */
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #C9D7EE;
-    margin-top: 50px;
-    font-size: 2.3vh;
-    color: #7B9CC8;
-    padding: 10px;
-    /* position: fixed; */
-    bottom: 0;
-    width: 100%;
-}
-
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-
-
-    p {
-        padding: 10px;
-        margin-left: 15px;
-        color: #ffffff;
-    }
-}
-
-
 
 /* popup */
 .popup {
@@ -346,7 +250,6 @@ body {
 
 .close-btn button img {
     width: 35px;
-
 }
 
 .close-btn {
@@ -358,10 +261,8 @@ body {
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
     width: calc(100% + 40px);
-    margin: -20px -20px 0; 
+    margin: -20px -20px 0;
     box-sizing: border-box;
-
-
 }
 
 .allpopupdata {
@@ -383,7 +284,6 @@ body {
     color: #93B1D7;
 }
 
-
 .popupdata label {
     margin-right: 15px;
     font-size: 1.3rem;
@@ -395,8 +295,6 @@ body {
     font-size: 1rem;
     padding: 5px;
     color: #616162;
-    /* width: 100%; */
-
 }
 
 .profile p {
@@ -422,7 +320,7 @@ body {
     width: 40px;
 }
 
-.overlay{
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -441,40 +339,8 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-
-    .menu-toggle,
-    .hidden {
-        display: block;
-    }
-
-    .pic2,
-    .pic3 {
-        display: none;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        max-width: 150px;
-        position: absolute;
-        top: 40px;
-        right: 0;
-        left: auto;
-        background: #94abca;
-        text-align: center;
-        border-radius: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-        max-width: 150px;
-        border-radius: 20px;
-        margin-top: 20px;
-
-    }
     .popup {
         top: 50%;
         left: 50%;
-}
+    }
 }
