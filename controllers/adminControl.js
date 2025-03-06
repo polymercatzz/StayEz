@@ -17,11 +17,14 @@ const show_manage_room = (req, res) => {
         departments.*,
         history.user_id,
         users.first_name,
-        users.last_name
+        users.last_name,
+        GROUP_CONCAT(room_images.room_img_id) AS images_id
     FROM room 
     JOIN departments ON room.department_id = departments.department_id
+    JOIN room_images ON room.room_id = room_images.room_id
     LEFT JOIN history ON room.room_id = history.room_id
     LEFT JOIN users ON history.user_id = users.user_id
+    GROUP BY room.room_id;
     ORDER BY department_id;`;
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -204,11 +207,20 @@ const delete_room = (req, res) => {
 };
 
 const show_manage_booking = (req, res) => {
-    const sql = `SELECT * FROM history
+    const sql = `SELECT 
+                history.*,
+                users.*,
+                room.*,
+                GROUP_CONCAT(room_images.room_img_id) AS images_id,
+                contract.*,
+                departments.*
+    FROM history
     JOIN users ON history.user_id = users.user_id
     JOIN room ON history.room_id = room.room_id
+    JOIN room_images ON room.room_id = room_images.room_id
     JOIN contract ON history.contract_id = contract.contract_id
-    JOIN departments ON room.department_id = departments.department_id;`;
+    JOIN departments ON room.department_id = departments.department_id
+    GROUP BY room.room_id;`;;
     db.all(sql, [], (err, rows) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
