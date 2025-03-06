@@ -11,101 +11,101 @@
 
 <body>
     <%- include('partials/admin-navbar') %>
-        <div class="box">
-            <p class="text">ระบบจัดการการจอง</p>
-        </div>
-        <div class="history">
-            <% data.forEach(function(item) { %>
-                <div class="all">
-                    <div class="card">
-                        <div class="data4">
-                            <p class="card-title2">
-                                <%= item.date %>
-                            </p>
-                        </div>
-                        <a href="#" class="card-link">
-                            <p class="badge">
-                                <%= item.department_name %>
-                            </p>
-                            <img src="/room_img/<%= item.images_id[0] %>"
-                                alt="Card Image" class="card-img">
-                        </a>
-                        <div class="data3">
-                            <a href="/admin/contact/<%= item.contract_id %>" class="book">หนังสือสัญญา</a>
-                        </div>
+    <div class="box">
+        <p class="text">ระบบจัดการการจอง</p>
+    </div>
+    <div class="history">
+        <% data.forEach(function(item) { %>
+            <div class="all">
+                <div class="card">
+                    <div class="data4">
+                        <p class="card-title2">
+                            <%= item.date %>
+                        </p>
                     </div>
-                    <div class="alldata">
-                        <div class="data5">
-                            <p class="card-title2">สถานะ:</p>
-                            <form action="/admin/updatebookstatus/<%= item.history_id %>" method="post">
-                                <select name="status" id="status" class="status" onchange="this.form.submit()">
-                                    <option value="verification" <%=item.history_status==='verification' ? 'selected'
-                                        : '' %>>กำลังรอตรวจสอบ</option>
-                                    <option value="completed" <%=item.history_status==='completed' ? 'selected' : '' %>
-                                        >สำเร็จ</option>
-                                    <option value="cancelled" <%=item.history_status==='cancelled' ? 'selected' : '' %>
-                                        >ยกเลิก</option>
-                                </select>
-                            </form>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">สลิปโอนเงิน: </p>
-                            <div class="slip">
-                                <a href="/history_img/<%= item.contract_id %>" target="_blank"><img
-                                        src="../img/archive.png" alt="" class="pic5"></a>
-                            </div>
-                        </div>
-                        <div class="data">
-                            <p class="card-title2">รายละเอียดผู้เช่า: </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">หมายเลขห้อง: </p>
-                            <p class="card-title2">
-                                <%= item.room_name %>
-                            </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">ชื่อ-นามสกุล</p>
-                            <p class="card-title2">
-                                <%= item.first_name %>
-                                    <%= item.last_name %>
-                            </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">email: </p>
-                            <p class="card-title2">
-                                <%= item.email %>
-                            </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">เบอร์โทร: </p>
-                            <p class="card-title2">
-                                <%= item.tel %>
-                            </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">สัญญาเช่าอยู่: </p>
-                            <p class="card-title2">
-                                <%= item.tenancy %> เดือน
-                            </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">จำนวนผู้เข้าพัก: </p>
-                            <p class="card-title2">
-                                <%= item.people %> คน
-                            </p>
-                        </div>
-                        <div class="data5">
-                            <p class="card-title2">วันที่เริ่มทำสัญญา: </p>
-                            <p class="card-title2">
-                                <%= item.date %>
-                            </p>
-                        </div>
+                    <a href="#" class="card-link">
+                        <p class="badge">
+                            <%= item.department_name %>
+                        </p>
+                        <img src="/room_img/<%= item.images_id[0] %>"
+                            alt="Card Image" class="card-img">
+                    </a>
+                    <div class="data3">
+                        <a href="/admin/contact/<%= item.contract_id %>" class="book">หนังสือสัญญา</a>
                     </div>
                 </div>
-                <% }); %>
-        </div>
-        <%- include('partials/admin-footer') %>
+                <div class="alldata">
+                    <div class="data5">
+                        <p class="card-title2">สถานะ:</p>
+                        <form action="/admin/updatebookstatus/<%= item.history_id %>" method="post">
+                            <select name="status" id="status" class="status" onchange="this.form.submit()">
+                                <option value="verification" <%=item.history_status==='verification' ? 'selected' : ''
+                                    %>>กำลังรอตรวจสอบ</option>
+                                <option value="completed" <%=item.history_status==='completed' ? 'selected' : '' %>
+                                    >สำเร็จ</option>
+                                <option value="cancelled" <%=item.history_status==='cancelled' ? 'selected' : '' %>
+                                    >ยกเลิก</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">สลิปโอนเงิน: </p>
+                        <div class="slip">
+                            <a href="/history_img/<%= item.contract_id %>" target="_blank"><img src="../img/archive.png"
+                                    alt="" class="pic5"></a>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <p class="card-title2">รายละเอียดผู้เช่า: </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">หมายเลขห้อง: </p>
+                        <p class="card-title2">
+                            <%= item.room_name %>
+                        </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">ชื่อ-นามสกุล</p>
+                        <p class="card-title2">
+                            <%= item.first_name %>
+                                <%= item.last_name %>
+                        </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">email: </p>
+                        <p class="card-title2">
+                            <%= item.email %>
+                        </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">เบอร์โทร: </p>
+                        <p class="card-title2">
+                            <%= item.tel %>
+                        </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">สัญญาเช่าอยู่: </p>
+                        <p class="card-title2">
+                            <%= item.tenancy %> เดือน
+                        </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">จำนวนผู้เข้าพัก: </p>
+                        <p class="card-title2">
+                            <%= item.people %> คน
+                        </p>
+                    </div>
+                    <div class="data5">
+                        <p class="card-title2">วันที่เริ่มทำสัญญา: </p>
+                        <p class="card-title2">
+                            <%= item.date %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+    <%- include('partials/admin-footer') %>
 </body>
 
 </html>

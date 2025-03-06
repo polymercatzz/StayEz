@@ -61,29 +61,29 @@
                 </tbody>
             </table>
         </div>
-        <%- include('partials/admin-footer') %>
-        <div class="popup-container" id="popup-container">
-            <div class="popup" id="popup">
-                <div class="popup-header">
-                    <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg"
-                        width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                    </svg>
+    <%- include('partials/admin-footer') %>
+    </div>
+    <div class="popup-container" id="popup-container">
+        <div class="popup" id="popup">
+            <div class="popup-header">
+                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                </svg>
+            </div>
+            <div class="popup-content">
+                <div class="content-item">
+                    <p>ชื่อ-นามสกุล : </p>
+                    <input type="text" id="name" readonly>
                 </div>
-                <div class="popup-content">
-                    <div class="content-item">
-                        <p>ชื่อ-นามสกุล : </p>
-                        <input type="text" id="name" readonly>
-                    </div>
-                    <div class="content-item">
-                        <p>เบอร์โทรศัพท์ : </p>
-                        <input type="text" id="tel" readonly>
-                    </div>
-                    <div class="content-item">
-                        <p>Email : </p>
-                        <input type="text" id="email" readonly>
-                    </div>
+                <div class="content-item">
+                    <p>เบอร์โทรศัพท์ : </p>
+                    <input type="text" id="tel" readonly>
+                </div>
+                <div class="content-item">
+                    <p>Email : </p>
+                    <input type="text" id="email" readonly>
                 </div>
             </div>
         </div>

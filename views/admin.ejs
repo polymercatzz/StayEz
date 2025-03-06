@@ -11,105 +11,105 @@
 
 <body>
     <%- include('partials/admin-navbar') %>
-        <div class="slider-container">
-            <div class="slider">
-                <div class="slide"><img
-                        src="https://cdn-images.prod.thinkofliving.com/wp-content/uploads/1/2019/02/19234153/10-14.jpg"
-                        alt="Image 1"></div>
-                <div class="slide"><img
-                        src="https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2023/07/COCO-PARC-Pool-02-FI.jpg"
-                        alt="Image 2"></div>
-                <div class="slide"><img src="https://realasset.co.th/ckfinder/userfiles/images/03_LAVIQ.jpg"
-                        alt="Image 3">
-                </div>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img
+                    src="https://cdn-images.prod.thinkofliving.com/wp-content/uploads/1/2019/02/19234153/10-14.jpg"
+                    alt="Image 1"></div>
+            <div class="slide"><img
+                    src="https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2023/07/COCO-PARC-Pool-02-FI.jpg"
+                    alt="Image 2"></div>
+            <div class="slide"><img src="https://realasset.co.th/ckfinder/userfiles/images/03_LAVIQ.jpg" alt="Image 3">
             </div>
-            <button class="prev" onclick="prevSlide()">&#10094;</button>
-            <button class="next" onclick="nextSlide()">&#10095;</button>
         </div>
-        <div class="page-select">
-            <a href="/admin/manage_user">ระบบจัดการ User</a>
-            <a href="/admin/manage_room">ระบบจัดการที่พัก</a>
-            <a href="/admin/manage_booking">ระบบจัดการจอง</a>
-            <a href="/admin/manage_rent">ระบบคำนวณ</a>
-        </div>
-        <div class="summary">
-            <p>สรุปรายได้-รายจ่ายที่พัก</p>
-            <div class="total">
-                <div class="total-header">
-                    <!-- <div class="total-section">
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+    <div class="page-select">
+        <a href="/admin/manage_user">ระบบจัดการ User</a>
+        <a href="/admin/manage_room">ระบบจัดการที่พัก</a>
+        <a href="/admin/manage_booking">ระบบจัดการจอง</a>
+        <a href="/admin/manage_rent">ระบบคำนวณ</a>
+    </div>
+    <div class="summary">
+        <p>สรุปรายได้-รายจ่ายที่พัก</p>
+        <div class="total">
+            <div class="total-header">
+                <!-- <div class="total-section">
                     <p>รายได้ทั้งหมด : </p>
                     <p class="total-text"></p>
                 </div> -->
-                    <div class="total-section">
-                        <p>รายจ่ายทั้งหมด : </p>
-                        <p class="total-text">
-                            <%= data.reduce((sum, item)=> sum + (item.total_amount || 0), 0) %>
-                        </p>
-                    </div>
+                <div class="total-section">
+                    <p>รายจ่ายทั้งหมด : </p>
+                    <p class="total-text">
+                        <%= data.reduce((sum, item)=> sum + (item.total_amount || 0), 0) %>
+                    </p>
                 </div>
-                <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
-                <div class="total-footer">
-                    <a href="/admin/monthly"><button>รายได้แต่ละเดือน</button></a>
-                    <div class="sum-section">
-                        <p>สรุป : </p>
-                        <p class="sum-text"></p>
-                    </div>
+            </div>
+            <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
+            <div class="total-footer">
+                <a href="/admin/monthly"><button>รายได้แต่ละเดือน</button></a>
+                <div class="sum-section">
+                    <p>สรุป : </p>
+                    <p class="sum-text"></p>
                 </div>
             </div>
         </div>
-        <%- include('partials/admin-footer') %>
-        <% for (let i = 0; i < 12; i++) { %>
-            <input type="hidden" id="month-<%= i + 1 %>" value="<%= (data.length > i && data[i].total_amount !== undefined) ? data[i].total_amount : 0 %>">
+    </div>
+    <%- include('partials/admin-footer') %>
+    <% for (let i=0; i < 12; i++) { %>
+        <input type="hidden" id="month-<%= i + 1 %>"
+            value="<%= (data.length > i && data[i].total_amount !== undefined) ? data[i].total_amount : 0 %>">
         <% } %>
-        <script>
-            const values = [];
-            for (let i = 1; i <= 12; i++) {
-                values.push(document.getElementById(`month-${i}`).value);
-            }
-            new Chart("total-chart", {
-                type: "line",
-                data: {
-                    labels: values,
-                    datasets: [{
-                        fill: false,
-                        lineTension: 0,
-                        backgroundColor: "rgba(0,0,255,1.0)",
-                        borderColor: "rgba(0,0,255,0.1)",
-                        data: values
-                    }]
-                },
-                options: {
-                    legend: { display: false },
-                    scales: {
-                        yAxes: [{ ticks: { min: 0, max: 50000 } }],
-                    }
+    <script>
+        const values = [];
+        for (let i = 1; i <= 12; i++) {
+            values.push(document.getElementById(`month-${i}`).value);
+        }
+        new Chart("total-chart", {
+            type: "line",
+            data: {
+                labels: values,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: values
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 0, max: 50000 } }],
                 }
-            });
-
-            // sliderpic
-            let index = 0;
-            const slides = document.querySelectorAll('.slide');
-
-            function showSlide(i) {
-                if (i >= slides.length) index = 0;
-                if (i < 0) index = slides.length - 1;
-                document.querySelector('.slider').style.transform = `translateX(${-index * 100}%)`;
             }
+        });
 
-            function nextSlide() {
-                index++;
-                showSlide(index);
-            }
+        // sliderpic
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
 
-            function prevSlide() {
-                index--;
-                showSlide(index);
-            }
+        function showSlide(i) {
+            if (i >= slides.length) index = 0;
+            if (i < 0) index = slides.length - 1;
+            document.querySelector('.slider').style.transform = `translateX(${-index * 100}%)`;
+        }
 
-            showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
-            setInterval(nextSlide, 5000); // Auto slide every 3 seconds
+        function nextSlide() {
+            index++;
+            showSlide(index);
+        }
 
-        </script>
+        function prevSlide() {
+            index--;
+            showSlide(index);
+        }
+
+        showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
+        setInterval(nextSlide, 5000); // Auto slide every 3 seconds
+
+    </script>
 </body>
 
 </html>
