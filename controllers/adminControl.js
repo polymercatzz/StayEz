@@ -263,7 +263,7 @@ const show_manage_user = (req, res) => {
     });
 };
 
-const updateuserstatus = (req, resredirect) => {
+const updateuserstatus = (req, res) => {
     const user_id = req.params.user_id;
     const status = req.body.status;
     const sql = `UPDATE users SET user_status = ? WHERE user_id = ?`;
