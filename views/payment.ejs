@@ -25,11 +25,11 @@
         <li><a href="/user/history">History</a></li>
         <li><a href="/user/payment">Payment</a></li>
         <li><a href="#footer">Contact</a></li>
-        <li><a href="/user/fav" class="hidden">Wish list</a></li>
+        <li><a href="#"class="hidden">Wish list</a></li>
         <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
-        <li><a href="/logout" class="hidden">Log out</a></li>
-        <li><a href="/user/fav"><img src="/img/heart.png" alt="" class="pic2"></a></li>
-        <li><a href="#" onclick="openPopup()"><img src="/img/user.png" alt="" class="pic3"></a></li>
+        <li><a href="main-regis.html"class="hidden">Log out</a></li>
+        <li><a href="/user/fav"><img src="../img/heart.png" alt="" class="pic2"></a></li>
+        <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>        
     </ul>
 </nav>
 
@@ -134,7 +134,7 @@
 <div class="overlay" id="overlay" onclick="closePopup()"></div>
 <section>
     <div class="popup" id="popup">
-        <div class="profile">
+        <div class="profile" >
             <div class="close-btn">
                 <button onclick="closePopup()">
                     <img src="../img/close.png" alt="">
@@ -144,30 +144,31 @@
             <div class="allpopupdata">
                 <div class="popupdata">
                     <label for="name">Name:</label>
-                    <input type="text">
+                    <input type="text" id="firstname" value="<%= user.first_name %>" readonly>
                 </div>
                 <div class="popupdata">
                     <label for="lastname">Lastname:</label>
-                    <input type="text">
+                    <input type="text" id="lastname" value="<%= user.last_name %>" readonly>
                 </div>
                 <div class="popupdata">
                     <label for="tel">Tel:</label>
-                    <input type="text">
+                    <input type="text" id="tel" value="<%= user.tel %>" readonly>
                 </div>
                 <div class="popupdata">
                     <label for="email">Email:</label>
-                    <input type="text">
+                    <input type="text" id="email" value="<%= user.email %>" readonly>
                 </div>
                 <div class="log-out">
                     <br>
 
-                    <a href="main-regis.html"><button><img src="../img/log-out.png" alt=""></button></a>
+                    <a href="/logout"><button><img src="../img/log-out.png" alt=""></button></a>
                 </div>
             </div>
-
+            
         </div>
     </div>
 
+</section>
     <footer id="footer">
         <div class="footer">
             <div class="footer-content">

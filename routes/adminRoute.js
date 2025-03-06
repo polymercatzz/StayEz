@@ -17,6 +17,7 @@ router.get("/manage_room", checkAd, adminControl.show_manage_room);
 router.get("/edit_room/:room_id", checkAd, adminControl.show_edit_room);
 router.get("/create_room", checkAd, adminControl.show_create_room);
 router.get("/manage_rent", checkAd, adminControl.show_calulate);
+router.get("/history_rent", checkAd, adminControl.show_history_rent);
 router.get("/contact/:contract_id", checkAd, adminControl.show_contact);
 router.get("/monthly", checkAd, adminControl.showMonthlyPayment);
 

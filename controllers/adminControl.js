@@ -238,7 +238,6 @@ const updatebookstatus = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            res.redirect("/user/history");
         });
     } else {
         const sql = `UPDATE history SET history_status = ? WHERE history_id = ?`;
@@ -304,12 +303,30 @@ const show_calulate = (req, res) => {
                 users.*,
                 room.*,
                 departments.*,
-                payment.payment_id,
-                payment.r_electric,
-                payment.r_water,
-                payment.r_other,
-                payment.payment_date,
-                payment.payment_status,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.payment_id ELSE NULL END AS payment_id,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.r_electric ELSE NULL END AS r_electric,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.r_water ELSE NULL END AS r_water,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.r_other ELSE NULL END AS r_other,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.payment_date ELSE NULL END AS payment_date,
+                CASE 
+                    WHEN strftime('%m', payment.payment_date) = strftime('%m', 'now') 
+                    AND strftime('%Y', payment.payment_date) = strftime('%Y', 'now')
+                    THEN payment.payment_status ELSE NULL END AS payment_status,
                 Payment_Images.pay_img_id
                 FROM history
                 JOIN users ON history.user_id = users.user_id
@@ -328,8 +345,35 @@ const show_calulate = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows);
         res.render("calculate", { history: rows });
+    });
+};
+
+const show_history_rent = (req, res) => {
+    const sql = `SELECT 
+                history.*,
+                users.*,
+                room.*,
+                departments.*,
+                payment.payment_id,
+                payment.r_electric,
+                payment.r_water,
+                payment.r_other,
+                payment.payment_date,
+                payment.payment_status,
+                Payment_Images.pay_img_id
+                FROM history
+                JOIN users ON history.user_id = users.user_id
+                JOIN room ON history.room_id = room.room_id
+                JOIN departments ON room.department_id = departments.department_id
+                JOIN payment ON history.history_id = payment.history_id
+                LEFT JOIN Payment_Images ON Payment_Images.payment_id = Payment.payment_id
+                WHERE history.history_status = 'completed';`
+    db.all(sql, (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        res.render("history_rent.ejs", { history: rows });
     });
 };
 
@@ -458,5 +502,5 @@ const updateMonthlyPayment = (req, res) => {
     });
 }
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact };
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact };
 

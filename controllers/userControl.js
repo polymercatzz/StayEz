@@ -292,13 +292,19 @@ const showpayment = (req, res) => {
                     WHEN payment.payment_status = 'Pending' THEN 1
                     WHEN payment.payment_status = 'Review' THEN 2
                     WHEN payment.payment_status = 'Completed' THEN 3 END;`
-    db.all(sql, [user_id], (err, rows) => {
-        if(err){
+    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    db.get(userSql, [user_id], (err, userData) => {
+        if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows)
-        res.render("payment", { data: rows });
-    })
+        db.all(sql, [user_id], (err, rows) => {
+            if(err){
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            console.log(rows)
+            res.render("payment", { data: rows, user : userData });
+        })
+    });
 }
 const update_payment = (req, res) => {
     const payment_id = req.params.payment_id;

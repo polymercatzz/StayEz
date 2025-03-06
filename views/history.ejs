@@ -23,13 +23,14 @@
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="/user/main">Home</a></li>
-            <li><a href="#" class="his">History</a></li>
-            <li><a href="#">Payment</a></li>
+            <li><a href="/user/history" class="his">History</a></li>
+            <li><a href="/user/payment">Payment</a></li>
             <li><a href="#footer">Contact</a></li>
-            <li><a href="/user/fav" class="hidden">Wish list</a></li>
+            <li><a href="#"class="hidden">Wish list</a></li>
             <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
+            <li><a href="main-regis.html"class="hidden">Log out</a></li>
             <li><a href="/user/fav"><img src="../img/heart.png" alt="" class="pic2"></a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>
+            <li><a href="#" onclick="openPopup()"><img src="../img/user.png" alt="" class="pic3"></a></li>        
         </ul>
     </nav>
     <section>
@@ -62,7 +63,12 @@
                         </div>
                         <div class="data5">
                             <p class="card-title2">สถานะ: </p>
-                            <p class="card-title2"><%= item.history_status %></p>
+                            
+                            <% let status = "สำเร็จ"; %>
+                            <% if (item.history_status == "verification") { %>
+                                <% status = "กำลังรอตรวจสอบ"; %>
+                            <% } %>
+                            <p class="card-title2"><%= status %></p>
                         </div>
                         <div class="data">
                             <p class="card-title2">รายละเอียดการเข้าพัก</p>
@@ -96,7 +102,7 @@
         <div class="overlay" id="overlay" onclick="closePopup()"></div>
         <section>
             <div class="popup" id="popup">
-                <div class="profile">
+                <div class="profile" >
                     <div class="close-btn">
                         <button onclick="closePopup()">
                             <img src="../img/close.png" alt="">
@@ -106,30 +112,30 @@
                     <div class="allpopupdata">
                         <div class="popupdata">
                             <label for="name">Name:</label>
-                            <input type="text" value="<%= user.first_name %>" readonly>
+                            <input type="text" id="firstname" value="<%= user.first_name %>" readonly>
                         </div>
                         <div class="popupdata">
                             <label for="lastname">Lastname:</label>
-                            <input type="text" value="<%= user.last_name %>" readonly>
+                            <input type="text" id="lastname" value="<%= user.last_name %>" readonly>
                         </div>
                         <div class="popupdata">
                             <label for="tel">Tel:</label>
-                            <input type="text" value="<%= user.tel %>" readonly>
+                            <input type="text" id="tel" value="<%= user.tel %>" readonly>
                         </div>
                         <div class="popupdata">
                             <label for="email">Email:</label>
-                            <input type="text" value="<%= user.email %>" readonly>
+                            <input type="text" id="email" value="<%= user.email %>" readonly>
                         </div>
                         <div class="log-out">
                             <br>
     
-                            <a href="/logout"><button><img src="/img/log-out.png" alt=""></button></a>
+                            <a href="/logout"><button><img src="../img/log-out.png" alt=""></button></a>
                         </div>
                     </div>
-    
+                    
                 </div>
             </div>
-
+    
         </section>
         <!-- popup cancel -->
         <div class="overlay2" id="overlay2" onclick="closePopup2()"></div>
