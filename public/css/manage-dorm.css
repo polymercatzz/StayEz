@@ -69,23 +69,24 @@ a {
 .form input {
     border: none;
     background-color: rgba(123, 156, 200, 1);
-    width: 90%;
-    height: 25px;
+    width: 200px;
+    /* height: 25px; */
     border-radius: 8px;
     color: white;
-    padding-left: 15px;
-    font-size: 2.5vh;
+    padding: 3px 15px;
+    font-size: 2.2vh;
 }
 
 .form select {
     border: none;
     background-color: rgba(123, 156, 200, 1);
-    width: 90%;
-    height: 25px;
+    width: 200px;
+    /* height: 25px; */
     border-radius: 8px;
     color: white;
     text-align: center;
-    font-size: 2.5vh;
+    font-size: 2.2vh;
+    padding: 3px;
 }
 
 .first-section {
@@ -107,8 +108,8 @@ a {
     background-color: rgba(123, 156, 200, 1);
     border-radius: 10px;
     color: white;
-    font-size: 2.5vh;
-    padding: 5px 15px;
+    font-size: 2.3vh;
+    padding: 10px 15px;
 }
 
 .file-input {
