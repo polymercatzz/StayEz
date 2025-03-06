@@ -183,10 +183,15 @@ const showDetails = (req, res) => {
     const roomSql = `SELECT * FROM Room WHERE room_id = ?`;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
     let reviewSql = `
-        SELECT room_id, AVG(rating) AS avg_rating, COUNT(*) AS review_count, GROUP_CONCAT(comment) AS comments
-        FROM review
-        WHERE room_id = ?
-        GROUP BY room_id;
+        SELECT r.room_id, 
+               AVG(r.rating) AS avg_rating, 
+               COUNT(*) AS review_count, 
+               GROUP_CONCAT(r.comment) AS comments, 
+               GROUP_CONCAT(u.first_name) AS reviewers
+        FROM review r
+        JOIN Users u ON r.user_id = u.user_id
+        WHERE r.room_id = ?
+        GROUP BY r.room_id;
     `;
     db.get(userSql, [req.cookies.userId], (err, userData) => {
         if (err) {
@@ -200,17 +205,19 @@ const showDetails = (req, res) => {
                 if (err) {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
-                console.log(reviewData);
                 const comments = reviewData ? reviewData.comments.split(',') : null;
+                const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
                 const avgRating = reviewData ? reviewData.avg_rating : 0;
                 const reviewCount = reviewData ? reviewData.review_count : 0;
-
+                console.log(roomData);
                 res.render('description', { 
                     room: roomData, 
                     user: userData, 
                     avgRating: avgRating,
                     reviewCount: reviewCount,
-                    comments: comments
+                    comments: comments,
+                    reviewers: reviewers,
+                    reviewData: reviewData
                 });
             });
         });

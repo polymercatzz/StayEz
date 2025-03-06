@@ -39,7 +39,7 @@
     <section class="all">
         <div class="text-map">
             <p class="text">Asok resident</p>
-            <a href="" class="map">
+            <a href="<%= room.map ? room.map : '#' %>" class="map">
                 <img src="../../img/map.png" alt="">
                 <p>Map</p>
             </a>
@@ -64,62 +64,100 @@
                 <div class="text-data2">
                     <div class="room">
                         <p>ห้อง:</p>
-                        <p>111</p>
+                        <p><%= room.room_name %></p>
                     </div>
                     <p class="p">
-                        7 ชั้น มีทั้งหมด 70 ห้อง
-                        ตั้งอยู่ในซอยวิภาวดี 38 เดินทางได้อย่างสะดวกสบาย ไปยังสถานที่ใกล้เคียง อาทิเช่น SCBสำนักงานใหญ่,
-                        เมเจอร์รัชโยธิน, ม.เกษตรฯ, เซ็นทรัล-ลาดพร้าว มี7/11ขนาดใหญ่(150ม.)
-                        และชุมชนร้านค้าร้านอาหารตามสั่ง ร้านข้าวแกง ร้านคาเฟ่น่ารักๆ ร้านขายยา
-                        อยู่บริเวณใกล้เคียงกันจำนวนมาก ชั้นล่างอาคารยังเป็นศูนย์ตัวแทนขนส่ง Flash express
+                        <%= room.detail %>
                     </p>
                 </div>
             </div>
+            <% const roomHave = JSON.parse(room.room_have); %>
             <div class="allhave">
                 <div class="have">
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>ตู้เย็น</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
+                    <% if (roomHave.air_conditioner) { %>
+                        <div class="datahave">
+                            <img src="/img/air-conditioner.png" alt="Air Conditioner" class="pic4">
+                            <p>Air Conditioner</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.wi_fi) { %>
+                        <div class="datahave">
+                            <img src="/img/wifi.png" alt="Wi-Fi" class="pic4">
+                            <p>Wi-Fi</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.TV) { %>
+                        <div class="datahave">
+                            <img src="/img/television.png" alt="TV" class="pic4">
+                            <p>TV</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.washing_machine) { %>
+                        <div class="datahave">
+                            <img src="/img/washing-machine.png" alt="Washing Machine" class="pic4">
+                            <p>Washing Machine</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.fitnaess) { %>
+                        <div class="datahave">
+                            <img src="/img/gym.png" alt="Fitness" class="pic4">
+                            <p>Fitness</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.furniture) { %>
+                        <div class="datahave">
+                            <img src="/img/home-furniture.png" alt="Furniture" class="pic4">
+                            <p>Furniture</p>
+                        </div>
+                    <% } %>
                 </div>
                 <div class="have">
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>ตู้เย็น</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-                    <div class="datahave">
-                        <img src="../../img/dog.png" alt="">
-                        <p>Pet Friendly</p>
-                    </div>
-
+                    <% if (roomHave.pet_friendly) { %>
+                        <div class="datahave">
+                            <img src="/img/dog.png" alt="Pet Friendly" class="pic4">
+                            <p>Pet Friendly</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.fridge) { %>
+                        <div class="datahave">
+                            <img src="/img/fridge.png" alt="Fridge" class="pic4">
+                            <p>Fridge</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.closed_camera) { %>
+                        <div class="datahave">
+                            <img src="/img/security-camera.png" alt="Closed Camera" class="pic4">
+                            <p>Security Camera</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.lift) { %>
+                        <div class="datahave">
+                            <img src="/img/elevator.png" alt="Lift" class="pic4">
+                            <p>Lift</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.microwave) { %>
+                        <div class="datahave">
+                            <img src="/img/microwave.png" alt="Microwave" class="pic4">
+                            <p>Microwave</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.parking) { %>
+                        <div class="datahave">
+                            <img src="/img/car.png" alt="Parking" class="pic4">
+                            <p>Parking</p>
+                        </div>
+                    <% } %>
                 </div>
 
             </div>
@@ -128,9 +166,16 @@
         <p class="rate">รีวิว <%= avgRating %> ★</p>
         <div class="alldata2">
             <div class="review">
-                <% if (comments) { %>
+                <% if (comments && reviewers) { %>
                     <% comments.forEach((comment, index) => { %>
                         <div class="name">
+                            <strong>
+                                <% if (user && user.user_id && reviewData.user_id == user.user_id) { %>
+                                    คุณ : 
+                                <% } else { %>
+                                    <%= reviewers[index] %> :
+                                <% } %>
+                            </strong>
                             <p><%= comment %></p>
                         </div>
                     <% }) %>
