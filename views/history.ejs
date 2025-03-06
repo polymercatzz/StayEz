@@ -85,7 +85,7 @@
                         </div>
                         <div class="data3">
                             <a href="/user/showcontract/<%= item.contract_id %>" class="book">หนังสือสัญญา</a>
-                            <button class="cancel" onclick="openPopup2()">ยกเลิกสัญญา</button>
+                            <button class="cancel" onclick="openPopup2(<%= item.history_id %>, <%= item.room_id %>)">ยกเลิกสัญญา</button>
                             <a href="#" class="review" onclick="openPopup3('<%= item.room_id %>')">Review</a>
                         </div>
                     </div>
@@ -142,8 +142,10 @@
                     </button>
                 </div>
                 <div class="ok">
-                    <p>ยืนยันการยกเลิก</p>
-                    <button onclick="closePopup2()" class="but">ยืนยัน</button>
+                    <form id="cancel_history" method="post">
+                        <p>ยืนยันการยกเลิก</p>
+                        <button onclick="closePopup2()" class="but" type="submit">ยืนยัน</button>
+                    </form>
                 </div>
             </div>
 
@@ -276,9 +278,10 @@
 
                 }
                 // cancel
-                function openPopup2() {
+                function openPopup2(history_id, room_id) {
                     document.getElementById("pop-upcancel").classList.add("active");
                     document.getElementById("overlay2").classList.add("active");
+                    document.getElementById("cancel_history").action = `/user/cancel_history/${history_id}/${room_id}`
                 }
 
                 function closePopup2() {

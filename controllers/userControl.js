@@ -220,7 +220,7 @@ const showDetails = (req, res) => {
 const showHistory = (req, res) => {
     const userId = req.cookies.userId;
     const historySql = `
-        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name, r.room_id
+        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name, r.room_id, h.history_id
         FROM history h
         LEFT JOIN room r ON h.room_id = r.room_id
         LEFT JOIN contract c ON h.contract_id = c.contract_id
@@ -395,6 +395,24 @@ const create_history = (req, res) => {
     });
 };
 
+const cancel_history = (req, res) => {
+    const history_id = req.params.history_id;
+    const room_id = req.params.room_id;
+    const room_sql = `UPDATE room SET room_status = 'available' WHERE room_id = ?`;
+    const delete_sql = `DELETE FROM history WHERE history_id = ?`;
+    db.run(delete_sql, [history_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+    });
+    db.run(room_sql, [room_id], (err) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+    });
+    res.redirect("/user/history");
+};
+
 const showcontact_histroy = (req, res) => {
     const contract_id = req.params.contract_id;
     const sql = `SELECT *
@@ -460,5 +478,5 @@ const writeReview = (req, res) => {
 }
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_histroy, writeReview};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_histroy, writeReview, cancel_history};
 

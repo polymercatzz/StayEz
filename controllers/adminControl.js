@@ -50,7 +50,7 @@ const show_edit_room = (req, res) => {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
                 let room_have = JSON.parse(room.room_have);
-                res.render('editroom', { data: room, room_have: room_have, dept: dept, image: image});
+                res.render('editroom', { data: room, room_have: room_have, dept: dept, image: image });
             });
         });
     });
@@ -213,7 +213,6 @@ const show_manage_booking = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows);
         res.render("managebook", { data: rows });
     });
 };
@@ -221,13 +220,36 @@ const show_manage_booking = (req, res) => {
 const updatebookstatus = (req, res) => {
     const history_id = req.params.history_id;
     const status = req.body.status;
-    const sql = `UPDATE history SET history_status = ? WHERE history_id = ?`;
-    db.run(sql, [status, history_id], (err) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err.message });
-        }
-        res.redirect("/admin/manage_booking");
-    });
+    if (status == "cancelled") {
+        const history_sql = "SELECT room_id FROM history WHERE history_id = ?"
+        const room_sql = `UPDATE room SET room_status = 'available' WHERE room_id = ?`;
+        const delete_sql = `DELETE FROM history WHERE history_id = ?`;
+        db.get(history_sql, [history_id], (err, row) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            db.run(room_sql, [row.room_id], (err) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+            });
+        });
+        db.run(delete_sql, [history_id], (err) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/user/history");
+        });
+    } else {
+        const sql = `UPDATE history SET history_status = ? WHERE history_id = ?`;
+        db.run(sql, [status, history_id], (err) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.redirect("/admin/manage_booking");
+        });
+    }
+
 };
 
 const show_manage_user = (req, res) => {
@@ -276,7 +298,7 @@ const delete_user = (req, res) => {
     });
 };
 
-const show_calulate = (req, res) =>{
+const show_calulate = (req, res) => {
     const sql = `SELECT 
                 history.*,
                 users.*,
@@ -303,11 +325,11 @@ const show_calulate = (req, res) =>{
                     ORDER BY payment_date DESC
                     LIMIT (1)) OR payment.payment_id ISNULL);`
     db.all(sql, (err, rows) => {
-        if (err){
+        if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         console.log(rows);
-        res.render("calculate", {history : rows});
+        res.render("calculate", { history: rows });
     });
 };
 
@@ -325,35 +347,35 @@ const create_payment = (req, res) => {
     let data = {};
     const room_sql = `SELECT * FROM room WHERE room_id = ?`
     db.get(room_sql, [room_id], (err, room) => {
-        if(err){
+        if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         let r_other_json = {};
         const other_name = req.body.other;
         const r_other = req.body.r_other;
         if (Array.isArray(other_name)) {
-            other_name.forEach(function(item, index) {
+            other_name.forEach(function (item, index) {
                 r_other_json[item] = Number(r_other[index]);
-        });
-        } else if (other_name){
+            });
+        } else if (other_name) {
             r_other_json[other_name] = Number(r_other);
         }
         data = {
-            r_electric: electricity*Number(room.p_electric),
-            r_water: water*Number(room.p_water),
+            r_electric: electricity * Number(room.p_electric),
+            r_water: water * Number(room.p_water),
             r_other: JSON.stringify(r_other_json),
             date: `${year}-${month}-${day}`
         };
         console.log(data, history_id);
         const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, payment_date) VALUES ( ?, ?, ?, ?, ?)`;
         db.run(payment_sql, [history_id, data.r_electric, data.r_water, data.r_other, data.date], (err) => {
-            if(err){
+            if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
             res.redirect("/admin/manage_rent")
         });
     });
-    
+
 };
 
 const update_payment = (req, res) => {
@@ -361,7 +383,7 @@ const update_payment = (req, res) => {
     const payment_id = req.params.payment_id;
     const sql = `UPDATE payment SET payment_status = ? WHERE payment_id = ?`
     db.run(sql, [payment_status, payment_id], (err) => {
-        if(err){
+        if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         res.redirect("/admin/manage_rent");
@@ -383,9 +405,9 @@ const show_contact = (req, res) => {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         console.log(row);
-        res.render("contract_admin_show", { data : row });
+        res.render("contract_admin_show", { data: row });
     });
-    
+
 };
 
 const showMonthlyPayment = (req, res) => {
@@ -394,20 +416,20 @@ const showMonthlyPayment = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        
+
         // Get the selected month from the URL parameters
         const selectedMonth = req.params.month; // Assuming /admin/monthly/:year/:month
         // Find the corresponding data for that month
         const monthData = rows.find(row => row.date.endsWith(selectedMonth)); // Matching by month (e.g., '2025-01')
-        
+
         const months = [
             "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
             "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
         ];
-        res.render("select-month", { 
-            monthly: rows, 
-            monthData: monthData, 
-            selectedMonth: selectedMonth, 
+        res.render("select-month", {
+            monthly: rows,
+            monthData: monthData,
+            selectedMonth: selectedMonth,
             months: months
         });
     });
@@ -429,12 +451,12 @@ const updateMonthlyPayment = (req, res) => {
     console.log(amount, date);
     const sql = `INSERT INTO report (water_bill, electric_bill, other_bill, total_amount, date) VALUES (?, ?, ?, ?, ?)`;
     db.run(sql, [waterInt, electricityInt, otherInt, amount, date], (err) => {
-        if (err){
+        if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         res.redirect("/admin/monthly");
     });
 }
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact};
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact };
 

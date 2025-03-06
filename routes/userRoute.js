@@ -24,6 +24,7 @@ router.post("/login", userControl.loginUser);
 router.post("/addFav/:roomId", userControl.addFav);
 router.post("/update_payment/:payment_id", upload.single('img'), userControl.update_payment);
 router.post("/create_history/:room_id", upload.single('img'), userControl.create_history);
+router.post("/cancel_history/:history_id/:room_id", userControl.cancel_history);
 router.post("/review/:user_id/:room_id", userControl.writeReview);
 
 
