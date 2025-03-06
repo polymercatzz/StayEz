@@ -119,13 +119,14 @@ body {
 .card {
     max-width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     margin: 0 60px 35px;
     padding: 20px;
 }
 
 .card-link {
+    max-width: 100%;
     margin-top: 25px;
     user-select: none;
     background-color: #d4ddec;
