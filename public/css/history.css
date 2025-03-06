@@ -305,7 +305,8 @@ body {
 
 /* popup */
 .popup {
-    max-width: 450px;
+    /* แก้ตรงนี้ */
+    width: 400px;
     background-color: #ffffff;
     border-radius: 18px;
     position: fixed;
@@ -379,17 +380,19 @@ body {
 .popupdata input {
     border: none;
     border-radius: 10px;
-    font-size: 1rem;
+    /* แก้ตรงนี้ */
+    font-size: 2vh;
     padding: 5px;
     color: #616162;
-    /* width: 100%; */
+    width: 100%;
 
 }
 
 .profile p {
     text-align: center;
     color: #93B1D7;
-    font-size: 1.8rem;
+    /* แก้ตรงนี้ */
+    font-size: 3vh;
     padding: 10px;
 }
 
@@ -687,7 +690,10 @@ body {
     }
 
     .popup {
-        top: 50%;
-        left: 50%;
+        width: 300px;
+
+    }
+    .log-out img {
+        width: 30px;
     }
 }

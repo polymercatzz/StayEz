@@ -276,7 +276,7 @@ margin-left: 50px;
 }
 
 
-.price button{
+.price a{
     width: 100px;
     border-radius: 10px;
     border: none;
@@ -286,6 +286,8 @@ margin-left: 50px;
     color: #ffffff;
     align-items: center;
     margin: 10px auto;
+    text-decoration: none;
+    text-align: center;
 }
 
 
@@ -315,14 +317,14 @@ margin-left: 50px;
 }
 
 .review{
-    max-width: 600px;
+    width: 600px;
     background-color: #C9D7EE;
     padding: 20px;
     border-radius: 18px;
-    max-height: 400px; 
+    max-height: 500px; 
     overflow-y: auto;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-    /* flex: 1; */
+    /* flex: 1.5; */
 }
 
 .name{
