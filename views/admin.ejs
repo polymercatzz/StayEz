@@ -57,8 +57,8 @@
             </div>
         </div>
         <%- include('partials/admin-footer') %>
-        <% for (let i = 1; i <= 12; i++) { %>
-            <input type="hidden" id="month-<%= i %>" value="<%= (data.length > i && data[i].total_amount !== undefined) ? data[i].total_amount : 0 %>">
+        <% for (let i = 0; i < 12; i++) { %>
+            <input type="hidden" id="month-<%= i + 1 %>" value="<%= (data.length > i && data[i].total_amount !== undefined) ? data[i].total_amount : 0 %>">
         <% } %>
         <script>
             const values = [];

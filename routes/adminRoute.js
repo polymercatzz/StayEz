@@ -9,7 +9,7 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.get("/main", checkAd, adminControl.show_main_admin);
+router.get("/main", checkAd, adminControl.show_main_admin); //
 router.get("/manage_booking", checkAd, adminControl.show_manage_booking);
 router.get("/manage_user", checkAd, adminControl.show_manage_user);
 router.get("/userdetail/:user_id", checkAd, adminControl.show_user_detail);
