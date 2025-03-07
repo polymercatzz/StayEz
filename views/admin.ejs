@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main - StayEz</title>
-    <%- include('partials/default-admin-head') %>
+    <%- include('partials/default-head') %>
     <link href="../css/admin.css" rel="stylesheet">
 </head>
 
@@ -55,11 +55,14 @@
         </div>
     </div>
     <%- include('partials/admin-footer') %>
+    <% for (let i=0; i < 12; i++) { %>
+        <input type="hidden" id="month-<%= i + 1 %>"
+            value="<%= (data.length > i && data[i].total_amount !== undefined) ? data[i].total_amount : 0 %>">
+        <% } %>
     <script>
-        const data = <%= JSON.stringify(data) %>;
         const values = [];
-        for (let i = 0; i < 12; i++) {
-            values.push(data.length > i && data[i].total_amount !== undefined ? data[i].total_amount : 0);
+        for (let i = 1; i <= 12; i++) {
+            values.push(document.getElementById(`month-${i}`).value);
         }
         new Chart("total-chart", {
             type: "line",
