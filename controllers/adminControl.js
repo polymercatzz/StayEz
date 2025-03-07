@@ -84,10 +84,10 @@ const update_room = (req, res) => {
             pet_friendly: req.body.pet_friendly == 'on',
             fridge: req.body.fridge == 'on',
             closed_camera: req.body.closed_camera == 'on',
-            lift: req.body.lift == 'on', 
+            lift: req.body.lift == 'on',
             microwave: req.body.microwave == 'on',
             parking: req.body.parking == 'on',
-        
+
         }),
         map: req.body.map
     };
@@ -551,5 +551,53 @@ const create_user = (req, res) => {
         }
     });
 };
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact, create_user};
+
+const showDetails = (req, res) => {
+    const room_id = req.params.room_id;
+    const roomSql = `SELECT * FROM Room r
+                    JOIN Departments d ON r.department_id = d.department_id
+                    WHERE r.room_id = ?`;
+    let reviewSql = `
+        SELECT r.room_id, 
+               AVG(r.rating) AS avg_rating, 
+               COUNT(*) AS review_count, 
+               GROUP_CONCAT(r.comment) AS comments, 
+               GROUP_CONCAT(u.first_name) AS reviewers
+        FROM review r
+        JOIN Users u ON r.user_id = u.user_id
+        WHERE r.room_id = ?
+        GROUP BY r.room_id;
+    `;
+    let imgSql = `SELECT * FROM Room_Images WHERE room_id = ?`;
+    db.get(roomSql, [room_id], (err, roomData) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        db.get(reviewSql, [room_id], (err, reviewData) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            db.all(imgSql, [room_id], (err, imgData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                const comments = reviewData ? reviewData.comments.split(',') : null;
+                const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
+                const avgRating = reviewData ? reviewData.avg_rating : 0;
+                const reviewCount = reviewData ? reviewData.review_count : 0;
+                console.log(roomData);
+                res.render('description-admin', {
+                    room: roomData,
+                    avgRating: avgRating,
+                    reviewCount: reviewCount,
+                    comments: comments,
+                    reviewers: reviewers,
+                    reviewData: reviewData,
+                    img: imgData
+                });
+            });
+        });
+    });
+};
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact, create_user, showDetails };
 

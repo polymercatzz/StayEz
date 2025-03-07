@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>description</title>
+    <%- include('partials/default-head') %>
+    <link rel="stylesheet" href="/css/description.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Concert+One&family=DM+Serif+Text:ital@0;1&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Hind+Mysuru:wght@300;400;500;600;700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Marcellus&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans+Caption:wght@400;700&family=Signika+Negative:wght@300..700&family=Silkscreen:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- heart -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=favorite" />
+
+</head>
+
+<body>
+    <%- include('partials/admin-navbar') %>
+    <section class="all">
+        <div class="text-map">
+            <p class="text"><%= room.department_name %></p>
+            <a href="<%= room.map ? room.map : '#' %>" class="map" target="_blank">
+                <img src="/img/map.png" alt="">
+                <p>Map</p>
+            </a>
+        </div>
+        <div class="allpic">
+            <% const roomImage = img.find(image => image.room_id === room.room_id); %>
+            <div class="p1">
+                <img src="/room_img/<%= img[0].room_img_id %>" alt="Card Image" class="card-img" style="width: 700px;">
+            </div>
+            <div class="p2">
+                <img src="/room_img/<%= img[1].room_img_id %>" alt="Card Image" class="card-img">
+                <img src="/room_img/<%= img[2].room_img_id %>" alt="Card Image" class="card-img">
+            </div>
+        </div>
+        <p class="text2">รายละเอียดที่พัก</p>
+        <div class="alldata">
+            <div class="data">
+                <div class="text-data2">
+                    <div class="room">
+                        <p>ห้อง:</p>
+                        <p><%= room.room_name %></p>
+                    </div>
+                    <p class="p">
+                        <%= room.detail %>
+                    </p>
+                </div>
+            </div>
+            <% const roomHave = JSON.parse(room.room_have); %>
+            <div class="allhave">
+                <div class="have">
+                    <% if (roomHave.air_conditioner) { %>
+                        <div class="datahave">
+                            <img src="/img/air-conditioner.png" alt="Air Conditioner" class="pic4">
+                            <p>Air Conditioner</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.wi_fi) { %>
+                        <div class="datahave">
+                            <img src="/img/wifi.png" alt="Wi-Fi" class="pic4">
+                            <p>Wi-Fi</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.TV) { %>
+                        <div class="datahave">
+                            <img src="/img/television.png" alt="TV" class="pic4">
+                            <p>TV</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.washing_machine) { %>
+                        <div class="datahave">
+                            <img src="/img/washing-machine.png" alt="Washing Machine" class="pic4">
+                            <p>Washing Machine</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.fitnaess) { %>
+                        <div class="datahave">
+                            <img src="/img/gym.png" alt="Fitness" class="pic4">
+                            <p>Fitness</p>
+                        </div>
+                    <% } %>
+
+                    <% if (roomHave.furniture) { %>
+                        <div class="datahave">
+                            <img src="/img/home-furniture.png" alt="Furniture" class="pic4">
+                            <p>Furniture</p>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="have">
+                    <% if (roomHave.pet_friendly) { %>
+                        <div class="datahave">
+                            <img src="/img/dog.png" alt="Pet Friendly" class="pic4">
+                            <p>Pet Friendly</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.fridge) { %>
+                        <div class="datahave">
+                            <img src="/img/fridge.png" alt="Fridge" class="pic4">
+                            <p>Fridge</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.closed_camera) { %>
+                        <div class="datahave">
+                            <img src="/img/security-camera.png" alt="Closed Camera" class="pic4">
+                            <p>Security Camera</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.lift) { %>
+                        <div class="datahave">
+                            <img src="/img/elevator.png" alt="Lift" class="pic4">
+                            <p>Lift</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.microwave) { %>
+                        <div class="datahave">
+                            <img src="/img/microwave.png" alt="Microwave" class="pic4">
+                            <p>Microwave</p>
+                        </div>
+                    <% } %>
+                
+                    <% if (roomHave.parking) { %>
+                        <div class="datahave">
+                            <img src="/img/car.png" alt="Parking" class="pic4">
+                            <p>Parking</p>
+                        </div>
+                    <% } %>
+                </div>
+
+            </div>
+
+        </div>
+        <p class="rate">รีวิว <%= avgRating %> ★</p>
+        <div class="alldata2">
+            <div class="review">
+                <% if (comments && reviewers) { %>
+                    <% comments.forEach((comment, index) => { %>
+                        <div class="name">
+                            <strong>
+                                <% if (user && user.user_id && reviewData.user_id == user.user_id) { %>
+                                    คุณ : 
+                                <% } else { %>
+                                    <%= reviewers[index] %> :
+                                <% } %>
+                            </strong>
+                            <p><%= comment %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>ไม่มีรีวิวในห้องนี้</p>
+                <% } %>
+            </div>
+            <div class="price">
+                <div class="flex-data">
+                    <p class="text-data">ราคา:</p>
+                    <p class="text-data"><%= room.price %> บาท/เดือน</p>
+                </div>
+                <div class="flex-data">
+                    <p class="text-data">ค่าไฟ:</p>
+                    <p class="text-data"><%= room.p_electric %> บาท/หน่วย</p>
+                </div>
+                <div class="flex-data">
+                    <p class="text-data">ค่าน้ำ:</p>
+                    <p class="text-data"><%= room.p_water %> บาท/หน่วย</p>
+                </div>
+                <div class="flex-data">
+                    <p class="text-data">เงินประกัน:</p>
+                    <p class="text-data"><%= room.deposit %> บาท</p>
+                </div>
+                <div class="flex-data">
+                    <p class="text-data">จ่ายเงินล่วงหน้า:</p>
+                    <p class="text-data"><%= room.pay_advance %> บาท</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <section>
+        <div class="popup" id="popup">
+            <div class="profile">
+                <div class="close-btn">
+                    <button onclick="closePopup()">
+                        <img src="../img/close.png" alt="">
+                    </button>
+                </div>
+                <p>Profile</p>
+                <div class="allpopupdata">
+                    <div class="popupdata">
+                        <label for="name">Name:</label>
+                        <input type="text">
+                    </div>
+                    <div class="popupdata">
+                        <label for="lastname">Lastname:</label>
+                        <input type="text">
+                    </div>
+                    <div class="popupdata">
+                        <label for="tel">Tel:</label>
+                        <input type="text">
+                    </div>
+                    <div class="popupdata">
+                        <label for="email">Email:</label>
+                        <input type="text">
+                    </div>
+                    <div class="log-out">
+                        <br>
+
+                        <a href="main-regis.html"><button><img src="../img/log-out.png" alt=""></button></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <%- include('partials/admin-footer') %>
+</body>
+
+
+
+
+
+
+
+
+
+<script>
+    // menu
+    document.getElementById("menuToggle").addEventListener("click", function () {
+        document.getElementById("navLinks").classList.toggle("active");
+    });
+
+    document.querySelectorAll(".dropdown-toggle").forEach(item => {
+        item.addEventListener("click", function () {
+            let dropdownMenu = this.nextElementSibling;
+            dropdownMenu.classList.toggle("show");
+        });
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!event.target.closest(".navbar")) {
+            document.getElementById("navLinks").classList.remove("active");
+            document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+        }
+    });
+
+    // when click change color heart to red
+    document.addEventListener("DOMContentLoaded", function () {
+        const heart = document.querySelector(".heart");
+
+        heart.addEventListener("click", function (event) {
+            event.preventDefault();
+            this.classList.toggle("active");
+        });
+    });
+
+    // popup
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+        popup.classList.add("openPopup");
+        document.getElementById("overlay").classList.add("active");
+
+
+    }
+
+    function closePopup() {
+        popup.classList.remove("openPopup");
+        document.getElementById("overlay").classList.remove("active");
+
+    }
+</script>
+
+</html>
