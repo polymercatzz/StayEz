@@ -23,20 +23,148 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routing path
 app.get('/', (req, res) => {
-  const roomSql = `SELECT * FROM Room WHERE room_status = "available" ORDER BY department_id`;
-  const deptSql = `SELECT * FROM Departments`;
-  db.all(roomSql, (err, roomData) => {
-    if (err) {
-      return res.status(500).json({ message: "Database error", error: err.message });
-    }
-    db.all(deptSql, (err, deptData) => {
-      if (err) {
-        return res.status(500).json({ message: "Database error", error: err.message });
+    const filters = {
+      location: req.query.location || "",
+      roomType: Array.isArray(req.query.roomType) ? req.query.roomType : req.query.roomType ? [req.query.roomType] : [],
+      price: req.query.price || "",
+  };
+
+  let userSql = `SELECT * FROM Users WHERE user_id = ?`;
+  let deptSql = `SELECT * FROM Departments`;
+  let roomSql = `SELECT * FROM Room WHERE room_status = "available"`;
+  let reviewSql = `
+      SELECT room_id, SUM(rating) AS total_rating, COUNT(*) AS review_count
+      FROM review
+      GROUP BY room_id;
+  `;
+  let imgSql = `SELECT * FROM Room_Images`;
+  const params = [req.cookies.userId];
+
+  if (filters.location) {
+      roomSql += ` AND department_id = ?`;
+      params.push(filters.location);
+  }
+
+  if (filters.price) {
+      const [minPrice, maxPrice] = filters.price.split("-").map(Number);
+      roomSql += ` AND CAST(price AS INTEGER) BETWEEN ? AND ?`;
+      params.push(minPrice, maxPrice);
+  }
+
+  const featureFilters = {
+      pets: "pet_friendly",
+      wifi: "wi_fi",
+      tv: "TV",
+      aircon: "air_conditioner",
+      washing: "washing_machine",
+      gym: "fitnaess",
+      furniture: "furniture",
+      fridge: "fridge",
+      security: "closed_camera",
+      lift: "lift",
+      microwave: "microwave",
+      parking: "parking"
+  };
+
+  filters.roomType.forEach(filter => {
+      if (featureFilters[filter]) {
+          roomSql += ` AND json_extract(room_have, '$.${featureFilters[filter]}') = 1`;
       }
-      res.render('main-regis', { room: roomData, dept: deptData});
+  });
+
+      db.all(deptSql, (err, deptData) => {
+          if (err) {
+              return res.status(500).json({ message: "Database error", error: err.message });
+          }
+
+          db.all(roomSql, params.slice(1), (err, roomData) => {
+              if (err) {
+                  return res.status(500).json({ message: "Database error", error: err.message });
+              }
+          
+              db.all(reviewSql, (err, reviewData) => {
+                  if (err) {
+                      return res.status(500).json({ message: "Database error", error: err.message });
+                  }
+
+                  let reviewMap = {};
+                  reviewData.forEach(rev => {
+                      reviewMap[rev.room_id] = {
+                          avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                      };
+                  });
+
+                  db.all(imgSql, (err, imgData) => {
+                      if (err) {
+                          return res.status(500).json({ message: "Database error", error: err.message });
+                      }
+                      res.render('main-regis', {
+                          room: roomData,
+                          dept: deptData,
+                          review: reviewMap,
+                          img: imgData,
+                          filters
+                      });
+                  });
+              });
+          });
+          
+      });
+});
+
+app.get('/room-details/:room_id', (req, res) => {
+  const room_id = req.params.room_id;
+
+    const roomSql = `SELECT * FROM Room WHERE room_id = ?`;
+    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    let reviewSql = `
+        SELECT r.room_id, 
+               AVG(r.rating) AS avg_rating, 
+               COUNT(*) AS review_count, 
+               GROUP_CONCAT(r.comment) AS comments, 
+               GROUP_CONCAT(u.first_name) AS reviewers
+        FROM review r
+        JOIN Users u ON r.user_id = u.user_id
+        WHERE r.room_id = ?
+        GROUP BY r.room_id;
+    `;
+    let imgSql = `SELECT * FROM Room_Images WHERE room_id = ?`;
+    db.get(userSql, [req.cookies.userId], (err, userData) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        db.get(roomSql, [room_id], (err, roomData) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            db.get(reviewSql, [room_id], (err, reviewData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                db.all(imgSql, [room_id], (err, imgData) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    const comments = reviewData ? reviewData.comments.split(',') : null;
+                    const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
+                    const avgRating = reviewData ? reviewData.avg_rating : 0;
+                    const reviewCount = reviewData ? reviewData.review_count : 0;
+
+                    res.render('description-regis', { 
+                        room: roomData, 
+                        user: userData, 
+                        avgRating: avgRating,
+                        reviewCount: reviewCount,
+                        comments: comments,
+                        reviewers: reviewers,
+                        reviewData: reviewData,
+                        img: imgData
+                    });
+                });
             });
         });
     });
+});
 
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/html/login.html'));

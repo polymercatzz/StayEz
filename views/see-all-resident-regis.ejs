@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>extra-regis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Concert+One&family=DM+Serif+Text:ital@0;1&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Hind+Mysuru:wght@300;400;500;600;700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Marcellus&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans+Caption:wght@400;700&family=Signika+Negative:wght@300..700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/see-all-resident-regis.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../img/logo.jpeg" alt="" class="pic">
+            <div class="stayEz">StayEz</div>
+        </div>
+        <div class="menu-toggle" id="menuToggle"></div>
+        <a href="/login"><img src="../img/login.png" alt="" class="pic3"></a>
+    </nav>
+    <div class="box">
+        <p class="text">Asok resident</p>
+    </div>
+
+    
+    <div class="card">
+        <% dept.forEach((data) => { %>
+            <% room.forEach((room) => { %>
+                <% if (data.department_id == room.department_id) { %>
+                    <a href="/user/room-details/<%=room.room_id %>" class="card-link">
+                        <p class="badge"><%= data.department_name %></p>
+                        <% const roomImage = img.find(image => image.room_id === room.room_id); %>
+                        <img src="/room_img/<%= roomImage ? roomImage.room_img_id : 'default.jpg' %>" alt="Room Image" class="card-img">
+                        <% let avgRating = review[room.room_id] ? review[room.room_id].avgRating : 0; %>
+                        <p class="card-title">รีวิว <%= avgRating %></p>
+                        <p class="card-title"><%= room.price %> บาท/เดือน</p>
+                        <p class="card-title"><%= room.bedroom %> ห้องนอน</p>
+                        <div class="service">
+                            <% if (room.air_conditioner) { %>
+                                <img src="/img/air-conditioner.png" alt="Air" class="pic4">
+                            <% } %>
+                            <% if (room.wi_fi) { %>
+                                <img src="/img/wifi.png" alt="Wi-Fi" class="pic4">
+                            <% } %>
+                            <% if (room.TV) { %>
+                                <img src="/img/television.png" alt="TV" class="pic4">
+                            <% } %>
+                            <% if (room.washing_machine) { %>
+                                <img src="/img/washing-machine.png" alt="Washing Machine" class="pic4">
+                            <% } %>
+                            <% if (room.fitnaess) { %>
+                                <img src="/img/gym.png" alt="Fitness" class="pic4">
+                            <% } %>
+                            <% if (room.furniture) { %>
+                                <img src="/img/home-furniture.png" alt="Furniture" class="pic4">
+                            <% } %>
+                            <% if (room.pet_friendly) { %>
+                                <img src="/img/dog.png" alt="Pet Friendly" class="pic4">
+                            <% } %>
+                            <% if (room.fridge) { %>
+                                <img src="/img/fridge.png" alt="Fridge" class="pic4">
+                            <% } %>
+                            <% if (room.closed_camera) { %>
+                                <img src="/img/security-camera.png" alt="Closed Camera" class="pic4">
+                            <% } %>
+                            <% if (room.lift) { %>
+                                <img src="/img/elevator.png" alt="Lift" class="pic4">
+                            <% } %>
+                            <% if (room.microwave) { %>
+                                <img src="/img/microwave.png" alt="Microwave" class="pic4">
+                            <% } %>
+                            <% if (room.parking) { %>
+                                <img src="/img/car.png" alt="Parking" class="pic4">
+                            <% } %>
+                        </div>
+                    </a>
+                <% } %>
+            <% }) %>
+        <% }) %>
+
+    </div>
+    <div class="footer">
+        <div class="footer-content">
+        <p>Line: @place1234</p>
+        <p>Tel: 000000000</p>
+        <p>Email: place@1234.com</p>
+        </div>
+</footer>
+</body>
+</html>

@@ -279,19 +279,18 @@ body {
 
 /* swiper room */
 
-.allroom,.allroom2,.allroom3{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
-    
+.allroom,
+.allroom2,
+.allroom3 {
+    margin-top: 50px ;  
+
 }
 
 
 
 
-.card-wrapper{
+.card-wrapper {
+    display: flex;
     max-width: 100%;
     margin: 0 60px 35px;
     padding: 20px 10px;
@@ -365,19 +364,17 @@ body {
     background-color: rgb(214, 235, 238);
 }
 
-.text2{
+.text2 {
     display: flex;
     font-size: 2.8vh;
-    /* font-family: "Itim", serif; */
     color: #7B9CC8;
-    /* background-color: #2e518a; */
     width: 92%;
     margin-bottom: 20px;
-
+    margin-left: 5%;
     .end {
         margin-left: auto;
     }
-    
+
 }
 
 .pic4{
