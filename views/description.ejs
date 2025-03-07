@@ -27,19 +27,20 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="/user/main">Home</a></li>
             <li><a href="/user/history">History</a></li>
-            <li><a href="#">Payment</a></li>
+            <li><a href="/user/payment">Payment</a></li>
             <li><a href="#footer">Contact</a></li>
-            <li><a href="#" class="hidden">Wish list</a></li>
+            <li><a href="#"class="hidden">Wish list</a></li>
             <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
-            <li><a href="/user/fav"><img src="../../img/heart.png" alt="" class="pic2"></a></li>
-            <li><a href="#" onclick="openPopup()"><img src="../../img/user.png" alt="" class="pic3"></a></li>
+            <li><a href="main-regis.html"class="hidden">Log out</a></li>
+            <li><a href="/user/fav"><img src="/img/heart.png" alt="" class="pic2"></a></li>
+            <li><a href="#" onclick="openPopup()"><img src="/img/user.png" alt="" class="pic3"></a></li>        
         </ul>
     </nav>
 
     <section class="all">
         <div class="text-map">
             <p class="text">Asok resident</p>
-            <a href="<%= room.map ? room.map : '#' %>" class="map">
+            <a href="<%= room.map ? room.map : '#' %>" class="map" target="_blank">
                 <img src="../../img/map.png" alt="">
                 <p>Map</p>
             </a>
@@ -55,7 +56,7 @@
             </div>
         </div>
         <form action="/user/addFav/<%= room.room_id %>" method="POST" id="favoriteForm">
-            <a class="heart" onclick="document.getElementById('favoriteForm').submit();">
+            <a class="heart <%= room.user_id ? 'active' : '' %>" onclick="document.getElementById('favoriteForm').submit();">
                 <span class="material-symbols-outlined">favorite</span>
             </a>
         </form>

@@ -6,167 +6,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage User - StayEz</title>
     <%- include('partials/default-head') %>
-    <link href="../css/manage-user.css" rel="stylesheet">
+        <link href="../css/manage-user.css" rel="stylesheet">
 </head>
 
 <body>
     <%- include('partials/admin-navbar') %>
-    <div class="container">
-        
-        <div class="container-header">
-            <p>ระบบจัดการ user</p>
-        </div>
-        <div class="btnad">
-            <button onclick="openPopupad()">
-                <img src="/img/addperson.png" alt="">
-            </button>
-        </div>
-    
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>ชื่อ-นามสกุล</th>
-                        <th>Detail</th>
-                        <th>สถานะ</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% data.forEach(function(item){ %>
-                        <tr>
-                            <td>
-                                <%= item.user_id %>
-                            </td>
-                            <td>
-                                <%= item.first_name %>
-                                    <%= item.last_name %>
-                            </td>
-                            <td><a
-                                    onclick="openPopup('<%= item.first_name %>', '<%= item.last_name %>', '<%= item.tel %>', '<%= item.email %>')">Show
-                                    Detail</a></td>
-                            <td>
-                                <form action="/admin/updateuserstatus/<%= item.user_id %>" method="post">
-                                    <select name="status" onchange="this.form.submit()">
-                                        <option value="active" <%=item.user_status==='active' ? 'selected' : '' %>
-                                            >active</option>
-                                        <option value="inactive" <%=item.user_status==='inactive' ? 'selected' : '' %>
-                                            >inactive</option>
-                                    </select>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="/admin/delete_user/<%= item.user_id %>" method="post">
-                                    <button type="submit" style="border: none; background: none; cursor: pointer;"><img
-                                            src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""
-                                            style="width: 30px;"></button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }) %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="popup-container" id="popup-container">
-        <div class="popup" id="popup">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg"
-                    width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <div class="content-item">
-                    <p>ชื่อ-นามสกุล : </p>
-                    <input type="text" id="name" readonly>
-                </div>
-                <div class="content-item">
-                    <p>เบอร์โทรศัพท์ : </p>
-                    <input type="text" id="tel" readonly>
-                </div>
-                <div class="content-item">
-                    <p>Email : </p>
-                    <input type="text" id="email" readonly>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- popup add user -->
-    <div class="overlay" id="overlay" onclick="closePopupad()"></div>
+        <div class="container">
 
-    <div class="popupad" id="popupad">
-        <div class="profilead">
-            <div class="close-btnad">
-                <button onclick="closePopupad()">
-                    <img src="/img/close.png" alt="">
+            <div class="container-header">
+                <p>ระบบจัดการ user</p>
+            </div>
+            <div class="btnad">
+                <button onclick="openPopupad()">
+                    <img src="/img/addperson.png" alt="">
                 </button>
             </div>
-            <p>Add Profile</p>
-            <div class="allpopupdataad">
-                <div class="popupdataad">
-                    <label for="name">Name:</label>
-                    <input type="text">
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>Detail</th>
+                            <th>สถานะ</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(function(item){ %>
+                            <tr>
+                                <td>
+                                    <%= item.user_id %>
+                                </td>
+                                <td>
+                                    <%= item.first_name %>
+                                        <%= item.last_name %>
+                                </td>
+                                <td><a
+                                        onclick="openPopup('<%= item.first_name %>', '<%= item.last_name %>', '<%= item.tel %>', '<%= item.email %>')">Show
+                                        Detail</a></td>
+                                <td>
+                                    <form action="/admin/updateuserstatus/<%= item.user_id %>" method="post">
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="active" <%=item.user_status==='active' ? 'selected' : '' %>
+                                                >active</option>
+                                            <option value="inactive" <%=item.user_status==='inactive' ? 'selected' : ''
+                                                %>
+                                                >inactive</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/admin/delete_user/<%= item.user_id %>" method="post">
+                                        <button type="submit"
+                                            style="border: none; background: none; cursor: pointer;"><img
+                                                src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""
+                                                style="width: 30px;"></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="popup-container" id="popup-container">
+            <div class="popup" id="popup">
+                <div class="popup-header">
+                    <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
                 </div>
-                <div class="popupdataad">
-                    <label for="lastname">Lastname:</label>
-                    <input type="text">
-                </div>
-                <div class="popupdataad">
-                    <label for="tel">Tel:</label>
-                    <input type="text">
-                </div>
-                <div class="popupdataad">
-                    <label for="email">Email:</label>
-                    <input type="text">
-                </div>
-                <div class="popupdataad">
-                    <label for="pass">Password:</label>
-                    <input type="text">
-                </div>
-                <div class="popupdataad">
-                    <label for="email">Confirm Password:</label>
-                    <input type="text">
+                <div class="popup-content">
+                    <div class="content-item">
+                        <p>ชื่อ-นามสกุล : </p>
+                        <input type="text" id="name" readonly>
+                    </div>
+                    <div class="content-item">
+                        <p>เบอร์โทรศัพท์ : </p>
+                        <input type="text" id="tel" readonly>
+                    </div>
+                    <div class="content-item">
+                        <p>Email : </p>
+                        <input type="text" id="email" readonly>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="btn-subad">
-            <button onclick="closePopupad()">Submit</button>
-        </div>
-    </div>
+        <!-- popup add user -->
+        <div class="overlay" id="overlay" onclick="closePopupad()"></div>
+        <form action="/admin/create_user" method="POST">
+            <div class="popupad" id="popupad">
+                <div class="profilead">
+                    <div class="close-btnad">
+                        <button onclick="closePopupad()">
+                            <img src="/img/close.png" alt="">
+                        </button>
+                    </div>
+                    <p>Add Profile</p>
+                    <div class="allpopupdataad">
+                        <div class="popupdataad">
+                            <label for="name">Firstname:</label>
+                            <input type="text" name="firstname">
+                        </div>
+                        <div class="popupdataad">
+                            <label for="lastname">Lastname:</label>
+                            <input type="text" name="lastname">
+                        </div>
+                        <div class="popupdataad">
+                            <label for="tel">Tel:</label>
+                            <input type="text" name="tel">
+                        </div>
+                        <div class="popupdataad">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email">
+                        </div>
+                        <div class="popupdataad">
+                            <label for="pass">Password:</label>
+                            <input type="password" name="password">
+                        </div>
+                        <div class="popupdataad">
+                            <label for="email">Confirm Password:</label>
+                            <input type="password" name="confirmPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-subad">
+                    <button onclick="closePopupad()">Submit</button>
+                </div>
+            </div>
+        </form>
+        <%- include('partials/admin-footer') %>
+            <script>
+                function openPopup(first_name, last_name, tel, email) {
+                    const container = document.getElementById("popup-container");
 
-    <%- include('partials/admin-footer') %>
-    <script>
-        function openPopup(first_name, last_name, tel, email) {
-            const container = document.getElementById("popup-container");
+                    container.style.display = 'block';
+                    document.getElementById("name").value = `${first_name} ${last_name}`;
+                    document.getElementById("tel").value = `${tel}`;
+                    document.getElementById("email").value = `${email}`;
 
-            container.style.display = 'block';
-            document.getElementById("name").value = `${first_name} ${last_name}`;
-            document.getElementById("tel").value = `${tel}`;
-            document.getElementById("email").value = `${email}`;
+                };
+                function closePopup() {
+                    const container = document.getElementById("popup-container");
 
-        };
-        function closePopup() {
-            const container = document.getElementById("popup-container");
+                    container.style.display = 'none';
+                };
 
-            container.style.display = 'none';
-        };
+                // popup ad user
+                function openPopupad() {
+                    document.getElementById("popupad").classList.add("openPopupad");
+                    document.getElementById("overlay").classList.add("active");
+                }
 
-        // popup ad user
-        function openPopupad() {
-            document.getElementById("popupad").classList.add("openPopupad");
-            document.getElementById("overlay").classList.add("active");
-        }
-
-        function closePopupad() {
-            document.getElementById("popupad").classList.remove("openPopupad");
-            document.getElementById("overlay").classList.remove("active");
-        }
+                function closePopupad() {
+                    document.getElementById("popupad").classList.remove("openPopupad");
+                    document.getElementById("overlay").classList.remove("active");
+                }
 
 
-    </script>
+            </script>
 </body>
 
 </html>

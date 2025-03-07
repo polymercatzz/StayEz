@@ -25,6 +25,7 @@ router.get("/monthly", checkAd, adminControl.showMonthlyPayment);
 
 router.post("/updatebookstatus/:history_id", adminControl.updatebookstatus);
 router.post("/updateuserstatus/:user_id", adminControl.updateuserstatus);
+router.post("/create_user", adminControl.create_user);
 router.post("/delete_user/:user_id", adminControl.delete_user);
 router.post("/updateroom/:room_id", adminControl.update_room);
 router.post("/createroom", upload.array('imageFiles'), adminControl.create_room);

@@ -205,8 +205,9 @@ const showFav = (req, res) => {
 
 const showDetails = (req, res) => {
     const room_id = req.params.room_id;
-
-    const roomSql = `SELECT * FROM Room WHERE room_id = ?`;
+    const roomSql = `SELECT r.*, f.user_id FROM Room r 
+                    LEFT JOIN Favorites f ON f.room_id = r.room_id 
+                    WHERE r.room_id = ? and (f.user_id = ? OR f.user_id ISNULL);`;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
     let reviewSql = `
         SELECT r.room_id, 
@@ -224,7 +225,7 @@ const showDetails = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        db.get(roomSql, [room_id], (err, roomData) => {
+        db.get(roomSql, [room_id, req.cookies.userId], (err, roomData) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
@@ -240,7 +241,7 @@ const showDetails = (req, res) => {
                     const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
                     const avgRating = reviewData ? reviewData.avg_rating : 0;
                     const reviewCount = reviewData ? reviewData.review_count : 0;
-
+                    console.log(roomData);
                     res.render('description', { 
                         room: roomData, 
                         user: userData, 

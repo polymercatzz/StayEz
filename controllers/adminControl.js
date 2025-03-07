@@ -1,5 +1,7 @@
 const path = require("path");
 const db = require("../server/database");
+const bcrypt = require("bcrypt");
+
 
 const show_main_admin = (req, res) => {
     const sql = `SELECT * FROM report`;
@@ -30,7 +32,6 @@ const show_manage_room = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows);
         res.render('manageroom', { data: rows });
     });
 };
@@ -83,10 +84,12 @@ const update_room = (req, res) => {
             pet_friendly: req.body.pet_friendly == 'on',
             fridge: req.body.fridge == 'on',
             closed_camera: req.body.closed_camera == 'on',
-            lift: req.body.lift == 'on',
+            lift: req.body.lift == 'on', 
             microwave: req.body.microwave == 'on',
-            parking: req.body.parking == 'on'
-        })
+            parking: req.body.parking == 'on',
+        
+        }),
+        map: req.body.map
     };
     db.get(dept_sql, [department_id], (err, row) => {
         if (err) {
@@ -100,8 +103,8 @@ const update_room = (req, res) => {
                 }
             });
         }
-        const sql = `UPDATE room SET room_name = ?, department_id = ?, size = ?, price = ?, p_electric = ?, p_water = ?, deposit = ?, pay_advance = ?, bedroom = ?, detail = ?, room_have = ? WHERE room_id = ?`;
-        db.run(sql, [data.room_name, department_id, data.size, data.price, data.p_electric, data.p_water, data.deposit, data.pay_advance, data.bedroom, data.detail, data.room_have, room_id], (err) => {
+        const sql = `UPDATE room SET room_name = ?, department_id = ?, size = ?, price = ?, p_electric = ?, p_water = ?, deposit = ?, pay_advance = ?, bedroom = ?, detail = ?, room_have = ?, map = ? WHERE room_id = ?`;
+        db.run(sql, [data.room_name, department_id, data.size, data.price, data.p_electric, data.p_water, data.deposit, data.pay_advance, data.bedroom, data.detail, data.room_have, data.map, room_id], (err) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
@@ -117,7 +120,6 @@ const show_create_room = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows);
         res.render('createroom', { data: rows });
     });
 };
@@ -147,9 +149,9 @@ const create_room = (req, res) => {
             lift: req.body.lift == 'on',
             microwave: req.body.microwave == 'on',
             parking: req.body.parking == 'on'
-        })
+        }),
+        map: req.body.map
     };
-    console.log(data, department_id);
     const dept_sql = `SELECT * FROM departments WHERE department_id = ?`;
     db.get(dept_sql, [department_id], (err, row) => {
         if (err) {
@@ -163,8 +165,8 @@ const create_room = (req, res) => {
                 }
             });
         }
-        const sql = `INSERT INTO room (room_name, size, price, p_electric, p_water, deposit, pay_advance, bedroom, detail, room_have, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-        db.run(sql, [data.room_name, data.size, data.price, data.p_electric, data.p_water, data.deposit, data.pay_advance, data.bedroom, data.detail, data.room_have, department_id], (err) => {
+        const sql = `INSERT INTO room (room_name, size, price, p_electric, p_water, deposit, pay_advance, bedroom, detail, room_have, department_id, map) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.run(sql, [data.room_name, data.size, data.price, data.p_electric, data.p_water, data.deposit, data.pay_advance, data.bedroom, data.detail, data.room_have, department_id, data.map], (err) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
@@ -269,7 +271,6 @@ const show_manage_user = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows);
         res.render("manageuser", { data: rows });
     });
 };
@@ -278,7 +279,6 @@ const updateuserstatus = (req, res) => {
     const user_id = req.params.user_id;
     const status = req.body.status;
     const sql = `UPDATE users SET user_status = ? WHERE user_id = ?`;
-    console.log(status, user_id);
     db.run(sql, [status, user_id], (err) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -391,7 +391,6 @@ const show_history_rent = (req, res) => {
 
 
 const create_payment = (req, res) => {
-    console.log(req.params);
     const room_id = req.params.room_id;
     const history_id = req.params.history_id;
     const electricity = parseFloat(req.body.electricity);
@@ -422,7 +421,6 @@ const create_payment = (req, res) => {
             r_other: JSON.stringify(r_other_json),
             date: `${year}-${month}-${day}`
         };
-        console.log(data, history_id);
         const payment_sql = `INSERT INTO payment (history_id, r_electric, r_water, r_other, payment_date) VALUES ( ?, ?, ?, ?, ?)`;
         db.run(payment_sql, [history_id, data.r_electric, data.r_water, data.r_other, data.date], (err) => {
             if (err) {
@@ -460,7 +458,6 @@ const show_contact = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(row);
         res.render("contract_admin_show", { data: row });
     });
 
@@ -514,5 +511,45 @@ const updateMonthlyPayment = (req, res) => {
     });
 }
 
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact };
+const create_user = (req, res) => {
+    const { firstname, lastname, tel, email, password, confirmPassword } = req.body;
+
+    if (!firstname || !lastname || !tel || !email || !password || !confirmPassword) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+
+    if (password !== confirmPassword) {
+        return res.status(400).json({ message: "Passwords do not match" });
+    }
+    console.log({ firstname, lastname, tel, email, password, confirmPassword });
+    // Check if the email already exists in the database
+    const sqlCheckEmail = `SELECT * FROM users WHERE email = ?`;
+    db.get(sqlCheckEmail, [email], async (err, user) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+
+        if (user) {
+            return res.status(400).json({ message: "Email is already registered" });
+        }
+
+        try {
+            // Hash the password
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+            // Insert the new user into the database
+            const sql = `INSERT INTO users (first_name, last_name, tel, email, password) VALUES (?, ?, ?, ?, ?)`;
+            db.run(sql, [firstname, lastname, tel, email, hashedPassword], function (err) {
+                if (err) {
+                    return res.status(500).json({ message: "Error registering user", error: err.message });
+                }
+                res.redirect("/admin/manage_user");
+            });
+        } catch (error) {
+            return res.status(500).json({ message: "Error hashing password", error: error.message });
+        }
+    });
+};
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact, create_user};
 
