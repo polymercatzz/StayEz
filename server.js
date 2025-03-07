@@ -166,6 +166,51 @@ app.get('/room-details/:room_id', (req, res) => {
     });
 });
 
+app.get('/department/:department_id', (req, res) => {
+  const department_id = req.params.department_id;
+    let deptSql = `SELECT * FROM Departments WHERE department_id = ?`;
+    let roomSql = `SELECT * FROM Room WHERE room_status = "available"`;
+    let reviewSql = `
+        SELECT room_id, SUM(rating) AS total_rating, COUNT(*) AS review_count
+        FROM review
+        GROUP BY room_id;
+    `;
+    let imgSql = `SELECT * FROM Room_Images`;
+    db.all(deptSql, [department_id],(err, deptData) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error", error: err.message });
+        }
+        db.all(roomSql, (err, roomData) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            db.all(reviewSql, (err, reviewData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                let reviewMap = {};
+                reviewData.forEach(rev => {
+                    reviewMap[rev.room_id] = {
+                        avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                    };
+                });
+                db.all(imgSql, (err, imgData) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    let reviewMap = {};
+                    reviewData.forEach(rev => {
+                        reviewMap[rev.room_id] = {
+                            avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                        };
+                    });
+                    res.render('see-all-resident-regis', { dept: deptData, room: roomData, review: reviewMap, img: imgData });
+                });
+            });
+        });
+    });
+});
+
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/html/login.html'));
 });

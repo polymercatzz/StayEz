@@ -28,7 +28,7 @@
             <% room.forEach((room) => { %>
                 <% if (data.department_id == room.department_id) { %>
                     <a href="/user/room-details/<%=room.room_id %>" class="card-link">
-                        <p class="badge"><%= data.department_name %></p>
+                        <p class="badge"><%= data.department_name %> : <%= room.room_name %></p>
                         <% const roomImage = img.find(image => image.room_id === room.room_id); %>
                         <img src="/room_img/<%= roomImage ? roomImage.room_img_id : 'default.jpg' %>" alt="Room Image" class="card-img">
                         <% let avgRating = review[room.room_id] ? review[room.room_id].avgRating : 0; %>
