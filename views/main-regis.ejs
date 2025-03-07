@@ -138,6 +138,71 @@
     </section>
 
     <div class="allroom">
+        <!-- ทีพักแนะนำ -->
+        <section class="allroom3">
+            <div class="text2">
+                <p>ที่พักแนะนำ</p>
+            </div>
+        
+            <div class="container swiper">
+                <div class="card-wrapper">
+                    <ul class="card-list swiper-wrapper">
+                        <% topRatedRooms.forEach((room) => { %>
+                            <li class="card-item swiper-slide">
+                                <a href="/user/room-details/<%= room.room_id %>" class="card-link">
+                                    <p class="badge"><%= room.department_name %> : <%= room.room_name %></p>
+                                    <% const roomImage = img.find(image => image.room_id === room.room_id); %>
+                                    <img src="/room_img/<%= roomImage ? roomImage.room_img_id : 'default.jpg' %>" alt="Room Image" class="card-img">
+                                    <p class="card-title">รีวิว <%= room.avg_rating ? room.avg_rating.toFixed(1) : "0" %></p>
+                                    <p class="card-title"><%= room.price %> บาท/เดือน</p>
+                                    <p class="card-title"><%= room.bedroom %> ห้องนอน</p>
+                                    <% const roomHave = JSON.parse(room.room_have); %>
+                                    <div class="service">
+                                        <% if (roomHave.air_conditioner) { %>
+                                            <img src="/img/air-conditioner.png" alt="Air" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.wi_fi) { %>
+                                            <img src="/img/wifi.png" alt="Wi-Fi" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.TV) { %>
+                                            <img src="/img/television.png" alt="TV" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.washing_machine) { %>
+                                            <img src="/img/washing-machine.png" alt="Washing Machine" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.fitnaess) { %>
+                                            <img src="/img/gym.png" alt="Fitness" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.furniture) { %>
+                                            <img src="/img/home-furniture.png" alt="Furniture" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.pet_friendly) { %>
+                                            <img src="/img/dog.png" alt="Pet Friendly" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.fridge) { %>
+                                            <img src="/img/fridge.png" alt="Fridge" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.closed_camera) { %>
+                                            <img src="/img/security-camera.png" alt="Closed Camera" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.lift) { %>
+                                            <img src="/img/elevator.png" alt="Lift" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.microwave) { %>
+                                            <img src="/img/microwave.png" alt="Microwave" class="pic4">
+                                        <% } %>
+                                        <% if (roomHave.parking) { %>
+                                            <img src="/img/car.png" alt="Parking" class="pic4">
+                                        <% } %>
+                                    </div>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
         <% dept.forEach((data) => { %>
             <% if (!filters.location || filters.location == data.department_id) { %>
                 <section class="allroom3">

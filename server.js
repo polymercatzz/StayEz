@@ -38,6 +38,16 @@ app.get('/', (req, res) => {
       GROUP BY room_id;
   `;
   let imgSql = `SELECT * FROM Room_Images`;
+  let topRatedRoomsSql = `
+        SELECT r.*, d.department_name, 
+            COALESCE(SUM(rv.rating) / COUNT(rv.room_id), 0) AS avg_rating
+        FROM Room r
+        LEFT JOIN review rv ON r.room_id = rv.room_id
+        LEFT JOIN Departments d ON r.department_id = d.department_id
+        GROUP BY r.room_id
+        ORDER BY avg_rating DESC
+        LIMIT 10;
+    `;
   const params = [req.cookies.userId];
 
   if (filters.location) {
@@ -98,13 +108,20 @@ app.get('/', (req, res) => {
                       if (err) {
                           return res.status(500).json({ message: "Database error", error: err.message });
                       }
-                      res.render('main-regis', {
-                          room: roomData,
-                          dept: deptData,
-                          review: reviewMap,
-                          img: imgData,
-                          filters
-                      });
+                      db.all(topRatedRoomsSql, (err, topRooms) => {
+                        if (err) {
+                            return res.status(500).json({ message: "Database error", error: err.message });
+                        }
+                        console.log(topRooms);
+                        res.render('main-regis', {
+                            room: roomData,
+                            dept: deptData,
+                            review: reviewMap,
+                            img: imgData,
+                            topRatedRooms: topRooms,
+                            filters
+                        });
+                    });
                   });
               });
           });
@@ -176,6 +193,14 @@ app.get('/department/:department_id', (req, res) => {
         GROUP BY room_id;
     `;
     let imgSql = `SELECT * FROM Room_Images`;
+    let topRatedRoomsSql = `
+        SELECT r.*, COALESCE(SUM(rv.rating) / COUNT(rv.room_id), 0) AS avg_rating
+        FROM Room r
+        LEFT JOIN review rv ON r.room_id = rv.room_id
+        GROUP BY r.room_id
+        ORDER BY avg_rating DESC
+        LIMIT 10;
+    `;
     db.all(deptSql, [department_id],(err, deptData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
