@@ -357,7 +357,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     background-color: #E5EFFF;
-    max-width: 370px;
+    max-width: 400px;
     margin: auto;
     padding: 20px;
     border-radius: 16px;
@@ -366,8 +366,8 @@ body {
 
 .popupdata {
     display: flex;
-    max-width: 370px;
-    flex-wrap: wrap;
+    max-width: 400px;
+    /* flex-wrap: wrap; */
     padding: 10px;
     color: #93B1D7;
 }
@@ -536,7 +536,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.4s, visibility 0.4s;

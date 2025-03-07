@@ -312,6 +312,8 @@
 
     <!-- popup -->
     <section>
+        <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
         <div class="popup" id="popup">
             <div class="profile" >
                 <div class="close-btn">
@@ -512,15 +514,19 @@
 
 
     // popup
-    let popup = document.getElementById("popup");
+    function openPopup() {
+        popup.classList.add("openPopup");
+        document.getElementById("overlay").classList.add("active");
 
-        function openPopup() {
-            popup.classList.add("openPopup");
-        }
 
-        function closePopup() {
-            popup.classList.remove("openPopup");
-        }
+                }
+
+    function closePopup() {
+        popup.classList.remove("openPopup");
+        document.getElementById("overlay").classList.remove("active");
+
+                }
+
 
     </script>
 </body>
