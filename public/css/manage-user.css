@@ -196,3 +196,157 @@ tr select {
     line-height: 16px;
     border-radius: 10px;
 }
+
+/* popup add user */
+        /* popup */
+        .popupad {
+            width: 420px;
+            background-color: #ffffff;
+            border-radius: 18px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            visibility: hidden;
+            transition: transform 0.4s, visibility 0.4s;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .openPopupad {
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .close-btnad button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .close-btnad button img {
+            width: 30px;
+
+        }
+
+        .close-btnad {
+            display: flex;
+            justify-content: end;
+            padding: 5px;
+            /* width: 100%; */
+            background-color: #93B1D7;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            width: calc(100% + 40px);
+            margin: -20px -20px 0;
+            box-sizing: border-box;
+
+
+        }
+
+        .allpopupdataad {
+            display: flex;
+            /* flex-direction: column; */
+            flex-wrap: wrap;
+            background-color: #E5EFFF;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .popupdataad {
+            display: flex;
+            /* flex-direction: column; */
+            max-width: 350px;
+            flex-wrap: wrap;
+            padding: 10px;
+            color: #93B1D7;
+        }
+
+
+        .popupdataad label {
+            margin-right: 15px;
+            font-size: 2vh;
+        }
+
+        .popupdataad input {
+            border: none;
+            border-radius: 10px;
+            font-size: 1.7vh;
+            padding: 5px;
+            color: #616162;
+            max-width: 160px;
+
+        }
+
+        .profilead p {
+            text-align: center;
+            color: #93B1D7;
+            font-size: 2.4vh;
+            padding: 10px;
+        }
+
+        .btn-subad {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-subad button {
+            border: none;
+            border-radius: 10px;
+            background-color: #93B1D7;
+            color: #ffffff;
+            padding: 10px;
+            font-size: 2vh;
+        }
+
+        .btnad{
+            display: flex;
+            justify-content: end;
+            align-items: end;
+            margin-right: 40px;
+        }
+        .btnad button {
+            background-color: #93B1D7;
+            border-radius: 50%;
+            padding: 10px;
+            border: none;
+        }
+        .btnad img{
+            width: 35px;
+        }
+
+        .btnad button:hover{
+            background-color: #688ac3;
+
+
+        }
+
+        .overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.4s, visibility 0.4s;
+            z-index: 999;
+        }
+        
+        .overlay.active{
+            visibility: visible;
+            opacity: 1;
+        }
+        @media screen and (max-width: 700px) {        
+            .popupad {
+                width: 300px;
+        
+            }
+        }

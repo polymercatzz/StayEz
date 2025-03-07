@@ -12,9 +12,16 @@
 <body>
     <%- include('partials/admin-navbar') %>
     <div class="container">
+        
         <div class="container-header">
             <p>ระบบจัดการ user</p>
         </div>
+        <div class="btnad">
+            <button onclick="openPopupad()">
+                <img src="/img/addperson.png" alt="">
+            </button>
+        </div>
+    
         <div class="table-container">
             <table>
                 <thead>
@@ -87,6 +94,49 @@
             </div>
         </div>
     </div>
+    <!-- popup add user -->
+    <div class="overlay" id="overlay" onclick="closePopupad()"></div>
+
+    <div class="popupad" id="popupad">
+        <div class="profilead">
+            <div class="close-btnad">
+                <button onclick="closePopupad()">
+                    <img src="/img/close.png" alt="">
+                </button>
+            </div>
+            <p>Add Profile</p>
+            <div class="allpopupdataad">
+                <div class="popupdataad">
+                    <label for="name">Name:</label>
+                    <input type="text">
+                </div>
+                <div class="popupdataad">
+                    <label for="lastname">Lastname:</label>
+                    <input type="text">
+                </div>
+                <div class="popupdataad">
+                    <label for="tel">Tel:</label>
+                    <input type="text">
+                </div>
+                <div class="popupdataad">
+                    <label for="email">Email:</label>
+                    <input type="text">
+                </div>
+                <div class="popupdataad">
+                    <label for="pass">Password:</label>
+                    <input type="text">
+                </div>
+                <div class="popupdataad">
+                    <label for="email">Confirm Password:</label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="btn-subad">
+            <button onclick="closePopupad()">Submit</button>
+        </div>
+    </div>
+
     <%- include('partials/admin-footer') %>
     <script>
         function openPopup(first_name, last_name, tel, email) {
@@ -103,6 +153,19 @@
 
             container.style.display = 'none';
         };
+
+        // popup ad user
+        function openPopupad() {
+            document.getElementById("popupad").classList.add("openPopupad");
+            document.getElementById("overlay").classList.add("active");
+        }
+
+        function closePopupad() {
+            document.getElementById("popupad").classList.remove("openPopupad");
+            document.getElementById("overlay").classList.remove("active");
+        }
+
+
     </script>
 </body>
 
