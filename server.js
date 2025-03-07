@@ -132,7 +132,9 @@ app.get('/', (req, res) => {
 app.get('/room-details/:room_id', (req, res) => {
   const room_id = req.params.room_id;
 
-    const roomSql = `SELECT * FROM Room WHERE room_id = ?`;
+    const roomSql = `SELECT * FROM Room r
+                    JOIN Departments d ON r.department_id = d.department_id
+                    WHERE r.room_id = ?`;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
     let reviewSql = `
         SELECT r.room_id, 
