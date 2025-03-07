@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Concert+One&family=DM+Serif+Text:ital@0;1&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Hind+Mysuru:wght@300;400;500;600;700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Marcellus&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans+Caption:wght@400;700&family=Signika+Negative:wght@300..700&family=Silkscreen:wght@400;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -22,14 +23,14 @@
     <form action="/user/create_history/<%= roomData.room_id %>" method="POST" enctype="multipart/form-data">
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="main-user.html">Home</a></li>
-            <li><a href="history.html">History</a></li>
+            <li><a href="/user/main">Home</a></li>
+            <li><a href="/user/history">History</a></li>
             <li><a href="#">Payment</a></li>
             <li><a href="#footer">Contact</a></li>
             <li><a href="#" class="hidden">Wish list</a></li>
             <li><a href="#" class="hidden" onclick="openPopup()">Profile</a></li>
-            <li><a href="main-regis.html" class="hidden">Log out</a></li>
-            <li><a href=""><img src="/img/heart.png" alt="" class="pic2"></a></li>
+            <li><a href="/logout" class="hidden">Log out</a></li>
+            <li><a href="/user/fav"><img src="/img/heart.png" alt="" class="pic2"></a></li>
             <li><a href="#" onclick="openPopup()"><img src="/img/user.png" alt="" class="pic3"></a></li>
         </ul>
     </nav>
@@ -64,16 +65,16 @@
                         </div>
                         <div class="form-group">
                             <p>เลขบัตรประชาชน: </p>
-                            <input type="text" id="idcard" maxlength="13" required name="idcard">
+                            <input type="text" id="idcard" maxlength="13" name="idcard">
                         </div>
                         <div class="form-group">
                             <p>ที่อยู่ตามทะเบียนบ้าน: </p>
-                            <textarea id="address" required name="address"></textarea>
+                            <textarea id="address" name="address"></textarea>
                         </div>
                         <div class="bank">
                             <div class="form-group">
                                 <p>โอนเงินคืนเข้า: </p>
-                                <select class="select" id="bankselect" required name="bankselect">
+                                <select class="select" id="bankselect" name="bankselect">
                                     <option selected>---เลือกธนาคาร---</option>
                                     <option value="BBL">ธนาคารกรุงเทพ</option>
                                     <option value="KBank">ธนาคารกสิกรไทย</option>
@@ -82,11 +83,11 @@
                             </div>
                             <div class="form-group">
                                 <p>เลขบัญชี: </p>
-                                <input type="text" id="accountNumber" required name="accountNumber">
+                                <input type="text" id="accountNumber" name="accountNumber">
                             </div>
                             <div class="form-group">
                                 <p>ชื่อบัญชี: </p>
-                                <input type="text" id="accountName" required name="accountName">
+                                <input type="text" id="accountName" name="accountName">
                             </div>
                         </div>
                     </div>
@@ -156,12 +157,12 @@
                 <p>สลิปโอนเงิน :</p>
                 <div class="file-select">
                     <label for="file-upload" class="file-label">เลือกไฟล์</label>
-                    <input type="file" id="file-upload" class="flieselect" name="img" accept="image/*" required>
+                    <input type="file" id="file-upload" class="flieselect" name="img" accept="image/*">
                 </div>
             </div>
             <div class="section">
                 <p>จำนวนผู้อยู่อาศัย :</p>
-                <input type="number" class="peopleselect" name="people" required>
+                <input type="number" class="peopleselect" name="people">
             </div>
         </div>
         <div class="foot">
@@ -254,6 +255,104 @@
             popup.classList.remove("openPopup");
             document.getElementById("overlay").classList.remove("active");
         }
+
+        // Form validation with SweetAlert2
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission until validation
+            
+            // Get form field values
+            const idcard = document.getElementById('idcard').value;
+            const address = document.getElementById('address').value;
+            const bankselect = document.getElementById('bankselect').value;
+            const accountNumber = document.getElementById('accountNumber').value;
+            const accountName = document.getElementById('accountName').value;
+            const month = document.querySelector('select[name="moth"]').value;
+            const fileUpload = document.getElementById('file-upload').value;
+            const people = document.querySelector('.peopleselect').value;
+
+            // Validation checks
+            if (!idcard || idcard.length !== 13 || !/^\d+$/.test(idcard)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลักและต้องเป็นตัวเลขเท่านั้น',
+                });
+                return;
+            }
+
+            if (!address.trim()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณากรอกที่อยู่ตามทะเบียนบ้าน',
+                });
+                return;
+            }
+
+            if (bankselect === '---เลือกธนาคาร---') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณาเลือกธนาคาร',
+                });
+                return;
+            }
+
+            if (!accountNumber.trim() || !/^\d+$/.test(accountNumber)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณากรอกเลขบัญชีให้ถูกต้อง (ตัวเลขเท่านั้น)',
+                });
+                return;
+            }
+
+            if (!accountName.trim()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณากรอกชื่อบัญชี',
+                });
+                return;
+            }
+
+            if (month === '---เลือกระยะเวลา---') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณาเลือกระยะเวลาเช่า',
+                });
+                return;
+            }
+
+            if (!fileUpload) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณาอัพโหลดสลิปโอนเงิน',
+                });
+                return;
+            }
+
+            if (!people || people <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณากรอกจำนวนผู้อยู่อาศัย (ต้องมากกว่า 0)',
+                });
+                return;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                text: 'ข้อมูลครบถ้วน กำลังดำเนินการยืนยันการจอง',
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => {
+                this.submit();
+            });
+        });
     </script>
 </body>
 

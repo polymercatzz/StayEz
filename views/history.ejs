@@ -11,7 +11,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Concert+One&family=DM+Serif+Text:ital@0;1&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Hind+Mysuru:wght@300;400;500;600;700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Marcellus&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans+Caption:wght@400;700&family=Signika+Negative:wght@300..700&family=Silkscreen:wght@400;700&display=swap"
         rel="stylesheet">
-
+    
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </head>
 
 <body>
@@ -288,6 +290,31 @@
                     document.getElementById("overlay2").classList.add("active");
                     document.getElementById("cancel_history").action = `/user/cancel_history/${history_id}/${room_id}`
                 }
+
+                document.getElementById("cancel_history").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    const formAction = document.getElementById("cancel_history").action;
+
+                    fetch(formAction, {
+                        method: "POST",
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire({
+                            title: "ยกเลิกสำเร็จ!",
+                            text: "การจองห้องพักของคุณถูกยกเลิกาสำเร็จแล้ว",
+                            icon: "success",
+                            confirmButtonText: "ตกลง"
+                        }).then(() => {
+                            closePopup2();
+                            window.location.reload();
+                        });
+                    })
+                    .catch(error => {
+                        console.log("Error:", error);
+                        Swal.fire("Error", "Something went wrong. Please try again.", "error");
+                    });
+                });
 
                 function closePopup2() {
                     document.getElementById("pop-upcancel").classList.remove("active");

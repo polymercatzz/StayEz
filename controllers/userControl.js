@@ -498,10 +498,10 @@ const cancel_history = (req, res) => {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
     });
-    res.redirect("/user/history");
+    res.json({ success: true });
 };
 
-const showcontact_histroy = (req, res) => {
+const showcontact_history = (req, res) => {
     const contract_id = req.params.contract_id;
     const sql = `SELECT *
         FROM contract c
@@ -578,5 +578,5 @@ const writeReview = (req, res) => {
 }
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_histroy, writeReview, cancel_history};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_history, writeReview, cancel_history};
 
