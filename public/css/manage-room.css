@@ -17,14 +17,14 @@
 .add-btn {
     float: right;
     margin-right: 5%;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
-    font-size: 24px;
-    border-radius: 30px;
-    line-height: 5px;
+    font-size: 4vh;
+    border-radius: 50%;
+    line-height: 1px;
 }
 
 .room-content {
