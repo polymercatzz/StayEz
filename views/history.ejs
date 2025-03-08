@@ -13,11 +13,9 @@
 <body>
     <%- include('partials/user-navbar') %>
     <section>
-
         <div class="box">
             <p class="text">History</p>
         </div>
-
         <section class="history">
             <% history.forEach((item, index) => { %>
                 <div class="all">
@@ -92,9 +90,7 @@
                     </form>
                 </div>
             </div>
-
             <div class="overlay" id="overlay" onclick="closePopup3()"></div>
-
             <section>
                 <div class="popup-review" id="popup-review">
                     <div class="close-btn">
@@ -123,11 +119,9 @@
                 </div>
             </section>
     <%- include('partials/footer') %>
-
             <input type="hidden" id="userId" value="<%= user.user_id %>">
             <input type="hidden" id="roomId" value="">
             <script>
-
                 async function submitReview() {
                     const userId = document.getElementById("userId").value;
                     const roomId = document.getElementById("roomId").value;
