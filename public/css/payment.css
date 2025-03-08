@@ -96,9 +96,10 @@ body {
 }
 
 .openPopup {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
     display: block;
 }
-
 .close-btn2 button {
     border: none;
     background: none;
