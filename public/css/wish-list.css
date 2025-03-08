@@ -48,6 +48,7 @@ body {
     padding: 25px;
     border-radius: 18px;
     text-decoration: none;
+    height: fit-content;
 }
 
 .card-img {
