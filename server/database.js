@@ -94,7 +94,7 @@ db.serialize(() => {
           room_id INTEGER NOT NULL,
           contract_id INTEGER NOT NULL,
           history_status TEXT CHECK(history_status IN ('verification', 'completed', 'cancelled')) NOT NULL DEFAULT 'verification',
-          date DATE NOT NULL,
+          history_date DATE NOT NULL,
           FOREIGN KEY (user_id) REFERENCES Users (user_id) ON DELETE CASCADE,
           FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE,
           FOREIGN KEY (contract_id) REFERENCES Contract (contract_id) ON DELETE CASCADE

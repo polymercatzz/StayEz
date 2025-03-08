@@ -206,7 +206,7 @@
                     <p class="text-data">จ่ายเงินล่วงหน้า:</p>
                     <p class="text-data"><%= room.pay_advance %> บาท</p>
                 </div>
-                <% if (!room.history_id) { %>
+                <% if (room.room_status === "available") { %>
                     <a href="/user/contact/<%= room.room_id %>">จอง</a>
                 <% } %>
             </div>

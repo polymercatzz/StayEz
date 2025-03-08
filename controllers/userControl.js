@@ -223,11 +223,10 @@ const showFav = (req, res) => {
 
 const showDetails = (req, res) => {
     const room_id = req.params.room_id;
-    const roomSql = `SELECT r.*, f.user_id, d.*, h.history_id FROM Room r 
+    const roomSql = `SELECT r.*, f.user_id, d.* FROM Room r 
                     JOIN Departments d ON r.department_id = d.department_id
-                    LEFT JOIN History h ON h.room_id = r.room_id
-                    LEFT JOIN Favorites f ON f.room_id = r.room_id 
-                    WHERE r.room_id = ? and (f.user_id = ? OR f.user_id ISNULL);`;
+                    LEFT JOIN Favorites f ON f.room_id = r.room_id AND f.user_id = ? 
+                    WHERE r.room_id = ?;`;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
     let reviewSql = `
         SELECT r.room_id, 
@@ -245,7 +244,7 @@ const showDetails = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        db.get(roomSql, [room_id, req.cookies.userId], (err, roomData) => {
+        db.get(roomSql, [req.cookies.userId, room_id, ], (err, roomData) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
@@ -281,7 +280,7 @@ const showDetails = (req, res) => {
 const showHistory = (req, res) => {
     const userId = req.cookies.userId;
     const historySql = `
-        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.date, r.price, r.bedroom, d.department_name, r.room_id, h.history_id
+        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.history_date, r.price, r.bedroom, d.department_name, r.room_id, h.history_id
         FROM history h
         LEFT JOIN room r ON h.room_id = r.room_id
         LEFT JOIN contract c ON h.contract_id = c.contract_id
@@ -460,7 +459,7 @@ const create_history = (req, res) => {
         }
     });
     const contract_sql = `INSERT INTO contract (prefix, id_card, address, bank_name, ac_number, ac_name, tenancy, people) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    const history_sql = `INSERT INTO history (user_id, room_id, contract_id, date) VALUES (?, ?, ?, ?)`;
+    const history_sql = `INSERT INTO history (user_id, room_id, contract_id, history_date) VALUES (?, ?, ?, ?)`;
     const history_img_sql = `INSERT INTO history_Images (history_id, filename, data) VALUES (?, ?, ?)`;
     db.run(contract_sql, [data.prefix, data.id_card, data.address, data.bank_name, data.ac_number, data.ac_name, data.tenancy, data.people], function(err) {
         if (err) {
