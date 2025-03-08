@@ -14,7 +14,7 @@ body {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     gap: 50px;
     padding: 20px;
     margin: 2%;
@@ -39,6 +39,10 @@ body {
 
 .card-con strong {
     color: white;
+}
+
+.card-con p {
+    margin: 15px;
 }
 
 .date {
