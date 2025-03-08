@@ -140,16 +140,16 @@ db.serialize(() => {
   // ตาราง Report
   db.run(`
         CREATE TABLE IF NOT EXISTS "Report" (
-          "report_id"	INTEGER,
-          "rent" REAL NOT NULL,
-          "water_income" REAL NOT NULL,
-          "electric_income" REAL NOT NULL,
-          "other_income" REAL NOT NULL,
-          "water_bill"	REAL NOT NULL,
-          "electric_bill"	REAL NOT NULL,
-          "other_bill"	REAL NOT NULL,
-          "total_amount"	REAL NOT NULL,
-          "date"	DATE NOT NULL,
+          report_id	INTEGER,
+          rent REAL NOT NULL,
+          water_income REAL NOT NULL,
+          electric_income REAL NOT NULL,
+          other_income REAL NOT NULL,
+          water_bill	REAL NOT NULL,
+          electric_bill	REAL NOT NULL,
+          other_bill	REAL NOT NULL,
+          total_amount	REAL NOT NULL,
+          date	DATE NOT NULL,
           PRIMARY KEY("report_id" AUTOINCREMENT)
         );`
       );
