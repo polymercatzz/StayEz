@@ -12,7 +12,7 @@
     <%- include('partials/admin-navbar') %>
     <div class="container">
         <p class="title">รายรับ-รายจ่ายแต่ละเดือน</p>
-        <p class="year">2024</p>
+        <p class="year">2025</p>
         <div class="month">
             <button class="month-detail" onclick="openPopup(0)">มกราคม</button>
             <button class="month-detail" onclick="openPopup(1)">กุมภาพันธ์</button>
@@ -29,434 +29,135 @@
         </div>
     </div>
     <%- include('partials/admin-footer') %>
-
     <!-- Popups for each month -->
-    <div class="popup-container" id="popup-container-0">
-        <div class="popup" id="popup-0">
+    <div class="popup-container" id="popup-container">
+        <div class="popup" id="popup">
             <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(0)" xmlns="http://www.w3.org/2000/svg" width="16"
+                <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
                     height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path
                         d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                 </svg>
             </div>
             <div class="popup-content">
-                <p class="content-head">รายจ่าย : มกราคม 2024</p>
+                <p class="content-head" id="month_show_in"></p>
+                <div class="content-item">
+                    <p>ค่าเช่า : </p>
+                    <input type="text" name="rent" id="rent" readonly>
+                    <p> บาท</p>
+                </div>
                 <div class="content-item">
                     <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[0] && monthly[0].water_bill || '' %>"
-                        <%=monthly[0] && monthly[0].water_bill ? 'readonly="readonly"' : '' %>">
+                    <input type="text" name="water_in" id="water_in" readonly>
                     <p> บาท</p>
                 </div>
                 <div class="content-item">
                     <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[0] && monthly[0].electric_bill || '' %>"
-                        <%=monthly[0] && monthly[0].electric_bill ? 'readonly="readonly"' : '' %>">
+                    <input type="text" name="electricity_in" id="electric_in" readonly>
                     <p> บาท</p>
                 </div>
                 <div class="content-item">
                     <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[0] && monthly[0].other_bill || '' %>"
-                        <%=monthly[0] && monthly[0].other_bill ? 'readonly="readonly"' : '' %>">
+                    <input type="text" name="other_in" id="other_in" readonly>
                     <p> บาท</p>
                 </div>
-                <button onclick="submitForm(0)">Submit</button>
-            </div>
-        </div>
-    </div>
-    <div class="popup-container" id="popup-container-1">
-        <div class="popup" id="popup-1">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(1)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : กุมภาพันธ์ 2024</p>
+                <p class="content-head" id="month_show_bill"></p>
                 <div class="content-item">
                     <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[1] && monthly[1].water_bill || '' %>"
-                        <%=monthly[1] && monthly[1].water_bill ? 'readonly="readonly"' : '' %>">
+                    <input type="text" name="water" id="water">
                     <p> บาท</p>
                 </div>
                 <div class="content-item">
                     <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[1] && monthly[1].electric_bill || '' %>"
-                        <%=monthly[1] && monthly[1].electric_bill ? 'readonly="readonly"' : '' %>">
+                    <input type="text" name="electricity" id="electric">
                     <p> บาท</p>
                 </div>
                 <div class="content-item">
                     <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[1] && monthly[1].other_bill || '' %>"
-                        <%=monthly[1] && monthly[1].other_bill ? 'readonly="readonly"' : '' %>">
+                    <input type="text" name="other" id="other">
                     <p> บาท</p>
                 </div>
-                <button onclick="submitForm(1)">Submit</button>
+                <button onclick="submitForm()" id="submitForm">Submit</button>
             </div>
         </div>
     </div>
-
-    <div class="popup-container" id="popup-container-2">
-        <div class="popup" id="popup-2">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(2)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : มีนาคม 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[2] && monthly[2].water_bill || '' %>"
-                        <%=monthly[2] && monthly[2].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[2] && monthly[2].electric_bill || '' %>"
-                        <%=monthly[2] && monthly[2].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[2] && monthly[2].other_bill || '' %>"
-                        <%=monthly[2] && monthly[2].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(2)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-3">
-        <div class="popup" id="popup-3">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(3)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : เมษายน 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[3] && monthly[3].water_bill || '' %>"
-                        <%=monthly[3] && monthly[3].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[3] && monthly[3].electric_bill || '' %>"
-                        <%=monthly[3] && monthly[3].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[3] && monthly[3].other_bill || '' %>"
-                        <%=monthly[3] && monthly[3].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(3)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-4">
-        <div class="popup" id="popup-4">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(4)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : พฤษภาคม 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[4] && monthly[4].water_bill || '' %>"
-                        <%=monthly[4] && monthly[4].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[4] && monthly[4].electric_bill || '' %>"
-                        <%=monthly[4] && monthly[4].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[4] && monthly[4].other_bill || '' %>"
-                        <%=monthly[4] && monthly[4].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(4)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-5">
-        <div class="popup" id="popup-5">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(5)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : มิถุนายน 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[5] && monthly[5].water_bill || '' %>"
-                        <%=monthly[5] && monthly[5].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[5] && monthly[5].electric_bill || '' %>"
-                        <%=monthly[5] && monthly[5].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[5] && monthly[5].other_bill || '' %>"
-                        <%=monthly[5] && monthly[5].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(5)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-6">
-        <div class="popup" id="popup-6">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(6)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : กรกฎาคม 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[6] && monthly[6].water_bill || '' %>"
-                        <%=monthly[6] && monthly[6].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[6] && monthly[6].electric_bill || '' %>"
-                        <%=monthly[6] && monthly[6].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[6] && monthly[6].other_bill || '' %>"
-                        <%=monthly[6] && monthly[6].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(6)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-7">
-        <div class="popup" id="popup-7">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(7)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : สิงหาคม 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[7] && monthly[7].water_bill || '' %>"
-                        <%=monthly[7] && monthly[7].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[7] && monthly[7].electric_bill || '' %>"
-                        <%=monthly[7] && monthly[7].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[7] && monthly[7].other_bill || '' %>"
-                        <%=monthly[7] && monthly[7].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(7)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-8">
-        <div class="popup" id="popup-8">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(8)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : กันยายน 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[8] && monthly[8].water_bill || '' %>"
-                        <%=monthly[8] && monthly[8].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[8] && monthly[8].electric_bill || '' %>"
-                        <%=monthly[8] && monthly[8].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[8] && monthly[8].other_bill || '' %>"
-                        <%=monthly[8] && monthly[8].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(8)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-9">
-        <div class="popup" id="popup-9">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(9)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : ตุลาคม 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[9] && monthly[9].water_bill || '' %>"
-                        <%=monthly[9] && monthly[9].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[9] && monthly[9].electric_bill || '' %>"
-                        <%=monthly[9] && monthly[9].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[9] && monthly[9].other_bill || '' %>"
-                        <%=monthly[9] && monthly[9].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(9)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-10">
-        <div class="popup" id="popup-10">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(10)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : พฤศจิกายน 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[10] && monthly[10].water_bill || '' %>"
-                        <%=monthly[10] && monthly[10].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[10] && monthly[10].electric_bill || '' %>"
-                        <%=monthly[10] && monthly[10].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[10] && monthly[10].other_bill || '' %>"
-                        <%=monthly[10] && monthly[10].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(10)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="popup-container" id="popup-container-11">
-        <div class="popup" id="popup-11">
-            <div class="popup-header">
-                <svg class="icon-popup" id="icon" onclick="closePopup(11)" xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                </svg>
-            </div>
-            <div class="popup-content">
-                <p class="content-head">รายจ่าย : ธันวาคม 2024</p>
-                <div class="content-item">
-                    <p>ค่าน้ำ : </p>
-                    <input type="text" name="water" value="<%= monthly[11] && monthly[11].water_bill || '' %>"
-                        <%=monthly[11] && monthly[11].water_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าไฟ : </p>
-                    <input type="text" name="electricity" value="<%= monthly[11] && monthly[11].electric_bill || '' %>"
-                        <%=monthly[11] && monthly[11].electric_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <div class="content-item">
-                    <p>ค่าใช้จ่ายอื่นๆ : </p>
-                    <input type="text" name="other" value="<%= monthly[11] && monthly[11].other_bill || '' %>"
-                        <%=monthly[11] && monthly[11].other_bill ? 'readonly="readonly"' : '' %>">
-                    <p> บาท</p>
-                </div>
-                <button onclick="submitForm(11)">Submit</button>
-            </div>
-        </div>
-    </div>
-
-    <input type="hidden" id="month" name="month" value="">
 
     <script>
-        // Show the correct popup and hide others
-        function openPopup(monthIndex) {
-            for (let i = 0; i < 12; i++) {
-                let popupContainer = document.getElementById(`popup-container-${i}`);
-                if (i === monthIndex) {
-                    popupContainer.style.display = 'block';
-                } else {
-                    popupContainer.style.display = 'none';
-                }
+        const months = [
+            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        ];
+        const monthly = <%- JSON.stringify(monthly) %>;
+        const datamonth = <%- JSON.stringify(datamonth) %>;
+              // Show the correct popup and hide others
+        function openPopup(index) {
+            let popupContainer = document.getElementById(`popup-container`);
+            popupContainer.style.display = 'block';
+            document.getElementById("month_show_bill").innerText = `รายจ่าย : ${months[index]} 2025`;
+            document.getElementById("month_show_in").innerText = `รายรับ : ${months[index]} 2025`;
+            let water = document.getElementById("water");
+            let electric = document.getElementById("electric");
+            let other = document.getElementById("other");
+            let water_in = document.getElementById("water_in");
+            let rent = document.getElementById("rent");
+            let electric_in = document.getElementById("electric_in");
+            let other_in = document.getElementById("other_in");
+            if (datamonth[index]) {
+                rent.value = datamonth[index].total_rent;
+                water_in.value = datamonth[index].total_water;
+                electric_in.value = datamonth[index].total_electric;
+                other_in.value = datamonth[index].total_other_sum;
+            }
+            if (monthly[index]) {
+                water.value = monthly[index].water_bill;
+                water.readOnly = "readOnly";
+
+                electric.value = monthly[index].electric_bill;
+                electric.readOnly = "readOnly";
+
+                other.value = monthly[index].other_bill;
+                other.readOnly = "readOnly";
+                document.getElementById("submitForm").style.display = "none";
+            } else {
+                water.value = "";
+                water.readOnly = "";
+
+                electric.value = "";
+                electric.readOnly = "";
+
+                other.value = "";
+                other.readOnly = "";
+                document.getElementById("submitForm").onclick = () => submitForm(index);
             }
         }
 
         // Close the specific popup
-        function closePopup(monthIndex) {
-            let popupContainer = document.getElementById(`popup-container-${monthIndex}`);
+        function closePopup() {
+            let popupContainer = document.getElementById(`popup-container`);
             popupContainer.style.display = 'none';
+            let water = document.getElementById("water");
+            let electric = document.getElementById("electric");
+            let other = document.getElementById("other");
+            let water_in = document.getElementById("water_in");
+            let rent = document.getElementById("rent");
+            let electric_in = document.getElementById("electric_in");
+            let other_in = document.getElementById("other_in");
+
+            rent.value = "";
+
+            water.value = "";
+            water_in.value = "";
+            water.readOnly = "";
+
+            electric.value = "";
+            electric_in.value = "";
+            electric.readOnly = "";
+
+            other.value = "";
+            other_in.value = "";
+            other.readOnly = "";
+            document.getElementById("submitForm").style.display = "block";
+
         }
 
         // Submit form for the specific month
@@ -466,27 +167,32 @@
             const textMonth = month < 10 ? '0' + month : month.toString();
             const year = new Date().getFullYear();
 
-            const waterInput = document.querySelector(`#popup-${monthIndex} input[name="water"]`);
-            const electricityInput = document.querySelector(`#popup-${monthIndex} input[name="electricity"]`);
-            const otherInput = document.querySelector(`#popup-${monthIndex} input[name="other"]`);
-
-            console.log(waterInput.readOnly);
+            const waterInput = document.getElementById("water").value;
+            const electricityInput = document.getElementById("electric").value;
+            const otherInput = document.getElementById("other").value;
+            const water_in = document.getElementById("water_in").value;
+            const rent = document.getElementById("rent").value;
+            const electric_in = document.getElementById("electric_in").value;
+            const other_in = document.getElementById("other_in").value;
             window.location.href = "http://localhost:3000/admin/monthly";
-            if (!waterInput.readOnly || !electricityInput.readOnly || !otherInput.readOnly) {
+            if (waterInput || electricityInput || otherInput) {
                 fetch(`/admin/monthly/${year}/${textMonth}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        water: waterInput.value,
-                        electricity: electricityInput.value,
-                        other: otherInput.value
+                        water_bill: waterInput,
+                        electric_bill: electricityInput,
+                        other_bill: otherInput,
+                        rent: rent,
+                        water_income: water_in,
+                        electric_income: electric_in,
+                        other_income: other_in
                     })
                 })
                     .then(response => response.json())
                     .then(data => {
-                        closePopup(monthIndex);
                     })
                     .catch(error => {
                         console.error("Error:", error);

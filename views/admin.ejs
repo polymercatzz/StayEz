@@ -56,7 +56,8 @@
     </div>
     <%- include('partials/admin-footer') %>
     <script>
-        const data = <%= JSON.stringify(data) %>;
+        const data = <%- JSON.stringify(data) %>;
+        console.log(data)
         const values = [];
         for (let i = 0; i < 12; i++) {
             values.push(data.length > i && data[i].total_amount !== undefined ? data[i].total_amount : 0);

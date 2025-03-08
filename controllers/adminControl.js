@@ -464,26 +464,45 @@ const show_contact = (req, res) => {
 };
 
 const showMonthlyPayment = (req, res) => {
-    const monthSql = `SELECT * FROM report`;
+    const monthSql = `SELECT * FROM report ORDER BY date`;
+    const datamonth = `SELECT 
+                        strftime('%Y-%m', payment_date) AS month,
+                        SUM(price) AS total_rent,
+                        SUM(r_electric) AS total_electric, 
+                        SUM(r_water) AS total_water, 
+                        '[' || GROUP_CONCAT(r_other, ',') || ']' AS total_other
+                    FROM Payment
+                    JOIN History ON History.history_id = Payment.history_id
+                    JOIN room ON room.room_id = History.room_id
+                    GROUP BY strftime('%Y-%m', payment_date)
+                    HAVING Payment.payment_status != "Pending";
+                    ORDER BY payment_date`;
     db.all(monthSql, (err, rows) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-
-        // Get the selected month from the URL parameters
-        const selectedMonth = req.params.month; // Assuming /admin/monthly/:year/:month
-        // Find the corresponding data for that month
-        const monthData = rows.find(row => row.date.endsWith(selectedMonth)); // Matching by month (e.g., '2025-01')
-
-        const months = [
-            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-        ];
-        res.render("select-month", {
-            monthly: rows,
-            monthData: monthData,
-            selectedMonth: selectedMonth,
-            months: months
+        db.all(datamonth, (err, data) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            data.forEach(monthData => {
+                const totalOtherArray = JSON.parse(monthData.total_other);
+                const totalOtherSum = totalOtherArray.reduce((sum, item) => {
+                    for (const key in item) {
+                        sum += item[key] || 0;
+                    }
+                    return sum;
+                }, 0);
+                monthData.total_other_sum = totalOtherSum;
+            });
+            console.log({
+                monthly: rows,
+                datamonth: data
+            })
+            res.render("select-month", {
+                monthly: rows,
+                datamonth: data
+            });
         });
     });
 }
@@ -492,19 +511,20 @@ const showMonthlyPayment = (req, res) => {
 
 const updateMonthlyPayment = (req, res) => {
     const { year, month } = req.params;
-    const { water, electricity, other } = req.body;
+    const { water_bill, electric_bill, other_bill, rent, water_income, electric_income, other_income } = req.body;
 
-    const waterInt = Number(water) || 0;
-    const electricityInt = Number(electricity) || 0;
-    const otherInt = Number(other) || 0;
+    const waterInt = Number(water_bill) || 0;
+    const electricityInt = Number(electric_bill) || 0;
+    const otherInt = Number(other_bill) || 0;
 
     const amount = waterInt + electricityInt + otherInt;
     const date = year + "-" + month;
 
-    console.log(amount, date);
-    const sql = `INSERT INTO report (water_bill, electric_bill, other_bill, total_amount, date) VALUES (?, ?, ?, ?, ?)`;
-    db.run(sql, [waterInt, electricityInt, otherInt, amount, date], (err) => {
+    console.log(amount, date, { water_bill, electric_bill, other_bill, rent, water_income, electric_income, other_income });
+    const sql = `INSERT INTO Report (rent, water_income, electric_income, other_income, water_bill, electric_bill, other_bill, total_amount, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    db.run(sql, [rent, water_income, electric_income, other_income, waterInt, electricityInt, otherInt, amount, date], (err) => {
         if (err) {
+            console.log({ message: "Database error", error: err.message });
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         res.redirect("/admin/monthly");

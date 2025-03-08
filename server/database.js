@@ -1,16 +1,16 @@
 const sqlite3 = require("sqlite3").verbose();
 
 const db = new sqlite3.Database('database.db', (err) => {
-    if (err) {
-      console.error('Error opening the database:', err);
-    } else {
-      console.log('Database connection opened');
-    }
-  });
+  if (err) {
+    console.error('Error opening the database:', err);
+  } else {
+    console.log('Database connection opened');
+  }
+});
 
 db.serialize(() => {
-    // ตาราง Users
-    db.run(`
+  // ตาราง Users
+  db.run(`
         CREATE TABLE IF NOT EXISTS Users (
           user_id INTEGER PRIMARY KEY AUTOINCREMENT,
           first_name TEXT NOT NULL,
@@ -21,15 +21,15 @@ db.serialize(() => {
           user_status TEXT CHECK(user_status IN ('active', 'inactive')) NOT NULL DEFAULT 'active'
         )
       `);
-      // ตาราง Departments
-    db.run(`
+  // ตาราง Departments
+  db.run(`
         CREATE TABLE IF NOT EXISTS Departments (
           department_id INTEGER PRIMARY KEY AUTOINCREMENT,
           department_name TEXT NOT NULL
         )
       `);
-      // ตาราง Room
-    db.run(`
+  // ตาราง Room
+  db.run(`
         CREATE TABLE IF NOT EXISTS Room (
           room_id INTEGER PRIMARY KEY AUTOINCREMENT,
           department_id INTEGER NOT NULL,
@@ -48,9 +48,9 @@ db.serialize(() => {
           FOREIGN KEY (department_id) REFERENCES Departments (department_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง Room Images
-    db.run(`
+
+  // ตาราง Room Images
+  db.run(`
         CREATE TABLE IF NOT EXISTS Room_Images (
           room_img_id INTEGER PRIMARY KEY AUTOINCREMENT,
           room_id INTEGER NOT NULL,
@@ -59,9 +59,9 @@ db.serialize(() => {
           FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง Favorites
-    db.run(`
+
+  // ตาราง Favorites
+  db.run(`
         CREATE TABLE IF NOT EXISTS Favorites (
           user_id INTEGER NOT NULL,
           room_id INTEGER NOT NULL,
@@ -70,9 +70,9 @@ db.serialize(() => {
           FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง Contract
-    db.run(`
+
+  // ตาราง Contract
+  db.run(`
         CREATE TABLE IF NOT EXISTS Contract (
           contract_id INTEGER PRIMARY KEY AUTOINCREMENT,
           prefix TEXT,
@@ -85,9 +85,9 @@ db.serialize(() => {
           people INTEGER NOT NULL
         )
       `);
-    
-      // ตาราง History
-    db.run(`
+
+  // ตาราง History
+  db.run(`
         CREATE TABLE IF NOT EXISTS History (
           history_id INTEGER PRIMARY KEY AUTOINCREMENT,
           user_id INTEGER NOT NULL,
@@ -100,9 +100,9 @@ db.serialize(() => {
           FOREIGN KEY (contract_id) REFERENCES Contract (contract_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง History Images
-    db.run(`
+
+  // ตาราง History Images
+  db.run(`
         CREATE TABLE IF NOT EXISTS History_Images (
           his_img_id INTEGER PRIMARY KEY AUTOINCREMENT,
           history_id INTEGER NOT NULL,
@@ -111,9 +111,9 @@ db.serialize(() => {
           FOREIGN KEY (history_id) REFERENCES History (history_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง Payment
-    db.run(`
+
+  // ตาราง Payment
+  db.run(`
         CREATE TABLE IF NOT EXISTS Payment (
           payment_id INTEGER PRIMARY KEY AUTOINCREMENT,
           history_id INTEGER NOT NULL,
@@ -125,9 +125,9 @@ db.serialize(() => {
           FOREIGN KEY (history_id) REFERENCES History (history_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง Payment Images
-    db.run(`
+
+  // ตาราง Payment Images
+  db.run(`
         CREATE TABLE IF NOT EXISTS Payment_Images (
           pay_img_id INTEGER PRIMARY KEY AUTOINCREMENT,
           payment_id INTEGER NOT NULL,
@@ -136,21 +136,26 @@ db.serialize(() => {
           FOREIGN KEY (payment_id) REFERENCES Payment (payment_id) ON DELETE CASCADE
         )
       `);
-    
-      // ตาราง Report
-    db.run(`
-        CREATE TABLE IF NOT EXISTS Report (
-          report_id INTEGER PRIMARY KEY AUTOINCREMENT,
-          water_bill REAL NOT NULL,
-          electric_bill REAL NOT NULL,
-          other_bill REAL NOT NULL,
-          total_amount REAL NOT NULL,
-          date DATE NOT NULL
-        )
-        `);
-    
-      // ตาราง Review
-    db.run(`
+
+  // ตาราง Report
+  db.run(`
+        CREATE TABLE IF NOT EXISTS "Report" (
+          "report_id"	INTEGER,
+          "rent" REAL NOT NULL,
+          "water_income" REAL NOT NULL,
+          "electric_income" REAL NOT NULL,
+          "other_income" REAL NOT NULL,
+          "water_bill"	REAL NOT NULL,
+          "electric_bill"	REAL NOT NULL,
+          "other_bill"	REAL NOT NULL,
+          "total_amount"	REAL NOT NULL,
+          "date"	DATE NOT NULL,
+          PRIMARY KEY("report_id" AUTOINCREMENT)
+        );`
+      );
+
+  // ตาราง Review
+  db.run(`
       CREATE TABLE IF NOT EXISTS Review (
         review_id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
@@ -159,8 +164,8 @@ db.serialize(() => {
         comment TEXT
       )
       `);
-        }
-    );
-    
+}
+);
+
 
 module.exports = db;
