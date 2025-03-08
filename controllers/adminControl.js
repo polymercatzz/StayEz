@@ -584,6 +584,7 @@ const showDetails = (req, res) => {
         GROUP BY r.room_id;
     `;
     let imgSql = `SELECT * FROM Room_Images WHERE room_id = ?`;
+    let userSql = `SELECT * FROM users`;
     db.get(roomSql, [room_id], (err, roomData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -596,19 +597,25 @@ const showDetails = (req, res) => {
                 if (err) {
                     return res.status(500).json({ message: "Database error", error: err.message });
                 }
-                const comments = reviewData ? reviewData.comments.split(',') : null;
-                const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
-                const avgRating = reviewData ? reviewData.avg_rating : 0;
-                const reviewCount = reviewData ? reviewData.review_count : 0;
-                console.log(roomData);
-                res.render('description-admin', {
-                    room: roomData,
-                    avgRating: avgRating,
-                    reviewCount: reviewCount,
-                    comments: comments,
-                    reviewers: reviewers,
-                    reviewData: reviewData,
-                    img: imgData
+                db.all(userSql, (err, userData) => {
+                    if (err) {
+                        return res.status(500).json({ message: "Database error", error: err.message });
+                    }
+                    const comments = reviewData ? reviewData.comments.split(',') : null;
+                    const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
+                    const avgRating = reviewData ? reviewData.avg_rating : 0;
+                    const reviewCount = reviewData ? reviewData.review_count : 0;
+                    console.log(roomData);
+                    res.render('description-admin', {
+                        room: roomData,
+                        user: userData,
+                        avgRating: avgRating,
+                        reviewCount: reviewCount,
+                        comments: comments,
+                        reviewers: reviewers,
+                        reviewData: reviewData,
+                        img: imgData
+                    });
                 });
             });
         });
