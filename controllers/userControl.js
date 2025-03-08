@@ -424,7 +424,7 @@ const showcontact = (req, res) => {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
             console.log(userData, roomData)
-            res.render("contract_user", { userData : userData, roomData : roomData , today : today});
+            res.render("contract_user", { user : userData, roomData : roomData , today : today});
         });
     });
 };
@@ -499,6 +499,8 @@ const cancel_history = (req, res) => {
 
 const showcontact_history = (req, res) => {
     const contract_id = req.params.contract_id;
+    const user_id = req.cookies.userId;
+    const userSql = `SELECT * FROM Users WHERE user_id = ?`;
     const sql = `SELECT *
         FROM contract c
         JOIN history h ON h.contract_id = c.contract_id
@@ -507,12 +509,16 @@ const showcontact_history = (req, res) => {
         JOIN departments d ON r.department_id = d.department_id
         JOIN History_Images i on h.history_id =i.history_id
         WHERE c.contract_id = ?`;
-    db.get(sql, [contract_id], (err, row) => {
+    db.get(sql, [contract_id], (err, data) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(row);
-        res.render("contract_user_show", { data : row });
+        db.get(userSql, [user_id], (err, user) => {
+            if (err) {
+                return res.status(500).json({ message: "Database error", error: err.message });
+            }
+            res.render("contract_user_show", { data : data, user:user});
+        });
     });
 };
 

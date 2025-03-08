@@ -132,7 +132,7 @@ db.serialize(() => {
           pay_img_id INTEGER PRIMARY KEY AUTOINCREMENT,
           payment_id INTEGER NOT NULL,
           filename TEXT NOT NULL,
-          data BLOB,
+          data BLOB NOT NULL,
           FOREIGN KEY (payment_id) REFERENCES Payment (payment_id) ON DELETE CASCADE
         )
       `);
@@ -161,7 +161,9 @@ db.serialize(() => {
         user_id INTEGER NOT NULL,
         room_id INTEGER NOT NULL,
         rating INTEGER NOT NULL,
-        comment TEXT
+        comment TEXT,
+        FOREIGN KEY (user_id) REFERENCES Users (user_id) ON DELETE CASCADE,
+        FOREIGN KEY (room_id) REFERENCES Room (room_id) ON DELETE CASCADE
       )
       `);
 }

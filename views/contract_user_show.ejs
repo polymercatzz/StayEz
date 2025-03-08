@@ -32,10 +32,11 @@
                     <div class="name">
                         <div class="form-group">
                             <p>คำนำหน้าชื่อ: </p>
-                            <select name="name" id="" disabled >
-                                <option value="นาย" <%= data.prefix === 'นาย' ? 'selected' : '' %>>นาย</option>
-                                <option value="นาง" <%= data.prefix === 'นาง' ? 'selected' : '' %>>นาง</option>
-                                <option value="นางสาว" <%= data.prefix === 'นางสาว' ? 'selected' : '' %>>นางสาว</option>
+                            <select name="name" id="" disabled>
+                                <option value="นาย" <%=data.prefix==='นาย' ? 'selected' : '' %>>นาย</option>
+                                <option value="นาง" <%=data.prefix==='นาง' ? 'selected' : '' %>>นาง</option>
+                                <option value="นางสาว" <%=data.prefix==='นางสาว' ? 'selected' : '' %>>นางสาว
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -45,8 +46,8 @@
                     </div>
                     <div class="form-group">
                         <p>เลขบัตรประชาชน: </p>
-                        <input type="text" id="idcard" maxlength="13" required name="idcard"
-                            value="<%= data.id_card %>" readonly> 
+                        <input type="text" id="idcard" maxlength="13" required name="idcard" value="<%= data.id_card %>"
+                            readonly>
                     </div>
                     <div class="form-group">
                         <p>ที่อยู่ตามทะเบียนบ้าน: </p>
@@ -57,93 +58,109 @@
                             <p>โอนเงินคืนเข้า: </p>
                             <select class="select" id="bankselect" required name="bankselect" disabled>
                                 <option selected>---เลือกธนาคาร---</option>
-                                <option value="BBL" <%= data.back_name === 'BBL' ? 'selected' : '' %>>ธนาคารกรุงเทพ</option>
-                                <option value="KBank" <%= data.back_name === 'KBank' ? 'selected' : '' %>>ธนาคารกสิกรไทย</option>
-                                <option value="SCB" <%= data.back_name === 'SCB' ? 'selected' : '' %>>ธนาคารไทยพาณิชย์</option>
+                                <option value="BBL" <%=data.back_name==='BBL' ? 'selected' : '' %>>ธนาคารกรุงเทพ
+                                </option>
+                                <option value="KBank" <%=data.back_name==='KBank' ? 'selected' : '' %>
+                                    >ธนาคารกสิกรไทย</option>
+                                <option value="SCB" <%=data.back_name==='SCB' ? 'selected' : '' %>>ธนาคารไทยพาณิชย์
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">
                             <p>เลขบัญชี: </p>
-                            <input type="text" id="accountNumber" required name="accountNumber" value="<%= data.id_card %>" readonly>
-                            </div>
-                            <div class=" form-group">
+                            <input type="text" id="accountNumber" required name="accountNumber"
+                                value="<%= data.id_card %>" readonly>
+                        </div>
+                        <div class=" form-group">
                             <p>ชื่อบัญชี: </p>
-                            <input type="text" id="accountName" required name="accountName" value="<%= data.id_card %>" readonly>
-                            </div>
+                            <input type="text" id="accountName" required name="accountName" value="<%= data.id_card %>"
+                                readonly>
                         </div>
                     </div>
                 </div>
-                <div class=" allrule">
-                            <p>
-                                ซึ่งต่อไปในสัญญานี้จะเรียกว่า "ผู้เช่า" อีกฝ่ายหนึ่ง
-                                ทั้งสองฝ่ายตกลงทำสัญญากันโดยมีข้อความดังต่อไปนี้
-                            </p>
-                            <div class="rule">
-                                <p>1. "ผู้เช่า" ตกลงเช่าห้องพักจากผู้ให้เช่าเพื่อใช้เป็นที่พักอาศัย
-                                    ภายใต้ระเบียบและข้อบังดับแนบท้ายสัญญาที่ผู้ให้เช่ากำหนด ระยะเวลาการเช่า
-                                    <select class="select" name="moth" disabled>
-                                        <option selected>---เลือกระยะเวลา---</option>
-                                        <option value="1" <%= data.tenancy === 1 ? 'selected' : '' %>>1 month</option>
-                                        <option value="3" <%= data.tenancy === 3 ? 'selected' : '' %>>3 month</option>
-                                        <option value="6" <%= data.tenancy === 6 ? 'selected' : '' %>>6 month</option>
-                                        <option value="12" <%= data.tenancy === 12 ? 'selected' : '' %>>12 month</option>
-                                    </select>
-                                </p>
-                                <p>
-                                    2. ผู้ให้เช่าและผู้เช่าตกลงค่าเช่าห้องพัก ในอัตราเดือนละ <%= data.price %> บาท
-                                </p>
-                                <p>3. ในวันทำสัญญา ผู้เช่าได้ชำระเงินให้กับผู้ให้เช่าดังต่อไปนี้</p>
-                                <p>3.1 เงินประกัน เป็นจำนวนเงิน <%= data.deposit %> บาท</p>
-                                <p>3.2 ค่าเช่าห้องในเดือนที่เข้าพัก เป็นจำนวนเงิน <%= data.pay_advance %> บาท
-                                        รวมจำนวนเงินที่ผู้เช่าได้ชำระในวันทำสัญญาเป็นจำนวนเงิน <%=
-                                            data.deposit+data.pay_advance %> บาท</p>
-                                <p>4. ในกรณีที่ผู้เช่าจะมีผู้ร่วมพักอาศัย
-                                    กรุณาแจ้งให้ทางบริษัททราบเพื่อลงทะเบียนผู้ร่วมพักอาศัย</p>
-                                <p>5.เมื่อสัญญาเช่าสิ้นสุดลงและผู้เช่าได้ปฏิบัติตามสัญญาถูกต้องเรียบร้อย
-                                    โดยห้องพักและทรัพย์สินอื่น ๆ ของ
-                                    ผู้ให้เช่าไม่ได้เกิดความเสียหาย และผู้เช่ามิได้ค้างชำระค่าใช้จ่ายต่างๆ
-                                    ผู้ให้เช่าจะคืนเงินประกันให้แก่ผู้เช่าภายใน 7 วัน
-                                    โดยโอนเข้าบัญชีธนาคารตามที่ผู้เช่าแจ้งไว้กับผู้ให้เช่า</p>
-                                <p>6. ผู้เช่าตกลงยินยอมว่า ในกรณีที่สัญญาเช่าสิ้นสุดลงไม่ว่ากรณีใด ๆ
-                                    ผู้ให้เช่ามีสิทธิ์ที่จะกลับเข้าครอบครอง ห้องพักทันที
-                                    หากมีทรัพย์สินของผู้เช่าอยู่ภายในห้องพัก
-                                    ผู้ให้เช่าจะนำไปเก็บไว้ในสถานที่ที่เห็นสมควร เพื่อ
-                                    ผู้ให้เช่าสามารถให้เช่าห้องพักนี้ได้ต่อไป</p><br><br>
-                                <p>สัญญาเช่านี้ทำขึ้น 2 ฉบับ มีข้อความถูกต้องตรงกัน
-                                    คู่สัญญาได้อ่านและเข้าใจข้อความในสัญญานี้โดยตลอดแล้วเห็นว่าถูกต้อง
-                                    จึงได้ลงลายมือชื่อไว้เป็นสำคัญ</p>
-                            </div>
-                        </div>
-                        <div class="signature-container">
-                            <div class="signature-box">
-                                <input type="text" class="signame" value="<%= data.first_name %> <%= data.last_name %>" readonly>
-                                <div class="signature-line"></div>
-                                <p class="signature-name">
-                                    <input type="text" class="signame" value="<%= data.first_name %> <%= data.last_name %>" readonly>
-                                </p>
-                                <p>ผู้เช่า</p>
-                            </div>
-                            <div class="signature-box">
-                                <p>แมน</p>
-                                <div class="signature-line"></div>
-                                <p class="signature-name">นาย แมน แมน</p>
-                                <p class="signature-title">ผู้ให้เช่า</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class=" allrule">
+                <p>
+                    ซึ่งต่อไปในสัญญานี้จะเรียกว่า "ผู้เช่า" อีกฝ่ายหนึ่ง
+                    ทั้งสองฝ่ายตกลงทำสัญญากันโดยมีข้อความดังต่อไปนี้
+                </p>
+                <div class="rule">
+                    <p>1. "ผู้เช่า" ตกลงเช่าห้องพักจากผู้ให้เช่าเพื่อใช้เป็นที่พักอาศัย
+                        ภายใต้ระเบียบและข้อบังดับแนบท้ายสัญญาที่ผู้ให้เช่ากำหนด ระยะเวลาการเช่า
+                        <select class="select" name="moth" disabled>
+                            <option selected>---เลือกระยะเวลา---</option>
+                            <option value="1" <%=data.tenancy===1 ? 'selected' : '' %>>1 month</option>
+                            <option value="3" <%=data.tenancy===3 ? 'selected' : '' %>>3 month</option>
+                            <option value="6" <%=data.tenancy===6 ? 'selected' : '' %>>6 month</option>
+                            <option value="12" <%=data.tenancy===12 ? 'selected' : '' %>>12 month</option>
+                        </select>
+                    </p>
+                    <p>
+                        2. ผู้ให้เช่าและผู้เช่าตกลงค่าเช่าห้องพัก ในอัตราเดือนละ <%= data.price %> บาท
+                    </p>
+                    <p>3. ในวันทำสัญญา ผู้เช่าได้ชำระเงินให้กับผู้ให้เช่าดังต่อไปนี้</p>
+                    <p>3.1 เงินประกัน เป็นจำนวนเงิน <%= data.deposit %> บาท</p>
+                    <p>3.2 ค่าเช่าห้องในเดือนที่เข้าพัก เป็นจำนวนเงิน <%= data.pay_advance %> บาท
+                            รวมจำนวนเงินที่ผู้เช่าได้ชำระในวันทำสัญญาเป็นจำนวนเงิน <%= data.deposit+data.pay_advance %>
+                                บาท</p>
+                    <p>4. ในกรณีที่ผู้เช่าจะมีผู้ร่วมพักอาศัย
+                        กรุณาแจ้งให้ทางบริษัททราบเพื่อลงทะเบียนผู้ร่วมพักอาศัย</p>
+                    <p>5.เมื่อสัญญาเช่าสิ้นสุดลงและผู้เช่าได้ปฏิบัติตามสัญญาถูกต้องเรียบร้อย
+                        โดยห้องพักและทรัพย์สินอื่น ๆ ของ
+                        ผู้ให้เช่าไม่ได้เกิดความเสียหาย และผู้เช่ามิได้ค้างชำระค่าใช้จ่ายต่างๆ
+                        ผู้ให้เช่าจะคืนเงินประกันให้แก่ผู้เช่าภายใน 7 วัน
+                        โดยโอนเข้าบัญชีธนาคารตามที่ผู้เช่าแจ้งไว้กับผู้ให้เช่า</p>
+                    <p>6. ผู้เช่าตกลงยินยอมว่า ในกรณีที่สัญญาเช่าสิ้นสุดลงไม่ว่ากรณีใด ๆ
+                        ผู้ให้เช่ามีสิทธิ์ที่จะกลับเข้าครอบครอง ห้องพักทันที
+                        หากมีทรัพย์สินของผู้เช่าอยู่ภายในห้องพัก
+                        ผู้ให้เช่าจะนำไปเก็บไว้ในสถานที่ที่เห็นสมควร เพื่อ
+                        ผู้ให้เช่าสามารถให้เช่าห้องพักนี้ได้ต่อไป</p><br><br>
+                    <p>สัญญาเช่านี้ทำขึ้น 2 ฉบับ มีข้อความถูกต้องตรงกัน
+                        คู่สัญญาได้อ่านและเข้าใจข้อความในสัญญานี้โดยตลอดแล้วเห็นว่าถูกต้อง
+                        จึงได้ลงลายมือชื่อไว้เป็นสำคัญ</p>
                 </div>
-                <div class="payment-section">
-                    <div class="section">
-                        <p>สลิปโอนเงิน :</p>
-                        <div class="file-select">
-                            <a href="/history_img/<%= data.his_img_id%>" target="_blank">ดูหลักฐาน</a>
-                        </div>
-                    </div>
-                    <div class="section">
-                        <p>จำนวนผู้อยู่อาศัย :</p>
-                        <input type="number" class="peopleselect" name="people" value="<%= data.people%>" readonly>
-                    </div>
+
+            </div>
+            <div class="signature-container">
+                <div class="signature-box">
+                    <input type="text" class="signame" value="<%= data.first_name %> <%= data.last_name %>" readonly>
+                    <div class="signature-line"></div>
+                    <p class="signature-name">
+                        <input type="text" class="signame" value="<%= data.first_name %> <%= data.last_name %>"
+                            readonly>
+                    </p>
+                    <p>ผู้เช่า</p>
                 </div>
+
+                <div class="signature-box">
+                    <p>แมน</p>
+                    <div class="signature-line"></div>
+                    <p class="signature-name">นาย แมน แมน</p>
+                    <p class="signature-title">ผู้ให้เช่า</p>
+                </div>
+            </div>
+            <div>
+                <p>เลขบัญชี : 693-0-57227-6</p>
+                <p>ธนาคาร: กรุงไทย (นายปณวัฒน์ ธรรมเจริญ)</p>
+                <div class="condi">
+                    <input type="checkbox" checked disabled> 
+                    <p>ยินยอมรับเงื่อนไขทั้งหมด</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="payment-section">
+        <div class="section">
+            <p>สลิปโอนเงิน :</p>
+            <div class="file-select">
+                <a href="/history_img/<%= data.his_img_id%>" target="_blank">ดูหลักฐาน</a>
+            </div>
+        </div>
+        <div class="section">
+            <p>จำนวนผู้อยู่อาศัย :</p>
+            <input type="number" class="peopleselect" name="people" value="<%= data.people%>" readonly>
+        </div>
+    </div>
     <%- include('partials/footer') %>
 </body>
 
