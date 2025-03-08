@@ -178,20 +178,25 @@
                 </div>
             </div>
         </section>
-    <% dept.forEach((data) => { %>
-        <% if (!filters.location || filters.location == data.department_id) { %>
-            <section class="allroom3">
-                <div class="text2">
-                    <p><%= data.department_name %> resident</p>
-                    <a href="/user/department/<%=data.department_id %>" class="end" id="openLink" target="_blank">
-                        <button class="card-button material-icons-outlined">arrow_forward</button>
-                    </a>
-                </div>
-                <div class="container swiper">
-                    <div class="card-wrapper">
-                        <ul class="card-list swiper-wrapper">
-                            <% room.forEach((room) => { %>
-                                <% if (data.department_id == room.department_id) { %>
+        <% dept.forEach((data) => { 
+            let filteredRooms = room.filter(r => r.department_id == data.department_id);
+        
+            if (filters.location) {
+                filteredRooms = filteredRooms.filter(r => filters.location == r.department_id);
+            }
+        
+            if (filteredRooms.length > 0) { %>
+                <section class="allroom3">
+                    <div class="text2">
+                        <p><%= data.department_name %> resident</p>
+                        <a href="/user/department/<%=data.department_id %>" class="end" id="openLink" target="_blank">
+                            <button class="card-button material-icons-outlined">arrow_forward</button>
+                        </a>
+                    </div>
+                    <div class="container swiper">
+                        <div class="card-wrapper">
+                            <ul class="card-list swiper-wrapper">
+                                <% filteredRooms.forEach((room) => { %>
                                     <li class="card-item swiper-slide">
                                         <a href="/user/room-details/<%=room.room_id %>" class="card-link">
                                             <p class="badge"><%= data.department_name %> : <%= room.room_name %></p>
@@ -242,15 +247,15 @@
                                             </div>
                                         </a>
                                     </li>
-                                <% } %>
-                            <% }) %>
-                        </ul>
-                        <div class="swiper-pagination"></div>
+                                <% }) %>
+                            </ul>
+                            <div class="swiper-pagination"></div>
+                        </div>
                     </div>
-                </div>
-            </section>
-        <% } %>
-    <% }) %>
+                </section>
+            <% } 
+        }) %>
+        
     <%- include('partials/footer') %>
     <!--  swiper room -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
