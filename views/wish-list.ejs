@@ -32,10 +32,44 @@
                         <p class="card-title">
                             <%= data.bedroom %> ห้องนอน
                         </p>
+                        <% const roomHave = JSON.parse(data.room_have); %>
                         <div class="service">
-                            <img src="../img/dog.png" alt="" class="pic4">
-                            <img src="../img/gym.png" alt="" class="pic4">
-                            <img src="../img/wifi.png" alt="" class="pic4">
+                            <% if (roomHave.air_conditioner) { %>
+                                <img src="/img/air-conditioner.png" alt="Air" class="pic4">
+                            <% } %>
+                            <% if (roomHave.wi_fi) { %>
+                                <img src="/img/wifi.png" alt="Wi-Fi" class="pic4">
+                            <% } %>
+                            <% if (roomHave.TV) { %>
+                                <img src="/img/television.png" alt="TV" class="pic4">
+                            <% } %>
+                            <% if (roomHave.washing_machine) { %>
+                                <img src="/img/washing-machine.png" alt="Washing Machine" class="pic4">
+                            <% } %>
+                            <% if (roomHave.fitnaess) { %>
+                                <img src="/img/gym.png" alt="Fitness" class="pic4">
+                            <% } %>
+                            <% if (roomHave.furniture) { %>
+                                <img src="/img/home-furniture.png" alt="Furniture" class="pic4">
+                            <% } %>
+                            <% if (roomHave.pet_friendly) { %>
+                                <img src="/img/dog.png" alt="Pet Friendly" class="pic4">
+                            <% } %>
+                            <% if (roomHave.fridge) { %>
+                                <img src="/img/fridge.png" alt="Fridge" class="pic4">
+                            <% } %>
+                            <% if (roomHave.closed_camera) { %>
+                                <img src="/img/security-camera.png" alt="Closed Camera" class="pic4">
+                            <% } %>
+                            <% if (roomHave.lift) { %>
+                                <img src="/img/elevator.png" alt="Lift" class="pic4">
+                            <% } %>
+                            <% if (roomHave.microwave) { %>
+                                <img src="/img/microwave.png" alt="Microwave" class="pic4">
+                            <% } %>
+                            <% if (roomHave.parking) { %>
+                                <img src="/img/car.png" alt="Parking" class="pic4">
+                            <% } %>
                         </div>
                     </a>
                     <% }) %>
