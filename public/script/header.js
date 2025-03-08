@@ -8,12 +8,13 @@ document.addEventListener("click", function (event) {
     }
 });
 
-let popup = document.getElementById("popup");
-
+// popup
 function openPopup() {
     popup.classList.add("openPopup");
+    document.getElementById("overlay").classList.add("active");
 }
 
 function closePopup() {
     popup.classList.remove("openPopup");
+    document.getElementById("overlay").classList.remove("active");
 }

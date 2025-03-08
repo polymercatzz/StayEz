@@ -100,7 +100,7 @@
 }
 
 .popup {
-    max-width: 450px;
+    max-width: 500px;
     background-color: #ffffff;
     border-radius: 18px;
     position: fixed;
@@ -118,6 +118,24 @@
 .openPopup {
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+    z-index: 999;
+}
+
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .close-btn button {
@@ -160,7 +178,7 @@
 .popupdata {
     display: flex;
     max-width: 370px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     padding: 10px;
     color: #93B1D7;
 }
@@ -168,23 +186,23 @@
 
 .popupdata label {
     margin-right: 15px;
-    font-size: 1.3rem;
+    font-size: 2.4vh;
 }
 
 .popupdata input {
     border: none;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 2vh;
     padding: 5px;
     color: #616162;
-    /* width: 100%; */
+    width: 100%;
 
 }
 
 .profile p {
     text-align: center;
     color: #93B1D7;
-    font-size: 1.8rem;
+    font-size: 3vh;
     padding: 10px;
 }
 
@@ -256,7 +274,11 @@
     }
 
     .popup {
-        top: 50%;
-        left: 50%;
+        width: 300px;
+
+    }
+
+    .log-out img {
+        width: 30px;
     }
 }
