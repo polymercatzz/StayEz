@@ -1,4 +1,4 @@
 @echo off
-call ./bat/install.bat
+call ./script/install.bat
 nodemon server.js
 pause
