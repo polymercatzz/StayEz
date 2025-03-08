@@ -103,6 +103,7 @@ const showMain = (req, res) => {
         FROM Room r
         LEFT JOIN review rv ON r.room_id = rv.room_id
         LEFT JOIN Departments d ON r.department_id = d.department_id
+        WHERE r.room_status = "available"
         GROUP BY r.room_id
         ORDER BY avg_rating DESC
         LIMIT 10;
@@ -276,7 +277,7 @@ const showDetails = (req, res) => {
 const showHistory = (req, res) => {
     const userId = req.cookies.userId;
     const historySql = `
-        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.history_date, r.price, r.bedroom, d.department_name, r.room_id, h.history_id
+        SELECT r.room_name, c.contract_id, c.tenancy, c.people, h.history_status, h.history_date, r.price, r.bedroom, d.department_name, r.room_id, h.history_id, r.room_have
         FROM history h
         LEFT JOIN room r ON h.room_id = r.room_id
         LEFT JOIN contract c ON h.contract_id = c.contract_id
@@ -532,6 +533,7 @@ const showDepartments = (req, res) => {
         GROUP BY room_id;
     `;
     let imgSql = `SELECT * FROM Room_Images`;
+    let userSql = `SELECT * FROM users`;
     db.all(deptSql, [department_id],(err, deptData) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -554,13 +556,18 @@ const showDepartments = (req, res) => {
                     if (err) {
                         return res.status(500).json({ message: "Database error", error: err.message });
                     }
-                    let reviewMap = {};
-                    reviewData.forEach(rev => {
-                        reviewMap[rev.room_id] = {
-                            avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
-                        };
+                    db.all(userSql, (err, userData) => {
+                        if (err) {
+                            return res.status(500).json({ message: "Database error", error: err.message });
+                        }
+                        let reviewMap = {};
+                        reviewData.forEach(rev => {
+                            reviewMap[rev.room_id] = {
+                                avgRating: rev.review_count > 0 ? (rev.total_rating / rev.review_count).toFixed(1) : 0
+                            };
+                        });
+                        res.render('see-all-resident-user', { dept: deptData, room: roomData, review: reviewMap, img: imgData, user: userData });
                     });
-                    res.render('see-all-resident-user', { dept: deptData, room: roomData, review: reviewMap, img: imgData });
                 });
             });
         });
