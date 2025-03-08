@@ -314,6 +314,12 @@ textarea,
     opacity: 1;
 }
 
+.condi{
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+}
+
 @media screen and (max-width: 768px) {
     .popup {
         top: 50%;

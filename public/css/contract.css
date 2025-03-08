@@ -308,6 +308,9 @@ body {
     background-color: white;
 }
 
+.condi{
+    display: flex;
+}
 /* Responsive */
 @media (max-width: 768px) {
     .signature-container {
