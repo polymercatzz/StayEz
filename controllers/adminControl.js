@@ -215,18 +215,21 @@ const show_manage_booking = (req, res) => {
                 room.*,
                 GROUP_CONCAT(room_images.room_img_id) AS images_id,
                 contract.*,
-                departments.*
+                departments.*,
+                i.his_img_id
     FROM history
     JOIN users ON history.user_id = users.user_id
     JOIN room ON history.room_id = room.room_id
     JOIN room_images ON room.room_id = room_images.room_id
     JOIN contract ON history.contract_id = contract.contract_id
     JOIN departments ON room.department_id = departments.department_id
+    JOIN History_Images i on history.history_id =i.history_id
     GROUP BY room.room_id;`;;
     db.all(sql, [], (err, rows) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
+        console.log(rows)
         res.render("managebook", { data: rows });
     });
 };
