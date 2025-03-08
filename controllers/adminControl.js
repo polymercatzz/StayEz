@@ -495,10 +495,6 @@ const showMonthlyPayment = (req, res) => {
                 }, 0);
                 monthData.total_other_sum = totalOtherSum;
             });
-            console.log({
-                monthly: rows,
-                datamonth: data
-            })
             res.render("select-month", {
                 monthly: rows,
                 datamonth: data
@@ -527,19 +523,18 @@ const updateMonthlyPayment = (req, res) => {
             console.log({ message: "Database error", error: err.message });
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        res.redirect("/admin/monthly");
+        res.json({ message: "บันทึกข้อมูลสำเร็จ" });
     });
 }
 
 const create_user = (req, res) => {
     const { firstname, lastname, tel, email, password, confirmPassword } = req.body;
-
     if (!firstname || !lastname || !tel || !email || !password || !confirmPassword) {
-        return res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "กรุณากรอกข้อมูลให้ครบทุกช่อง" });
     }
 
     if (password !== confirmPassword) {
-        return res.status(400).json({ message: "Passwords do not match" });
+        return res.status(400).json({ message: "รหัสผ่านไม่ตรงกัน" });
     }
     console.log({ firstname, lastname, tel, email, password, confirmPassword });
     // Check if the email already exists in the database
@@ -550,7 +545,7 @@ const create_user = (req, res) => {
         }
 
         if (user) {
-            return res.status(400).json({ message: "Email is already registered" });
+            return res.status(400).json({ message: "อีเมล์นี้ได้ลงทะเบียนไว้แล้ว" });
         }
 
         try {
@@ -564,7 +559,7 @@ const create_user = (req, res) => {
                 if (err) {
                     return res.status(500).json({ message: "Error registering user", error: err.message });
                 }
-                res.redirect("/admin/manage_user");
+                res.status(200).json({ message: "Successful"});
             });
         } catch (error) {
             return res.status(500).json({ message: "Error hashing password", error: error.message });

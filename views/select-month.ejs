@@ -6,6 +6,9 @@
     <title>Monthly - StayEz</title>
     <%- include('partials/default-head') %>
     <link href="../css/select-month.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -166,6 +169,7 @@
 
             const textMonth = month < 10 ? '0' + month : month.toString();
             const year = new Date().getFullYear();
+            const month_tody = new Date().getMonth()+1;
 
             const waterInput = document.getElementById("water").value;
             const electricityInput = document.getElementById("electric").value;
@@ -174,8 +178,9 @@
             const rent = document.getElementById("rent").value;
             const electric_in = document.getElementById("electric_in").value;
             const other_in = document.getElementById("other_in").value;
-            window.location.href = "http://localhost:3000/admin/monthly";
-            if (waterInput || electricityInput || otherInput) {
+            console.log(month_tody,month)
+            if (month_tody >= month){
+                if (waterInput || electricityInput || otherInput) {
                 fetch(`/admin/monthly/${year}/${textMonth}`, {
                     method: "POST",
                     headers: {
@@ -193,13 +198,31 @@
                 })
                     .then(response => response.json())
                     .then(data => {
+                        Swal.fire({
+                            title: "เพิ่มข้อมูลรายรับ-รายจ่าย",
+                            text: "เพิ่มข้อมูลรายรับ-รายจ่ายสำเร็จแล้ว",
+                            icon: "success",
+                            confirmButtonText: "ตกลง"
+                        }).then(()=> {
+                            closePopup(monthIndex);
+                            window.location.reload();
+                        });
                     })
                     .catch(error => {
                         console.error("Error:", error);
                     });
-            } else {
+                } else {
+                    closePopup(monthIndex);
+                }
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'ไม่สามารถเพิ่มรายรับ-รายจ่ายมากว่าปัจจุบันได้',
+                });
                 closePopup(monthIndex);
             }
+            
         }
     </script>
 </body>

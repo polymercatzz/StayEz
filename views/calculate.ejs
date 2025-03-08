@@ -7,6 +7,9 @@
     <title>Manage Rent - StayEz</title>
     <%- include('partials/default-head') %>
     <link href="../css/calculate.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -93,17 +96,17 @@
                     <p class="content-head">เรียกเก็บเงิน</p>
                     <div class="content-item">
                         <p>ค่าเช่า : </p>
-                        <input type="text" id="rent" name="rent" disabled required>
+                        <input type="text" id="rent" name="rent" disabled>
                         <p>บาท</p>
                     </div>
                     <div class="content-item">
                         <p>ค่าน้ำ : </p>
-                        <input type="text" name="water" id="water" required>
+                        <input type="text" name="water" id="water">
                         <p>หน่วย</p>
                     </div>
                     <div class="content-item">
                         <p>ค่าไฟ :</p>
-                        <input type="text" name="electricity" id="electricity" required>
+                        <input type="text" name="electricity" id="electricity">
                         <p>หน่วย</p>
                     </div>
                     <div id="expense-container">
@@ -165,6 +168,41 @@
     </div>
     <%- include('partials/admin-footer') %>
     <script>
+        document.getElementById("payment-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const rent = document.getElementById("rent").value;
+            const water = document.getElementById("water").value;
+            const electricity = document.getElementById("electricity").value;
+
+            // ตรวจสอบว่า rent, water, electricity ถูกกรอกหรือไม่
+            if (!water || Number(water) < 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'กรุณากรอกค่าน้ำที่ถูกต้อง',
+                    text: 'ค่าน้ำต้องเป็นตัวเลขและไม่สามารถติดลบได้',
+                });
+                return;
+            }
+
+            if (!electricity || Number(electricity) < 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'กรุณากรอกค่าไฟที่ถูกต้อง',
+                    text: 'ค่าไฟต้องเป็นตัวเลขและไม่สามารถติดลบได้',
+                });
+                return;
+            }
+            Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                text: 'ข้อมูลครบถ้วน กำลังดำเนินการกรอกค่าที่พัก',
+                timer: 1500,
+                showConfirmButton: false
+                }).then(() => {
+                    this.submit();
+                });
+        });
         function openInputPopup(history_id, room_id, price) {
             const form = document.getElementById("payment-form");
             form.action = `/admin/createpayment/${room_id}/${history_id}`;
@@ -237,8 +275,8 @@
             newExpense.classList.add("content-item");
 
             newExpense.innerHTML = `
-        <input type="text" name="other" >: 
-        <input type="text" name="r_other" >
+        <input type="text" name="other" required>: 
+        <input type="text" name="r_other" required>
         <p>บาท</p>
         <button onclick="removeExpense(this)">-</button>`;
 

@@ -206,7 +206,9 @@
                     <p class="text-data">จ่ายเงินล่วงหน้า:</p>
                     <p class="text-data"><%= room.pay_advance %> บาท</p>
                 </div>
-                <a href="/user/contact/<%= room.room_id %>">จอง</a>
+                <% if (!room.history_id) { %>
+                    <a href="/user/contact/<%= room.room_id %>">จอง</a>
+                <% } %>
             </div>
 
         </div>
@@ -218,7 +220,7 @@
             <div class="profile">
                 <div class="close-btn">
                     <button onclick="closePopup()">
-                        <img src="../../img/close.png" alt="">
+                        <img src="/img/close.png" alt="">
                     </button>
                 </div>
                 <p>Profile</p>

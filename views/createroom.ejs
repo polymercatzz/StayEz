@@ -6,174 +6,285 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Room - StayEz</title>
     <%- include('partials/default-head') %>
-    <link href="../css/manage-dorm.css" rel="stylesheet">
+        <link href="../css/manage-dorm.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
     <%- include('partials/admin-navbar') %>
-    <div class="container">
-        <a href="/admin/manage_room">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-                <path
-                    d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-            </svg>
-        </a>
-        <form class="form-container" action="/admin/createroom" method="POST" enctype="multipart/form-data">
-            <div class="form">
-                <div class="first-section">
-                    <div class="item">
-                        <label>ชื่อที่พัก : </label>
-                        <select id="department-name" name="department_id">
-                            <option value="">เลือก</option>
-                            <% data.forEach((department)=> { %>
-                                <option value="<%= department.department_id %>">
-                                    <%= department.department_name %>
-                                </option>
-                                <% }) %>
-                                    <option value="<%= data.length+1 %>">อื่นๆ</option>
-                        </select>
-                        <input type="text" id="other-department-name" style="display: none;"
-                            placeholder="กรอกชื่อที่พัก" name="department_name" />
+        <div class="container">
+            <a href="/admin/manage_room">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                </svg>
+            </a>
+            <form class="form-container" action="/admin/createroom" method="POST" enctype="multipart/form-data">
+                <div class="form">
+                    <div class="first-section">
+                        <div class="item">
+                            <label>ชื่อที่พัก : </label>
+                            <select id="department-name" name="department_id">
+                                <option value="">เลือก</option>
+                                <% data.forEach((department)=> { %>
+                                    <option value="<%= department.department_id %>">
+                                        <%= department.department_name %>
+                                    </option>
+                                    <% }) %>
+                                        <option value="<%= data.length+1 %>">อื่นๆ</option>
+                            </select>
+                            <input type="text" id="other-department-name" style="display: none;"
+                                placeholder="กรอกชื่อที่พัก" name="department_name" />
+                        </div>
+                        <div class="item">
+                            <label>เลขห้อง : </label>
+                            <input type="text" name="room_name">
+                        </div>
+                        <div class="item">
+                            <label>ขนาดห้อง : </label>
+                            <input type="text" name="size">
+                        </div>
+                        <div class="item">
+                            <label>รูปที่ 1 : </label>
+                            <input class="file-input" type="file" accept="image/*" name="imageFiles">
+                        </div>
+                        <div class="item">
+                            <label>รูปที่ 2 : </label>
+                            <input class="file-input" type="file" accept="image/*" name="imageFiles">
+                        </div>
+                        <div class="item">
+                            <label>รูปที่ 3 : </label>
+                            <input class="file-input" type="file" accept="image/*" name="imageFiles">
+                        </div>
+                        <div class="item">
+                            <label>ราคา : </label>
+                            <input type="number" name="price">
+                        </div>
+                        <div class="item">
+                            <label>ค่าไฟ : </label>
+                            <input type="number" name="p_electric">
+                        </div>
+                        <div class="item">
+                            <label>ค่าน้ำ : </label>
+                            <input type="number" name="p_water">
+                        </div>
+                        <div class="item">
+                            <label>เงินประกัน : </label>
+                            <input type="number" name="deposit">
+                        </div>
+                        <div class="item">
+                            <label>จ่ายเงินล่วงหน้า : </label>
+                            <input name="pay_advance">
+                        </div>
+                        <div class="item">
+                            <label>ห้องนอน : </label>
+                            <input name="bedroom">
+                        </div>
                     </div>
-                    <div class="item">
-                        <label>เลขห้อง : </label>
-                        <input type="text" name="room_name">
+                    <div class="item form-textarea">
+                        <label>รายละเอียดที่พัก : </label>
+                        <textarea name="detail"></textarea>
                     </div>
-                    <div class="item">
-                        <label>ขนาดห้อง : </label>
-                        <input type="text" name="size">
+                    <div class="item checklist">
+                        <label>ที่พักนี้มีอะไรบ้าง : </label>
+                        <div class="checklist-menu">
+                            <div class="checklist-item">
+                                <input type="checkbox" name="air_conditioner">
+                                <img src="/../img/air-conditioner.png">
+                                <label>เครื่องปรับอากาศ</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="wi_fi">
+                                <img src="/img/wifi.png">
+                                <label>wi-fi</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="TV">
+                                <img src="/img/television.png">
+                                <label>โทรทัศน์</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="washing_machine">
+                                <img src="/img/washing-machine.png">
+                                <label>เครื่องซักผ้า</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="fitnaess">
+                                <img src="/img/gym.png">
+                                <label>ฟิตเนส</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="furniture">
+                                <img src="/img/home-furniture.png">
+                                <label>เฟอร์นิเจอร์</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="pet_friendly">
+                                <img src="/img/dog.png">
+                                <label>pet friendly</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="fridge">
+                                <img src="/img/fridge.png">
+                                <label>ตู้เย็น</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="closed_camera">
+                                <img src="/img/security-camera.png">
+                                <label>กล้องวงจรปิด</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="lift">
+                                <img src="/img/elevator.png">
+                                <label>lift</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="microwave">
+                                <img src="/img/microwave.png">
+                                <label>ไมโครเวฟ</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" name="parking">
+                                <img src="/img/car.png">
+                                <label>ที่จอดรถ</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="item">
-                        <label>รูปที่ 1 : </label>
-                        <input class="file-input" type="file" accept="image/*" name="imageFiles">
-                    </div>
-                    <div class="item">
-                        <label>รูปที่ 2 : </label>
-                        <input class="file-input" type="file" accept="image/*" name="imageFiles">
-                    </div>
-                    <div class="item">
-                        <label>รูปที่ 3 : </label>
-                        <input class="file-input" type="file" accept="image/*" name="imageFiles">
-                    </div>
-                    <div class="item">
-                        <label>ราคา : </label>
-                        <input type="number" name="price">
-                    </div>
-                    <div class="item">
-                        <label>ค่าไฟ : </label>
-                        <input type="number" name="p_electric">
-                    </div>
-                    <div class="item">
-                        <label>ค่าน้ำ : </label>
-                        <input type="number" name="p_water">
-                    </div>
-                    <div class="item">
-                        <label>เงินประกัน : </label>
-                        <input type="number" name="deposit">
-                    </div>
-                    <div class="item">
-                        <label>จ่ายเงินล่วงหน้า : </label>
-                        <input name="pay_advance">
-                    </div>
-                    <div class="item">
-                        <label>ห้องนอน : </label>
-                        <input name="bedroom">
+                    <div class="item map">
+                        <label>Map : </label>
+                        <input type="text" name="map">
                     </div>
                 </div>
-                <div class="item form-textarea">
-                    <label>รายละเอียดที่พัก : </label>
-                    <textarea name="detail"></textarea>
-                </div>
-                <div class="item checklist">
-                    <label>ที่พักนี้มีอะไรบ้าง : </label>
-                    <div class="checklist-menu">
-                        <div class="checklist-item">
-                            <input type="checkbox" name="air_conditioner">
-                            <img src="/../img/air-conditioner.png">
-                            <label>เครื่องปรับอากาศ</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="wi_fi">
-                            <img src="/img/wifi.png">
-                            <label>wi-fi</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="TV">
-                            <img src="/img/television.png">
-                            <label>โทรทัศน์</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="washing_machine">
-                            <img src="/img/washing-machine.png">
-                            <label>เครื่องซักผ้า</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="fitnaess">
-                            <img src="/img/gym.png">
-                            <label>ฟิตเนส</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="furniture">
-                            <img src="/img/home-furniture.png">
-                            <label>เฟอร์นิเจอร์</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="pet_friendly">
-                            <img src="/img/dog.png">
-                            <label>pet friendly</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="fridge">
-                            <img src="/img/fridge.png">
-                            <label>ตู้เย็น</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="closed_camera">
-                            <img src="/img/security-camera.png">
-                            <label>กล้องวงจรปิด</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="lift">
-                            <img src="/img/elevator.png">
-                            <label>lift</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="microwave">
-                            <img src="/img/microwave.png">
-                            <label>ไมโครเวฟ</label>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" name="parking">
-                            <img src="/img/car.png">
-                            <label>ที่จอดรถ</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="item map">
-                    <label>Map : </label>
-                    <input type="text" name="map">
-                </div>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    <%- include('partials/admin-footer') %>
-    <script>
-        function confirmDelete() {
-            const container = document.getElementById("popup-container");
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <%- include('partials/admin-footer') %>
+            <script>
+                document.querySelector("form.form-container").addEventListener("submit", function (e) {
+                    e.preventDefault(); // ป้องกันการส่งฟอร์มอัตโนมัติ
 
-            container.style.display = 'block';
-        };
-        document.getElementById('department-name').addEventListener('change', function () {
-            const otherInput = document.getElementById('other-department-name');
-            if (this.value === "<%= data.length+1 %>") {
-                otherInput.style.display = 'block';
-            } else {
-                otherInput.style.display = 'none';
-            }
-        });
-    </script>
+                    // ดึงค่าจาก input
+                    const departmentName = document.querySelector("select[name='department_id']").value;
+                    const otherDepartmentName = document.querySelector("input[name='department_name']").value;
+                    const roomName = document.querySelector("input[name='room_name']").value;
+                    const size = document.querySelector("input[name='size']").value;
+                    const price = document.querySelector("input[name='price']").value;
+                    const pElectric = document.querySelector("input[name='p_electric']").value;
+                    const pWater = document.querySelector("input[name='p_water']").value;
+                    const deposit = document.querySelector("input[name='deposit']").value;
+                    const payAdvance = document.querySelector("input[name='pay_advance']").value;
+                    const bedroom = document.querySelector("input[name='bedroom']").value;
+                    const detail = document.querySelector("textarea[name='detail']").value;
+                    const map = document.querySelector("input[name='map']").value;
+                    const imageFiles = document.querySelectorAll("input[name='imageFiles']");
+                    let allImagesSelected = true;
+
+                    imageFiles.forEach(function (fileInput, index) {
+                        if (fileInput.files.length === 0) {
+                            allImagesSelected = false;
+                        }
+                    });
+                    // ตรวจสอบว่าเลือกรูปหรือไม่
+                    if (!allImagesSelected) {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "กรุณาอัพโหลดรูปครบ 3 รูป",
+                            text: "กรุณาเลือกไฟล์รูปภาพทั้งหมด 3 รูป",
+                        });
+                        return;
+                    }
+                    // ตรวจสอบว่าเลือกชื่อที่พักหรือไม่
+                    if (departmentName === "" && otherDepartmentName === "") {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "ข้อมูลไม่ครบถ้วน!",
+                            text: "กรุณาเลือกหรือกรอกชื่อที่พัก",
+                        });
+                        return;
+                    }
+
+                    // ตรวจสอบว่าไม่มีช่องว่าง (ยกเว้น detail และ map)
+                    if (!roomName || !size || !price || !pElectric || !pWater || !deposit || !payAdvance || !bedroom) {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "ข้อมูลไม่ครบถ้วน!",
+                            text: "กรุณากรอกข้อมูลให้ครบทุกช่องที่จำเป็น",
+                        });
+                        return;
+                    }
+
+                    // ตรวจสอบช่องที่ต้องเป็นตัวเลข และต้องไม่ติดลบ
+                    if (isNaN(price) || Number(price) < 0) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ข้อมูลไม่ถูกต้อง!",
+                            text: "กรุณากรอกราคาห้องเป็นตัวเลขที่ไม่ติดลบ",
+                        });
+                        return;
+                    } else if (isNaN(pElectric) || Number(pElectric) < 0) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ข้อมูลไม่ถูกต้อง!",
+                            text: "กรุณากรอกค่าไฟเป็นตัวเลขที่ไม่ติดลบ",
+                        });
+                        return;
+                    } else if (isNaN(pWater) || Number(pWater) < 0) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ข้อมูลไม่ถูกต้อง!",
+                            text: "กรุณากรอกค่าน้ำเป็นตัวเลขที่ไม่ติดลบ",
+                        });
+                        return;
+                    } else if (isNaN(deposit) || Number(deposit) < 0) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ข้อมูลไม่ถูกต้อง!",
+                            text: "กรุณากรอกเงินประกันเป็นตัวเลขที่ไม่ติดลบ",
+                        });
+                        return;
+                    } else if (isNaN(payAdvance) || Number(payAdvance) < 0) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ข้อมูลไม่ถูกต้อง!",
+                            text: "กรุณากรอกเงินล่วงหน้าเป็นตัวเลขที่ไม่ติดลบ",
+                        });
+                        return;
+                    } else if (isNaN(bedroom) || Number(bedroom) < 0) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "ข้อมูลไม่ถูกต้อง!",
+                            text: "กรุณากรอกจำนวนห้องนอนเป็นตัวเลขที่ไม่ติดลบ",
+                        });
+                        return;
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'สำเร็จ',
+                        text: 'ข้อมูลครบถ้วน กำลังดำเนินการสร้างห้อง',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        this.submit();
+                    });
+                });
+                function confirmDelete() {
+                    const container = document.getElementById("popup-container");
+
+                    container.style.display = 'block';
+                };
+                document.getElementById('department-name').addEventListener('change', function () {
+                    const otherInput = document.getElementById('other-department-name');
+                    if (this.value === "<%= data.length+1 %>") {
+                        otherInput.style.display = 'block';
+                    } else {
+                        otherInput.style.display = 'none';
+                    }
+                });
+            </script>
 </body>
 
 </html>

@@ -8,11 +8,11 @@ const registerUser = async (req, res) => {
     const { register_firstname, register_lastname, register_tel, register_email, register_password, register_confirmPassword } = req.body;
 
     if (!register_firstname || !register_lastname || !register_tel || !register_email || !register_password || !register_confirmPassword) {
-        return res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "กรุณากรอกข้อมูลให้ครบทุกช่อง" });
     }
 
     if (register_password !== register_confirmPassword) {
-        return res.status(400).json({ message: "Passwords do not match" });
+        return res.status(400).json({ message: "รหัสผ่านไม่ตรงกัน" });
     }
 
     // Check if the email already exists in the database
@@ -223,8 +223,9 @@ const showFav = (req, res) => {
 
 const showDetails = (req, res) => {
     const room_id = req.params.room_id;
-    const roomSql = `SELECT r.*, f.user_id, d.* FROM Room r 
+    const roomSql = `SELECT r.*, f.user_id, d.*, h.history_id FROM Room r 
                     JOIN Departments d ON r.department_id = d.department_id
+                    LEFT JOIN History h ON h.room_id = r.room_id
                     LEFT JOIN Favorites f ON f.room_id = r.room_id 
                     WHERE r.room_id = ? and (f.user_id = ? OR f.user_id ISNULL);`;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;

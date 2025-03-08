@@ -45,7 +45,7 @@
             <% history.forEach((item, index) => { %>
                 <div class="all">
                     <div class="card">
-                        <a href="#" class="card-link">
+                        <a href="/user/room-details/<%= item.room_id %>" class="card-link">
                             <p class="badge"><%= item.department_name %></p>
                             <img src="/room_img/<%= history[index].room_img_id %>" alt="Room Image" class="card-img">
                             <p class="card-title">รีวิว 4.9</p>
