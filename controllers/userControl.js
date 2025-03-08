@@ -99,7 +99,7 @@ const showMain = (req, res) => {
     let imgSql = `SELECT * FROM Room_Images`;
     let topRatedRoomsSql = `
         SELECT r.*, d.department_name, 
-            COALESCE(SUM(rv.rating) / COUNT(rv.room_id), 0) AS avg_rating
+            COALESCE(AVG(rv.rating), 0) AS avg_rating
         FROM Room r
         LEFT JOIN review rv ON r.room_id = rv.room_id
         LEFT JOIN Departments d ON r.department_id = d.department_id
@@ -177,7 +177,6 @@ const showMain = (req, res) => {
                             if (err) {
                                 return res.status(500).json({ message: "Database error", error: err.message });
                             }
-
                             res.render('main-user', {
                                 user: userData,
                                 room: roomData,
@@ -214,8 +213,6 @@ const showFav = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            // check favorite Data
-            // console.log(favData);
             res.render('wish-list', { fav: favData, user: userData});
         });
     });
@@ -244,7 +241,7 @@ const showDetails = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        db.get(roomSql, [req.cookies.userId, room_id, ], (err, roomData) => {
+        db.get(roomSql, [req.cookies.userId, room_id], (err, roomData) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
@@ -260,7 +257,6 @@ const showDetails = (req, res) => {
                     const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
                     const avgRating = reviewData ? reviewData.avg_rating : 0;
                     const reviewCount = reviewData ? reviewData.review_count : 0;
-                    console.log(roomData);
                     res.render('description', { 
                         room: roomData, 
                         user: userData, 

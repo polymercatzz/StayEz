@@ -165,7 +165,7 @@
             </div>
 
         </div>
-        <p class="rate">รีวิว <%= avgRating %> ★</p>
+        <p class="rate">รีวิว <%= avgRating.toFixed(1); %> ★</p>
         <div class="alldata2">
             <div class="review">
                 <% if (comments && reviewers) { %>
