@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,7 +7,6 @@
     <title>Monthly - StayEz</title>
     <%- include('partials/default-head') %>
     <link href="../css/select-month.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -34,15 +34,15 @@
     <%- include('partials/footer') %>
     <!-- Popups for each month -->
     <div class="popup-container" id="popup-container">
-        <div class="popup" id="popup">
-            <div class="popup-header">
+        <div class="page-popup" id="popup">
+            <div class="page-popup-header">
                 <svg class="icon-popup" id="icon" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="16"
                     height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path
                         d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                 </svg>
             </div>
-            <div class="popup-content">
+            <div class="page-popup-content">
                 <p class="content-head" id="month_show_in"></p>
                 <div class="content-item">
                     <p>ค่าเช่า : </p>

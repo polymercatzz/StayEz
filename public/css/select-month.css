@@ -70,12 +70,12 @@ body {
     align-items: center;
 }
 
-.popup {
+.page-popup {
     position: fixed;
     color: rgba(123, 156, 200, 1);
     background-color: white;
-    width: 50vh;
-    height: 50vh;
+    width: fit-content;
+    height: fit-content;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -83,7 +83,7 @@ body {
     overflow: hidden;
 }
 
-.popup-header {
+.page-popup-header {
     background-color: rgba(201, 215, 238, 1);
     height: 30px;
     justify-content: flex-end;
@@ -92,22 +92,21 @@ body {
     padding-right: 5px;
 }
 
-.popup-content {
+.page-popup-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 45vh;
+    padding: 10px;
 }
 
-.popup-content button {
+.page-popup-content button {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
     width: 60px;
     height: 30px;
     border-radius: 10px;
-    margin-top: 10px;
 }
 
 .icon-popup {
@@ -121,7 +120,7 @@ body {
 
 .content-head {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin: 5px;
 }
 
 .content-item {
@@ -129,6 +128,8 @@ body {
     height: 40px;
     align-items: center;
     gap: 10px;
+    margin: 5px;
+    white-space: nowrap;
 }
 
 .content-item input {

@@ -117,20 +117,21 @@ tr select {
     align-items: center;
 }
 
-.popup {
+.page-popup {
     position: fixed;
     color: rgba(123, 156, 200, 1);
     background-color: white;
-    width: 50vh;
-    height: 30vh;
+    width: fit-content;
+    height: fit-content;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow: hidden;
+    min-width: 200px;
 }
 
-.popup-header {
+.page-popup-header {
     background-color: rgba(201, 215, 238, 1);
     height: 30px;
     justify-content: flex-end;
@@ -139,15 +140,16 @@ tr select {
     padding-right: 5px;
 }
 
-.popup-content {
+.page-popup-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: fit-content;
+    padding: 20px;
 }
 
-.popup-content button {
+.page-popup-content button {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
@@ -166,16 +168,12 @@ tr select {
     stroke-width: 2;
 }
 
-.content-head {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
 .content-item {
     display: flex;
     height: 40px;
     align-items: center;
     gap: 10px;
+    white-space: nowrap;
 }
 
 .content-item input {
