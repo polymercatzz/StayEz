@@ -58,6 +58,9 @@ const loginUser = (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "รหัสผ่านหรืออีเมลไม่ถูกต้อง" });
         }
+        if (user.status === "inactive") {
+            return res.status(401).json({ message: "บัญชีของคุณถูกระงับ"});
+        }
 
         // Compare hashed password
         const isMatch = await bcrypt.compare(login_password, user.password);
