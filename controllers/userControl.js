@@ -211,6 +211,7 @@ const showFav = (req, res) => {
         GROUP BY r.room_id;
     `;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
+    let imgSql = `SELECT * FROM Room_Images`;
 
     db.get(userSql, [req.cookies.userId], (err, userData) => {
         if (err) {
@@ -220,7 +221,12 @@ const showFav = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            res.render('wish-list', { fav: favData, user: userData});
+            db.all(imgSql, (err, imgData) => {
+                if (err) {
+                    return res.status(500).json({ message: "Database error", error: err.message });
+                }
+                res.render('wish-list', { fav: favData, user: userData, img: imgData});
+            });
         });
     });
 }

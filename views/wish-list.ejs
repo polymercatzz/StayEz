@@ -23,8 +23,8 @@
                         <p class="badge">
                             <%= data.department_name %> resident
                         </p>
-                        <img src="https://cdn-cms.pgimgs.com/static/2021/10/How-to-choose-luxury-condo.jpg"
-                            alt="Card Image" class="card-img">
+                        <% const roomImage = img.find(image => image.room_id === data.room_id); %>
+                        <img src="/room_img/<%= roomImage.room_img_id %>" alt="Room Image" class="card-img">
                         <p class="card-title">รีวิว <%= data.avg_rating %></p>
                         <p class="card-title">
                             <%= data.price %> บาท/เดือน
