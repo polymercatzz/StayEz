@@ -30,18 +30,20 @@
         <a href="/admin/manage_rent">ระบบคำนวณ</a>
     </div>
     <div class="summary">
+        <% 
+            let totalIncome = data.reduce((sum, item) => sum + (item.rent || 0) + (item.water_income || 0) + (item.electric_income || 0) + (item.other_income || 0), 0);
+            let totalExpense = data.reduce((sum, item) => sum + (item.water_bill || 0) + (item.electric_bill || 0) + (item.other_bill || 0), 0);
+        %>
         <p>สรุปรายได้-รายจ่ายที่พัก</p>
         <div class="total">
             <div class="total-header">
-                <!-- <div class="total-section">
+                <div class="total-section">
                     <p>รายได้ทั้งหมด : </p>
-                    <p class="total-text"></p>
-                </div> -->
+                    <p class="total-text"><%= totalIncome %></p>
+                </div>
                 <div class="total-section">
                     <p>รายจ่ายทั้งหมด : </p>
-                    <p class="total-text">
-                        <%= data.reduce((sum, item)=> sum + (item.total_amount || 0), 0) %>
-                    </p>
+                    <p class="total-text"> <%= totalExpense %> </p>
                 </div>
             </div>
             <canvas id="total-chart" style="width:100%;max-width: 75%;justify-self: center;"></canvas>
@@ -49,7 +51,7 @@
                 <a href="/admin/monthly"><button>รายได้แต่ละเดือน</button></a>
                 <div class="sum-section">
                     <p>สรุป : </p>
-                    <p class="sum-text"></p>
+                    <p class="sum-text"><%= totalIncome-totalExpense %></p>
                 </div>
             </div>
         </div>

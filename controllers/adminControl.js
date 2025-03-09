@@ -434,7 +434,7 @@ const update_payment = (req, res) => {
     });
 };
 
-const show_contact = (req, res) => {
+const show_contract = (req, res) => {
     const contract_id = req.params.contract_id;
     const sql = `SELECT *
         FROM contract c
@@ -503,12 +503,15 @@ const updateMonthlyPayment = (req, res) => {
     const electricityInt = Number(electric_bill) || 0;
     const otherInt = Number(other_bill) || 0;
 
-    const amount = waterInt + electricityInt + otherInt;
-    const date = year + "-" + month;
+    const rentInt = Number(rent) || 0;
+    const waterIncomeInt = Number(water_income) || 0;
+    const electricIncomeInt = Number(electric_income) || 0;
+    const otherIncomeInt = Number(other_income) || 0;
 
-    console.log(amount, date, { water_bill, electric_bill, other_bill, rent, water_income, electric_income, other_income });
+    const amount = (rentInt + waterIncomeInt + electricIncomeInt + otherIncomeInt) - (waterInt + electricityInt + otherInt);
+    const date = year + "-" + month;
     const sql = `INSERT INTO Report (rent, water_income, electric_income, other_income, water_bill, electric_bill, other_bill, total_amount, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-    db.run(sql, [rent, water_income, electric_income, other_income, waterInt, electricityInt, otherInt, amount, date], (err) => {
+    db.run(sql, [rentInt, waterIncomeInt, electricIncomeInt, otherIncomeInt, waterInt, electricityInt, otherInt, amount, date], (err) => {
         if (err) {
             console.log({ message: "Database error", error: err.message });
             return res.status(500).json({ message: "Database error", error: err.message });
@@ -609,5 +612,5 @@ const showDetails = (req, res) => {
         });
     });
 };
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact, create_user, showDetails };
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contract, create_user, showDetails };
 
