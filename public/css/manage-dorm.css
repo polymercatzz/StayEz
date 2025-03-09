@@ -172,7 +172,7 @@
     align-items: center;
 }
 
-.popup {
+.page-popup {
     position: fixed;
     color: rgba(123, 156, 200, 1);
     background-color: white;
@@ -185,7 +185,7 @@
     overflow: hidden;
 }
 
-.popup-header {
+.page-popup-header {
     background-color: rgba(201, 215, 238, 1);
     height: 30px;
     justify-content: flex-end;
@@ -194,7 +194,7 @@
     padding-right: 5px;
 }
 
-.popup-content {
+.page-popup-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -202,7 +202,7 @@
     height: 15vh;
 }
 
-.popup-content button {
+.page-popup-content button {
     border: none;
     background-color: rgba(123, 156, 200, 1);
     color: white;
