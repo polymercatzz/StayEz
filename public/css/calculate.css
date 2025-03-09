@@ -116,8 +116,8 @@ tr select {
     position: fixed;
     color: rgba(123, 156, 200, 1);
     background-color: white;
-    width: 50vh;
-    height: 40vh;
+    width: fit-content;
+    height: fit-content;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -179,7 +179,8 @@ tr select {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 35vh;
+    height: fit-content;
+    padding: 20px;
 }
 
 .input-popup-content button {
