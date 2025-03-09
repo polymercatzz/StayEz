@@ -100,7 +100,7 @@
                     <label for="allplace" class="text">ช่วงราคา</label>
                     <select id="allplace" name="price" class="allplace">
                         <option value="">ราคาทั้งหมด</option>
-                        <% ["5000-10000", "10000-15000", "15000-20000", "20000-25000", "25000-30000"].forEach(price => { %>
+                        <% ["0-5000", "5000-10000", "10000-15000", "15000-20000", "20000-25000", "25000-30000"].forEach(price => { %>
                             <option value="<%= price %>" <%= filters.price == price ? 'selected' : '' %>><%= price %></option>
                         <% }) %>
                     </select>
