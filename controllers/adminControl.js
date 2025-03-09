@@ -464,8 +464,8 @@ const showMonthlyPayment = (req, res) => {
                     FROM Payment
                     JOIN History ON History.history_id = Payment.history_id
                     JOIN room ON room.room_id = History.room_id
+                    WHERE Payment.payment_status != "Pending"
                     GROUP BY strftime('%Y-%m', payment_date)
-                    HAVING Payment.payment_status != "Pending"
                     ORDER BY payment_date;`;
     db.all(monthSql, (err, rows) => {
         if (err) {
