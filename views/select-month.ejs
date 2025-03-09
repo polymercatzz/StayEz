@@ -90,6 +90,7 @@
             "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
             "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
         ];
+        const currentYearMonth = new Date().toISOString().slice(0, 7);
         const monthly = <%- JSON.stringify(monthly) %>;
         const datamonth = <%- JSON.stringify(datamonth) %>;
               // Show the correct popup and hide others
@@ -105,7 +106,7 @@
             let rent = document.getElementById("rent");
             let electric_in = document.getElementById("electric_in");
             let other_in = document.getElementById("other_in");
-            if (datamonth[index]) {
+            if (datamonth[index].month === currentYearMonth) {
                 rent.value = datamonth[index].total_rent;
                 water_in.value = datamonth[index].total_water;
                 electric_in.value = datamonth[index].total_electric;
@@ -120,6 +121,12 @@
 
                 other.value = monthly[index].other_bill;
                 other.readOnly = "readOnly";
+
+                rent.value = monthly[index].rent;
+                water_in.value = monthly[index].water_income;
+                electric_in.value = monthly[index].electric_income;
+                other_in.value = monthly[index].other_income;
+
                 document.getElementById("submitForm").style.display = "none";
             } else {
                 water.value = "";
