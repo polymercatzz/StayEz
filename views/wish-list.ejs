@@ -21,11 +21,11 @@
                 <% fav.forEach((data)=> { %>
                     <a href="/user/room-details/<%= data.room_id %>" class="card-link">
                         <p class="badge">
-                            <% data.room_id %> resident
+                            <%= data.department_name %> resident
                         </p>
                         <img src="https://cdn-cms.pgimgs.com/static/2021/10/How-to-choose-luxury-condo.jpg"
                             alt="Card Image" class="card-img">
-                        <p class="card-title">รีวิว 4.9</p>
+                        <p class="card-title">รีวิว <%= data.avg_rating %></p>
                         <p class="card-title">
                             <%= data.price %> บาท/เดือน
                         </p>

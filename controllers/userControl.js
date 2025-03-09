@@ -202,10 +202,13 @@ const showMain = (req, res) => {
 
 const showFav = (req, res) => {
     const favSql = `
-        SELECT *
+        SELECT r.*, d.*, COALESCE(AVG(rv.rating), 0) AS avg_rating
         FROM Favorites f
         JOIN room r ON f.room_id = r.room_id
-        WHERE user_id = ?;
+        JOIN departments d ON r.department_id = d.department_id
+        LEFT JOIN review rv ON f.room_id = rv.room_id
+        WHERE f.user_id = ?
+        GROUP BY r.room_id;
     `;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
 
