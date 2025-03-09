@@ -27,7 +27,7 @@
                             <% } %>
                                 <a href="/admin/edit_room/<%= item.room_id %>">
                                     <div class="card <%= item.user_id ? 'reserve' : 'empty' %>">
-                                        <img src="/room_img/<%= item.images_id[0] %>" style="width: 300px; height: 200px;">
+                                        <img src="/room_img/<%= item.images_id.split(',')[0] %>" style="width: 300px; height: 200px;">
                                         <p>ห้อง : <%= item.room_name %>
                                         </p>
                                         <% if (item.user_id) { %>

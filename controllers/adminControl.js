@@ -26,7 +26,7 @@ const show_manage_room = (req, res) => {
     JOIN room_images ON room.room_id = room_images.room_id
     LEFT JOIN history ON room.room_id = history.room_id
     LEFT JOIN users ON history.user_id = users.user_id
-    GROUP BY room.room_id;
+    GROUP BY room.room_id
     ORDER BY department_id;`;
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -465,8 +465,8 @@ const showMonthlyPayment = (req, res) => {
                     JOIN History ON History.history_id = Payment.history_id
                     JOIN room ON room.room_id = History.room_id
                     GROUP BY strftime('%Y-%m', payment_date)
-                    HAVING Payment.payment_status != "Pending";
-                    ORDER BY payment_date`;
+                    HAVING Payment.payment_status != "Pending"
+                    ORDER BY payment_date;`;
     db.all(monthSql, (err, rows) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
