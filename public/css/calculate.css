@@ -350,6 +350,12 @@ tr select {
     font-size: 24px;
 }
 
+.expense-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media screen and (max-width: 768px) {
     .status-content {
         margin-left: 0px;
