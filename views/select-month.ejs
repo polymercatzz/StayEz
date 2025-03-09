@@ -8,10 +8,30 @@
     <%- include('partials/default-head') %>
     <link href="../css/select-month.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
-    
+    <%- include('partials/admin-navbar') %>
+    <div class="container">
+        <p class="title">รายรับ-รายจ่ายแต่ละเดือน</p>
+        <p class="year">2025</p>
+        <div class="month">
+            <button class="month-detail" onclick="openPopup(0)">มกราคม</button>
+            <button class="month-detail" onclick="openPopup(1)">กุมภาพันธ์</button>
+            <button class="month-detail" onclick="openPopup(2)">มีนาคม</button>
+            <button class="month-detail" onclick="openPopup(3)">เมษายน</button>
+            <button class="month-detail" onclick="openPopup(4)">พฤษภาคม</button>
+            <button class="month-detail" onclick="openPopup(5)">มิถุนายน</button>
+            <button class="month-detail" onclick="openPopup(6)">กรกฎาคม</button>
+            <button class="month-detail" onclick="openPopup(7)">สิงหาคม</button>
+            <button class="month-detail" onclick="openPopup(8)">กันยายน</button>
+            <button class="month-detail" onclick="openPopup(9)">ตุลาคม</button>
+            <button class="month-detail" onclick="openPopup(10)">พฤศจิกายน</button>
+            <button class="month-detail" onclick="openPopup(11)">ธันวาคม</button>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
     <!-- Popups for each month -->
     <div class="popup-container" id="popup-container">
         <div class="page-popup" id="popup">

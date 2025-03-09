@@ -116,8 +116,8 @@ tr select {
     position: fixed;
     color: rgba(123, 156, 200, 1);
     background-color: white;
-    width: fit-content;
-    height: fit-content;
+    width: 50vh;
+    height: 40vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -179,8 +179,7 @@ tr select {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: fit-content;
-    padding: 20px;
+    height: 35vh;
 }
 
 .input-popup-content button {
@@ -348,12 +347,6 @@ tr select {
 
 .content-head {
     font-size: 24px;
-}
-
-.expense-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 @media screen and (max-width: 768px) {
