@@ -404,7 +404,7 @@ const update_payment = (req, res) => {
     });
 }
 
-const showcontact = (req, res) => {
+const showcontract = (req, res) => {
     const date = new Date();
     const year = String(date.getFullYear());
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -498,7 +498,7 @@ const cancel_history = (req, res) => {
     res.json({ success: true });
 };
 
-const showcontact_history = (req, res) => {
+const showcontract_history = (req, res) => {
     const contract_id = req.params.contract_id;
     const user_id = req.cookies.userId;
     const userSql = `SELECT * FROM Users WHERE user_id = ?`;
@@ -587,5 +587,5 @@ const writeReview = (req, res) => {
 }
 
 //exports
-module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontact, create_history, showDepartments, showcontact_history, writeReview, cancel_history};
+module.exports = { registerUser, loginUser, showMain, showFav, showDetails, showHistory, addFav, showpayment, update_payment, showcontract, create_history, showDepartments, showcontract_history, writeReview, cancel_history};
 
