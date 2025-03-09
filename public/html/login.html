@@ -116,7 +116,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Login Failed',
-                        text: result.message || 'Invalid email or password',
+                        text: result.message || 'อีเมลหรือรหัสผ่าน ไม่ถูกต้อง',
                     });
                 } else if (response.status === 200) {
                     window.location.href = '/user/main'; // Redirect to main page after login

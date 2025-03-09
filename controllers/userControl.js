@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
         }
 
         if (user) {
-            return res.status(400).json({ message: "Email is already registered" });
+            return res.status(400).json({ message: "อีเมลนี้ถูกใช้ไปแล้ว" });
         }
 
         try {
@@ -56,13 +56,13 @@ const loginUser = (req, res) => {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         if (!user) {
-            return res.status(401).json({ message: "Invalid username or password" });
+            return res.status(401).json({ message: "รหัสผ่านหรืออีเมลไม่ถูกต้อง" });
         }
 
         // Compare hashed password
         const isMatch = await bcrypt.compare(login_password, user.password);
         if (!isMatch) {
-            return res.status(401).json({ message: "Invalid username or password" });
+            return res.status(401).json({ message: "รหัสผ่านหรืออีเมลไม่ถูกต้อง" });
         }
 
         // Set a cookie with user ID (Expires 1 hour)
