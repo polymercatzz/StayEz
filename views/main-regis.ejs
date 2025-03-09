@@ -275,8 +275,8 @@
             showSlide(index);
         }
 
-        showSlide(0); // ให้แสดงรูปแรกเมื่อโหลดหน้าเว็บ
-        setInterval(nextSlide, 5000); // Auto slide every 3 seconds
+        showSlide(0); 
+        setInterval(nextSlide, 5000); 
 
         // dropdownsearch
         document.querySelector(".dropdown-toggle").addEventListener("click", function () {
@@ -295,16 +295,10 @@
             loop: true,
             grabCursor: true,
             simulateTouch: true,
-            // If we need pagination
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
                 dynamicBullets: true,
-            },
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
             },
             breakpoints: {
                 0: {
@@ -328,7 +322,7 @@
         // open link new tab
         document.addEventListener("keydown", function (event) {
             if (event.key === "a" || event.key === "A") {
-                event.preventDefault(); // ป้องกันการเปลี่ยนหน้าเว็บหลัก
+                event.preventDefault(); 
                 document.getElementById("openLink").click();
             }
         });
