@@ -229,7 +229,6 @@ const show_manage_booking = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Database error", error: err.message });
         }
-        console.log(rows)
         res.render("managebook", { data: rows });
     });
 };
@@ -262,10 +261,9 @@ const updatebookstatus = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            res.redirect("/admin/manage_booking");
         });
     }
-
+    res.redirect("/admin/manage_booking");
 };
 
 const show_manage_user = (req, res) => {
@@ -289,17 +287,6 @@ const updateuserstatus = (req, res) => {
         res.redirect("/admin/manage_user");
     });
 };
-
-const show_user_detail = (req, res) => {
-    const user_id = req.params.user_id;
-    const sql = `SELECT * FROM users WHERE user_id = ?`;
-    db.get(sql, [user_id], (err, row) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err.message });
-        }
-        res.send(row);
-    });
-}
 
 const delete_user = (req, res) => {
     const user_id = req.params.user_id;
@@ -539,8 +526,6 @@ const create_user = (req, res) => {
     if (password !== confirmPassword) {
         return res.status(400).json({ message: "รหัสผ่านไม่ตรงกัน" });
     }
-    console.log({ firstname, lastname, tel, email, password, confirmPassword });
-    // Check if the email already exists in the database
     const sqlCheckEmail = `SELECT * FROM users WHERE email = ?`;
     db.get(sqlCheckEmail, [email], async (err, user) => {
         if (err) {
@@ -624,5 +609,5 @@ const showDetails = (req, res) => {
         });
     });
 };
-module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_user_detail, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact, create_user, showDetails };
+module.exports = { show_main_admin, show_manage_user, updateuserstatus, delete_user, show_manage_room, show_edit_room, show_create_room, create_room, update_room, delete_room, show_manage_booking, updatebookstatus, show_calulate, show_history_rent, create_payment, update_payment, showMonthlyPayment, updateMonthlyPayment, show_contact, create_user, showDetails };
 

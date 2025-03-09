@@ -239,7 +239,7 @@
             document.getElementById("room_name").innerHTML = room_name;
             document.getElementById("status-date").innerHTML = payment_date;
             document.querySelector("#payment_status").value = payment_status;
-            document.getElementById("status-form").action = `/admin/updatapayment/${payment_id}`;
+            document.getElementById("status-form").action = `/admin/updatepayment/${payment_id}`;
             document.getElementById("check").href = `/payment_img/${pay_img_id}`;
         };
         function closeInputPopup() {

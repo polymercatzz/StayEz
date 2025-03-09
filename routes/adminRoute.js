@@ -12,7 +12,6 @@ const router = express.Router();
 router.get("/main", checkAd, adminControl.show_main_admin);
 router.get("/manage_booking", checkAd, adminControl.show_manage_booking);
 router.get("/manage_user", checkAd, adminControl.show_manage_user);
-router.get("/userdetail/:user_id", checkAd, adminControl.show_user_detail);
 router.get("/manage_room", checkAd, adminControl.show_manage_room);
 router.get("/edit_room/:room_id", checkAd, adminControl.show_edit_room);
 router.get("/create_room", checkAd, adminControl.show_create_room);
@@ -32,7 +31,7 @@ router.post("/updateroom/:room_id", adminControl.update_room);
 router.post("/createroom", upload.array('imageFiles'), adminControl.create_room);
 router.post("/deleteroom/:room_id", adminControl.delete_room);
 router.post("/createpayment/:room_id/:history_id", adminControl.create_payment);
-router.post("/updatapayment/:payment_id", adminControl.update_payment);
+router.post("/updatepayment/:payment_id", adminControl.update_payment);
 router.post("/monthly/:year/:month", adminControl.updateMonthlyPayment);
 
 

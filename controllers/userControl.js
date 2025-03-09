@@ -424,7 +424,6 @@ const showcontract = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            console.log(userData, roomData)
             res.render("contract_user", { user : userData, roomData : roomData , today : today});
         });
     });
@@ -436,7 +435,6 @@ const create_history = (req, res) => {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const today = `${year}-${month}-${day}`;
-    console.log(req.body, req.file, req.params);
     const user_id = req.cookies.userId;
     const room_id = req.params.room_id;
     const data = {
