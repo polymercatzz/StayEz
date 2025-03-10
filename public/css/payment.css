@@ -90,7 +90,7 @@ body {
 
 /* Popup ใบเสร็จ */
 .popup2 {
-    width: 330px;
+    width: 350px;
     background-color: #ffffff;
     border-radius: 18px;
     position: fixed;
@@ -103,6 +103,7 @@ body {
     box-sizing: border-box;
     z-index: 1000;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    
 }
 
 .openPopup {
@@ -177,7 +178,7 @@ body {
 }
 
 .title {
-    font-size: 2.5vh;
+    font-size: 2.3vh;
     padding-left: 10px;
     margin-top: 10px;
     margin-bottom: 0;
@@ -193,7 +194,7 @@ body {
 table {
     width: 100%;
     padding: 5px 15px 15px 15px;
-    font-size: 2.3vh;
+    font-size: 2.2vh;
     color: #7B9CC8;
     border-collapse: collapse;
 }
@@ -216,7 +217,7 @@ thead th {
 .tb-left {
     text-align: left;
     padding: 10px;
-    font-size: 2.2vh;
+    font-size: 2vh;
 }
 
 .tb-right {
@@ -254,15 +255,25 @@ thead th {
 
 .line {
     border-top: 1.2px solid #9f9c9c;
-    margin-top: -30px;
+    /* margin-top: -30px; */
 }
 
 .bank {
-    padding: 20px;
+    /* padding: 20px; */
     font-size: 2vh;
     color: #878787;
 }
+.bank p{
+    padding: 10px;
+}
+.slip{
+    color: #7B9CC8;
+    font-size: 2vh;
+}
 
+.allpopupdata2{
+    padding: 15px;
+}
 @media screen and (max-width: 600px) {
     .card-container {
         display: flex;
