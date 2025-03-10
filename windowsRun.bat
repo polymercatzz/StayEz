@@ -1,4 +1,5 @@
 @echo off
 call ./script/install.bat
-nodemon server.js
+start "" http://localhost:3000
+node server.js
 pause

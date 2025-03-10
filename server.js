@@ -112,7 +112,6 @@ app.get('/', (req, res) => {
                         if (err) {
                             return res.status(500).json({ message: "Database error", error: err.message });
                         }
-                        console.log(topRooms);
                         res.render('main-regis', {
                             room: roomData,
                             dept: deptData,
