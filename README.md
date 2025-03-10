@@ -1,9 +1,9 @@
 # วิธีการรัน web application
 
 * ## การรันใน WindownsOS
-    * > สามารถเรียกไฟล์ windowsRun.bat ได้โดยตรง, หรือ double click ก็ได้
+    * > สามารถเรียกไฟล์ windowsRun.bat ได้โดยตรง, หรือ ./windowsRun.bat ก็ได้
 * ## การรันใน MacOs
-    * > สามารถเรียกไฟล์ macOSrun.sh ได้โดยตรง, หรือ double click ก็ได้
+    * > สามารถเรียกไฟล์ macOSrun.sh ได้โดยตรง, หรือ ./macOSrun.sh ก็ได้
 
 ********************รหัส Admin(ผู้จัดการที่พัก)********************
 admin admin
