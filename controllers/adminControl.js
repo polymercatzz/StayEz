@@ -513,7 +513,6 @@ const updateMonthlyPayment = (req, res) => {
     const sql = `INSERT INTO Report (rent, water_income, electric_income, other_income, water_bill, electric_bill, other_bill, total_amount, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
     db.run(sql, [rentInt, waterIncomeInt, electricIncomeInt, otherIncomeInt, waterInt, electricityInt, otherInt, amount, date], (err) => {
         if (err) {
-            console.log({ message: "Database error", error: err.message });
             return res.status(500).json({ message: "Database error", error: err.message });
         }
         res.json({ message: "บันทึกข้อมูลสำเร็จ" });
@@ -596,7 +595,6 @@ const showDetails = (req, res) => {
                     const reviewers = reviewData ? reviewData.reviewers.split(',') : null;
                     const avgRating = reviewData ? reviewData.avg_rating : 0;
                     const reviewCount = reviewData ? reviewData.review_count : 0;
-                    console.log(roomData);
                     res.render('description-admin', {
                         room: roomData,
                         user: userData,

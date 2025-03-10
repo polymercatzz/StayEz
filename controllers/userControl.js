@@ -392,7 +392,6 @@ const showpayment = (req, res) => {
             if(err){
                 return res.status(500).json({ message: "Database error", error: err.message });
             }
-            console.log(rows)
             res.render("payment", { data: rows, user : userData });
         })
     });
