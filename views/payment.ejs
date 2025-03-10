@@ -39,7 +39,7 @@
                                 <form action="/user/update_payment/<%= item.payment_id %>" method="post"
                                     enctype="multipart/form-data">
                                     <% if (item.pay_img_id) { %>
-                                        <a href="/payment_img/<%= item.pay_img_id %>">ดูหลักฐานการจ่ายเงิน</a>
+                                        <a href="/payment_img/<%= item.pay_img_id %>" class="slip">ดูหลักฐานการจ่ายเงิน</a>
                                         <% } else { %>
                                             <label for="file-upload" class="file-label">เลือกไฟล์</label>
                                             <input type="file" id="file-upload" class="flieselect" accept="image/*"

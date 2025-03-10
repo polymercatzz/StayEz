@@ -290,6 +290,10 @@
     padding: 20px;
 }
 
+.noreview{
+    color: #ffffff;
+    font-size: 2vh;
+}
 @media screen and (max-width: 768px) {
     .alldata {
         padding: 20px;

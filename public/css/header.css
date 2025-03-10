@@ -248,7 +248,7 @@
     }
 
     .pic2,
-    .logout-icon {
+    .logout-icon ,.pic3{
         display: none;
     }
 

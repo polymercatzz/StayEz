@@ -24,7 +24,7 @@
         <div class="allpic">
             <% const roomImage = img.find(image => image.room_id === room.room_id); %>
             <div class="p1">
-                <img src="/room_img/<%= img[0].room_img_id %>" alt="Card Image" class="card-img" style="width: 700px;">
+                <img src="/room_img/<%= img[0].room_img_id %>" alt="Card Image" class="card-img">
             </div>
             <div class="p2">
                 <img src="/room_img/<%= img[1].room_img_id %>" alt="Card Image" class="card-img">
@@ -158,7 +158,7 @@
                         </div>
                     <% }) %>
                 <% } else { %>
-                    <p>ไม่มีรีวิวในห้องนี้</p>
+                    <p class="noreview">ไม่มีรีวิวในห้องนี้</p>
                 <% } %>
             </div>
             <div class="price">
